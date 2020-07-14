@@ -25,3 +25,4 @@ mvn archetype:generate
 ## 模块
 
 * [spring-boot-helloworld](spring-boot-helloworld) spring-boot 的一个 helloworld
+* [spring-boot-read-properties](spring-boot-read-properties) 一个spring boot读取properties/yml的例子
