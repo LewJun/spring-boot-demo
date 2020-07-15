@@ -390,6 +390,82 @@ public class LongToLocalDateTimeJsonDeserializer extends JsonDeserializer<LocalD
 ```
 这样就能够实现上传的long转换为相对应日期，和响应的日期转换为long了。
 
+### 改进，放弃在日期字段上加@JsonSerialize和@JsonDeserialize
+如上，在Ac01的字段上添加@JsonSerialize和@JsonDeserialize是一个巨大的工程，所有类的日期类型都需要加这两个注解。
+可以通过一种简单的配置来实现。
+
+[LocalDateTimeSerializerConfig.java](src/main/java/com/example/lewjun/config/LocalDateTimeSerializerConfig.java)
+```java
+package com.example.lewjun.config;
+
+import com.example.lewjun.util.*;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Date;
+
+@Configuration
+public class LocalDateTimeSerializerConfig {
+
+    @Bean
+    @Primary
+    public ObjectMapper serializingObjectMapper() {
+        final ObjectMapper objectMapper = new ObjectMapper();
+        final JavaTimeModule javaTimeModule = new JavaTimeModule();
+
+        javaTimeModule.addSerializer(Date.class, new DateToLongJsonSerializer());
+        javaTimeModule.addDeserializer(Date.class, new LongToDateJsonDeserializer());
+
+        javaTimeModule.addSerializer(LocalDate.class, new LocalDateToLongJsonSerializer());
+        javaTimeModule.addDeserializer(LocalDate.class, new LongToLocalDateJsonDeserializer());
+
+        javaTimeModule.addSerializer(LocalDateTime.class, new LocalDateTimeToLongJsonSerializer());
+        javaTimeModule.addDeserializer(LocalDateTime.class, new LongToLocalDateTimeJsonDeserializer());
+
+        objectMapper.registerModule(javaTimeModule);
+
+        return objectMapper;
+    }
+}
+```
+
+然后Ac01回到最原始的状态。
+
+```java
+package com.example.lewjun.model;
+
+import lombok.Data;
+import lombok.experimental.Accessors;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Date;
+import java.util.List;
+
+@Data
+@Accessors(chain = true)
+public class Ac01 extends BaseObj {
+    private int aac001;
+    private String aac002;
+    private String aac003;
+    private Integer aac004;
+    private LocalDate aac005;
+    private int aac006;
+    private float aac007;
+    private float aac008;
+    private List<String> aac009;
+    private Ab01 ab01;
+    private LocalDateTime aac100;
+    private Date aac101;
+}
+```
+这样就在也不用在日期字段上添加那两个注解了。
+
 ## [application.yml](src/main/resources/application.yml)
 
 ```yaml
