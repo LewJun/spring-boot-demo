@@ -2,7 +2,6 @@ package com.example.lewjun;
 
 import com.example.lewjun.model.Ab01;
 import com.example.lewjun.model.Ac01;
-import com.example.lewjun.util.GsonUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -40,21 +39,21 @@ public class App {
     }
 
     @RequestMapping("/pass_ab01")
-    public String pass_ab01(final Ab01 ab01) {
+    public Ab01 pass_ab01(final Ab01 ab01) {
         log.info("ab01: {}", ab01);
-        return ab01.toString();
+        return ab01;
     }
 
     @RequestMapping("/request_body")
-    public String request_body(@RequestBody final Ab01 ab01) {
+    public Ab01 request_body(@RequestBody final Ab01 ab01) {
         log.info("ab01: {}", ab01);
-        return GsonUtil.objToJsonString(ab01);
+        return ab01;
     }
 
     @RequestMapping("/request_body_ac01")
-    public String request_body_ac01(@RequestBody final Ac01 ac01) {
+    public Ac01 request_body_ac01(@RequestBody final Ac01 ac01) {
         log.info("ac01: {}", ac01);
-        return GsonUtil.objToJsonString(ac01);
+        return ac01;
     }
 
     @GetMapping("/")
