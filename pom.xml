@@ -19,6 +19,7 @@
         <module>spring-boot-read-properties</module>
         <module>spring-boot-actuator</module>
         <module>spring-boot-admin</module>
+        <module>spring-boot-logback</module>
     </modules>
 
     <properties>
