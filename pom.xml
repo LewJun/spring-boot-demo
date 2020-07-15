@@ -17,6 +17,7 @@
     <modules>
         <module>spring-boot-helloworld</module>
         <module>spring-boot-read-properties</module>
+        <module>spring-boot-actuator</module>
     </modules>
 
     <properties>

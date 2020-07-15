@@ -26,3 +26,4 @@ mvn archetype:generate
 
 * [spring-boot-helloworld](spring-boot-helloworld) spring-boot 的一个 helloworld
 * [spring-boot-read-properties](spring-boot-read-properties) 一个spring boot读取properties/yml的例子
+* [spring-boot-actuator](spring-boot-actuator) spring-boot 集成 spring-boot-starter-actuator 用于监控 spring-boot 的启动和运行状态
