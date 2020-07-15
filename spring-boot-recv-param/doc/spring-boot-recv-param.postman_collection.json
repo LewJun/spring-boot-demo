@@ -1,0 +1,410 @@
+{
+	"info": {
+		"_postman_id": "ed9beeba-00b9-4c5c-824c-c645779e6a1f",
+		"name": "spring-boot-recv-param",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "request_param 有参数",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:1234/demo/request_param",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "1234",
+					"path": [
+						"demo",
+						"request_param"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "request_param 传递参数",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:1234/demo/request_param?name=Amy",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "1234",
+					"path": [
+						"demo",
+						"request_param"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Amy"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "request_param/post 无参数",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:1234/demo/request_param/post",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "1234",
+					"path": [
+						"demo",
+						"request_param",
+						"post"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "request_param/post 有参数",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "xyz",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:1234/demo/request_param/post",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "1234",
+					"path": [
+						"demo",
+						"request_param",
+						"post"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "path_variable",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:1234/demo/path_variable/hello/23423",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "1234",
+					"path": [
+						"demo",
+						"path_variable",
+						"hello",
+						"23423"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "auto_match params",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "",
+							"value": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:1234/demo/auto_match?hello=a&world=b",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "1234",
+					"path": [
+						"demo",
+						"auto_match"
+					],
+					"query": [
+						{
+							"key": "hello",
+							"value": "a"
+						},
+						{
+							"key": "world",
+							"value": "b"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "auto_match form-data",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "hello",
+							"value": "a",
+							"type": "text"
+						},
+						{
+							"key": "world",
+							"value": "b",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:1234/demo/auto_match",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "1234",
+					"path": [
+						"demo",
+						"auto_match"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "auto_match x-www-form-urlencoded",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "hello",
+							"value": "a",
+							"type": "text"
+						},
+						{
+							"key": "world",
+							"value": "b",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:1234/demo/auto_match",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "1234",
+					"path": [
+						"demo",
+						"auto_match"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "pass_ab01",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "aab001",
+							"value": "123",
+							"type": "text"
+						},
+						{
+							"key": "aab002",
+							"value": "ACCOUNTING",
+							"type": "text"
+						},
+						{
+							"key": "aab003",
+							"value": "NEW YORK",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:1234/demo/pass_ab01",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "1234",
+					"path": [
+						"demo",
+						"pass_ab01"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "pass_ab01 params",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:1234/demo/pass_ab01?aab001=123&aab002=ACCOUNTING&aab003=NEW YORK",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "1234",
+					"path": [
+						"demo",
+						"pass_ab01"
+					],
+					"query": [
+						{
+							"key": "aab001",
+							"value": "123"
+						},
+						{
+							"key": "aab002",
+							"value": "ACCOUNTING"
+						},
+						{
+							"key": "aab003",
+							"value": "NEW YORK"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "request_body raw json",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"aab001\": 10, \"aab002\": \"ACCOUNTING\", \"aab003\": \"NEW YORK\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:1234/demo/request_body",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "1234",
+					"path": [
+						"demo",
+						"request_body"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "request_body get方式",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"aab001\":10,\"aab002\":\"ACCOUNTING\",\"aab003\":\"NEW YORK\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:1234/demo/request_body",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "1234",
+					"path": [
+						"demo",
+						"request_body"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "request_body_ac01",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"aac001\": 7839,\r\n  \"aac002\": \"KING\",\r\n  \"aac003\": \"PRESIDENT\",\r\n  \"aac005\": 1590681600000,\r\n  \"aac006\": 1,\r\n  \"aac007\": 66.6,\r\n  \"aac008\": 1.72,\r\n  \"aac009\": [\r\n    \"Reading\",\r\n    \"Coding\",\r\n    \"Play\"\r\n  ],\r\n  \"ab01\": {\r\n    \"aab001\": 10,\r\n    \"aab002\": \"ACCOUNTING\",\r\n    \"aab003\": \"NEW YORK\"\r\n  },\r\n  \"aac100\": 1590738530054,\r\n  \"aac101\": 1590738530060\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:1234/demo/request_body_ac01",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "1234",
+					"path": [
+						"demo",
+						"request_body_ac01"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

@@ -31,5 +31,5 @@ mvn archetype:generate
     分别为 [admin 服务端](spring-boot-admin/spring-boot-admin-server)和 [admin 客户端](spring-boot-admin/spring-boot-admin-client) 两个模块。
     可以通过服务端管理客户端，客户端也可以看到自己的详细信息。
 * [spring-boot-logback](spring-boot-logback) 一个spring boot的logback配置及使用示例
-
+* [spring-boot-recv-param](spring-boot-recv-param) spring boot 接收参数的几种方式
 
