@@ -27,3 +27,9 @@ mvn archetype:generate
 * [spring-boot-helloworld](spring-boot-helloworld) spring-boot 的一个 helloworld
 * [spring-boot-read-properties](spring-boot-read-properties) 一个spring boot读取properties/yml的例子
 * [spring-boot-actuator](spring-boot-actuator) spring-boot 集成 spring-boot-starter-actuator 用于监控 spring-boot 的启动和运行状态
+* [spring-boot-admin](spring-boot-admin) 主要演示了 Spring Boot 如何集成 Admin 管控台，监控管理 Spring Boot 应用，
+    分别为 [admin 服务端](spring-boot-admin/spring-boot-admin-server)和 [admin 客户端](spring-boot-admin/spring-boot-admin-client) 两个模块。
+    可以通过服务端管理客户端，客户端也可以看到自己的详细信息。
+
+
+
