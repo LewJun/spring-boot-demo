@@ -23,6 +23,7 @@
         <module>spring-boot-recv-param</module>
         <module>spring-boot-file-upload</module>
         <module>spring-boot-file-download</module>
+        <module>spring-boot-junit-test</module>
     </modules>
 
     <properties>
@@ -61,12 +62,12 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
-            <exclusions>
+            <!--<exclusions>
                 <exclusion>
                     <groupId>org.junit.vintage</groupId>
                     <artifactId>junit-vintage-engine</artifactId>
                 </exclusion>
-            </exclusions>
+            </exclusions>-->
         </dependency>
         <!--        TEST END-->
 

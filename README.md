@@ -34,5 +34,6 @@ mvn archetype:generate
 * [spring-boot-recv-param](spring-boot-recv-param) spring boot 接收参数的几种方式
 * [spring-boot-file-upload](spring-boot-file-upload) 文件上传例子
 * [spring-boot-file-download](spring-boot-file-download) 文件下载例子
+* [spring-boot-junit-test](spring-boot-junit-test) 单元测试例子
 
 
