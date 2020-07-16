@@ -22,6 +22,7 @@
         <module>spring-boot-logback</module>
         <module>spring-boot-recv-param</module>
         <module>spring-boot-file-upload</module>
+        <module>spring-boot-file-download</module>
     </modules>
 
     <properties>

@@ -33,4 +33,6 @@ mvn archetype:generate
 * [spring-boot-logback](spring-boot-logback) 一个spring boot的logback配置及使用示例
 * [spring-boot-recv-param](spring-boot-recv-param) spring boot 接收参数的几种方式
 * [spring-boot-file-upload](spring-boot-file-upload) 文件上传例子
+* [spring-boot-file-download](spring-boot-file-download) 文件下载例子
+
 
