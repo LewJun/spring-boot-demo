@@ -24,6 +24,7 @@
         <module>spring-boot-file-upload</module>
         <module>spring-boot-file-download</module>
         <module>spring-boot-junit-test</module>
+        <module>spring-boot-restfull</module>
     </modules>
 
     <properties>
