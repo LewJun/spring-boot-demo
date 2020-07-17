@@ -36,5 +36,6 @@ mvn archetype:generate
 * [spring-boot-file-download](spring-boot-file-download) 文件下载例子
 * [spring-boot-junit-test](spring-boot-junit-test) 单元测试例子
 * [spring-boot-restfull](spring-boot-restfull) restfull例子
+* [spring-boot-swagger2](spring-boot-swagger2) 使用springfox3生成swagger文档
 
 
