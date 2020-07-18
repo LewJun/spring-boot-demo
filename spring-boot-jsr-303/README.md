@@ -271,6 +271,77 @@ public class Ab01Controller {
 }
 ```
 
+## 自定义校验器
+
+* [Mobile.java](src/main/java/com/example/lewjun/jsr/custom/Mobile.java)
+```java
+package com.example.lewjun.jsr.custom;
+
+import javax.validation.Constraint;
+import javax.validation.Payload;
+import java.lang.annotation.Documented;
+import java.lang.annotation.Retention;
+import java.lang.annotation.Target;
+
+import static java.lang.annotation.ElementType.*;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
+
+@Target({METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER})
+@Retention(RUNTIME)
+@Documented
+@Constraint(validatedBy = {MobileValidator.class})
+public @interface Mobile {
+    boolean required() default true;
+
+    String message() default "电话号码格式错误";
+
+    Class<?>[] groups() default {};
+
+    Class<? extends Payload>[] payload() default {};
+}
+```
+
+* [MobileValidator.java](src/main/java/com/example/lewjun/jsr/custom/MobileValidator.java)
+
+
+```java
+package com.example.lewjun.jsr.custom;
+
+import javax.validation.Constraint;
+import javax.validation.Payload;
+import java.lang.annotation.Documented;
+import java.lang.annotation.Retention;
+import java.lang.annotation.Target;
+
+import static java.lang.annotation.ElementType.*;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
+
+@Target({METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER})
+@Retention(RUNTIME)
+@Documented
+@Constraint(validatedBy = {MobileValidator.class})
+public @interface Mobile {
+    boolean required() default true;
+
+    String message() default "电话号码格式错误";
+
+    Class<?>[] groups() default {};
+
+    Class<? extends Payload>[] payload() default {};
+}
+```
+
+* 使用
+
+```java
+
+    /**
+     * 电话号码
+     */
+    @Mobile(message = "电话号码格式错误")
+    private String aac105;
+```
+
 ## [application.yml](src/main/resources/application.yml)
 
 ```yaml

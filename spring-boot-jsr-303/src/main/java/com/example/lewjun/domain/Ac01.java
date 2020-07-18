@@ -1,5 +1,6 @@
 package com.example.lewjun.domain;
 
+import com.example.lewjun.jsr.custom.Mobile;
 import com.example.lewjun.jsr.group.UpdateGroup;
 import lombok.Data;
 import lombok.experimental.Accessors;
@@ -97,4 +98,10 @@ public class Ac01 extends BaseObj {
      */
     @Pattern(regexp = "[0-9]{6}", message = "邮政编码长度不对")
     private String aac104;
+
+    /**
+     * 电话号码
+     */
+    @Mobile(message = "电话号码格式错误")
+    private String aac105;
 }
