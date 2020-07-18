@@ -3,4 +3,4 @@ server:
   servlet:
     context-path: /demo
 
-debug: true
+debug: false
