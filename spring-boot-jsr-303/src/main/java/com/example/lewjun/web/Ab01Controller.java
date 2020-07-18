@@ -1,9 +1,11 @@
 package com.example.lewjun.web;
 
 import com.example.lewjun.domain.Ab01;
+import com.example.lewjun.jsr.group.UpdateGroup;
 import com.example.lewjun.service.Ab01Service;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -56,7 +58,7 @@ public class Ab01Controller {
      * @return Ab01
      */
     @PutMapping
-    public Ab01 putAc01(@RequestBody @Valid final Ab01 ab01) {
+    public Ab01 putAc01(@RequestBody @Validated(UpdateGroup.class) final Ab01 ab01) {
         final Ab01 oldAb01 = ab01Service.get(ab01.getAab001());
         BeanUtils.copyProperties(ab01, oldAb01);
         ab01Service.update(oldAb01);
