@@ -252,6 +252,25 @@ public class Ac01 extends BaseObj {
 }
 ```
 
+## 对@RequestParam或@PathVariable进行校验
+
+使用@Valid注解，对RequestParam和PathVariable对应的参数进行注解，是无效的，需要使用@Validated注解对类进行注解，来使得验证生效，
+然后才能在参数上使用校验注解。
+
+```java
+@Validated                         // <------------------- 1
+@RequestMapping("/ab01s")
+@RestController
+public class Ab01Controller {
+    @GetMapping("/{aab001}")
+    public Ab01 getAc01(@PathVariable 
+                            @Min(value = 1, message = "aab001不能小于1")      // <-------------- 2
+                            final int aab001) {
+        return ab01Service.get(aab001);
+    }
+}
+```
+
 ## [application.yml](src/main/resources/application.yml)
 
 ```yaml

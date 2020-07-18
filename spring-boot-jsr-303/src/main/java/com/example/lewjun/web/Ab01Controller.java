@@ -9,8 +9,10 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.validation.constraints.Min;
 import java.util.List;
 
+@Validated
 @RequestMapping("/ab01s")
 @RestController
 public class Ab01Controller {
@@ -47,7 +49,8 @@ public class Ab01Controller {
      * @return Ab01
      */
     @GetMapping("/{aab001}")
-    public Ab01 getAc01(@PathVariable final int aab001) {
+    public Ab01 getAc01(@PathVariable
+                        @Min(value = 1, message = "aab001不能小于1") final int aab001) {
         return ab01Service.get(aab001);
     }
 
