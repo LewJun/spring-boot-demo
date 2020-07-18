@@ -1,0 +1,284 @@
+{
+	"info": {
+		"_postman_id": "c21c60be-af04-45e6-861c-5c1a223bd98a",
+		"name": "spring-boot-restfull",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/ac01s get",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:1234/demo/ac01s/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "1234",
+					"path": [
+						"demo",
+						"ac01s",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/ac01s post",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"aac002\": \"KING\",\r\n  \"aac003\": \"PRESIDENT\",\r\n  \"aac006\": 1,\r\n  \"aac007\": 66.6\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:1234/demo/ac01s/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "1234",
+					"path": [
+						"demo",
+						"ac01s",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/ac01s/{aac001} get",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:1234/demo/ac01s/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "1234",
+					"path": [
+						"demo",
+						"ac01s",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ac01s/{aac001} del",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:1234/demo/ac01s/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "1234",
+					"path": [
+						"demo",
+						"ac01s",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/ac01s put",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"aac001\": 1,\n    \"aac002\": \"KING\",\n    \"aac003\": \"PRESIDENT\",\n    \"aac006\": 2,\n    \"aac007\": 66.7,\n    \"aac008\": 8\n}"
+				},
+				"url": {
+					"raw": "http://localhost:1234/demo/ac01s/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "1234",
+					"path": [
+						"demo",
+						"ac01s",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/ab01s get",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:1234/demo/ab01s",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "1234",
+					"path": [
+						"demo",
+						"ab01s"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/ab01s post",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"aab002\": \"ACCOUNTING\", \"aab003\": \"NEW YORK\"}"
+				},
+				"url": {
+					"raw": "http://localhost:1234/demo/ab01s",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "1234",
+					"path": [
+						"demo",
+						"ab01s"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/ab01s/{aab001} get",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:1234/demo/ab01s/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "1234",
+					"path": [
+						"demo",
+						"ab01s",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/ab01s put",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"aab001\":1, \"aab002\": \"ACCOUNTING\", \"aab003\": \"NEW YORK2\"}"
+				},
+				"url": {
+					"raw": "http://localhost:1234/demo/ab01s",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "1234",
+					"path": [
+						"demo",
+						"ab01s"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/ab01s/{aab001} del",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:1234/demo/ab01s/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "1234",
+					"path": [
+						"demo",
+						"ab01s",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

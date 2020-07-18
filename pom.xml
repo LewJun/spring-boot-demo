@@ -26,6 +26,7 @@
         <module>spring-boot-junit-test</module>
         <module>spring-boot-restfull</module>
         <module>spring-boot-swagger2</module>
+        <module>spring-boot-jsr-303</module>
     </modules>
 
     <properties>

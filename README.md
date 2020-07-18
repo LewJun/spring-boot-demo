@@ -37,5 +37,6 @@ mvn archetype:generate
 * [spring-boot-junit-test](spring-boot-junit-test) 单元测试例子
 * [spring-boot-restfull](spring-boot-restfull) restfull例子
 * [spring-boot-swagger2](spring-boot-swagger2) 使用springfox3生成swagger文档
+* [spring-boot-jsr-303](spring-boot-jsr-303) JSR-303实现请求参数校验
 
 
