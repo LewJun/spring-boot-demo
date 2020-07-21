@@ -1,6 +1,7 @@
 package com.example.lewjun.domain;
 
 import com.example.lewjun.jsr.custom.Mobile;
+import com.example.lewjun.jsr.custom.Sex;
 import com.example.lewjun.jsr.group.UpdateGroup;
 import lombok.Data;
 import lombok.experimental.Accessors;
@@ -46,7 +47,8 @@ public class Ac01 extends BaseObj {
     /**
      * 性别 -1 未知 0 女 1 男
      */
-    private int aac006 = -1;
+    @Sex
+    private Integer aac006;
     /**
      * 身高
      */
@@ -96,12 +98,12 @@ public class Ac01 extends BaseObj {
     /**
      * 邮政编码
      */
-    @Pattern(regexp = "[0-9]{6}", message = "邮政编码长度不对")
+    @Pattern(regexp = "[0-9]{6}", message = "邮政编码长度或格式不对")
     private String aac104;
 
     /**
      * 电话号码
      */
-    @Mobile(message = "电话号码格式错误")
+    @Mobile
     private String aac105;
 }

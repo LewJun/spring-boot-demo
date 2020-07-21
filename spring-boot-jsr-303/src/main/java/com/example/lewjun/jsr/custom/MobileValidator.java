@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 public class MobileValidator implements ConstraintValidator<Mobile, String> {
     public static final String regex = "^((13[0-9])|(14[5,7,9])|(15([0-3]|[5-9]))|(17[0,1,3,5,6,7,8])|(18[0-9])|(19[8|9]))\\d{8}$";
 
-    private boolean required = false;
+    private boolean required;
 
     @Override
     public void initialize(final Mobile constraintAnnotation) {
@@ -17,15 +17,9 @@ public class MobileValidator implements ConstraintValidator<Mobile, String> {
 
     @Override
     public boolean isValid(final String s, final ConstraintValidatorContext constraintValidatorContext) {
-        if (required) {
-            return isMobile(s);
-        } else {
-            if (s == null) {
-                return true;
-            } else {
-                return isMobile(s);
-            }
-        }
+        if (required) return isMobile(s);
+        if (s == null) return true;
+        return isMobile(s);
     }
 
 
