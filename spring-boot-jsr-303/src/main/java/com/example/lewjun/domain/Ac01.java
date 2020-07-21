@@ -1,5 +1,6 @@
 package com.example.lewjun.domain;
 
+import com.example.lewjun.jsr.custom.Hobby;
 import com.example.lewjun.jsr.custom.Mobile;
 import com.example.lewjun.jsr.custom.Sex;
 import com.example.lewjun.jsr.group.UpdateGroup;
@@ -66,7 +67,8 @@ public class Ac01 extends BaseObj {
     /**
      * 兴趣爱好
      */
-    private List<String> aac009;
+    @Hobby
+    private List<Integer> aac009;
     /**
      * ab01信息
      */
