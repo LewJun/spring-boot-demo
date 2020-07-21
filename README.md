@@ -38,5 +38,6 @@ mvn archetype:generate
 * [spring-boot-restfull](spring-boot-restfull) restfull例子
 * [spring-boot-swagger2](spring-boot-swagger2) 使用springfox3生成swagger文档
 * [spring-boot-jsr-303](spring-boot-jsr-303) JSR-303实现请求参数校验
+* [spring-boot-war](spring-boot-war) 演示如何将spring boot 项目打包成传统的war包
 
 
