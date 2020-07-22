@@ -30,6 +30,7 @@
         <module>spring-boot-war</module>
         <module>spring-boot-multi-env</module>
         <module>spring-boot-aoplog</module>
+        <module>spring-boot-unified-return</module>
     </modules>
 
     <properties>
