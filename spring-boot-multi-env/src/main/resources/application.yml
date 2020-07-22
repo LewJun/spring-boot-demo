@@ -1,4 +1,7 @@
 server:
-  port: 1234
   servlet:
     context-path: /demo
+
+spring:
+  profiles:
+    active: dev
