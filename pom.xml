@@ -28,6 +28,7 @@
         <module>spring-boot-swagger2</module>
         <module>spring-boot-jsr-303</module>
         <module>spring-boot-war</module>
+        <module>spring-boot-multi-env</module>
     </modules>
 
     <properties>
