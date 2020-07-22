@@ -142,3 +142,91 @@ public class AppTest {
     }
 }
 ```
+
+## spring boot 多环境打包时如何只打包当前环境的配置文件
+
+如上方式，实现了环境的指定，但是把每一种环境`application-*.yml`都放到jar中classes目录了，会导致打出的jar在任何环境都可以指定环境参数，可能由于没有或错误的指定，而导致故障。
+所以，最好的方式是多环境打包时，只打包具体环境的配置文件。
+
+### Step 1 配置profiles
+
+```xml
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <properties>
+                <profiles.active>dev</profiles.active>
+                <modifier/>
+            </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+
+        <profile>
+            <id>pre</id>
+            <properties>
+                <profiles.active>pre</profiles.active>
+                <modifier>-pre</modifier>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>prod</id>
+            <properties>
+                <profiles.active>prod</profiles.active>
+                <modifier>-prod</modifier>
+            </properties>
+        </profile>
+    </profiles>
+```
+
+### Step 2 排除和保留所有的application-*.yml
+
+```xml
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+                <excludes>
+                    <!-- 排除所有的application-*.yml -->
+                    <exclude>application-*.yml</exclude>
+                </excludes>
+            </resource>
+
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <!-- 只保留application-x.yml -->
+                    <include>application-${profiles.active}.yml</include>
+                </includes>
+            </resource>
+        </resources>
+    </build>
+```
+
+### @profiles.active@
+
+```yaml
+spring:
+  profiles:
+    active: @profiles.active@
+```
+
+### 打包
+> mvn clean package -Ppre
+
+通过指定-P来指定环境参数
+
+再次打开jar包，classes目录中就只保留了相应的环境了。
+```log
++----classes
+        |
+        +----com
+        +----application.yml
+        +----application-pre.yml
+```
+
+测试同事打好相应的环境的包，发邮件给运维同事，运维同事只需要执行`java -jar xxx.jar`就可以了，
+而不用添加参数`--spring.profiles.active=yyy`指定环境了。其实就算指定了，也可能报错，除非是`pre`。
