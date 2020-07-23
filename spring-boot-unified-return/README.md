@@ -188,6 +188,7 @@ public enum EnumApiResultStatus {
         public ApiResult exceptionHandle(final Throwable throwable) {
             log.error("【出现异常】", throwable);
 
+            // 处理BussException异常
             if (throwable instanceof BussException) {
                 final BussException ex = (BussException) throwable;
                 return ApiResult.of(ex.getStatus());
@@ -196,6 +197,98 @@ public enum EnumApiResultStatus {
             return ApiResult.of(EnumApiResultStatus.FAIL);
         }
     }
+```
+
+### 实体字段jsr303校验，统一格式返回异常信息
+
+* [Ac01.java](src/main/java/com/example/lewjun/domain/Ac01.java)
+
+如下，在Ac01实体字段上使用了jsr303的`@NotBlank`注解，如果前端传递的字段是空的时候，就会出现MethodArgumentNotValidException异常。
+
+```java
+    /**
+     * 雇员姓名
+     */
+    @NotBlank(message = "雇员姓名不能为空")
+    private String aac002;
+    /**
+     * 雇员职位
+     */
+    @NotBlank(message = "雇员职位不能为空")
+    private String aac003;
+```
+
+* 处理
+
+[UnifiedReturnConfig.java](src/main/java/com/example/lewjun/config/UnifiedReturnConfig.java)
+
+```java
+// 处理MethodArgumentNotValidException异常
+if (throwable instanceof MethodArgumentNotValidException) {
+    final MethodArgumentNotValidException ex = (MethodArgumentNotValidException) throwable;
+
+    final BindingResult bindingResult = ex.getBindingResult();
+
+    final String defaultMessages = bindingResult.getAllErrors()
+            .stream()
+            .map(DefaultMessageSourceResolvable::getDefaultMessage)
+            .collect(Collectors.joining("],["));
+
+    return ApiResult.fail(defaultMessages);
+}
+```
+
+* 返回结果
+
+```json
+{
+    "data": null,
+    "code": -1,
+    "msg": "雇员姓名不能为空],[雇员职位不能为空"
+}
+```
+
+
+### 入参jsr303校验，统一格式返回异常信息
+
+如下，使用jsr303的`@Min`注解放到aac001上，如果入参小于1，那么会抛出ConstraintViolationException异常。
+
+```java
+    /**
+     * 根据aac001得到Ac01
+     *
+     * @param aac001 aac001
+     * @return Ac01
+     */
+    @GetMapping("/{aac001}")
+    public Ac01 getAc01(@PathVariable @Min(value = 1, message = "aac001不能小于1")  final int aac001) {
+        return ac01Service.get(aac001);
+    }
+```
+
+* 处理
+
+```java
+    // 处理ConstraintViolationException异常
+    if (throwable instanceof ConstraintViolationException) {
+        final ConstraintViolationException ex = (ConstraintViolationException) throwable;
+
+        final String messages = ex.getConstraintViolations()
+                .stream()
+                .map(ConstraintViolation::getMessage)
+                .collect(Collectors.joining("],["));
+        return ApiResult.fail(messages);
+    }
+```
+
+* 返回结果
+
+```json
+{
+    "data": null,
+    "code": -1,
+    "msg": "aac001不能小于1"
+}
 ```
 
 ## Try it

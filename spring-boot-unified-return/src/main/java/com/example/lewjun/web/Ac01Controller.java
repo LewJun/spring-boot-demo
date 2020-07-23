@@ -6,10 +6,14 @@ import com.example.lewjun.domain.Ac01;
 import com.example.lewjun.service.Ac01Service;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import javax.validation.constraints.Min;
 import java.util.List;
 
+@Validated
 @RequestMapping("/ac01s")
 @RestController
 public class Ac01Controller {
@@ -39,7 +43,7 @@ public class Ac01Controller {
      * @return Ac01
      */
     @PostMapping
-    public Ac01 postAc01(@RequestBody final Ac01 ac01) {
+    public Ac01 postAc01(@RequestBody @Valid final Ac01 ac01) {
         ac01Service.save(ac01);
         return ac01;
     }
@@ -51,7 +55,7 @@ public class Ac01Controller {
      * @return Ac01
      */
     @GetMapping("/{aac001}")
-    public Ac01 getAc01(@PathVariable final int aac001) {
+    public Ac01 getAc01(@PathVariable @Min(value = 1, message = "aac001不能小于1")  final int aac001) {
         return ac01Service.get(aac001);
     }
 

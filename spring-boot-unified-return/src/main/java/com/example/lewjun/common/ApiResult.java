@@ -22,27 +22,31 @@ public class ApiResult {
         this.msg = msg;
     }
 
-    public static ApiResult ofOk() {
-        return of(EnumApiResultStatus.OK);
+    public static ApiResult ok() {
+        return fail(EnumApiResultStatus.OK);
     }
 
-    public static ApiResult ofOk(final Object data) {
+    public static ApiResult ok(final Object data) {
         return of(EnumApiResultStatus.OK, data);
     }
 
-    public static ApiResult ofFail() {
-        return of(EnumApiResultStatus.FAIL);
+    public static ApiResult fail() {
+        return fail(EnumApiResultStatus.FAIL);
     }
 
-    public static ApiResult ofFail(final Object data) {
+    public static ApiResult fail(final Object data) {
         return of(EnumApiResultStatus.FAIL, data);
     }
 
-    public static ApiResult of(final EnumApiResultStatus status) {
+    public static ApiResult fail(final EnumApiResultStatus status) {
         return of(status, null);
     }
 
     public static ApiResult of(final EnumApiResultStatus status, final Object data) {
         return new ApiResult(status.code, status.msg, data);
+    }
+
+    public static ApiResult fail(final String msg) {
+        return new ApiResult(EnumApiResultStatus.FAIL.code, msg, null);
     }
 }

@@ -3,6 +3,7 @@ package com.example.lewjun.domain;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
+import javax.validation.constraints.NotBlank;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -18,10 +19,12 @@ public class Ac01 extends BaseObj {
     /**
      * 雇员姓名
      */
+    @NotBlank(message = "雇员姓名不能为空")
     private String aac002;
     /**
      * 雇员职位
      */
+    @NotBlank(message = "雇员职位不能为空")
     private String aac003;
     /**
      * 领导编号
