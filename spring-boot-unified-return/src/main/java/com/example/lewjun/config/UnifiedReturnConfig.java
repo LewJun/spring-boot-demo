@@ -46,38 +46,42 @@ public class UnifiedReturnConfig {
 
     @ControllerAdvice
     static class ExceptionHandlerAdvice {
-        @ExceptionHandler
+
+        @ExceptionHandler(BussException.class)
+        @ResponseBody
+        public ApiResult exceptionHandle(final BussException ex) {
+            log.error("【出现异常BussException】", ex);
+            return ApiResult.fail(ex.getStatus());
+        }
+
+        @ExceptionHandler(MethodArgumentNotValidException.class)
+        @ResponseBody
+        public ApiResult exceptionHandle(final MethodArgumentNotValidException ex) {
+            log.error("【出现异常MethodArgumentNotValidException】", ex);
+            return ApiResult.fail(
+                    ex.getBindingResult().getAllErrors()
+                            .stream()
+                            .map(DefaultMessageSourceResolvable::getDefaultMessage)
+                            .collect(Collectors.joining("],["))
+            );
+        }
+
+        @ExceptionHandler(ConstraintViolationException.class)
+        @ResponseBody
+        public ApiResult exceptionHandle(final ConstraintViolationException ex) {
+            log.error("【出现异常ConstraintViolationException】", ex);
+            return ApiResult.fail(
+                    ex.getConstraintViolations()
+                            .stream()
+                            .map(ConstraintViolation::getMessage)
+                            .collect(Collectors.joining("],["))
+            );
+        }
+
+        @ExceptionHandler(Throwable.class)
         @ResponseBody
         public ApiResult exceptionHandle(final Throwable throwable) {
             log.error("【出现异常】", throwable);
-
-            if (throwable instanceof BussException) {
-                final BussException ex = (BussException) throwable;
-                return ApiResult.fail(ex.getStatus());
-            }
-
-            if (throwable instanceof MethodArgumentNotValidException) {
-                final MethodArgumentNotValidException ex = (MethodArgumentNotValidException) throwable;
-
-                return ApiResult.fail(
-                        ex.getBindingResult().getAllErrors()
-                                .stream()
-                                .map(DefaultMessageSourceResolvable::getDefaultMessage)
-                                .collect(Collectors.joining("],["))
-                );
-            }
-
-            if (throwable instanceof ConstraintViolationException) {
-                final ConstraintViolationException ex = (ConstraintViolationException) throwable;
-
-                return ApiResult.fail(
-                        ex.getConstraintViolations()
-                                .stream()
-                                .map(ConstraintViolation::getMessage)
-                                .collect(Collectors.joining("],["))
-                );
-            }
-
             return ApiResult.fail(EnumApiResultStatus.FAIL);
         }
     }

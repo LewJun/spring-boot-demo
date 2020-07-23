@@ -291,6 +291,54 @@ if (throwable instanceof MethodArgumentNotValidException) {
 }
 ```
 
+## 优化ExceptionHandlerAdvice
+
+之前出现了很多的if instanceof 判断异常属于那种具体的异常。这样显得繁琐复杂。优化如下：
+
+```java
+    @ControllerAdvice
+    static class ExceptionHandlerAdvice {
+
+        @ExceptionHandler(BussException.class)
+        @ResponseBody
+        public ApiResult exceptionHandle(final BussException ex) {
+            log.error("【出现异常BussException】", ex);
+            return ApiResult.fail(ex.getStatus());
+        }
+
+        @ExceptionHandler(MethodArgumentNotValidException.class)
+        @ResponseBody
+        public ApiResult exceptionHandle(final MethodArgumentNotValidException ex) {
+            log.error("【出现异常MethodArgumentNotValidException】", ex);
+            return ApiResult.fail(
+                    ex.getBindingResult().getAllErrors()
+                            .stream()
+                            .map(DefaultMessageSourceResolvable::getDefaultMessage)
+                            .collect(Collectors.joining("],["))
+            );
+        }
+
+        @ExceptionHandler(ConstraintViolationException.class)
+        @ResponseBody
+        public ApiResult exceptionHandle(final ConstraintViolationException ex) {
+            log.error("【出现异常ConstraintViolationException】", ex);
+            return ApiResult.fail(
+                    ex.getConstraintViolations()
+                            .stream()
+                            .map(ConstraintViolation::getMessage)
+                            .collect(Collectors.joining("],["))
+            );
+        }
+
+        @ExceptionHandler(Throwable.class)
+        @ResponseBody
+        public ApiResult exceptionHandle(final Throwable throwable) {
+            log.error("【出现异常】", throwable);
+            return ApiResult.fail(EnumApiResultStatus.FAIL);
+        }
+    }
+```
+
 ## Try it
 
 * MacOS/Linux
