@@ -1,5 +1,7 @@
 package com.example.lewjun.web;
 
+import com.example.lewjun.common.BussException;
+import com.example.lewjun.common.EnumApiResultStatus;
 import com.example.lewjun.domain.Ac01;
 import com.example.lewjun.service.Ac01Service;
 import org.springframework.beans.BeanUtils;
@@ -22,6 +24,11 @@ public class Ac01Controller {
      */
     @GetMapping
     public List<Ac01> getList() {
+        try {
+            final int i = 1 / 0;
+        } catch (final Exception ex) {
+            throw BussException.of(EnumApiResultStatus.FAIL, ex);
+        }
         return ac01Service.getList();
     }
 

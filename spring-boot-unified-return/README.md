@@ -97,6 +97,107 @@ public class UnifiedReturnConfig {
 }
 ```
 
+## 异常统一处理返回
+
+### 处理手动抛出异常 throw
+
+```java
+    /**
+     * 获取列表
+     *
+     * @return List<Ac01>
+     */
+    @GetMapping
+    public List<Ac01> getList() {
+        try {
+            final int i = 1 / 0;
+        } catch (final Exception ex) {
+            throw BussException.of(EnumApiResultStatus.FAIL, ex);
+        }
+        return ac01Service.getList();
+    }
+```
+
+如上，模拟了一个异常，并通过throw抛出了一个自定义的BussException
+
+* [BussException.java](src/main/java/com/example/lewjun/common/BussException.java)
+
+```java
+package com.example.lewjun.common;
+
+public class BussException extends RuntimeException {
+    private EnumApiResultStatus status;
+
+    public EnumApiResultStatus getStatus() {
+        return status;
+    }
+
+    private BussException() {
+    }
+
+    private BussException(final EnumApiResultStatus status, final Throwable throwable) {
+        super(throwable);
+        this.status = status;
+    }
+
+    public static BussException of() {
+        return of(EnumApiResultStatus.FAIL);
+    }
+
+    public static BussException of(EnumApiResultStatus status) {
+        return of(status, null);
+    }
+
+    public static BussException of(final Throwable throwable) {
+        return of(EnumApiResultStatus.FAIL, throwable);
+    }
+
+    public static BussException of(final EnumApiResultStatus status, final Throwable throwable) {
+        return new BussException(status, throwable);
+    }
+}
+```
+
+* [EnumApiResultStatus.java](src/main/java/com/example/lewjun/common/EnumApiResultStatus.java)
+```java
+package com.example.lewjun.common;
+
+public enum EnumApiResultStatus {
+    OK(0, "请求成功"),
+    FAIL(-1, "系统异常");
+
+    public final int code;
+
+    public final String msg;
+
+    EnumApiResultStatus(final int code, final String msg) {
+        this.code = code;
+        this.msg = msg;
+    }
+}
+```
+
+* 统一异常处理方式
+[UnifiedReturnConfig.java](src/main/java/com/example/lewjun/config/UnifiedReturnConfig.java)
+
+```java
+    @ControllerAdvice
+    static class ExceptionHandlerAdvice {
+        @ExceptionHandler
+        @ResponseBody
+        public ApiResult exceptionHandle(final Throwable throwable) {
+            log.error("【出现异常】", throwable);
+
+            if (throwable instanceof BussException) {
+                final BussException ex = (BussException) throwable;
+                return ApiResult.of(ex.getStatus());
+            }
+
+            return ApiResult.of(EnumApiResultStatus.FAIL);
+        }
+    }
+```
+
 ## Try it
 
 * MacOS/Linux

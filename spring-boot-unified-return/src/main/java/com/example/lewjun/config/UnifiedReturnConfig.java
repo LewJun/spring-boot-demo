@@ -1,16 +1,23 @@
 package com.example.lewjun.config;
 
 import com.example.lewjun.common.ApiResult;
+import com.example.lewjun.common.BussException;
+import com.example.lewjun.common.EnumApiResultStatus;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServerHttpResponse;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
+@Slf4j
 @EnableWebMvc
 @Configuration
 public class UnifiedReturnConfig {
@@ -27,7 +34,23 @@ public class UnifiedReturnConfig {
             if (obj instanceof ApiResult) {
                 return obj;
             }
-            return new ApiResult<>(obj);
+            return ApiResult.ofOk(obj);
+        }
+    }
+
+    @ControllerAdvice
+    static class ExceptionHandlerAdvice {
+        @ExceptionHandler
+        @ResponseBody
+        public ApiResult exceptionHandle(final Throwable throwable) {
+            log.error("【出现异常】", throwable);
+
+            if (throwable instanceof BussException) {
+                final BussException ex = (BussException) throwable;
+                return ApiResult.of(ex.getStatus());
+            }
+
+            return ApiResult.of(EnumApiResultStatus.FAIL);
         }
     }
 }
