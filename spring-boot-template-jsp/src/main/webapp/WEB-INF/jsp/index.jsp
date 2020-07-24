@@ -6,6 +6,6 @@
   <title>index.jsp</title>
 </head>
 <body>
-Hello ${user.username}
+Hello ${loginUser.username}
 </body>
 </html>

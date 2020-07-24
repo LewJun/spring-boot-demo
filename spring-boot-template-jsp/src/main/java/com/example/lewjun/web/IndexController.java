@@ -1,25 +1,27 @@
 package com.example.lewjun.web;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 @Controller
 public class IndexController {
+
+    @Autowired
+    public HttpSession session;
+
     @GetMapping({"", "/", "/index"})
-    public ModelAndView index(HttpServletRequest request) {
-
-        ModelAndView mv = new ModelAndView("index");
-
-        Object user = request.getSession().getAttribute("user");
+    public String index(Model model) {
+        Object user = session.getAttribute("loginUser");
         if (user == null) {
-            mv.setViewName("redirect:/user/login");
-            return mv;
+            return "redirect:/user/login";
         }
 
-        mv.addObject("user", user);
-        return mv;
+        model.addAttribute("loginUser", user);
+
+        return "index";
     }
 }
