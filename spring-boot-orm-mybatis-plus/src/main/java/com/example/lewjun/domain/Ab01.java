@@ -1,34 +1,29 @@
 package com.example.lewjun.domain;
 
-import com.example.lewjun.jsr.group.UpdateGroup;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-
+@AllArgsConstructor
 @Data
 @Accessors(chain = true)
+@Builder
+@TableName("ab01")
 public class Ab01 extends BaseObj {
     /**
-     * 部门编号
-     * <pre>
-     *     WARNING: 当group为UpdateGroup时，@NotNull校验生效
-     * </pre>
+     * 部门编号 如果不是id字段，那么需要使用@TableId注释这就是id
      */
-    @NotNull(message = "部门编号不能为空", groups = {UpdateGroup.class})
+    @TableId
     private Integer aab001;
     /**
      * 部门名称
      */
-    @Size(min = 3, max = 32, message = "长度介于[3, 32]")
-    @NotBlank(message = "部门名称不能为空")
     private String aab002;
     /**
      * 部门所在位置
      */
-    @Size(min = 3, max = 32, message = "长度介于[3, 32]")
-    @NotBlank(message = "部门所在位置不能为空")
     private String aab003;
 }
