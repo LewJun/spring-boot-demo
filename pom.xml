@@ -32,6 +32,7 @@
         <module>spring-boot-aoplog</module>
         <module>spring-boot-unified-return</module>
         <module>spring-boot-template-jsp</module>
+        <module>spring-boot-orm-mybatis-plus</module>
     </modules>
 
     <properties>
