@@ -3,11 +3,7 @@
 <%@ include file="/WEB-INF/_inc/_inc_basePath.jsp" %>
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>login.jsp</title>
-</head>
+<%@ include file="/WEB-INF/_inc/_inc_head.html" %>
 <body>
 <form method="post" action="user/login">
   username:<input name="username" placeholder="username"/>

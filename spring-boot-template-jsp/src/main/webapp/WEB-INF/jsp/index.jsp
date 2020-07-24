@@ -1,10 +1,7 @@
+<%@ page pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>index.jsp</title>
-</head>
+<%@ include file="/WEB-INF/_inc/_inc_head.html" %>
 <body>
 Hello ${loginUser.username}
 </body>
