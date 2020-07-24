@@ -6,6 +6,6 @@
   <title>index.jsp</title>
 </head>
 <body>
-${time}
+Hello ${user.username}
 </body>
 </html>
