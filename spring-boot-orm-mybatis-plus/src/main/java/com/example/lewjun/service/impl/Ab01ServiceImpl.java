@@ -12,6 +12,11 @@ import java.util.List;
 public class Ab01ServiceImpl extends ServiceImpl<Ab01Mapper, Ab01> implements Ab01Service {
     @Override
     public List<Ab01> queryByAab002(final String aab002) {
-        return getBaseMapper().queryByAab002(aab002);
+        return baseMapper.queryByAab002(aab002);
+    }
+
+    @Override
+    public List<Ab01> queryByAab003(String aab003) {
+        return baseMapper.queryByAab003(aab003);
     }
 }

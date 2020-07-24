@@ -86,4 +86,9 @@ public class Ab01ServiceTest {
     public void testQueryByAab002() {
         log.info("【queryByAab002: {}】", ab01Service.queryByAab002("SALES"));
     }
+
+    @Test
+    public void testQueryByAab003() {
+        log.info("【queryByAab003: {}】", ab01Service.queryByAab003("DALLAS"));
+    }
 }

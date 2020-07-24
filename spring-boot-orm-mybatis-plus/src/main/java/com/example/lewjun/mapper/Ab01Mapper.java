@@ -11,4 +11,6 @@ import java.util.List;
 public interface Ab01Mapper extends BaseMapper<Ab01> {
     @Select("select * from ab01 where aab002=#{aab002}")
     List<Ab01> queryByAab002(String aab002);
+
+    List<Ab01> queryByAab003(String aab003);
 }

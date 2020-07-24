@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface Ab01Service extends IService<Ab01> {
     List<Ab01> queryByAab002(String aab002);
+
+    List<Ab01> queryByAab003(String aab003);
 }

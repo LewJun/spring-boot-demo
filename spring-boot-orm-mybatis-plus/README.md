@@ -202,6 +202,31 @@ public interface Ab01Mapper extends BaseMapper<Ab01> {
 }
 ```
 
+## 使用xml方式查询
+
+* 完全使用注解可以吗？
+
+* 配置扫描xml的位置
+
+```yaml
+mybatis-plus:
+  # 扫描xml的位置
+  mapper-locations: classpath:/mappers/**/*Mapper.xml
+  configuration:
+    cache-enabled: false
+```
+
+* [Ab01Mapper.xml](src/main/resources/mappers/com/example/lewjun/mapper/Ab01Mapper.xml)
+
+```xml
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.lewjun.mapper.Ab01Mapper">
+    <select id="queryByAab003" resultType="com.example.lewjun.domain.Ab01">
+        select * from ab01 where aab003=#{aab003}
+    </select>
+</mapper>
+```
 
 
 ## Try it

@@ -14,3 +14,11 @@ spring:
     url: jdbc:h2:mem:test
     username: root
     password: test
+
+mybatis-plus:
+  # 扫描xml的位置
+  mapper-locations:
+    - classpath:/mappers/**/*Mapper.xml
+  configuration:
+    cache-enabled: true
+    map-underscore-to-camel-case: true
