@@ -55,7 +55,7 @@ server:
 spring:
   mvc:
     view:
-      prefix: /WEB/INF/jsp/
+      prefix: /WEB-INF/jsp/
       suffix: .jsp
 
 ```
