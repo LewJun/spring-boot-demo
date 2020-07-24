@@ -58,7 +58,7 @@ public class Ab01ServiceTest {
 
         log.info("【aab003 like ll: {}】", ab01Service.query().like("aab003", "LL").list());
 
-        Page<Ab01> ab01Page = ab01Service.page(
+        final Page<Ab01> ab01Page = ab01Service.page(
                 new Page<Ab01>()
                         .setCurrent(2) // 第2页
                         .setSize(3) // 第3页
@@ -80,5 +80,10 @@ public class Ab01ServiceTest {
                 ).getRecords()
         );
 
+    }
+
+    @Test
+    public void testQueryByAab002() {
+        log.info("【queryByAab002: {}】", ab01Service.queryByAab002("SALES"));
     }
 }

@@ -192,6 +192,18 @@ public class Ab01ServiceTest {
 }
 ```
 
+## 使用注解查询
+
+```java
+@Repository
+public interface Ab01Mapper extends BaseMapper<Ab01> {
+    @Select("select * from ab01 where aab002=#{aab002}")
+    List<Ab01> queryByAab002(String aab002);
+}
+```
+
+
+
 ## Try it
 
 * MacOS/Linux
