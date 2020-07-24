@@ -1,0 +1,10 @@
+server:
+  port: 1234
+  servlet:
+    context-path: /demo
+
+spring:
+  mvc:
+    view:
+      prefix: /WEB/INF/jsp/
+      suffix: .jsp

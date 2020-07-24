@@ -31,6 +31,7 @@
         <module>spring-boot-multi-env</module>
         <module>spring-boot-aoplog</module>
         <module>spring-boot-unified-return</module>
+        <module>spring-boot-template-jsp</module>
     </modules>
 
     <properties>

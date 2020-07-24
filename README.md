@@ -42,5 +42,6 @@ mvn archetype:generate
 * [spring-boot-multi-env](spring-boot-multi-env) 演示spring boot 项目多环境配置
 * [spring-boot-aoplog](spring-boot-aoplog) 演示spring boot 实现日志全局拦截
 * [spring-boot-unified-return](spring-boot-unified-return) 演示spring boot 实现restfull api返回统一格式的数据
+* [spring-boot-template-jsp](spring-boot-template-jsp) 演示spring boot 一个spring boot集成jsp的例子
 
 
