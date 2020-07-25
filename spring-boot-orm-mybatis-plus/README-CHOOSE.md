@@ -71,3 +71,4 @@ toString()来解决
     </select>
 ```
 
+如上问题，不仅限于choose标签，其它动态sql标签在对string进行处理时也会出现同样的问题。
