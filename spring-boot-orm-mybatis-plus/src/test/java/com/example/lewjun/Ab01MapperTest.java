@@ -44,4 +44,10 @@ public class Ab01MapperTest {
                 ab01Mapper.queryTrim()
         );
     }
+
+    @Test
+    public void testUpdateSelective() {
+        log.info("【updateSelective:{}】", ab01Mapper.updateSelective(new Ab01(10, null, "aab003")));
+        log.info("【selectById:{}】", ab01Mapper.selectById(10));
+    }
 }

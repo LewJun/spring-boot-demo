@@ -82,4 +82,17 @@
             </if>
         </trim>
     </select>
+
+    <update id="updateSelective" parameterType="com.example.lewjun.domain.Ab01">
+        update ab01
+        <set>
+            <if test="aab002!=null">
+                aab002=#{aab002},
+            </if>
+            <if test="aab003!=null">
+                aab003=#{aab003},
+            </if>
+        </set>
+        where aab001=#{aab001}
+    </update>
 </mapper>

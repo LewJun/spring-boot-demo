@@ -22,4 +22,6 @@ public interface Ab01Mapper extends BaseMapper<Ab01> {
     List<Ab01> queryChoose(String words);
 
     List<Ab01> queryTrim();
+
+    int updateSelective(Ab01 ab01);
 }
