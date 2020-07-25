@@ -258,6 +258,7 @@ org.springframework.dao.DataIntegrityViolationException: Error attempting to get
 
 * [where 的使用](README-WHERE.md)
 * [if 条件](README-IF.md)
+* [choose,when和otherwise条件](README-CHOOSE.md)
 
 ## Try it
 

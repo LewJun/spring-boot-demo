@@ -47,4 +47,23 @@
             </if>
         </where>
     </select>
+
+    <select id="queryChoose" parameterType="string" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from ab01
+        <where>
+            <choose>
+                <when test="words=='a'.toString()">
+                    and aab001=10
+                </when>
+                <when test="words=='b'.toString()">
+                    and aab001=20
+                </when>
+                <otherwise>
+                    and aab001=50
+                </otherwise>
+            </choose>
+        </where>
+    </select>
 </mapper>

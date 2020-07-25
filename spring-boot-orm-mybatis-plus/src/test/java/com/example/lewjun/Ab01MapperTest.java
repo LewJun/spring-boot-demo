@@ -24,4 +24,17 @@ public class Ab01MapperTest {
                 )
         );
     }
+
+    @Test
+    public void testQueryChoose() {
+        log.info("【queryChoose a:{}】",
+                ab01Mapper.queryChoose("a")
+        );
+        log.info("【queryChoose b:{}】",
+                ab01Mapper.queryChoose("b")
+        );
+        log.info("【queryChoose c:{}】",
+                ab01Mapper.queryChoose("c")
+        );
+    }
 }
