@@ -7,6 +7,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.Arrays;
+
 @Slf4j
 @SpringBootTest
 public class Ab01MapperTest {
@@ -49,5 +51,10 @@ public class Ab01MapperTest {
     public void testUpdateSelective() {
         log.info("【updateSelective:{}】", ab01Mapper.updateSelective(new Ab01(10, null, "aab003")));
         log.info("【selectById:{}】", ab01Mapper.selectById(10));
+    }
+
+    @Test
+    public void testQueryByPks() {
+        log.info("【queryByPks:{}】", ab01Mapper.queryByPks(Arrays.asList(10, 30)));
     }
 }

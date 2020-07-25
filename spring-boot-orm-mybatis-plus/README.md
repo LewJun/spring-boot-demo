@@ -261,6 +261,7 @@ org.springframework.dao.DataIntegrityViolationException: Error attempting to get
 * [choose,when和otherwise条件](README-CHOOSE.md)
 * [trim 条件](README-TRIM.md)
 * [set 条件](README-SET.md)
+* [foreach 循环](README-FOREACH.md)
 
 ## Try it
 

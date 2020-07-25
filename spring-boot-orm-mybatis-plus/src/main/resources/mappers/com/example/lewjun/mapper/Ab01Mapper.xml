@@ -83,6 +83,18 @@
         </trim>
     </select>
 
+    <select id="queryByPks" resultMap="BaseResultMap">
+        select * from ab01
+        <where>
+            <if test="list!=null">
+                aab001 in
+                <foreach collection="list" item="item" open="(" close=")" separator=",">
+                    #{item}
+                </foreach>
+            </if>
+        </where>
+    </select>
+
     <update id="updateSelective" parameterType="com.example.lewjun.domain.Ab01">
         update ab01
         <set>
