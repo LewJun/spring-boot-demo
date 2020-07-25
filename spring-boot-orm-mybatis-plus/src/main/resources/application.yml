@@ -22,3 +22,12 @@ mybatis-plus:
   configuration:
     cache-enabled: true
     map-underscore-to-camel-case: true
+
+logging:
+  level:
+    com:
+      example:
+        lewjun:
+          # 设置mapper包日志级别为debug
+          mapper: debug
+

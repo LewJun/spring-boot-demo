@@ -16,4 +16,6 @@ public interface Ab01Mapper extends BaseMapper<Ab01> {
     List<Ab01> queryByAab003(String aab003);
 
     List<Ab01Ac01> queryAb01Ac01();
+
+    List<Ab01> queryWhere(Ab01 ab01);
 }

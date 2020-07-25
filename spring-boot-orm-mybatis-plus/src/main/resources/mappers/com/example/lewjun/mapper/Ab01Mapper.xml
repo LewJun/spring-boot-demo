@@ -28,4 +28,23 @@
         select ab01.*, ac01.* from ab01
         left join ac01 on ab01.aab001=ac01.aac006
     </select>
+    <!--    where 的使用 -->
+    <select id="queryWhere" parameterType="com.example.lewjun.domain.Ab01" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from ab01
+        <where>
+            <if test="aab001!=null">
+                and aab001=#{aab001}
+            </if>
+
+            <if test="aab002!=null">
+                and aab002=#{aab002}
+            </if>
+
+            <if test="aab003!=null">
+                or aab003=#{aab003}
+            </if>
+        </where>
+    </select>
 </mapper>

@@ -254,6 +254,9 @@ org.springframework.dao.DataIntegrityViolationException: Error attempting to get
 @AllArgsConstructor
 @Builder
 
+## 动态sql
+
+* [where 的使用](README-WHERE.md)
 
 ## Try it
 
