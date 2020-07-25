@@ -9,8 +9,23 @@
         <result column="aac005" jdbcType="DATE" property="aac005"/>
         <result column="aac006" jdbcType="INTEGER" property="aac006"/>
     </resultMap>
+
+    <resultMap id="Ac01Ab01" type="com.example.lewjun.domain.Ac01Ab01">
+        <id column="aac001" jdbcType="INTEGER" property="aac001"/>
+        <result column="aac002" jdbcType="VARCHAR" property="aac002"/>
+        <result column="aac003" jdbcType="VARCHAR" property="aac003"/>
+        <result column="aac004" jdbcType="INTEGER" property="aac004"/>
+        <result column="aac005" jdbcType="DATE" property="aac005"/>
+
+        <association property="ab01" resultMap="com.example.lewjun.mapper.Ab01Mapper.BaseResultMap"/>
+    </resultMap>
+
     <sql id="Base_Column_List">
         aac01, aac002, aac003, aac004, aac005, aac006
     </sql>
 
+    <select id="queryAc01Ab01" resultMap="Ac01Ab01">
+        select ac01.*, ab01.* from ac01
+        join ab01 on ab01.aab001=ac01.aac006
+    </select>
 </mapper>

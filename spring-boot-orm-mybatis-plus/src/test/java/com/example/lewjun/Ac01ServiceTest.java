@@ -16,4 +16,9 @@ public class Ac01ServiceTest {
     public void testAc01Service() {
         log.info("【ac01List: {}】", ac01Service.list());
     }
+
+    @Test
+    public void testQueryAc01Ab01() {
+        log.info("【Ac01Ab01List: {}】", ac01Service.queryAc01Ab01());
+    }
 }
