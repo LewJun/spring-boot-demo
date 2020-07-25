@@ -37,4 +37,11 @@ public class Ab01MapperTest {
                 ab01Mapper.queryChoose("c")
         );
     }
+
+    @Test
+    public void testQueryTrim() {
+        log.info("【queryTrim:{}】",
+                ab01Mapper.queryTrim()
+        );
+    }
 }

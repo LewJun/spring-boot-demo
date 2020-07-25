@@ -20,4 +20,6 @@ public interface Ab01Mapper extends BaseMapper<Ab01> {
     List<Ab01> queryWhere(Ab01 ab01);
 
     List<Ab01> queryChoose(String words);
+
+    List<Ab01> queryTrim();
 }
