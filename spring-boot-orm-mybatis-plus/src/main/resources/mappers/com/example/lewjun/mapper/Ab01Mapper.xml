@@ -8,6 +8,10 @@
         <result column="aab003" jdbcType="VARCHAR" property="aab003"/>
     </resultMap>
 
+    <resultMap id="Ab01Ac01" type="com.example.lewjun.domain.Ab01Ac01" extends="BaseResultMap">
+        <collection property="ac01s" resultMap="com.example.lewjun.mapper.Ac01Mapper.BaseResultMap"/>
+    </resultMap>
+
     <sql id="Base_Column_List">
         aab001, aab002, aab003
     </sql>
@@ -18,5 +22,10 @@
         from ab01
         where
         aab003=#{aab003}
+    </select>
+
+    <select id="queryAb01Ac01" resultMap="Ab01Ac01">
+        select ab01.*, ac01.* from ab01
+        left join ac01 on ab01.aab001=ac01.aac006
     </select>
 </mapper>

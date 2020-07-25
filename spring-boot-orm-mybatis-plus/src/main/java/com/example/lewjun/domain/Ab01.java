@@ -3,14 +3,14 @@ package com.example.lewjun.domain;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
+@NoArgsConstructor
 @AllArgsConstructor
 @Data
 @Accessors(chain = true)
-@Builder
 @TableName("ab01")
 public class Ab01 extends BaseObj {
     /**

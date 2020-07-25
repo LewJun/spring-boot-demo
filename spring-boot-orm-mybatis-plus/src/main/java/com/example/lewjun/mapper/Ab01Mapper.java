@@ -2,6 +2,7 @@ package com.example.lewjun.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.example.lewjun.domain.Ab01;
+import com.example.lewjun.domain.Ab01Ac01;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
@@ -13,4 +14,6 @@ public interface Ab01Mapper extends BaseMapper<Ab01> {
     List<Ab01> queryByAab002(String aab002);
 
     List<Ab01> queryByAab003(String aab003);
+
+    List<Ab01Ac01> queryAb01Ac01();
 }

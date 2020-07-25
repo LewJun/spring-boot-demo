@@ -91,4 +91,9 @@ public class Ab01ServiceTest {
     public void testQueryByAab003() {
         log.info("【queryByAab003: {}】", ab01Service.queryByAab003("DALLAS"));
     }
+
+    @Test
+    public void testQueryAb01Ac01() {
+        log.info("【queryAb01Ac01:{}】", ab01Service.queryAb01Ac01());
+    }
 }

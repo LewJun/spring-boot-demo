@@ -1,21 +1,22 @@
-DROP TABLE IF EXISTS ab01;
+DROP TABLE IF EXISTS AB01;
 
-CREATE TABLE ab01
+CREATE TABLE AB01
 (
-    aab001 bigint(20) not null comment '部门编号',
-    aab002 varchar(30) not null comment '部门名称',
-    aab003 varchar(30) not null comment '部门所在位置',
-    primary key (aab001)
+    AAB001 BIGINT(20)  NOT NULL AUTO_INCREMENT COMMENT '部门编号',
+    AAB002 VARCHAR(30) NOT NULL COMMENT '部门名称',
+    AAB003 VARCHAR(30) NOT NULL COMMENT '部门所在位置',
+    PRIMARY KEY (AAB001)
 );
 
-drop table if exists ac01;
+DROP TABLE IF EXISTS AC01;
 
-create table ac01
+CREATE TABLE AC01
 (
-    aac001 bigint(20) not null comment '雇员编号',
-    aac002 varchar(30) not null comment '雇员姓名',
-    aac003 varchar(30) not null comment '雇员职位',
-    aac004 bigint(20) not null default '' comment '领导编号',
-    aac005 DATE not null comment '雇佣日期',
-    aac006 bigint(20) not null comment '所在部门'
+    AAC001 BIGINT(20)  NOT NULL AUTO_INCREMENT COMMENT '雇员编号',
+    AAC002 VARCHAR(30) NOT NULL COMMENT '雇员姓名',
+    AAC003 VARCHAR(30) NOT NULL COMMENT '雇员职位',
+    AAC004 BIGINT(20)  NOT NULL DEFAULT -1 COMMENT '领导编号',
+    AAC005 DATE        NOT NULL COMMENT '雇佣日期',
+    AAC006 BIGINT(20)  NOT NULL COMMENT '所在部门',
+    PRIMARY KEY (AAC001)
 );

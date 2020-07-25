@@ -228,6 +228,32 @@ mybatis-plus:
 </mapper>
 ```
 
+## 1对多查询
+
+```xml
+    <select id="queryAb01Ac01" resultMap="Ab01Ac01">
+        select ab01.*, ac01.* from ab01
+        left join ac01 on ab01.aab001=ac01.aac006
+    </select>
+
+    <resultMap id="Ab01Ac01" type="com.example.lewjun.domain.Ab01Ac01" extends="BaseResultMap">
+        <collection property="ac01s" resultMap="com.example.lewjun.mapper.Ac01Mapper.BaseResultMap"/>
+    </resultMap>
+```
+
+结果运行的时候一直报错
+```log
+org.springframework.dao.DataIntegrityViolationException: Error attempting to get column 'AAC002' from result set.  Cause: java.sql.SQLDataException: Cannot convert string 'SMITH' to java.sql.Timestamp value
+; Cannot convert string 'SMITH' to java.sql.Timestamp value; nested exception is java.sql.SQLDataException: Cannot convert string 'SMITH' to java.sql.Timestamp value
+```
+几近曲折，最后把Ac01上的@Builder去掉就可以了。
+
+原因是：@Builder导致无参的构造方法不在了。也可以加上
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+
 
 ## Try it
 

@@ -2,6 +2,7 @@ package com.example.lewjun.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.lewjun.domain.Ab01;
+import com.example.lewjun.domain.Ab01Ac01;
 import com.example.lewjun.mapper.Ab01Mapper;
 import com.example.lewjun.service.Ab01Service;
 import org.springframework.stereotype.Service;
@@ -16,7 +17,12 @@ public class Ab01ServiceImpl extends ServiceImpl<Ab01Mapper, Ab01> implements Ab
     }
 
     @Override
-    public List<Ab01> queryByAab003(String aab003) {
+    public List<Ab01> queryByAab003(final String aab003) {
         return baseMapper.queryByAab003(aab003);
+    }
+
+    @Override
+    public List<Ab01Ac01> queryAb01Ac01() {
+        return baseMapper.queryAb01Ac01();
     }
 }

@@ -1,10 +1,12 @@
 package com.example.lewjun.domain;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 import java.util.Date;
 
 @Data
+@Accessors(chain = true)
 public class Ac01Ab01 {
     private int aac001;
 
