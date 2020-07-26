@@ -49,3 +49,16 @@ c.e.lewjun.mapper.Ab01Mapper.queryByPks  : <==      Total: 2
 ```log
 org.mybatis.spring.MyBatisSystemException: nested exception is org.apache.ibatis.binding.BindingException: Parameter 'pks' not found. Available parameters are [collection, list]
 ```
+
+## 更多例子
+
+* 使用foreach批量插入
+
+```xml
+    <insert id="inserts" parameterType="list">
+        insert into Ab01(aab001, aab002, aab003) values
+        <foreach collection="list" separator="," item="item">
+            (#{item.aab001}, #{item.aab002}, #{item.aab003})
+        </foreach>
+    </insert>
+```

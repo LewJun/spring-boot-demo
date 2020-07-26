@@ -57,4 +57,19 @@ public class Ab01MapperTest {
     public void testQueryByPks() {
         log.info("【queryByPks:{}】", ab01Mapper.queryByPks(Arrays.asList(10, 30)));
     }
+
+    @Test
+    public void testInserts() {
+        ab01Mapper.inserts(Arrays.asList(
+                new Ab01().setAab001(1).setAab002("aab002").setAab003("aab003"),
+                new Ab01().setAab001(2).setAab002("aab0021").setAab003("aab0031")
+        ));
+    }
+
+    @Test
+    public void testInsertSelective() {
+        final Ab01 ab01 = new Ab01().setAab001(1).setAab002("aab002").setAab003("aab003");
+        ab01Mapper.insertSelective(ab01);
+        log.info("【ab01.aab001:{}】", ab01.getAab001());
+    }
 }

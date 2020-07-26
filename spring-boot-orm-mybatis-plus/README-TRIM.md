@@ -20,4 +20,31 @@
                 and aab002='xyz'
             </if>
         </trim>
+    </select>
+```
+
+## 更多例子
+
+* 使用trim动态加入values()
+
+```xml
+    <insert id="insertSelective" useGeneratedKeys="true" keyProperty="aab001">
+        insert into ab01
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="aab002!=null">
+                aab002,
+            </if>
+            <if test="aab003!=null">
+                aab003,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="aab002!=null">
+                #{aab002},
+            </if>
+            <if test="aab003!=null">
+                #{aab003},
+            </if>
+        </trim>
+    </insert>
 ```

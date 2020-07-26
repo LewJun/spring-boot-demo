@@ -26,4 +26,18 @@ public interface Ab01Mapper extends BaseMapper<Ab01> {
     int updateSelective(Ab01 ab01);
 
     List<Ab01> queryByPks(List<Integer> pks);
+
+    /**
+     * 使用foreach批量插入
+     *
+     * @param ab01s
+     */
+    int inserts(List<Ab01> ab01s);
+
+    /**
+     * 使用trim动态加入values()
+     *
+     * @param ab01
+     */
+    int insertSelective(Ab01 ab01);
 }

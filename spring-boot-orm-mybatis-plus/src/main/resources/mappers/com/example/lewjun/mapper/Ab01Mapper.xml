@@ -83,6 +83,26 @@
         </trim>
     </select>
 
+    <insert id="insertSelective" useGeneratedKeys="true" keyProperty="aab001">
+        insert into ab01
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="aab002!=null">
+                aab002,
+            </if>
+            <if test="aab003!=null">
+                aab003,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="aab002!=null">
+                #{aab002},
+            </if>
+            <if test="aab003!=null">
+                #{aab003},
+            </if>
+        </trim>
+    </insert>
+
     <select id="queryByPks" resultMap="BaseResultMap">
         select * from ab01
         <where>
@@ -94,6 +114,13 @@
             </if>
         </where>
     </select>
+
+    <insert id="inserts" parameterType="list">
+        insert into Ab01(aab001, aab002, aab003) values
+        <foreach collection="list" separator="," item="item">
+            (#{item.aab001}, #{item.aab002}, #{item.aab003})
+        </foreach>
+    </insert>
 
     <update id="updateSelective" parameterType="com.example.lewjun.domain.Ab01">
         update ab01
