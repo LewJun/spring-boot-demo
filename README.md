@@ -45,3 +45,4 @@ mvn archetype:generate
 * [spring-boot-template-jsp](spring-boot-template-jsp) 演示spring boot 一个spring boot集成jsp的例子
 * [spring-boot-orm-mybatis-plus](spring-boot-orm-mybatis-plus) spring boot 集成 mybatis-plus
 * [spring-boot-orm-jdbcTemplate](spring-boot-orm-jdbcTemplate) 一个spring boot集成jdbcTemplate的例子
+* [spring-boot-orm-jpa](spring-boot-orm-jpa) 一个spring boot整合jpa的例子
