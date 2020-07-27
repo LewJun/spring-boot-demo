@@ -33,6 +33,7 @@
         <module>spring-boot-unified-return</module>
         <module>spring-boot-template-jsp</module>
         <module>spring-boot-orm-mybatis-plus</module>
+        <module>spring-boot-orm-jdbcTemplate</module>
     </modules>
 
     <properties>
