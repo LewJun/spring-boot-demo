@@ -35,6 +35,7 @@
         <module>spring-boot-orm-mybatis-plus</module>
         <module>spring-boot-orm-jdbcTemplate</module>
         <module>spring-boot-orm-jpa</module>
+        <module>spring-boot-orm-mybatis</module>
     </modules>
 
     <properties>
