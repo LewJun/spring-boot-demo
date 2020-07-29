@@ -39,7 +39,8 @@ public class HelloController {
 }
 ```
 
-## [HelloControllerTest.java](src/test/java/com/example/lewjun/HelloControllerTest.java)
+## 使用MockMvc对接口做单元测试
+[HelloControllerTest.java](src/test/java/com/example/lewjun/HelloControllerTest.java)
 ```java
 package com.example.lewjun;
 
@@ -95,6 +96,38 @@ server:
   port: 1234
   servlet:
     context-path: /demo
+```
+
+## 使用TestRestTemplate对接口做单元测试
+[HelloControllerTest2.java](src/test/java/com/example/lewjun/HelloControllerTest2.java)
+
+```java
+@Slf4j
+@RunWith(SpringRunner.class)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+public class HelloControllerTest2 {
+
+    @LocalServerPort
+    private int port;
+
+    @Autowired
+    private TestRestTemplate testRestTemplate;
+
+    private String baseUrl;
+
+    @Before
+    public void setUp() throws MalformedURLException {
+        this.baseUrl = new URL("http://localhost:" + port + "/demo").toString();
+    }
+
+    @Test
+    public void testHello() {
+        log.info("【port: {}】", port);
+        String url = baseUrl + "/hello";
+        final ResponseEntity<String> responseEntity = testRestTemplate.getForEntity(url, String.class);
+        log.info("【/hello: {}】", responseEntity);
+    }
+}
 ```
 
 ## Try it
