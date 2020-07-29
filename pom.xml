@@ -36,6 +36,7 @@
         <module>spring-boot-orm-jdbcTemplate</module>
         <module>spring-boot-orm-jpa</module>
         <module>spring-boot-orm-mybatis</module>
+        <module>spring-boot-template-thymeleaf</module>
     </modules>
 
     <properties>

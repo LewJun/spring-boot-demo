@@ -42,7 +42,8 @@ mvn archetype:generate
 * [spring-boot-multi-env](spring-boot-multi-env) 演示spring boot 项目多环境配置
 * [spring-boot-aoplog](spring-boot-aoplog) 演示spring boot 实现日志全局拦截
 * [spring-boot-unified-return](spring-boot-unified-return) 演示spring boot 实现restfull api返回统一格式的数据
-* [spring-boot-template-jsp](spring-boot-template-jsp) 演示spring boot 一个spring boot集成jsp的例子
+* [spring-boot-template-jsp](spring-boot-template-jsp) 演示spring boot 集成jsp的例子
+* [spring-boot-template-thymeleaf](spring-boot-template-thymeleaf) 演示spring boot 集成thymeleaf的例子
 * [spring-boot-orm-jdbcTemplate](spring-boot-orm-jdbcTemplate) 一个spring boot集成jdbcTemplate的例子
 * [spring-boot-orm-jpa](spring-boot-orm-jpa) 一个spring boot整合jpa的例子
 * [spring-boot-orm-mybatis](spring-boot-orm-mybatis) 一个spring boot整合mybatis的例子
