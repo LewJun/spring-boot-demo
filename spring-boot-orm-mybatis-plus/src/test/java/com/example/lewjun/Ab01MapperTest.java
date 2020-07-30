@@ -66,6 +66,18 @@ public class Ab01MapperTest {
         ));
     }
 
+    @Test public void testInsert() {
+        ab01Mapper.insert(new Ab01().setAab001(1).setAab002("aab002").setAab003("aab003"));
+        ab01Mapper.insert(new Ab01().setAab001(2).setAab002("aab0021").setAab003("aab0031"));
+        log.info("【selectById 1: {}】", ab01Mapper.selectById(1));
+
+        ab01Mapper.updateById(new Ab01().setAab001(2).setAab002("aab0021").setAab003("aab003xxx"));
+        Ab01 ab01 = ab01Mapper.selectById(2);
+        log.info("【selectById 2: {}】", ab01);
+        log.info("【selectById 2: {}】", ab01.getCreateTime());
+        log.info("【selectById 2: {}】", ab01.getUpdateTime());
+    }
+
     @Test
     public void testInsertSelective() {
         final Ab01 ab01 = new Ab01().setAab001(1).setAab002("aab002").setAab003("aab003");

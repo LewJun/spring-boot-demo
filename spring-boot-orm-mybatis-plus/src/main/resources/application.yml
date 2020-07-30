@@ -22,6 +22,9 @@ mybatis-plus:
   configuration:
     cache-enabled: true
     map-underscore-to-camel-case: true
+  global-config:
+    # 驼峰下划线转换
+    db-column-underline: true
 
 logging:
   level:
