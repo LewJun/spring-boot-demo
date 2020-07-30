@@ -33,4 +33,9 @@ public class Ab01ServiceTest {
 
         log.info("【queryAllAab001: {}】", ab01Service.queryAllAab001());
     }
+
+    @Test
+    public void testQueryAll() {
+        log.info("【queryAll: {}】", ab01Service.queryAll());
+    }
 }

@@ -58,12 +58,20 @@ public class Ab01ServiceImpl implements Ab01Service {
 
     @Override
     public List<Ab01> queryAll() {
-        return jdbcTemplate.query("select * from ab01", (resultSet, i) ->
-                new Ab01()
-                        .setAab001(resultSet.getInt("aab001"))
-                        .setAab002(resultSet.getString("aab002"))
-                        .setAab003(resultSet.getString("aab003"))
-        );
+//        return jdbcTemplate.query("select * from ab01", (resultSet, i) ->
+//                new Ab01()
+//                        .setAab001(resultSet.getInt("aab001"))
+//                        .setAab002(resultSet.getString("aab002"))
+//                        .setAab003(resultSet.getString("aab003"))
+//        );
+
+
+//        使用错误new BeanPropertyRowMapper<>()
+//        java.lang.IllegalStateException: Mapped class was not specified
+//        return jdbcTemplate.query("select * from ab01", new Object[]{}, new BeanPropertyRowMapper<>());
+
+        // 需要把Ab01.class传入到BeanPropertyRowMapper中
+        return jdbcTemplate.query("select * from ab01", new Object[]{}, new BeanPropertyRowMapper<>(Ab01.class));
     }
 
     @Override
