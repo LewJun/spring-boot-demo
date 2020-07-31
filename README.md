@@ -48,3 +48,5 @@ mvn archetype:generate
 * [spring-boot-orm-jpa](spring-boot-orm-jpa) 一个spring boot整合jpa的例子
 * [spring-boot-orm-mybatis](spring-boot-orm-mybatis) 一个spring boot整合mybatis的例子
 * [spring-boot-orm-mybatis-plus](spring-boot-orm-mybatis-plus) spring boot 集成 mybatis-plus
+* [spring-boot-banner](spring-boot-banner) 一个spring boot自定义banner的例子
+* [spring-boot-orm-redis-lettuce](spring-boot-redis-lettuce) 一个spring boot整合lettuce redis的例子
