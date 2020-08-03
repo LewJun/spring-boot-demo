@@ -200,6 +200,47 @@ public class AppTest {
 "{\"@class\":\"com.example.lewjun.domain.Ab01\",\"aab001\":10,\"aab002\":\"aab002\",\"aab003\":\"aab003\"}"
 ```
 
+## SerializableRedisTemplate
+仿造StringRedisTemplate建立自己的Serializable
+
+* [SerializableRedisTemplate.java](src/main/java/com/example/lewjun/config/SerializableRedisTemplate.java)
+```java
+public class SerializableRedisTemplate extends RedisTemplate<String, Serializable> {
+    public SerializableRedisTemplate() {
+        this.setKeySerializer(new StringRedisSerializer());
+        this.setValueSerializer(new GenericJackson2JsonRedisSerializer());
+    }
+
+    public SerializableRedisTemplate(final RedisConnectionFactory connectionFactory) {
+        this();
+        this.setConnectionFactory(connectionFactory);
+        this.afterPropertiesSet();
+    }
+}
+```
+
+* 实例化
+
+```java
+    @Bean
+    public SerializableRedisTemplate serializableRedisTemplateCustom(final LettuceConnectionFactory connectionFactory) {
+        return new SerializableRedisTemplate(connectionFactory);
+    }
+```
+
+* 使用
+
+```java
+    @Autowired
+    private SerializableRedisTemplate serializableRedisTemplateCustom;
+
+    serializableRedisTemplateCustom.opsForValue().set("ab01x",
+            Ab01.builder().aab001(20).aab002("aab002x").aab003("aab003x").build()
+    );
+    final Ab01 ab01x = (Ab01) serializableRedisTemplateCustom.opsForValue().get("ab01x");
+    log.info("【ab01x:{}】", ab01x);
+```
+
 ## 其它类型
 
 *    opsForValue： 对应 String（字符串）

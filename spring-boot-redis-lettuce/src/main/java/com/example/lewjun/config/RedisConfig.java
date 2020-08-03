@@ -25,4 +25,9 @@ public class RedisConfig {
         redisTemplate.setConnectionFactory(connectionFactory);
         return redisTemplate;
     }
+
+    @Bean
+    public SerializableRedisTemplate serializableRedisTemplateCustom(final LettuceConnectionFactory connectionFactory) {
+        return new SerializableRedisTemplate(connectionFactory);
+    }
 }
