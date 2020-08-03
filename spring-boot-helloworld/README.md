@@ -71,6 +71,27 @@ server:
     context-path: /demo
 ```
 
+## 找回日志中请求路径列表
+为什么在Spring Boot 2.1.x版本中不再打印请求路径列表呢？
+
+主要是由于从该版本开始，将这些日志的打印级别做了调整：从原来的INFO调整为TRACE。所以，当我们希望在应用启动的时候打印这些信息的话，只需要在配置文件增增加对RequestMappingHandlerMapping类的打印级别设置即可，比如在application.properties中增加下面这行配置：
+
+```properties
+logging.level.org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping=trace
+```
+
+在增加了上面的配置之后重启应用，便可以看到如下的日志打印：
+```log
+2020-08-03 10:18:08.315 TRACE 7080 --- [  restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	c.e.l.App:
+	{GET /}: index()
+	{GET /hello}: hello(String)
+2020-08-03 10:18:08.322 TRACE 7080 --- [  restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 
+	o.s.b.a.w.s.e.BasicErrorController:
+	{ /error}: error(HttpServletRequest)
+	{ /error, produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
+```
+
 ## Try it
 
 * MacOS/Linux
