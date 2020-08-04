@@ -39,6 +39,7 @@
         <module>spring-boot-template-thymeleaf</module>
         <module>spring-boot-banner</module>
         <module>spring-boot-redis-lettuce</module>
+        <module>spring-boot-scheduling</module>
     </modules>
 
     <properties>

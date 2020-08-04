@@ -50,3 +50,4 @@ mvn archetype:generate
 * [spring-boot-orm-mybatis-plus](spring-boot-orm-mybatis-plus) spring boot 集成 mybatis-plus
 * [spring-boot-banner](spring-boot-banner) 一个spring boot自定义banner的例子
 * [spring-boot-orm-redis-lettuce](spring-boot-redis-lettuce) 一个spring boot整合lettuce redis的例子
+* [spring-boot-scheduling](spring-boot-scheduling) 定时任务
