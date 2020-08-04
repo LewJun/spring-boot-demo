@@ -91,6 +91,64 @@
     }
 ```
 
+## Spring Task
+
+### 开启scheduled
+
+```java
+
+/**
+ * spring boot 启动类
+ */
+// @EnableScheduling 注解表示开启对@Scheduled注解的解析
+@EnableScheduling
+// @EnableAsync 注解表示开启@Async注解的解析；作用就是将串行化的任务给并行化了
+@EnableAsync
+@SpringBootApplication
+@RestController
+public class App {}
+```
+
+* @EnableScheduling 注解表示开启对@Scheduled注解的解析
+
+* @EnableAsync 注解表示开启@Async注解的解析；作用就是将串行化的任务给并行化了
+
+```java
+    @Scheduled(cron = "0/1 * * * * *")
+    public void scheduledPerSeconds3() throws InterruptedException {
+        Thread.sleep(3000);
+        log.info("【scheduledPerSeconds3 上次执行完毕后，隔3秒继续执行: {}】", System.currentTimeMillis());
+    }
+```
+
+如上，输出的内容如下，中间会被暂停3秒 Thread.sleep(3000)，因为这是串行化的任务
+```log
+1596528185000
+1596528189002
+1596528193005
+1596528197001
+```
+
+可以通过添加@Async，来设置任务为并行化的任务
+```java
+    @Scheduled(cron = "0/1 * * * * *")
+    public void scheduledPerSeconds3() throws InterruptedException {
+        Thread.sleep(3000);
+        log.info("【scheduledPerSeconds3 上次执行完毕后，隔3秒继续执行: {}】", System.currentTimeMillis());
+    }
+```
+
+```log
+1596528410001
+1596528411001
+1596528412004
+1596528413001
+1596528414002
+1596528415001
+1596528416002
+1596528417010
+```
+
 ## Try it
 
 * MacOS/Linux
