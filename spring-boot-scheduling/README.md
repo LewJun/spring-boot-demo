@@ -70,6 +70,27 @@
     }
 ```
 
+## ScheduledExecutorService
+
+> 与Timer很类似，但它的效果更好，多线程并行处理定时任务时，Timer运行多个TimeTask时，只要其中有一个因任务报错没有捕获抛出的异常，其它任务便会自动终止运行，使用 ScheduledExecutorService 则可以规避这个问题
+
+```java
+    @Test
+    public void testScheduledExecutorService() throws InterruptedException {
+        final int[] i = {0};
+        final ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(10);
+        scheduledExecutorService.scheduleAtFixedRate(() -> {
+            System.out.println(LocalDateTime.now());
+
+            if (++i[0] == 4) {
+                scheduledExecutorService.shutdown();
+            }
+        }, 1000, 1000, TimeUnit.MILLISECONDS);
+
+        Thread.sleep(15000);
+    }
+```
+
 ## Try it
 
 * MacOS/Linux

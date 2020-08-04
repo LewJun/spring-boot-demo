@@ -5,6 +5,9 @@ import org.junit.Test;
 import java.time.LocalDateTime;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class JunitTest {
     @Test
@@ -61,4 +64,18 @@ public class JunitTest {
 //        i[0]=3
     }
 
+    @Test
+    public void testScheduledExecutorService() throws InterruptedException {
+        final int[] i = {0};
+        final ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(10);
+        scheduledExecutorService.scheduleAtFixedRate(() -> {
+            System.out.println(LocalDateTime.now());
+
+            if (++i[0] == 4) {
+                scheduledExecutorService.shutdown();
+            }
+        }, 1000, 1000, TimeUnit.MILLISECONDS);
+
+        Thread.sleep(15000);
+    }
 }
