@@ -139,6 +139,10 @@ public class Ab01MapperTest {
 }
 ```
 
+## 开启mybatis 缓存
+
+[开启mybatis 缓存](README-MYBATIS-CACHE.md)
+
 ## Try it
 
 * MacOS/Linux

@@ -35,4 +35,14 @@ public class Ab01MapperTest {
 
         log.info("【queryAll:{}】", ab01Mapper.queryAll());
     }
+
+    @Test
+    public void testQueryByAab002Cache() {
+        log.info("【1:{}】", ab01Mapper.queryByAab002("SALES"));
+        log.info("【2:{}】", ab01Mapper.queryByAab002("SALES"));
+
+        ab01Mapper.delete(30);// 这里有一个删除操作
+
+        log.info("【3:{}】", ab01Mapper.queryByAab002("SALES"));
+    }
 }

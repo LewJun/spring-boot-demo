@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@CacheNamespace(flushInterval = 60000)
 @Repository
 public interface Ab01Mapper {
 

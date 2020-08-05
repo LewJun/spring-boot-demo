@@ -16,3 +16,11 @@ spring:
 mybatis:
   # 扫描xml的位置
   mapper-locations: classpath:/mappers/**/*Mapper.xml
+  configuration:
+    map-underscore-to-camel-case: true
+    # mybatis开启缓存
+    cache-enabled: true
+
+logging:
+  level:
+    root: debug
