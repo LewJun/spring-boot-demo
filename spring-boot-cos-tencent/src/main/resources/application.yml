@@ -1,0 +1,24 @@
+server:
+  port: 1234
+  servlet:
+    context-path: /demo
+
+logging:
+  level:
+    org:
+      springframework:
+        web:
+          servlet:
+            mvc:
+              method:
+                annotation:
+                  RequestMappingHandlerMapping: trace
+
+cos:
+  accessKey: xxx
+  secretKey: yyy
+  bucketName: qcjl2019-1300597172
+  regionName: ap-chengdu
+  baseDir: test/
+  timeout: 5000
+  domain: https://${cos.bucketName}.cos.${cos.regionName}.myqcloud.com/

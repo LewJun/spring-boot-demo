@@ -40,6 +40,7 @@
         <module>spring-boot-banner</module>
         <module>spring-boot-redis-lettuce</module>
         <module>spring-boot-scheduling</module>
+        <module>spring-boot-cos-tencent</module>
     </modules>
 
     <properties>
@@ -95,6 +96,13 @@
                 <groupId>com.baomidou</groupId>
                 <artifactId>mybatis-plus-boot-starter</artifactId>
                 <version>3.3.2</version>
+            </dependency>
+
+            <!-- 腾讯COS -->
+            <dependency>
+                <groupId>com.qcloud</groupId>
+                <artifactId>cos_api</artifactId>
+                <version>5.6.23</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
