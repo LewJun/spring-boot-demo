@@ -13,7 +13,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
 import java.io.File;
 import java.io.FileInputStream;
 import java.util.HashMap;
@@ -37,15 +36,13 @@ public class CosServiceImpl implements ICosService {
     @Value("${cos.timeout}")
     private int timeout;
 
-    private COSClient cosClient;
-
-    @PostConstruct
-    private void initCosClient() {
+    private COSClient initCosClient() {
         final ClientConfig clientConfig = new ClientConfig(new Region(regionName));
         clientConfig.setConnectionRequestTimeout(timeout);
         //请求协议
         clientConfig.setHttpProtocol(HttpProtocol.https);
-        this.cosClient = new COSClient(new BasicCOSCredentials(accessKey, secretKey), clientConfig);
+
+        return new COSClient(new BasicCOSCredentials(accessKey, secretKey), clientConfig);
     }
 
     @Override
@@ -66,6 +63,7 @@ public class CosServiceImpl implements ICosService {
     @Override
     public boolean uploadFile(final String directory, final String newFileName, final File file,
                               final Map<String, String> metadataMap) {
+        final COSClient cosClient = initCosClient();
         try {
             final String key = baseDir + getDirectoryFixed(directory) + newFileName;
 
@@ -77,12 +75,12 @@ public class CosServiceImpl implements ICosService {
                 cosClient.putObject(new PutObjectRequest(bucketName, key, new FileInputStream(file), metadata));
             }
 
-            cosClient.shutdown();
-
             return true;
         } catch (final Exception e) {
             log.error("【出现异常：】", e);
             throw new RuntimeException(e);
+        } finally {
+            shutdown(cosClient);
         }
     }
 
@@ -100,7 +98,15 @@ public class CosServiceImpl implements ICosService {
 
     @Override
     public ObjectMetadata getObjectMetadata(final String filePath) {
-        return cosClient.getObjectMetadata(new GetObjectMetadataRequest(bucketName, filePath));
+        final COSClient cosClient = initCosClient();
+        try {
+            return cosClient.getObjectMetadata(new GetObjectMetadataRequest(bucketName, filePath));
+        } catch (final Exception e) {
+            log.error("【出现异常：】", e);
+            throw new RuntimeException(e);
+        } finally {
+            shutdown(cosClient);
+        }
     }
 
     private String getDirectoryFixed(String directory) {
@@ -113,28 +119,32 @@ public class CosServiceImpl implements ICosService {
 
     @Override
     public File downloadFile(final String filePath, final String outputFilePath) {
+        final COSClient cosClient = initCosClient();
         try {
             final File outFile = new File(outputFilePath);
             cosClient.getObject(new GetObjectRequest(bucketName, filePath), outFile);
-            cosClient.shutdown();
 
             return outFile;
         } catch (final Exception e) {
             log.error("【出现异常：】", e);
             throw new RuntimeException(e);
+        } finally {
+            shutdown(cosClient);
         }
     }
 
     @Override
     public boolean deleteFile(final String filePath) {
+        final COSClient cosClient = initCosClient();
         try {
             cosClient.deleteObject(bucketName, filePath);
-            cosClient.shutdown();
 
             return true;
         } catch (final Exception e) {
             log.error("【出现异常：】", e);
             throw new RuntimeException(e);
+        } finally {
+            shutdown(cosClient);
         }
     }
 
@@ -148,8 +158,11 @@ public class CosServiceImpl implements ICosService {
     }
 
     @Override
-    public String getFullPath(String filePath) {
+    public String getFullPath(final String filePath) {
         return domain + filePath;
     }
 
+    private void shutdown(final COSClient cosClient) {
+        cosClient.shutdown();
+    }
 }
