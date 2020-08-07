@@ -149,6 +149,18 @@ public class App {}
 1596528417010
 ```
 
+## 把配置放到单独的类
+
+```java
+@Configuration
+// @EnableScheduling 注解表示开启对@Scheduled注解的解析
+@EnableScheduling
+// @EnableAsync 注解表示开启@Async注解的解析；作用就是将串行化的任务给并行化了
+@EnableAsync
+public class SpringTaskConfig {
+}
+```
+
 ## Try it
 
 * MacOS/Linux
