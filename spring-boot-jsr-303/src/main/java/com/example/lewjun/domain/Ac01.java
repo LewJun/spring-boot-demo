@@ -28,13 +28,13 @@ public class Ac01 extends BaseObj {
     /**
      * 雇员姓名
      */
-    @Size(min = 3, max = 32, message = "长度介于[3, 32]")
+    @Size(min = 3, max = 32, message = "长度范围[{min}, {max}]")
     @NotBlank(message = "雇员姓名不能为空")
     private String aac002;
     /**
      * 雇员职位
      */
-    @Size(min = 3, max = 32, message = "长度范围[3, 32]")
+    @Size(min = 3, max = 32, message = "长度范围[{min}, {max}]")
     @NotBlank(message = "雇员职位不能为空")
     private String aac003;
     /**
@@ -53,16 +53,16 @@ public class Ac01 extends BaseObj {
     /**
      * 身高
      */
-    @DecimalMin(value = "1.0", message = "身高必须>=1米")
-    @DecimalMax(value = "2.5", message = "身高必须<=2.5米")
-    @Digits(integer = 1, fraction = 2, message = "小数点后最多保留2位小数")
+    @DecimalMin(value = "1.0", message = "身高必须>={value}米")
+    @DecimalMax(value = "2.5", message = "身高必须<={value}米")
+    @Digits(integer = 1, fraction = 2, message = "小数点后最多保留{fraction}位小数")
     private float aac007;
     /**
      * 体重
      */
-    @DecimalMin(value = "30", message = "体重必须>=30KG")
-    @DecimalMax(value = "100", message = "体重必须<=100KG")
-    @Digits(integer = 3, fraction = 2, message = "小数点后最多保留2位小数")
+    @DecimalMin(value = "30", message = "体重必须>={value}KG")
+    @DecimalMax(value = "100", message = "体重必须<={value}KG")
+    @Digits(integer = 3, fraction = 2, message = "小数点后最多保留{fraction}位小数")
     private float aac008;
     /**
      * 兴趣爱好
@@ -93,7 +93,7 @@ public class Ac01 extends BaseObj {
     /**
      * 年龄
      */
-    @Range(min = 18, max = 150, message = "年龄范围[18, 150]")
+    @Range(min = 18, max = 150, message = "年龄范围[{min}, {max}]")
     @NotNull(message = "年龄不能为空")
     private Integer aac103;
 

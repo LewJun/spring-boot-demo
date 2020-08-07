@@ -4,6 +4,7 @@ import com.example.lewjun.jsr.group.UpdateGroup;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
+import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -22,13 +23,13 @@ public class Ab01 extends BaseObj {
     /**
      * 部门名称
      */
-    @Size(min = 3, max = 32, message = "长度介于[3, 32]")
+    @Size(min = 3, max = 32, message = "长度范围[{min}, {max}]")
     @NotBlank(message = "部门名称不能为空")
     private String aab002;
     /**
      * 部门所在位置
      */
-    @Size(min = 3, max = 32, message = "长度介于[3, 32]")
+    @Size(min = 3, max = 32, message = "长度范围[{min}, {max}]")
     @NotBlank(message = "部门所在位置不能为空")
     private String aab003;
 }

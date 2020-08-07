@@ -252,6 +252,13 @@ public class Ac01 extends BaseObj {
 }
 ```
 
+* 在验证属性message中使用占位符{xxx}
+
+如上的message出现一个问题，例如`@Range(min = 18, max = 150, message = "年龄范围[18, 150]")`，出现两个18，两个150，
+开发的时候，如果改了前面，忘记了后面，就出问题了。
+其实可以用占位符`{xxx}`来解决。最终为`@Range(min = 18, max = 150, message = "年龄范围[{min}, {max}]")`
+
+
 ## 对@RequestParam或@PathVariable进行校验
 
 使用@Valid注解，对RequestParam和PathVariable对应的参数进行注解，是无效的，需要使用@Validated注解对类进行注解，来使得验证生效，
@@ -302,32 +309,34 @@ public @interface Mobile {
 ```
 
 * [MobileValidator.java](src/main/java/com/example/lewjun/jsr/custom/MobileValidator.java)
-
-
 ```java
-package com.example.lewjun.jsr.custom;
+public class MobileValidator implements ConstraintValidator<Mobile, String> {
+    public static final String regex = "^((13[0-9])|(14[5,7,9])|(15([0-3]|[5-9]))|(17[0,1,3,5,6,7,8])|(18[0-9])|(19[8|9]))\\d{8}$";
 
-import javax.validation.Constraint;
-import javax.validation.Payload;
-import java.lang.annotation.Documented;
-import java.lang.annotation.Retention;
-import java.lang.annotation.Target;
+    private boolean required;
 
-import static java.lang.annotation.ElementType.*;
-import static java.lang.annotation.RetentionPolicy.RUNTIME;
+    @Override
+    public void initialize(final Mobile constraintAnnotation) {
+        required = constraintAnnotation.required();
+    }
 
-@Target({METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER})
-@Retention(RUNTIME)
-@Documented
-@Constraint(validatedBy = {MobileValidator.class})
-public @interface Mobile {
-    boolean required() default true;
+    @Override
+    public boolean isValid(final String s, final ConstraintValidatorContext constraintValidatorContext) {
+        if (required) return isMobile(s);
+        if (s == null) return true;
+        return isMobile(s);
+    }
 
-    String message() default "电话号码格式错误";
 
-    Class<?>[] groups() default {};
-
-    Class<? extends Payload>[] payload() default {};
+    private boolean isMobile(final String phone) {
+        if (phone.length() != 11) {
+            return false;
+        } else {
+            final Pattern p = Pattern.compile(regex);
+            final Matcher m = p.matcher(phone);
+            return m.matches();
+        }
+    }
 }
 ```
 
