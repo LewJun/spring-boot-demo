@@ -3,8 +3,12 @@ package com.example.lewjun;
 import com.example.lewjun.domain.bo.Ab01BO;
 import com.example.lewjun.domain.convert.Ab01Convert;
 import com.example.lewjun.domain.dataobject.Ab01DO;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 
+import java.util.Date;
+
+@Slf4j
 public class JunitTest {
     @Test
     public void test1() {
@@ -12,10 +16,9 @@ public class JunitTest {
         ab01DO.setAab001(111);
         ab01DO.setAab002("aab002");
         ab01DO.setAab003("aab003");
+        ab01DO.setBirthday(new Date());
 
         Ab01BO ab01BO = Ab01Convert.INSTANCE.convert(ab01DO);
-        System.out.println(ab01BO.getAab001());
-        System.out.println(ab01BO.getAab002());
-        System.out.println(ab01BO.getAab003());
+        log.info("【ab01BO: {}】", ab01BO);
     }
 }

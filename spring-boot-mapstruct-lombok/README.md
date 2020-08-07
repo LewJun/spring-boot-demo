@@ -39,6 +39,19 @@
     </build>
 ```
 
+`必须的配置`在以前的基础上引入lombok-processor
+
+```xml
+<!-- 引入 lombok-processor -->
+<path>
+    <groupId>org.projectlombok</groupId>
+    <artifactId>lombok</artifactId>
+    <version>${lombok.version}</version>
+</path>
+```
+
+完整[pom.xml](pom.xml)
+
 ## Ab01BO
 
 [Ab01BO](src/main/java/com/example/lewjun/domain/bo/Ab01BO.java)
@@ -106,6 +119,9 @@ public interface Ab01Convert {
 }
 ```
 
+`convert方法还可以传入多个对象，不仅仅是一个对象。将1个或多个对象的属性转换到目标对象上对应的属性`
+
+
 编译项目，就会在target/generated-sources/annotations/com.example.lewjun.domain.convert目录下生成Ab01ConvertImpl.java
 
 ```java
@@ -157,6 +173,83 @@ public class JunitTest {
     }
 }
 ```
+
+## 使用mapping将两个不同名字的属性对应起来
+
+```java
+    /**
+     * 将Ab01DO转换为Ab01BO
+     *
+     * @param ab01DO
+     * @return
+     */
+    @Mappings({
+            // 使用mapping将两个不同名字的属性对应起来 ab01BO.setBob( ab01DO.getBirthday() );
+            @Mapping(source = "birthday", target = "bob")
+    })
+    Ab01BO convert(Ab01DO ab01DO);
+```
+
+## qualifiedByName
+
+Ab01DO#hobbies中将以逗号分隔的字符串转换为Ab01BO中的List
+
+```java
+
+@Mapper
+public interface Ab01Convert {
+
+    Ab01Convert INSTANCE = Mappers.getMapper(Ab01Convert.class);
+
+    /**
+     * 将Ab01DO转换为Ab01BO
+     *
+     * @param ab01DO
+     * @return
+     */
+    @Mappings({
+            // 使用mapping将两个不同名字的属性对应起来 ab01BO.setBob( ab01DO.getBirthday() );
+            @Mapping(source = "birthday", target = "bob"),
+            // 限定 将以逗号分隔的字符串转换为List，ab01BO.setHobbies( translateStringToListString( ab01DO.getHobbies() ) );
+            @Mapping(source = "hobbies", target = "hobbies", qualifiedByName = "translateStringToListString")
+    })
+    Ab01BO convert(Ab01DO ab01DO);
+
+    default List<String> translateStringToListString(final String string) {
+        if (string == null) return null;
+        return Arrays.asList(string.split(",", -1));
+    }
+}
+```
+
+在Ab01ConvertImpl.java 中，生成的代码是
+```java
+@Generated(
+    value = "org.mapstruct.ap.MappingProcessor",
+    date = "2020-08-07T13:02:37+0800",
+    comments = "version: 1.3.1.Final, compiler: javac, environment: Java 1.8.0_65 (Oracle Corporation)"
+)
+public class Ab01ConvertImpl implements Ab01Convert {
+
+    @Override
+    public Ab01BO convert(Ab01DO ab01DO) {
+        if ( ab01DO == null ) {
+            return null;
+        }
+
+        Ab01BO ab01BO = new Ab01BO();
+
+        ab01BO.setBob( ab01DO.getBirthday() );
+        ab01BO.setHobbies( translateStringToListString( ab01DO.getHobbies() ) );
+        ab01BO.setAab001( ab01DO.getAab001() );
+        ab01BO.setAab002( ab01DO.getAab002() );
+        ab01BO.setAab003( ab01DO.getAab003() );
+
+        return ab01BO;
+    }
+}
+```
+
 
 ## Try it
 
