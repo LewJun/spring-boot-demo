@@ -87,6 +87,43 @@ public class HelloControllerTest {
 }
 ```
 
+## @AutoConfigureMockMvc 注解
+
+用于自动化配置我们稍后注入的 MockMvc Bean 对象 mvc，这样，就可以取消手动初始化mvc了。
+
+```java
+/**
+ * spring boot 测试类
+ */
+@RunWith(SpringRunner.class)
+@SpringBootTest
+@AutoConfigureMockMvc
+public class HelloControllerTest {
+    @Autowired
+    private MockMvc mvc;
+
+    @Test
+    public void testLoadContext() {
+    }
+//
+//    @Before
+//    public void setUp() {
+//        mvc = MockMvcBuilders.standaloneSetup(new HelloController()).build();
+//    }
+
+    @Test
+    public void getHello() throws Exception {
+        mvc.perform(
+                MockMvcRequestBuilders.get("/hello")
+                        .accept(MediaType.APPLICATION_JSON)
+        )
+                .andExpect(status().isOk())
+                .andExpect(content().string(equalTo("Hello World!")))
+        ;
+    }
+}
+```
+
 选中getHello运行即可
 
 ## [application.yml](src/main/resources/application.yml)
