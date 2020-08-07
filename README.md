@@ -52,3 +52,4 @@ mvn archetype:generate
 * [spring-boot-orm-redis-lettuce](spring-boot-redis-lettuce) 一个spring boot整合lettuce redis的例子
 * [spring-boot-scheduling](spring-boot-scheduling) 定时任务
 * [spring-boot-cos-tencent](spring-boot-cos-tencent) 集成腾讯对象存储 COS
+* [spring-boot-mapstruct](spring-boot-mapstruct) spring-boot-mapstruct的使用
