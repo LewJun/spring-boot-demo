@@ -53,3 +53,5 @@ mvn archetype:generate
 * [spring-boot-scheduling](spring-boot-scheduling) 定时任务
 * [spring-boot-cos-tencent](spring-boot-cos-tencent) 集成腾讯对象存储 COS
 * [spring-boot-mapstruct](spring-boot-mapstruct) spring-boot-mapstruct的使用
+* [spring-boot-mapstruct-lombok](spring-boot-mapstruct-lombok) mapstruct搭配lombok的使用
+
