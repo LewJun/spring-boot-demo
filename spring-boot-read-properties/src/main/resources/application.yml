@@ -5,7 +5,15 @@ server:
 
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true&serverTimezone=Asia
-    username: root
-    password: root123456
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: ENC(lwPI/fQ+94O+QnWwdxIyJMZviR0ixSpk1EjILFKRQQvuJ2jy6SnX6mbsIKEpci02t0zc+sV70h4ZsjypClMZM52vvFDpn+bZMWdHrVbGLTnM7FYZ4MnCgPxBv6ckAkGOgClWJkJW2KNBYCtiWfZKmoVVgKks4t3pC3B++pAJ0yv0iqPK509E6kcJ4SbvXzeuwmQxFb7m8XHD1Fwd/jD5mg==)
+    username: ENC(y9BNwZRLsLofuUXE2QL2Xg==)
+    password: ENC(r1PqBEazfhzHaqvxBU7yPR+QlNUgf0oR)
+    driver-class-name: ENC(rhAkOpda4L6wT9vyKyfhY7otS3hxscTdBVhCSWIGtFkb+hP5skcxZg==)
+
+jasypt:
+  encryptor:
+    pool-size: 4
+    # 加密算法
+    algorithm: PBEWithMD5AndDES
+    # 加密密钥
+    password: pwd # ${JASYPT_PASSWORD} 不要把密钥写在这里，可以通过配置环境变量，或者命令行参数传入

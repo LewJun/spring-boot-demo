@@ -108,10 +108,19 @@
                 <artifactId>cos_api</artifactId>
                 <version>5.6.23</version>
             </dependency>
+
+            <!-- mapstruct用于将对象转换为另一个对象 -->
             <dependency>
                 <groupId>org.mapstruct</groupId>
                 <artifactId>mapstruct</artifactId>
                 <version>${mapstruct.version}</version>
+            </dependency>
+
+            <!-- Jasypt Spring Boot Starter -->
+            <dependency>
+                <groupId>com.github.ulisesbocchio</groupId>
+                <artifactId>jasypt-spring-boot-starter</artifactId>
+                <version>2.1.2</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
