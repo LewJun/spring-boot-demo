@@ -6,6 +6,8 @@
 
 ## lambda表达式
 
+[README-LAMBDA.md](README-LAMBDA.md)
+
 ## 方法引用
 
 ## 函数式接口
