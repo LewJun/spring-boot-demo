@@ -8,12 +8,13 @@
 
 [README-LAMBDA.md](README-LAMBDA.md)
 
-## 方法引用
-
-## 函数式接口
-
 ## 默认方法
 [README-DEFAULT-FUNCTION.md](README-DEFAULT-FUNCTION.md)
+
+## 函数式接口
+[README-FUNCTIONAL-INTERFACE.md](README-FUNCTIONAL-INTERFACE.md)
+
+## 方法引用
 
 ## Stream
 
