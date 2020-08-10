@@ -96,4 +96,18 @@ public class Ab01ServiceTest {
     public void testQueryAb01Ac01() {
         log.info("【queryAb01Ac01:{}】", ab01Service.queryAb01Ac01());
     }
+
+
+    @Test
+    public void testGetById() {
+        final Ab01 ab01 = ab01Service.getById(100);
+        log.info("【getById:{}】", ab01);
+    }
+
+    @Test
+    public void testGetByIdOptional() {
+        final String aab002 = ab01Service.getByIdOptional(100).map(Ab01::getAab002)
+                .orElseThrow(() -> new IllegalArgumentException("illegal arg"));
+        log.info("【aab002:{}】", aab002);
+    }
 }

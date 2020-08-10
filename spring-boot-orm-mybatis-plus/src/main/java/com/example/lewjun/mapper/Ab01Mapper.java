@@ -1,6 +1,6 @@
 package com.example.lewjun.mapper;
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.example.lewjun.base.MyBaseMapper;
 import com.example.lewjun.domain.Ab01;
 import com.example.lewjun.domain.Ab01Ac01;
 import org.apache.ibatis.annotations.Select;
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface Ab01Mapper extends BaseMapper<Ab01> {
+public interface Ab01Mapper extends MyBaseMapper<Ab01> {
     @Select("select * from ab01 where aab002=#{aab002}")
     List<Ab01> queryByAab002(String aab002);
 
