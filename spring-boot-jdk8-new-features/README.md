@@ -13,6 +13,7 @@
 ## 函数式接口
 
 ## 默认方法
+[README-DEFAULT-FUNCTION.md](README-DEFAULT-FUNCTION.md)
 
 ## Stream
 
