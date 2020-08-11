@@ -42,7 +42,6 @@
         <module>spring-boot-scheduling</module>
         <module>spring-boot-cos-tencent</module>
         <module>spring-boot-mapstruct</module>
-        <module>spring-boot-mapstruct</module>
         <module>spring-boot-mapstruct-lombok</module>
         <module>spring-boot-jdk8-new-features</module>
     </modules>

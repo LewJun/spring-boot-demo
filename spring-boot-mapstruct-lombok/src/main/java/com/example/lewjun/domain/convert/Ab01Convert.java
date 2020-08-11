@@ -7,6 +7,7 @@ import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 import org.mapstruct.factory.Mappers;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -22,15 +23,18 @@ public interface Ab01Convert {
      * @return
      */
     @Mappings({
-            // 使用mapping将两个不同名字的属性对应起来 ab01BO.setBob( ab01DO.getBirthday() );
-            @Mapping(source = "birthday", target = "bob"),
+            // 使用mapping将两个不同名字的属性对应起来，将日期类型的birthday转换为yyyy-MM-dd格式的字符串
+            // 生成的代码 if ( ab01DO.getBirthday() != null ) {
+            //     ab01BO.setBob( new SimpleDateFormat( "yyyy-MM-dd" ).format( ab01DO.getBirthday() ) );
+            // }
+            @Mapping(source = "birthday", target = "bob", dateFormat = "yyyy-MM-dd"),
             // 限定 将以逗号分隔的字符串转换为List，ab01BO.setHobbies( translateStringToListString( ab01DO.getHobbies() ) );
             @Mapping(source = "hobbies", target = "hobbies", qualifiedByName = "translateStringToListString")
     })
-    Ab01BO convert(Ab01DO ab01DO);
+    Ab01BO do2bo(Ab01DO ab01DO);
 
     default List<String> translateStringToListString(final String string) {
-        if (string == null) return null;
+        if (string == null) return new ArrayList<>();
         return Arrays.asList(string.split(",", -1));
     }
 }

@@ -2,7 +2,7 @@ package com.example.lewjun.domain.bo;
 
 import lombok.Data;
 import lombok.experimental.Accessors;
-import java.util.Date;
+
 import java.util.List;
 
 @Accessors(chain = true)
@@ -21,7 +21,7 @@ public class Ab01BO extends BaseObj {
      */
     private String aab003;
 
-    private Date bob;
+    private String bob;
 
     private List<String> hobbies;
 }

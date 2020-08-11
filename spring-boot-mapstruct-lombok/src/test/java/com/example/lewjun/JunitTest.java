@@ -18,7 +18,7 @@ public class JunitTest {
         ab01DO.setAab003("aab003");
         ab01DO.setBirthday(new Date());
 
-        Ab01BO ab01BO = Ab01Convert.INSTANCE.convert(ab01DO);
+        Ab01BO ab01BO = Ab01Convert.INSTANCE.do2bo(ab01DO);
         log.info("【ab01BO: {}】", ab01BO);
     }
 }

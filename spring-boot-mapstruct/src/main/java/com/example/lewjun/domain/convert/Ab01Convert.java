@@ -15,5 +15,5 @@ public interface Ab01Convert {
      * @param ab01DO
      * @return
      */
-    Ab01BO convert(Ab01DO ab01DO);
+    Ab01BO do2bo(Ab01DO ab01DO);
 }
