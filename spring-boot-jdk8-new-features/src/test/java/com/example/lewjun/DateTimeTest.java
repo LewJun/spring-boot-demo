@@ -1,14 +1,14 @@
 package com.example.lewjun;
 
+import com.example.lewjun.util.DateUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.ZonedDateTime;
+import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.time.format.TextStyle;
 import java.time.temporal.ChronoField;
+import java.util.Date;
 import java.util.Locale;
 
 @Slf4j
@@ -59,5 +59,30 @@ public class DateTimeTest {
         log.info("【Second: {}】", localDateTime.getSecond());
         log.info("【milli second: {}】", localDateTime.get(ChronoField.MILLI_OF_SECOND));
         log.info("【dayOfMonth: {}】", localDateTime.get(ChronoField.DAY_OF_MONTH));
+    }
+
+    @Test
+    public void testLocalDateAsDate() {
+        final Date date = DateUtils.asDate(LocalDate.now());
+        log.info("【date: {}】", date);//【date: Tue Aug 11 00:00:00 CST 2020】
+    }
+
+    @Test
+    public void testLocalDateTimeAsDate() {
+        final Date date = DateUtils.asDate(LocalDateTime.now());
+        log.info("【date: {}】", date);// 【date: Tue Aug 11 17:14:41 CST 2020】
+    }
+
+    @Test
+    public void testDateAsLocalDate() {
+        final Date date = new Date();
+        final LocalDate localDate = DateUtils.asLocalDate(date);
+        log.info("【localDate: {}】", localDate);
+    }
+
+    @Test
+    public void testLongAsLocalDate() {
+        final long stamp = System.currentTimeMillis();
+        log.info("【localDate: {}】", DateUtils.asLocalDate(stamp));
     }
 }
