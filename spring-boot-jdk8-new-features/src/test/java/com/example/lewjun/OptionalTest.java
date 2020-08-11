@@ -36,7 +36,7 @@ public class OptionalTest {
         final Integer x = 3;
         final Integer y = null;
 
-        // 当为null时，返回0
+        // 当为null时，返回0 y != null ? y : 0;
         log.info("【y: {}】", Optional.ofNullable(y).orElse(0));
     }
 
@@ -45,13 +45,25 @@ public class OptionalTest {
         final Integer x = 3;
         final Integer y = null;
 
-        // 当为null时，返回5
+        // 当为null时，返回5 y != null ? y : get()=> 5
         log.info("【y: {}】", Optional.ofNullable(y).orElseGet(() -> 5));
+//        log.info("【y: {}】", Optional.ofNullable(y).orElseGet(new Supplier<Integer>() {
+//            @Override
+//            public Integer get() {
+//                return 5;
+//            }
+//        }));
     }
 
     @Test
     public void testOptionalIfPresent() {
         final Optional<Integer> x = Optional.ofNullable(3);
         x.ifPresent(integer -> log.info("【ret: {}】", integer));
+//        x.ifPresent(new Consumer<Integer>() {
+//            @Override
+//            public void accept(Integer integer) {
+//                log.info("【ret: {}】", integer);
+//            }
+//        });
     }
 }
