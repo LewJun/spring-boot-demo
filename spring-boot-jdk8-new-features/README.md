@@ -28,7 +28,7 @@
 [README-DATETIME.md](README-DATETIME.md)
 
 ## Base64
-
+[README-BASE64.md](README-BASE64.md)
 
 ## Try it
 
