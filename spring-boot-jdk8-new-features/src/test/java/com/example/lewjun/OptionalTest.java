@@ -4,6 +4,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 
 import java.util.Optional;
+import java.util.function.Function;
+import java.util.function.Predicate;
 
 @Slf4j
 public class OptionalTest {
@@ -65,5 +67,17 @@ public class OptionalTest {
 //                log.info("【ret: {}】", integer);
 //            }
 //        });
+
+        x.filter(new Predicate<Integer>() {
+            @Override
+            public boolean test(final Integer integer) {
+                return integer >= 3;
+            }
+        }).map(new Function<Integer, String>() {
+            @Override
+            public String apply(final Integer integer) {
+                return integer == 3 ? "three" : "other";
+            }
+        }).get();
     }
 }
