@@ -7,8 +7,7 @@ public class MyServiceImpl<M extends MyBaseMapper<T>, T> extends ServiceImpl<M, 
     @Autowired
     protected M myBaseMapper;
 
-    @Override
-    public M getMyBaseMapper() {
-        return this.myBaseMapper;
+    public MyServiceImpl() {
+        super.baseMapper = myBaseMapper;
     }
 }
