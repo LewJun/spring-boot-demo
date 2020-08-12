@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.lewjun.mapper.Ab01Mapper">
+
+    <resultMap id="BaseResultMap" type="com.example.lewjun.domain.Ab01">
+        <id column="aab001" jdbcType="INTEGER" property="aab001"/>
+        <result column="aab002" jdbcType="VARCHAR" property="aab002"/>
+        <result column="aab003" jdbcType="VARCHAR" property="aab003"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        aab001, aab002, aab003
+    </sql>
+</mapper>

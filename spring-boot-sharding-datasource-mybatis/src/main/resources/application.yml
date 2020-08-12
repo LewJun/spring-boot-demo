@@ -1,0 +1,67 @@
+server:
+  port: 1234
+  servlet:
+    context-path: /demo
+
+# DataSource Config
+#spring:
+#  datasource:
+#    driver-class-name: com.mysql.jdbc.Driver
+#    schema: classpath:db/schema-h2.sql
+#    data: classpath:db/data-h2.sql
+#    url: jdbc:mysql://localhost:3306/test
+#    username: root
+#    password: Root123456
+
+spring:
+  # ShardingSphere 配置项
+  shardingsphere:
+    datasource:
+      # 所有数据源的名字
+      names: test0, test1
+      test0:
+        type: com.zaxxer.hikari.HikariDataSource # 使用 Hikari 数据库连接池
+        driver-class-name: com.mysql.jdbc.Driver
+        jdbc-url: jdbc:mysql://127.0.0.1:3306/test0
+        username: root
+        password: Root123456
+      test1:
+        type: com.zaxxer.hikari.HikariDataSource # 使用 Hikari 数据库连接池
+        driver-class-name: com.mysql.jdbc.Driver
+        jdbc-url: jdbc:mysql://127.0.0.1:3306/test1
+        username: root
+        password: Root123456
+    # 分片规则
+    sharding:
+      tables:
+        # orders 表配置
+        ab01:
+          actualDataNodes: test0.ab01_$->{[0,2,4,6,8]}, test1.ab01_$->{[1,3,5,7,9]}
+          key-generator: # 主键生成策略
+            column: id
+            type: SNOWFLAKE
+          database-strategy:
+            inline:
+              algorithm-expression: test$->{aab001 % 2}
+              sharding-column: aab001
+          table-strategy:
+            inline:
+              algorithm-expression: ab01_$->{aab001 % 10}
+              sharding-column: aab001
+    # 拓展属性配置
+    props:
+      sql:
+        show: true # 打印 SQL
+
+
+mybatis:
+  # 扫描xml的位置
+  mapper-locations: classpath:/mappers/**/*Mapper.xml
+  configuration:
+    map-underscore-to-camel-case: true
+    # mybatis开启缓存
+    cache-enabled: true
+
+logging:
+  level:
+    root: debug
