@@ -1,6 +1,6 @@
 # spring-boot-sharding-datasource-mybatis
 
-> mybatis整合[ShardingSphere](https://shardingsphere.apache.org/index_zh.html)
+> mybatis整合[ShardingSphere](https://shardingsphere.apache.org/index_zh.html)，实现分库分表
 
 [TOC]
 

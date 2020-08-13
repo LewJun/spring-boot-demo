@@ -48,10 +48,11 @@ mvn archetype:generate
 * [spring-boot-orm-jpa](spring-boot-orm-jpa) 一个spring boot整合jpa的例子
 * [spring-boot-orm-mybatis](spring-boot-orm-mybatis) 一个spring boot整合mybatis的例子
 * [spring-boot-orm-mybatis-plus](spring-boot-orm-mybatis-plus) spring boot 集成 mybatis-plus
+* [spring-boot-sharding-datasource-mybatis](spring-boot-sharding-datasource-mybatis) mybatis整合ShardingSphere，实现分库分表
 * [spring-boot-banner](spring-boot-banner) 一个spring boot自定义banner的例子
 * [spring-boot-orm-redis-lettuce](spring-boot-redis-lettuce) 一个spring boot整合lettuce redis的例子
 * [spring-boot-scheduling](spring-boot-scheduling) 定时任务
 * [spring-boot-cos-tencent](spring-boot-cos-tencent) 集成腾讯对象存储 COS
 * [spring-boot-mapstruct](spring-boot-mapstruct) spring-boot-mapstruct的使用
 * [spring-boot-mapstruct-lombok](spring-boot-mapstruct-lombok) mapstruct搭配lombok的使用
-[spring-boot-jdk8-new-features](spring-boot-jdk8-new-features) java 8 新特性
+* [spring-boot-jdk8-new-features](spring-boot-jdk8-new-features) java 8 新特性
