@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.lewjun.mapper.Ab01Mapper">
+
+
+    <resultMap id="BaseResultMap" type="com.example.lewjun.domain.Ab01">
+        <result column="aab001" jdbcType="INTEGER" property="aab001"/>
+        <result column="aab002" jdbcType="VARCHAR" property="aab002"/>
+        <result column="aab003" jdbcType="VARCHAR" property="aab003"/>
+    </resultMap>
+
+
+    <resultMap id="Ab01Ac01ResultMap" type="com.example.lewjun.domain.Ab01Ac01" extends="BaseResultMap">
+        <collection property="ac01s" resultMap="com.example.lewjun.mapper.Ac01Mapper.BaseResultMap"/>
+    </resultMap>
+
+</mapper>

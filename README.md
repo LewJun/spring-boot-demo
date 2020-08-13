@@ -43,12 +43,14 @@ mvn archetype:generate
 * [spring-boot-aoplog](spring-boot-aoplog) 演示spring boot 实现日志全局拦截
 * [spring-boot-unified-return](spring-boot-unified-return) 演示spring boot 实现restfull api返回统一格式的数据
 * [spring-boot-template-jsp](spring-boot-template-jsp) 演示spring boot 集成jsp的例子
-* [spring-boot-template-thymeleaf](spring-boot-template-thymeleaf) 演示spring boot 集成thymeleaf的例子
-* [spring-boot-orm-jdbcTemplate](spring-boot-orm-jdbcTemplate) 一个spring boot集成jdbcTemplate的例子
-* [spring-boot-orm-jpa](spring-boot-orm-jpa) 一个spring boot整合jpa的例子
-* [spring-boot-orm-mybatis](spring-boot-orm-mybatis) 一个spring boot整合mybatis的例子
-* [spring-boot-orm-mybatis-plus](spring-boot-orm-mybatis-plus) spring boot 集成 mybatis-plus
-* [spring-boot-sharding-datasource-mybatis](spring-boot-sharding-datasource-mybatis) mybatis整合ShardingSphere，实现分库分表
+* 数据库
+    * [spring-boot-template-thymeleaf](spring-boot-template-thymeleaf) 演示spring boot 集成thymeleaf的例子
+    * [spring-boot-orm-jdbcTemplate](spring-boot-orm-jdbcTemplate) 一个spring boot集成jdbcTemplate的例子
+    * [spring-boot-orm-jpa](spring-boot-orm-jpa) 一个spring boot整合jpa的例子
+    * [spring-boot-orm-mybatis](spring-boot-orm-mybatis) 一个spring boot整合mybatis的例子
+    * [spring-boot-orm-mybatis-plus](spring-boot-orm-mybatis-plus) spring boot 集成 mybatis-plus
+    * [spring-boot-sharding-datasource-mybatis](spring-boot-sharding-datasource-mybatis) mybatis整合ShardingSphere，实现分库分表
+    * [spring-boot-sharding-multi-datasource-mybatis](spring-boot-sharding-multi-datasource-mybatis) mybatis整合ShardingSphere实现多数据源
 * [spring-boot-banner](spring-boot-banner) 一个spring boot自定义banner的例子
 * [spring-boot-orm-redis-lettuce](spring-boot-redis-lettuce) 一个spring boot整合lettuce redis的例子
 * [spring-boot-scheduling](spring-boot-scheduling) 定时任务
