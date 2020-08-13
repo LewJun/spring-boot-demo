@@ -20,13 +20,14 @@ spring:
       # 所有数据源的名字
       names: test0, test1
       test0:
-        type: com.zaxxer.hikari.HikariDataSource # 使用 Hikari 数据库连接池
+        #        type: com.zaxxer.hikari.HikariDataSource # 使用 Hikari 数据库连接池
         driver-class-name: com.mysql.jdbc.Driver
         jdbc-url: jdbc:mysql://127.0.0.1:3306/test0
         username: root
         password:
+
       test1:
-        type: com.zaxxer.hikari.HikariDataSource # 使用 Hikari 数据库连接池
+        #        type: com.zaxxer.hikari.HikariDataSource # 使用 Hikari 数据库连接池
         driver-class-name: com.mysql.jdbc.Driver
         jdbc-url: jdbc:mysql://127.0.0.1:3306/test1
         username: root
@@ -34,20 +35,22 @@ spring:
     # 分片规则
     sharding:
       tables:
-        # orders 表配置
+        # ab01 表配置
         ab01:
+          # 真实数据节点
           actualDataNodes: test0.ab01_$->{[0,2,4,6,8]}, test1.ab01_$->{[1,3,5,7,9]}
           key-generator: # 主键生成策略
             column: id
-            type: SNOWFLAKE
+            type: SNOWFLAKE # 雪花算法 所以id是long类型
           database-strategy:
             inline:
-              algorithm-expression: test$->{aab001 % 2}
-              sharding-column: aab001
+              algorithm-expression: test$->{id % 2}
+              sharding-column: id
           table-strategy:
             inline:
-              algorithm-expression: ab01_$->{aab001 % 10}
-              sharding-column: aab001
+              algorithm-expression: ab01_$->{id % 10}
+              sharding-column: id
+
     # 拓展属性配置
     props:
       sql:

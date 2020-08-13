@@ -1,96 +1,146 @@
-# spring-boot-helloworld
+# spring-boot-sharding-datasource-mybatis
 
-> 一个spring boot的hello world
+> mybatis整合[ShardingSphere](https://shardingsphere.apache.org/index_zh.html)
 
-[TOC]
-
-## 模板复用
-
-> 使用命令创建模块是一个重复的动作，可以直接拷贝该模块，然后修改pom.xml
-<artifactId>spring-boot-helloworld</artifactId>为对应的模块名字即可
-启动后访问 http://localhost:1234/demo 即可
-
-## [pom.xml](pom.xml)
+## 引入依赖
 
 ```xml
-<?xml version="1.0"?>
-<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd"
-         xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <modelVersion>4.0.0</modelVersion>
-    <parent>
-        <groupId>com.example.lewjun</groupId>
-        <artifactId>spring-boot-demo</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
-    </parent>
+    <dependencies>
+        <!--实现对mybatis的自动化-->
+        <dependency>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+        </dependency>
 
-    <artifactId>spring-boot-helloworld</artifactId>
-    <version>1.0-SNAPSHOT</version>
-</project>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${mysql-connector-java.version}</version>
+        </dependency>
+
+        <!-- 实现对 Sharding-JDBC 的自动化配置 -->
+        <dependency>
+            <groupId>org.apache.shardingsphere</groupId>
+            <artifactId>sharding-jdbc-spring-boot-starter</artifactId>
+        </dependency>
+
+    </dependencies>
 ```
 
-## [App.java](src/main/java/com/example/lewjun/App.java)
+## 水平分库分表
 
-```java
-package com.example.lewjun;
+将ab01表，拆分到2个库，每个库5张表，一共10张表
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+```
+- test0
+    - ab01_0
+    - ab01_2
+    - ab01_4
+    - ab01_6
+    - ab01_8
 
-/**
- * spring boot 启动类
- */
-@SpringBootApplication
-@RestController
-public class App {
-    public static void main(String[] args) {
-        SpringApplication.run(App.class, args);
-    }
+- test1
+    - ab01_1
+    - ab01_3
+    - ab01_5
+    - ab01_7
+    - ab01_9
 
-    @GetMapping("/hello")
-    public String hello(@RequestParam(name = "name", defaultValue = "World") String name) {
-        return String.format("Hello %s!", name);
-    }
+id以5结尾的数据都在ab01_5中
 
-    @GetMapping("/")
-    public String index() {
-        return "/";
-    }
-}
+                id  aab001  AAB002     AAB003     
+------------------  ------  ---------  -----------
+500630389065252865       1  aab002 1   aab003 1   
+500630405653725185      71  aab002 71  aab003 71  
+500630407310475265      79  aab002 79  aab003 79  
+500630409722200065      89  aab002 89  aab003 89  
+500630410057744385      91  aab002 91  aab003 91  
+500630411504779265      97  aab002 97  aab003 97  
+
+------------------  ------  ---------  -----------
+
+id以9结尾的数据都在ab01_9中
+
+                id  aab001  AAB002     AAB003     
+------------------  ------  ---------  -----------
+500630389425963009       3  aab002 3   aab003 3   
+500630389782478849       5  aab002 5   aab003 5   
+500630391145627649       9  aab002 9   aab003 9   
+500630392110317569      13  aab002 13  aab003 13  
+500630396933767169      35  aab002 35  aab003 35  
+500630397898457089      39  aab002 39  aab003 39  
+500630398506631169      41  aab002 41  aab003 41  
+500630401337786369      53  aab002 53  aab003 53  
+500630405867634689      73  aab002 73  aab003 73  
+500630410628169729      93  aab002 93  aab003 93  
+
 ```
 
-## [application.yml](src/main/resources/application.yml)
+拆分规则：对id字段进行计算
+
+* 分库 var index = id % 2(个库); => test${index}
+
+* 分表 var index = id % 10(张表); => ab01_${index}
+
+根据以上规则，得到生成数据库表的ddl语句，在数据库中执行。
+[schema-h2.sql](src/main/resources/db/schema-h2.sql)
+
+水平拆分的数据库（表）的逻辑和数据结构相同
+
+## ShardingSphere 配置水平分库分表
+根据以上规则，在application.yml中配置水平分库分表
 
 ```yaml
-server:
-  port: 1234
-  servlet:
-    context-path: /demo
+spring:
+  # ShardingSphere 配置项
+  shardingsphere:
+    datasource:
+      # 所有数据源的名字
+      names: test0, test1
+      test0:
+        type: com.zaxxer.hikari.HikariDataSource # 使用 Hikari  数据库连接池
+        driver-class-name: com.mysql.jdbc.Driver
+        jdbc-url: jdbc:mysql://127.0.0.1:3306/test0
+        username: root
+        password:
+
+      test1:
+        type: com.zaxxer.hikari.HikariDataSource # 使用 Hikari  数据库连接池
+        driver-class-name: com.mysql.jdbc.Driver
+        jdbc-url: jdbc:mysql://127.0.0.1:3306/test1
+        username: root
+        password:
+    # 分片规则
+    sharding:
+      tables:
+        # ab01 表配置
+        ab01:
+          # 真实数据节点
+          actualDataNodes: test0.ab01_$->{[0,2,4,6,8]}, test1.ab01_$->{[1,3,5,7,9]}
+          key-generator: # 主键生成策略
+            column: id
+            type: SNOWFLAKE # 雪花算法 所以id是long类型
+          database-strategy:
+            inline:
+              algorithm-expression: test$->{id % 2}
+              sharding-column: id
+          table-strategy:
+            inline:
+              algorithm-expression: ab01_$->{id % 10}
+              sharding-column: id
+
+    # 拓展属性配置
+    props:
+      sql:
+        show: true # 打印 SQL
 ```
 
-## 找回日志中请求路径列表
-为什么在Spring Boot 2.1.x版本中不再打印请求路径列表呢？
-
-主要是由于从该版本开始，将这些日志的打印级别做了调整：从原来的INFO调整为TRACE。所以，当我们希望在应用启动的时候打印这些信息的话，只需要在配置文件增增加对RequestMappingHandlerMapping类的打印级别设置即可，比如在application.properties中增加下面这行配置：
-
-```properties
-logging.level.org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping=trace
-```
-
-在增加了上面的配置之后重启应用，便可以看到如下的日志打印：
+必须配置数据库连接池，否则会报错：
 ```log
-2020-08-03 10:18:08.315 TRACE 7080 --- [  restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 
-	c.e.l.App:
-	{GET /}: index()
-	{GET /hello}: hello(String)
-2020-08-03 10:18:08.322 TRACE 7080 --- [  restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 
-	o.s.b.a.w.s.e.BasicErrorController:
-	{ /error}: error(HttpServletRequest)
-	{ /error, produces [text/html]}: errorHtml(HttpServletRequest,HttpServletResponse)
+Error creating bean with name 'org.apache.shardingsphere.shardingjdbc.spring.boot.SpringBootConfiguration': Initialization of bean failed; nested exception is java.lang.NullPointerException
 ```
+
+[TOC]
 
 ## Try it
 

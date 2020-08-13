@@ -1,16 +1,3 @@
-use test;
-
-DROP TABLE IF EXISTS AB01;
-
-CREATE TABLE AB01
-(
-    id BIGINT(20)  NOT NULL AUTO_INCREMENT COMMENT '部门编号',
-    aab001 BIGINT(20),
-    AAB002 VARCHAR(30) NOT NULL COMMENT '部门名称',
-    AAB003 VARCHAR(30) NOT NULL COMMENT '部门所在位置',
-    PRIMARY KEY (id)
-);
-
 drop database if exists test0;
 create database test0;
 
