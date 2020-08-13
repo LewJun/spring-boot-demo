@@ -1,6 +1,7 @@
 package com.example.lewjun.mapper;
 
 import com.example.lewjun.domain.Ab01;
+import com.example.lewjun.domain.Ab01Ad01;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
@@ -49,4 +50,7 @@ public interface Ab01Mapper {
 
     @Delete("truncate table ab01")
     void truncate();
+
+    @Select("select ab01.*, ad01.aad001 from ab01 as ab01 join ad01 as ad01 on ab01.aab001=ad01.aad001")
+    List<Ab01Ad01> queryAb01Ad01();
 }

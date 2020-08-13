@@ -131,3 +131,9 @@ CREATE TABLE AB01_9
     PRIMARY KEY (id)
 );
 
+CREATE TABLE AD01
+(
+    id BIGINT(20) not null AUTO_INCREMENT,
+    aad001 BIGINT(20),
+    PRIMARY KEY (id)
+);

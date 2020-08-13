@@ -70,6 +70,20 @@ spring:
               algorithm-expression: ab01_$->{id % 10}
               sharding-column: id
 
+        # ############  公共表配置  开始   ####################
+        # 在broadcast-tables中，配置了t_dict为广播表/公共表，所以这里是对t_dict进行配置
+        ad01:
+          # 配置公共表的主键生成策略
+          key-generator:
+            column: id
+            type: SNOWFLAKE
+        # todo 如果公共表比较多，那还挺麻烦的，有解决方法吗？
+      # 配置广播表/公共表（在项目中一般会有一些表的内容是固定的，或者说是很少修改的表，但是又经常跟这些表关联查询，例如一些状态信息。一般在我们项目中这种表会存放在我们各个数据库，所以称为公共表）
+      # 同时存在于 test、test0、test1中
+      broadcast-tables:
+        - ad01
+    # ############  公共表配置  开始   ####################
+
     # 拓展属性配置
     props:
       sql:

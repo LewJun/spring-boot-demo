@@ -28,4 +28,9 @@ public class Ab01MapperTest {
     public void testShardingQueryAll() {
         log.info("【queryAll:{}】", ab01Mapper.queryAll());
     }
+
+    @Test
+    public void testQueryAb01Ad01() {
+        log.info("【queryAb01Ad01: {}】", ab01Mapper.queryAb01Ad01());
+    }
 }

@@ -2,6 +2,8 @@
 
 > mybatis整合[ShardingSphere](https://shardingsphere.apache.org/index_zh.html)
 
+[TOC]
+
 ## 引入依赖
 
 ```xml
@@ -158,11 +160,60 @@ Error creating bean with name 'org.apache.shardingsphere.shardingjdbc.spring.boo
         # ################## 垂直分库的表 ######################
 ```
 
-垂直分库的表，不能和水平分库的表联合查询。
+垂直分库的表，不能和水平分库的表联合查询。##TODO## 该怎么办？
 
+## 公共表配置
 
+在项目中一般会有一些表的内容是固定的，或者说是很少修改的表，但是又经常跟这些表关联查询，例如一些状态信息。一般在我们项目中这种表会存放在我们各个数据库，所以称为公共表
 
-[TOC]
+```yaml
+        # ############  公共表配置  开始   ####################
+        # 在broadcast-tables中，配置了t_dict为广播表/公共表，所以这里是对t_dict进行配置
+        ad01:
+          # 配置公共表的主键生成策略
+          key-generator:
+            column: id
+            type: SNOWFLAKE
+        # todo 如果公共表比较多，那还挺麻烦的
+      # 配置广播表/公共表（在项目中一般会有一些表的内容是固定的，或者说是很少修改的表，但是又经常跟这些表关联查询，例如一些状态信息。一般在我们项目中这种表会存放在我们各个数据库，所以称为公共表）
+      broadcast-tables:
+        - ad01 # 同时存在于 test、test0、test1中
+    # ############  公共表配置  开始   ####################
+```
+
+由于这是公共表，在增删改数据时候，会在每个库中都会做相同的操作。
+
+执行查询
+```
+//  错误的写法 @Select("select ab01.*, ad01.aad001 from ab01 join ad01 on ab01.aab001=ad01.aad001") // 运行时会提示找不到ab01，因为最后真实的语句是select ab01.*, ad01.aad001 from ab01_0 join ad01 on ab01.aab001=ad01.aad001
+// **所以，如果要做分库分表，别名处该写as的地方一定要写as**
+    @Select("select ab01.*, ad01.aad001 from ab01 as ab01 join ad01 as ad01 on ab01.aab001=ad01.aad001")
+    List<Ab01Ad01> queryAb01Ad01();
+```
+
+```log
+ ShardingSphere-SQL                       : Logic SQL: select ab01.*, ad01.aad001 from ab01 as ab01 join ad01 as ad01 on ab01.aab001=ad01.aad001
+ ShardingSphere-SQL                       : SQLStatement: SelectStatementContext(super=CommonSQLStatementContext(sqlStatement=org.apache.shardingsphere.sql.parser.sql.statement.dml.SelectStatement@68b7bdcb, tablesContext=org.apache.shardingsphere.sql.parser.binder.segment.table.TablesContext@d84418a), tablesContext=org.apache.shardingsphere.sql.parser.binder.segment.table.TablesContext@d84418a, projectionsContext=ProjectionsContext(startIndex=7, stopIndex=25, distinctRow=false, projections=[ShorthandProjection(owner=Optional[ab01], actualColumns=[ColumnProjection(owner=ab01, name=id, alias=Optional.empty), ColumnProjection(owner=ab01, name=aab001, alias=Optional.empty), ColumnProjection(owner=ab01, name=aab002, alias=Optional.empty), ColumnProjection(owner=ab01, name=aab003, alias=Optional.empty)]), ColumnProjection(owner=ad01, name=aad001, alias=Optional.empty)]), groupByContext=org.apache.shardingsphere.sql.parser.binder.segment.select.groupby.GroupByContext@45e11627, orderByContext=org.apache.shardingsphere.sql.parser.binder.segment.select.orderby.OrderByContext@ec5f944, paginationContext=org.apache.shardingsphere.sql.parser.binder.segment.select.pagination.PaginationContext@5b4954b2, containsSubquery=false)
+ ShardingSphere-SQL                       : Actual SQL: test0 ::: select ab01.*, ad01.aad001 from ab01_0 as ab01 join ad01 as ad01 on ab01.aab001=ad01.aad001
+ ShardingSphere-SQL                       : Actual SQL: test0 ::: select ab01.*, ad01.aad001 from ab01_2 as ab01 join ad01 as ad01 on ab01.aab001=ad01.aad001
+ ShardingSphere-SQL                       : Actual SQL: test0 ::: select ab01.*, ad01.aad001 from ab01_4 as ab01 join ad01 as ad01 on ab01.aab001=ad01.aad001
+ ShardingSphere-SQL                       : Actual SQL: test0 ::: select ab01.*, ad01.aad001 from ab01_6 as ab01 join ad01 as ad01 on ab01.aab001=ad01.aad001
+ ShardingSphere-SQL                       : Actual SQL: test0 ::: select ab01.*, ad01.aad001 from ab01_8 as ab01 join ad01 as ad01 on ab01.aab001=ad01.aad001
+ ShardingSphere-SQL                       : Actual SQL: test1 ::: select ab01.*, ad01.aad001 from ab01_1 as ab01 join ad01 as ad01 on ab01.aab001=ad01.aad001
+ ShardingSphere-SQL                       : Actual SQL: test1 ::: select ab01.*, ad01.aad001 from ab01_3 as ab01 join ad01 as ad01 on ab01.aab001=ad01.aad001
+ ShardingSphere-SQL                       : Actual SQL: test1 ::: select ab01.*, ad01.aad001 from ab01_5 as ab01 join ad01 as ad01 on ab01.aab001=ad01.aad001
+ ShardingSphere-SQL                       : Actual SQL: test1 ::: select ab01.*, ad01.aad001 from ab01_7 as ab01 join ad01 as ad01 on ab01.aab001=ad01.aad001
+ ShardingSphere-SQL                       : Actual SQL: test1 ::: select ab01.*, ad01.aad001 from ab01_9 as ab01 join ad01 as ad01 on ab01.aab001=ad01.aad001
+ com.example.lewjun.Ab01MapperTest        : 【queryAb01Ad01: [Ab01Ad01(id=500663677825843200, aab002=aab002 20, aab003=aab003 20, aab001=20, aad001=20), Ab01Ad01(id=500663678874419200, aab002=aab002 30, aab003=aab003 30, aab001=30, aad001=30), Ab01Ad01(id=500663680795410432, aab002=aab002 50, aab003=aab003 50, aab001=50, aad001=50), Ab01Ad01(id=500663681697185792, aab002=aab002 60, aab003=aab003 60, aab001=60, aad001=60), Ab01Ad01(id=500663676865347584, aab002=aab002 10, aab003=aab003 10, aab001=10, aad001=10), Ab01Ad01(id=500663679868469248, aab002=aab002 40, aab003=aab003 40, aab001=40, aad001=40)]】
+```
+
+## 完整单元测试
+
+* [Ab01MapperTest.java](src/test/java/com/example/lewjun/Ab01MapperTest.java)
+
+* [Ac01MapperTest.java](src/test/java/com/example/lewjun/Ac01MapperTest.java)
+
+* [Ad01MapperTest.java](src/test/java/com/example/lewjun/Ad01MapperTest.java)
 
 ## Try it
 
