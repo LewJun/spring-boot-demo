@@ -5,20 +5,20 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
+import java.util.Date;
+
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
 @Accessors(chain = true)
-public class Ab01 extends BaseObj {
+@Data
+public class Ac01 extends BaseObj {
+    private String aac002;
 
-    /**
-     * 部门名称
-     */
-    private String aab002;
-    /**
-     * 部门所在位置
-     */
-    private String aab003;
+    private String aac003;
 
-    private Integer aab001;
+    private Integer aac004;
+
+    private Date aac005;
+
+    private Long aac006;
 }

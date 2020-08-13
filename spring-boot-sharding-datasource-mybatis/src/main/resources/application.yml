@@ -18,16 +18,23 @@ spring:
   shardingsphere:
     datasource:
       # 所有数据源的名字
-      names: test0, test1
+      names: test, test0, test1
+      test:
+        type: com.zaxxer.hikari.HikariDataSource # 使用 Hikari 数据库连接池
+        driver-class-name: com.mysql.jdbc.Driver
+        jdbc-url: jdbc:mysql://127.0.0.1:3306/test
+        username: root
+        password:
+
       test0:
-        #        type: com.zaxxer.hikari.HikariDataSource # 使用 Hikari 数据库连接池
+        type: com.zaxxer.hikari.HikariDataSource # 使用 Hikari 数据库连接池
         driver-class-name: com.mysql.jdbc.Driver
         jdbc-url: jdbc:mysql://127.0.0.1:3306/test0
         username: root
         password:
 
       test1:
-        #        type: com.zaxxer.hikari.HikariDataSource # 使用 Hikari 数据库连接池
+        type: com.zaxxer.hikari.HikariDataSource # 使用 Hikari 数据库连接池
         driver-class-name: com.mysql.jdbc.Driver
         jdbc-url: jdbc:mysql://127.0.0.1:3306/test1
         username: root
@@ -35,6 +42,18 @@ spring:
     # 分片规则
     sharding:
       tables:
+        # ################## 垂直分库的表 ######################
+        ac01:
+          actualDataNodes: test.ac01
+          keyGenerator:
+            column: id
+            type: SNOWFLAKE
+          tableStrategy:
+            inline:
+              shardingColumn: id
+              algorithmExpression: ac01
+        # ################## 垂直分库的表 ######################
+
         # ab01 表配置
         ab01:
           # 真实数据节点

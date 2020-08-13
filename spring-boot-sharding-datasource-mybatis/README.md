@@ -140,6 +140,28 @@ spring:
 Error creating bean with name 'org.apache.shardingsphere.shardingjdbc.spring.boot.SpringBootConfiguration': Initialization of bean failed; nested exception is java.lang.NullPointerException
 ```
 
+## 垂直分库表
+
+不用水平分库表的某些表，可以放到原库中。例如test.ac01
+```yaml
+
+        # ################## 垂直分库的表 ######################
+        ac01:
+          actualDataNodes: test.ac01
+          keyGenerator:
+            column: id
+            type: SNOWFLAKE
+          tableStrategy:
+            inline:
+              shardingColumn: id
+              algorithmExpression: ac01
+        # ################## 垂直分库的表 ######################
+```
+
+垂直分库的表，不能和水平分库的表联合查询。
+
+
+
 [TOC]
 
 ## Try it
