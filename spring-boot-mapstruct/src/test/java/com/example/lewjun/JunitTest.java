@@ -13,7 +13,7 @@ public class JunitTest {
         ab01DO.setAab002("aab002");
         ab01DO.setAab003("aab003");
 
-        Ab01BO ab01BO = Ab01Convert.INSTANCE.convert(ab01DO);
+        Ab01BO ab01BO = Ab01Convert.INSTANCE.do2bo(ab01DO);
         System.out.println(ab01BO.getAab001());
         System.out.println(ab01BO.getAab002());
         System.out.println(ab01BO.getAab003());
