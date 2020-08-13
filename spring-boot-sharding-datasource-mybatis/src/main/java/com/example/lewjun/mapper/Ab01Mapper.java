@@ -44,4 +44,9 @@ public interface Ab01Mapper {
     )
     List<Ab01> queryByAab003AndAab002(String aab003, String aab002);
 
+    @Delete("delete from ab01")
+    int deleteAll();
+
+    @Delete("truncate table ab01")
+    void truncate();
 }

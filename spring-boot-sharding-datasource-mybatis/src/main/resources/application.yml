@@ -24,13 +24,13 @@ spring:
         driver-class-name: com.mysql.jdbc.Driver
         jdbc-url: jdbc:mysql://127.0.0.1:3306/test0
         username: root
-        password: Root123456
+        password:
       test1:
         type: com.zaxxer.hikari.HikariDataSource # 使用 Hikari 数据库连接池
         driver-class-name: com.mysql.jdbc.Driver
         jdbc-url: jdbc:mysql://127.0.0.1:3306/test1
         username: root
-        password: Root123456
+        password:
     # 分片规则
     sharding:
       tables:
@@ -64,4 +64,11 @@ mybatis:
 
 logging:
   level:
-    root: debug
+    org:
+      springframework:
+        web:
+          servlet:
+            mvc:
+              method:
+                annotation:
+                  RequestMappingHandlerMapping: trace
