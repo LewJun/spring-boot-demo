@@ -1,0 +1,66 @@
+server:
+  port: 1234
+  servlet:
+    context-path: /demo
+
+spring:
+  # ShardingSphere 配置项
+  shardingsphere:
+    datasource:
+      # 所有数据源的名字
+      names: test, test0, test1
+      test:
+        type: com.zaxxer.hikari.HikariDataSource # 使用 Hikari 数据库连接池
+        driver-class-name: com.mysql.jdbc.Driver
+        jdbc-url: jdbc:mysql://127.0.0.1:3306/test
+        username: root
+        password:
+
+      test0:
+        type: com.zaxxer.hikari.HikariDataSource # 使用 Hikari 数据库连接池
+        driver-class-name: com.mysql.jdbc.Driver
+        jdbc-url: jdbc:mysql://127.0.0.1:3306/test0
+        username: root
+        password:
+
+      test1:
+        type: com.zaxxer.hikari.HikariDataSource # 使用 Hikari 数据库连接池
+        driver-class-name: com.mysql.jdbc.Driver
+        jdbc-url: jdbc:mysql://127.0.0.1:3306/test1
+        username: root
+        password:
+
+
+    # ################# 主从配置 ##################
+    masterslave:
+      name: ms
+      # 主数据源配置
+      master-data-source-name: test
+      # 从数据源配置
+      slave-data-source-names: test0, test1
+    # ################# 主从配置 ##################
+
+    # 拓展属性配置
+    props:
+      sql:
+        show: true # 打印 SQL
+
+
+mybatis:
+  # 扫描xml的位置
+  mapper-locations: classpath:/mappers/**/*Mapper.xml
+  configuration:
+    map-underscore-to-camel-case: true
+    # mybatis开启缓存
+    cache-enabled: true
+
+logging:
+  level:
+    org:
+      springframework:
+        web:
+          servlet:
+            mvc:
+              method:
+                annotation:
+                  RequestMappingHandlerMapping: trace
