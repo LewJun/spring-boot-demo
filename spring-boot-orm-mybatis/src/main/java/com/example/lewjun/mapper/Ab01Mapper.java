@@ -44,4 +44,8 @@ public interface Ab01Mapper {
     )
     List<Ab01> queryByAab003AndAab002(String aab003, String aab002);
 
+    @Select("select aab001 as ab01_aab001, aab002 as ab01_aab002, aab003 as ab01_aab003 from ab01 where aab003=#{aab003}")
+    // 使用@Results的方式不方便复用，可以使用@ResultMap来解决
+    @ResultMap("com.example.lewjun.mapper.Ab01Mapper.ResultMapOfQueryByAab003")
+    List<Ab01> queryByAab003(String aab003);
 }

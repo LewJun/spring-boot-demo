@@ -45,4 +45,9 @@ public class Ab01MapperTest {
 
         log.info("【3:{}】", ab01Mapper.queryByAab002("SALES"));
     }
+
+    @Test
+    public void queryByAab003() {
+        log.info("【queryByAab003:{}】", ab01Mapper.queryByAab003("DALLAS"));
+    }
 }
