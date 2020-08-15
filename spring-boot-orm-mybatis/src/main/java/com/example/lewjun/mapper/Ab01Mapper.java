@@ -1,6 +1,7 @@
 package com.example.lewjun.mapper;
 
 import com.example.lewjun.domain.Ab01;
+import com.example.lewjun.domain.Ab01Ac01;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
@@ -48,4 +49,8 @@ public interface Ab01Mapper {
     // 使用@Results的方式不方便复用，可以使用@ResultMap来解决
     @ResultMap("com.example.lewjun.mapper.Ab01Mapper.ResultMapOfQueryByAab003")
     List<Ab01> queryByAab003(String aab003);
+
+    @Select("select ab01.*, ac01.* from ab01 left join ac01 on ac01.aac006=ab01.aab001")
+    @ResultMap("com.example.lewjun.mapper.Ab01Mapper.Ab01Ac01")
+    List<Ab01Ac01> queryByAb01Ac01();
 }

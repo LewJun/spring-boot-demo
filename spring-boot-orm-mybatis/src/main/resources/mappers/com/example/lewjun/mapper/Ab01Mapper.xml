@@ -14,6 +14,10 @@
         <result column="ab01_aab003" jdbcType="VARCHAR" property="aab003" />
     </resultMap>
 
+    <resultMap extends="BaseResultMap" id="Ab01Ac01" type="com.example.lewjun.domain.Ab01Ac01">
+        <collection property="ac01s" resultMap="com.example.lewjun.mapper.Ac01Mapper.BaseResultMap" />
+    </resultMap>
+
     <sql id="Base_Column_List">
         aab001, aab002, aab003
     </sql>

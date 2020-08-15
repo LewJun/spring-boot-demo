@@ -1,11 +1,14 @@
 package com.example.lewjun;
 
 import com.example.lewjun.domain.Ab01;
+import com.example.lewjun.domain.Ab01Ac01;
 import com.example.lewjun.mapper.Ab01Mapper;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.List;
 
 /**
  * spring boot 测试类
@@ -49,5 +52,15 @@ public class Ab01MapperTest {
     @Test
     public void queryByAab003() {
         log.info("【queryByAab003:{}】", ab01Mapper.queryByAab003("DALLAS"));
+    }
+
+    @Test
+    public void queryByAb01Ac01() {
+        final List<Ab01Ac01> ab01Ac01s = ab01Mapper.queryByAb01Ac01();
+        log.info("【queryByAb01Ac01:{}】", ab01Ac01s);
+
+        ab01Ac01s.forEach(it ->
+                log.info("【aab001:{}, aab002: {}, aab003: {}, ac01: {}】", it.getAab001(), it.getAab002(), it.getAab003(), it.getAc01s())
+        );
     }
 }
