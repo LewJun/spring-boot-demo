@@ -58,9 +58,5 @@ public class Ab01MapperTest {
     public void queryByAb01Ac01() {
         final List<Ab01Ac01> ab01Ac01s = ab01Mapper.queryByAb01Ac01();
         log.info("【queryByAb01Ac01:{}】", ab01Ac01s);
-
-        ab01Ac01s.forEach(it ->
-                log.info("【aab001:{}, aab002: {}, aab003: {}, ac01: {}】", it.getAab001(), it.getAab002(), it.getAab003(), it.getAc01s())
-        );
     }
 }

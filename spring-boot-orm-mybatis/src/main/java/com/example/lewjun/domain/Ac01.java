@@ -5,7 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -20,7 +20,7 @@ public class Ac01 extends BaseObj {
 
     private Integer aac004;
 
-    private Date aac005;
+    private LocalDate aac005;
 
     private Integer aac006;
 }

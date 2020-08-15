@@ -10,8 +10,7 @@
         <result column="aac006" jdbcType="INTEGER" property="aac006" />
     </resultMap>
 
-    <resultMap id="Ac01Ab01" type="com.example.lewjun.domain.Ac01Ab01">
-        <association property="ac01" resultMap="BaseResultMap" />
+    <resultMap extends="BaseResultMap" id="Ac01Ab01" type="com.example.lewjun.domain.Ac01Ab01">
         <association property="ab01" resultMap="com.example.lewjun.mapper.Ab01Mapper.BaseResultMap" />
     </resultMap>
 
