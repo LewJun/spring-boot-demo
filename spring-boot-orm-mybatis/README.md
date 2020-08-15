@@ -143,6 +143,10 @@ public class Ab01MapperTest {
 
 [开启mybatis 缓存](README-MYBATIS-CACHE.md)
 
+## 动态sql
+
+[动态sql](README-DYNAMIC.md)
+
 ## Try it
 
 * MacOS/Linux

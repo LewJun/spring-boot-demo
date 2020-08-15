@@ -53,4 +53,23 @@ public interface Ab01Mapper {
     @Select("select ab01.*, ac01.* from ab01 left join ac01 on ac01.aac006=ab01.aab001")
     @ResultMap("com.example.lewjun.mapper.Ab01Mapper.Ab01Ac01")
     List<Ab01Ac01> queryByAb01Ac01();
+
+    @SelectProvider(type = Ab01MapperProvider.class, method = "queryByAab001UseProvider")
+    Ab01 queryByAab001UseProvider(int aab001);
+
+    @InsertProvider(type = Ab01MapperProvider.class, method = "insertUseProvider")
+    int insertUseProvider(Ab01 ab01);
+
+    @UpdateProvider(type = Ab01MapperProvider.class, method = "updateUseProvider")
+    int updateUseProvider(Ab01 ab01);
+
+    @UpdateProvider(type = Ab01MapperProvider.class, method = "updateSelectiveProvider")
+    int updateSelectiveUseProvider(Ab01 ab01);
+
+    @DeleteProvider(type = Ab01MapperProvider.class, method = "deleteUseProvider")
+    int deleteUseProvider(int aab001);
+
+    @SelectProvider(type = Ab01MapperProvider.class, method = "queryByAb01Ac01UseProvider")
+    @ResultMap("com.example.lewjun.mapper.Ab01Mapper.Ab01Ac01")
+    List<Ab01Ac01> queryByAb01Ac01UseProvider();
 }
