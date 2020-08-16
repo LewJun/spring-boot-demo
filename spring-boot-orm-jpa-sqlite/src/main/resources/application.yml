@@ -1,0 +1,33 @@
+server:
+  port: 1234
+  servlet:
+    context-path: /demo
+
+
+# DataSource Config
+spring:
+  datasource:
+    driver-class-name: org.sqlite.JDBC
+    url: jdbc:sqlite:/Users/huiye/Documents/scott.db3
+    username:
+    password:
+  jpa:
+    database-platform: org.hibernate.dialect.SQLiteDialect
+    # 显示sql
+    show-sql: true
+    properties:
+      hibernate:
+        # 格式化输出sql
+        #        format_sql: true
+        hbm2ddl:
+          auto: none # update
+
+# 显示jpa的入参
+logging:
+  level:
+    org:
+      hibernate:
+        type:
+          descriptor:
+            sql:
+              BasicBinder: trace

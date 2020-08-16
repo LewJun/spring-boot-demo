@@ -47,6 +47,7 @@ mvn archetype:generate
 * 数据库
     * [spring-boot-orm-jdbcTemplate](spring-boot-orm-jdbcTemplate) 一个spring boot集成jdbcTemplate的例子
     * [spring-boot-orm-jpa](spring-boot-orm-jpa) 一个spring boot整合jpa的例子
+    * [spring-boot-orm-jpa-sqlite](spring-boot-orm-jpa-sqlite) 一个spring boot整合jpa + sqlite 的例子
     * [spring-boot-orm-mybatis](spring-boot-orm-mybatis) 一个spring boot整合mybatis的例子
     * [spring-boot-orm-mybatis-plus](spring-boot-orm-mybatis-plus) spring boot 集成 mybatis-plus
     * [spring-boot-sharding-datasource-mybatis](spring-boot-sharding-datasource-mybatis) mybatis整合ShardingSphere，实现分库分表
