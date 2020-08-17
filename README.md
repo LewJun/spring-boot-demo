@@ -60,3 +60,4 @@ mvn archetype:generate
 * [spring-boot-mapstruct](spring-boot-mapstruct) spring-boot-mapstruct的使用
 * [spring-boot-mapstruct-lombok](spring-boot-mapstruct-lombok) mapstruct搭配lombok的使用
 * [spring-boot-jdk8-new-features](spring-boot-jdk8-new-features) java 8 新特性
+* [spring-boot-security](spring-boot-security) spring security的使用

@@ -1,0 +1,23 @@
+server:
+  port: 1234
+  servlet:
+    context-path: /demo
+
+logging:
+  level:
+    org:
+      springframework:
+        web:
+          servlet:
+            mvc:
+              method:
+                annotation:
+                  RequestMappingHandlerMapping: trace
+
+spring:
+  # SecurityProperties配置项
+  security:
+    # 配置默认的 InMemoryUserDetailsManager 的用户账号与密码
+    user:
+      name: user        # 账号
+      password: user    # 密码
