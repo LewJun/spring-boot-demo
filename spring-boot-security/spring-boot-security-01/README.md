@@ -31,6 +31,10 @@ Using generated security password: 11472b78-eae8-41ff-bcb3-40a434a478f1
 
 所以输入user/11472b78-eae8-41ff-bcb3-40a434a478f1即可登录。
 
+## 取消认证（登出）
+
+在登录端，访问 [http://localhost:1234/demo/logout](http://localhost:1234/demo/logout) 即可登出
+
 ## 覆盖默认用户名和密码
 
 ```yaml
@@ -42,6 +46,9 @@ spring:
       name: user        # 账号
       password: user    # 密码
 ```
+
+注意：这里只能配置`一个`用户
+
 
 ## Try it
 
