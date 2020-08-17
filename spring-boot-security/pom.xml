@@ -15,5 +15,6 @@
 
     <modules>
         <module>spring-boot-security-01</module>
+        <module>spring-boot-security-02</module>
     </modules>
 </project>
