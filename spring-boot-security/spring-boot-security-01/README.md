@@ -49,6 +49,64 @@ spring:
 
 注意：这里只能配置`一个`用户
 
+## 注解授权
+
+* 对user配置一个角色'ADMIN'
+
+```yaml
+spring:
+  # SecurityProperties配置项
+  security:
+    # 配置默认的 InMemoryUserDetailsManager 的用户账号与密码
+    user:
+      name: user        # 账号
+      password: user    # 密码
+      roles:
+        - ADMIN
+```
+
+* 增加 @EnableGlobalMethodSecurity 注解，开启对 Spring Security 注解的方法，进行权限验证
+
+```java
+@EnableGlobalMethodSecurity(prePostEnabled = true)
+@SpringBootApplication
+@RestController
+public class App {
+    
+}
+```
+
+* @PreAuthorize
+
+在需要授权的方法上使用@PreAuthorize指定需要的角色或权限
+
+```java
+    @PreAuthorize("hasRole('ROLE_NORMAL')")
+    @GetMapping("/normal")
+    public String normal() {
+        return "/normal";
+    }
+
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @GetMapping("/admin")
+    public String admin() {
+        return "/admin";
+    }
+
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_NORMAL')")
+    @GetMapping("/adminOrNormal")
+    public String adminOrNormal() {
+        return "/adminOrNormal";
+    }
+
+    @DenyAll// 无效，登录者都可以访问
+    @GetMapping("/denyAll")
+    public String denyAll() {
+        return "nobody can access";
+    }
+```
+
+@PreAuthorize 注解，当 Spring EL 表达式的执行结果为 true 时，可以访问。
 
 ## Try it
 

@@ -21,3 +21,5 @@ spring:
     user:
       name: user        # 账号
       password: user    # 密码
+      roles:
+        - ADMIN
