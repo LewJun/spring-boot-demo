@@ -1,34 +1,38 @@
 package com.example.lewjun.config;
 
+import com.example.lewjun.service.LoginUserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+    @Autowired
+    private LoginUserService loginUserService;
+
+//    @Bean
+//    public UserDetailsService userDetailsService() {
+//        return s -> User.withUsername("admin")// 用户名
+//                .password("admin")// 密码
+//                .authorities("ROLE_ADMIN") // 权限
+//                .build();
+//    }
+
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
         final DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
         provider.setPasswordEncoder(passwordEncoder());
 
-        provider.setUserDetailsService(userDetailsService());
+//        provider.setUserDetailsService(userDetailsService());
+        provider.setUserDetailsService(loginUserService);
         return provider;
-    }
-
-    @Bean
-    public UserDetailsService userDetailsService() {
-        return s -> User.withUsername("admin")// 用户名
-                .password("admin")// 密码
-                .authorities("ROLE_ADMIN") // 权限
-                .build();
     }
 
     @Bean
