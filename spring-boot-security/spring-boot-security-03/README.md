@@ -39,6 +39,15 @@
     }
 ```
 
+## 使用BCryptPasswordEncoder对数据加密
+
+```java
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+```
+
 ## Try it
 
 * MacOS/Linux

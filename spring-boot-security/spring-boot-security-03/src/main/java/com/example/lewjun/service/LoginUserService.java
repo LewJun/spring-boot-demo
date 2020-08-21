@@ -7,13 +7,21 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class LoginUserService implements UserDetailsService {
-    @Autowired
     public LoginUserRepository loginUserRepository;
+
+    // spring 推荐在构造方法上注入属性
+    @Autowired
+    public LoginUserService(final LoginUserRepository loginUserRepository) {
+        this.loginUserRepository = loginUserRepository;
+    }
 
     @Override
     public LoginUser loadUserByUsername(final String username) throws UsernameNotFoundException {
-        return loginUserRepository.findByUsername(username);
+        return Optional.ofNullable(loginUserRepository.findByUsername(username))
+                .orElseThrow(() -> new UsernameNotFoundException("username not found"));
     }
 }
