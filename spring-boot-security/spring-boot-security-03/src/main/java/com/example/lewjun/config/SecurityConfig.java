@@ -1,28 +1,44 @@
 package com.example.lewjun.config;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
+    @Bean
+    public DaoAuthenticationProvider authenticationProvider() {
+        final DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+        provider.setPasswordEncoder(passwordEncoder());
+
+        provider.setUserDetailsService(userDetailsService());
+        return provider;
+    }
+
+    @Bean
+    public UserDetailsService userDetailsService() {
+        return s -> User.withUsername("admin")// 用户名
+                .password("admin")// 密码
+                .authorities("ROLE_ADMIN") // 权限
+                .build();
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return NoOpPasswordEncoder.getInstance();
+    }
+
     @Override
     protected void configure(final AuthenticationManagerBuilder auth) throws Exception {
-        auth
-                // 使用内存中的InMemoryUserDetailsManager
-                .inMemoryAuthentication()
-//                .jdbcAuthentication()
-//                .userDetailsService(userDetailsService)
-                // 不使用PasswordEncoder密码编码器
-                .passwordEncoder(NoOpPasswordEncoder.getInstance())
-                // 配置admin用户 拥有ADMIN角色
-                .withUser("admin").password("admin").roles("ADMIN")
-                .and()
-                // 配置normal用户 拥有NORMAL角色
-                .withUser("normal").password("normal").roles("NORMAL")
-        ;
+        auth.authenticationProvider(authenticationProvider());
     }
 
     @Override
