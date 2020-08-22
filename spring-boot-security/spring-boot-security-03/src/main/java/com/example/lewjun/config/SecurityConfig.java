@@ -8,22 +8,38 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.annotation.web.configurers.ExpressionUrlAuthorizationConfigurer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.function.BiConsumer;
 
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+    private final String[] anonymousList = {
+            "/login",
+            "/captchaImage",
+            "/profile/**",
+            "/webjars/**",
+            "/swagger-ui.html",
+            "/swagger-resources/**",
+            "/druid/**"
+    };
+
+    private final String[] permitAllList = {
+            "/permitAll",
+            "/*.html",
+            "/**/*.html",
+            "/**/*.css",
+            "/**/*.js"
+    };
     @Autowired
     private LoginUserService loginUserService;
-
-//    @Bean
-//    public UserDetailsService userDetailsService() {
-//        return s -> User.withUsername("admin")// 用户名
-//                .password("admin")// 密码
-//                .authorities("ROLE_ADMIN") // 权限
-//                .build();
-//    }
 
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
@@ -47,25 +63,37 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(final HttpSecurity http) throws Exception {
-        http
-                // 配置请求地址的权限 开始
-                .authorizeRequests()
-                // 所有用户都可以访问
-                .antMatchers("/permitAll").permitAll()
-                // 有ADMIN角色
-                .antMatchers("/admin").hasRole("ADMIN")
-                // 需要NORMAL角色
-                .antMatchers("/normal").hasRole("NORMAL")//.access("hasRole('ROLE_NORMAL')")// 需要NORMAL角色
-                // 任何请求，访问的用户都需要经过认证（登录）
-                .anyRequest().authenticated()
+        final ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry expressionInterceptUrlRegistry = http.authorizeRequests();
+
+        expressionInterceptUrlRegistry.antMatchers(permitAllList).permitAll();
+
+        expressionInterceptUrlRegistry.antMatchers(anonymousList).anonymous();
+
+        configHasRole(expressionInterceptUrlRegistry);
+
+        expressionInterceptUrlRegistry.anyRequest().authenticated()
                 .and()
                 // 设置form表单登录 登录路径 所有用户都可以访问
                 .formLogin()/*.loginPage("/login")*/.permitAll()
                 .and()
                 // 设置登出 所有用户都可以访问
                 .logout()/*.logoutUrl("/logout")*/.permitAll()
-        // 配置请求地址的权限 结束
         ;
+    }
+
+    private void configHasRole(final ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry expressionInterceptUrlRegistry) {
+        final String[] strs = {};
+
+        // 对应的角色可以访问
+        final Map<String, List<String>> hasRoleMap = new HashMap<>();
+        hasRoleMap.put("ADMIN", Arrays.asList("/admin"));
+        hasRoleMap.put("NORMAL", Arrays.asList("/normal"));
+        hasRoleMap.forEach(new BiConsumer<String, List<String>>() {
+            @Override
+            public void accept(final String s, final List<String> strings) {
+                expressionInterceptUrlRegistry.antMatchers(strings.toArray(strs)).hasRole(s);
+            }
+        });
     }
 
 }
