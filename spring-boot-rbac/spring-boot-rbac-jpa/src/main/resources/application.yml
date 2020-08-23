@@ -1,0 +1,34 @@
+server:
+  port: 1234
+  servlet:
+    context-path: /demo
+
+
+# DataSource Config
+spring:
+  datasource:
+    driver-class-name: org.h2.Driver
+    #    schema: classpath:db/schema-h2.sql
+    #    data: classpath:db/data-h2.sql
+    url: jdbc:h2:mem:test
+    username: root
+    password: test
+  jpa:
+    # 显示sql
+    show-sql: true
+    properties:
+      hibernate:
+        # 格式化输出sql
+        #        format_sql: true
+        hbm2ddl:
+          auto: update
+
+# 显示jpa的入参
+logging:
+  level:
+    org:
+      hibernate:
+        type:
+          descriptor:
+            sql:
+              BasicBinder: trace
