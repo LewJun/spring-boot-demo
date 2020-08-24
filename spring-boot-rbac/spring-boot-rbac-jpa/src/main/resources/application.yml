@@ -8,8 +8,8 @@ server:
 spring:
   datasource:
     driver-class-name: org.h2.Driver
-    #    schema: classpath:db/schema-h2.sql
-    #    data: classpath:db/data-h2.sql
+    schema: classpath:db/schema-h2.sql
+    data: classpath:db/data.sql
     url: jdbc:h2:mem:test
     username: root
     password: test
@@ -21,7 +21,7 @@ spring:
         # 格式化输出sql
         #        format_sql: true
         hbm2ddl:
-          auto: update
+          auto: none # update
 
 # 显示jpa的入参
 logging:

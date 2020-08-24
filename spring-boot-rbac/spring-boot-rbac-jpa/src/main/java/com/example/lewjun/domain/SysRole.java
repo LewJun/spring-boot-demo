@@ -12,12 +12,10 @@ import javax.persistence.*;
 @Data
 @Accessors(chain = true)
 @Entity
-public class SysUser extends BaseObj {
+public class SysRole extends BaseObj {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @Column(length = 32, nullable = false, unique = true)
-    private String username;
-    @Column(length = 32, nullable = false)
-    private String password;
+    @Column(length = 10, unique = true, nullable = false)
+    private String name;
 }

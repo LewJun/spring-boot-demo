@@ -15,11 +15,28 @@ public class SysUserServiceTest {
     private SysUserService sysUserService;
 
     @Test
-    public void testAdd() {
+    public void testSave() {
         log.info("【add: {}】", sysUserService.save(
                 new SysUser()
-                        .setUsername("admin")
-                        .setPassword("admin")
+                        .setUsername("user")
+                        .setPassword("user")
         ));
+    }
+
+    @Test
+    public void testUpdate() {
+        log.info("【update: {}】", sysUserService.update(
+                new SysUser(1, "admin", "ADMIN")
+        ));
+    }
+
+    @Test
+    public void testDelete() {
+        sysUserService.deleteById(2L);
+    }
+
+    @Test
+    public void testQueryAll() {
+        log.info("【queryAll: {}】", sysUserService.queryAll());
     }
 }
