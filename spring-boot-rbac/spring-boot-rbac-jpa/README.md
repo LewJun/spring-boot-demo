@@ -1,5 +1,7 @@
 # spring-boot-rbac-jpa
 
+失败，对一对一，一对多，多对多不熟悉，有时间再完善。
+
 ## Try it
 
 * MacOS/Linux
