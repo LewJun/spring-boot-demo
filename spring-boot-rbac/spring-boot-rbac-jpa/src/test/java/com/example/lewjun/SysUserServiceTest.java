@@ -39,4 +39,9 @@ public class SysUserServiceTest {
     public void testQueryAll() {
         log.info("【queryAll: {}】", sysUserService.queryAll());
     }
+
+    @Test
+    public void testExistsByUsername() {
+        log.info("【existsByUsername: {}】", sysUserService.existsByUsername("admin"));
+    }
 }
