@@ -159,7 +159,7 @@ public class CosServiceImpl implements ICosService {
 
     @Override
     public String getFullPath(final String filePath) {
-        return domain + filePath;
+        return domain + baseDir + filePath;
     }
 
     private void shutdown(final COSClient cosClient) {
