@@ -1,0 +1,36 @@
+server:
+  port: 1234
+  servlet:
+    context-path: /demo
+
+debug: false
+
+# DataSource Config
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    schema: classpath:db/schema-mysql.sql
+    data: classpath:db/data-mysql.sql
+    url: jdbc:mysql://127.0.0.1:3306/rbac
+    username: root
+    password:
+
+mybatis-plus:
+  # 扫描xml的位置
+  mapper-locations:
+    - classpath:/mappers/**/*Mapper.xml
+  configuration:
+    cache-enabled: true
+    map-underscore-to-camel-case: true
+  global-config:
+    # 驼峰下划线转换
+    db-column-underline: true
+
+logging:
+  level:
+    com:
+      example:
+        lewjun:
+          # 设置mapper包日志级别为debug
+          mapper: debug
+
