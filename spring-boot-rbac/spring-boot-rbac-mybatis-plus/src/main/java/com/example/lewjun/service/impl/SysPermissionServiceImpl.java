@@ -27,8 +27,8 @@ public class SysPermissionServiceImpl extends MyServiceImpl<SysPermissionMapper,
     }
 
     @Override
-    public List<SysPermission> findSubPermissionById(final long id) {
-        return baseMapper.findSubPermissionById(id);
+    public List<SysPermission> findSubPermissionByPermissionId(final long permissionId) {
+        return baseMapper.findSubPermissionByPermissionId(permissionId);
     }
 
     @Override
@@ -42,13 +42,14 @@ public class SysPermissionServiceImpl extends MyServiceImpl<SysPermissionMapper,
     }
 
     @Override
-    public boolean existsSubPermissionById(final Serializable id) {
-        return baseMapper.existsSubPermissionsById(id) != 0;
+    public boolean existsSubPermissionsByPermissionId(final Serializable permissionId) {
+        return baseMapper.existsSubPermissionsByPermissionId(permissionId) != 0;
     }
+
 
     @Override
     public boolean removeById(final Serializable id) {
-        if (existsSubPermissionById(id)) {
+        if (existsSubPermissionsByPermissionId(id)) {
             throw new RuntimeException("删除失败，权限存在子权限。");
         }
 

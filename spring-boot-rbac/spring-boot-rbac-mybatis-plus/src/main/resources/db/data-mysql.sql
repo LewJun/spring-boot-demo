@@ -2,16 +2,24 @@
 --  -------------------------
 
 TRUNCATE TABLE sys_user;
+TRUNCATE TABLE sys_user_login;
 TRUNCATE TABLE sys_role;
 TRUNCATE TABLE sys_permission;
 TRUNCATE TABLE sys_user_role;
 TRUNCATE TABLE sys_role_permission;
 
-INSERT INTO sys_user (id, username, `password`)
+INSERT INTO sys_user (id, username)
 VALUES
-  (1, 'admin', 'admin')
-  ,(2, 'normal', 'normal')
-  ,(3, 'user', 'user')
+  (1, 'admin')
+  ,(2, 'normal')
+  ,(3, 'user')
+  ;
+
+INSERT INTO sys_user_login (id, `password`)
+VALUES
+  (1, '$2a$10$WkmpZmq.pwpTwhCSzv6QXehG7UJ7vvQb/Ig7z0IKfZBxQv4hmsRGm')
+  ,(2, '$2a$10$v3wVT1WTpFBOLOHCfINr9utndMlKQiMMsDxn2gv6iF/5zIPa72StG')
+  ,(3, '$2a$10$6dqkOA7c7NBMEXW3yjMvRuBrOtFVHr10jSNXLMyczQaHKJ/65v1te')
   ;
 
 INSERT INTO sys_role (id, `name`)

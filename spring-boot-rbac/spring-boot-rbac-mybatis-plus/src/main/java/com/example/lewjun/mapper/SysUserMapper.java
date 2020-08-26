@@ -5,17 +5,25 @@ import com.example.lewjun.domain.SysUser;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 public interface SysUserMapper extends MyBaseMapper<SysUser> {
     /**
      * 根据用户名判断是否存在
      *
-     * @param username
-     * @return 1
+     * @param username 用户名
+     * @return 1 if exists, otherwise 0
      */
     @Select("select count(1) from sys_user t where t.username=#{username} limit 1")
     int existsByUsername(String username);
 
-    @Select("select t.password from sys_user t where t.username=#{username} limit 1")
-    String findPasswordByUsername(String username);
+    /**
+     * 根据用户名查找用户id
+     *
+     * @param username 用户名
+     * @return 用户id
+     */
+    @Select("select t.id from sys_user t where t.username=#{username} limit 1")
+    Optional<Long> findUserIdByUsername(String username);
 }

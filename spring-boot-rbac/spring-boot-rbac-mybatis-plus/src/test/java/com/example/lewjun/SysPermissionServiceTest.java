@@ -27,7 +27,7 @@ public class SysPermissionServiceTest {
 
     @Test
     public void findSubPermissionById() {
-        log.info("【: {}】", sysPermissionService.findSubPermissionById(1));
+        log.info("【: {}】", sysPermissionService.findSubPermissionByPermissionId(1));
     }
 
     @Test

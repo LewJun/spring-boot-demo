@@ -72,7 +72,7 @@
         WHERE sys_permission.`id` = sys_role_permission.`permission_id`) ;
     </select>
 
-    <select id="findSubPermissionById" resultMap="BaseResultMap">
+    <select id="findSubPermissionByPermissionId" resultMap="BaseResultMap">
         SELECT
         <include refid="Sub_Permission_Column_Select_List" />
         FROM

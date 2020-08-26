@@ -12,7 +12,11 @@ public interface SysUserService extends MyIService<SysUser> {
      */
     boolean existsByUsername(String username);
 
-    boolean login(SysUser sysUser);
-
-    boolean changePassword(SysUser sysUser, String newPassword);
+    /**
+     * 根据用户名查找用户id
+     *
+     * @param username 用户名
+     * @return 用户id
+     */
+    Long findUserIdByUsername(String username);
 }

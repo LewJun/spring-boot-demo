@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS sys_permission (
   `name` VARCHAR (120) NOT NULL,
   url VARCHAR (120) NOT NULL,
   parent_id BIGINT,
-  description VARCHAR (120),
+  description VARCHAR (120) not null default '',
   PRIMARY KEY (id)
 ) ENGINE = INNODB DEFAULT CHARSET = utf8mb4 ;
 
@@ -88,7 +88,7 @@ CREATE TABLE AB01
     CREATE_TIME TIMESTAMP,
     UPDATE_TIME TIMESTAMP,
     PRIMARY KEY (AAB001)
-);
+) ENGINE = INNODB DEFAULT CHARSET = utf8mb4 ;
 
 DROP TABLE IF EXISTS AC01;
 
@@ -103,4 +103,22 @@ CREATE TABLE AC01
     CREATE_TIME TIMESTAMP,
     UPDATE_TIME TIMESTAMP,
     PRIMARY KEY (AAC001)
-);
+) ENGINE = INNODB DEFAULT CHARSET = utf8mb4 ;
+
+-- ------------------------
+alter table sys_user drop column `password`;
+alter table sys_user add column `email` VARCHAR(32) not null default '';
+alter table sys_user add column `avatar` VARCHAR(128) not null default '';
+
+
+DROP TABLE IF EXISTS sys_user_login ;
+
+CREATE TABLE IF NOT EXISTS sys_user_login (
+  user_id BIGINT not null,
+  `password` VARCHAR (60) NOT NULL,
+  PRIMARY KEY (user_id)
+) ENGINE = INNODB DEFAULT CHARSET = utf8mb4 ;
+
+ALTER TABLE sys_user_login
+  ADD CONSTRAINT fk_sys_user_login__user_id FOREIGN KEY (user_id) REFERENCES sys_user (id)
+  ON UPDATE CASCADE ON DELETE CASCADE ;

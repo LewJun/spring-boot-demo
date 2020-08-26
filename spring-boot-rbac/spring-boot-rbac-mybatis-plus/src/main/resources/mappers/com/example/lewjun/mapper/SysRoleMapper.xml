@@ -10,7 +10,7 @@
         id, name
     </sql>
 
-    <select id="findByUserId" resultType="com.example.lewjun.domain.SysRole">
+    <select id="findByUserId" resultMap="BaseResultMap">
         SELECT
         sys_role.id,
         sys_role.`name`
