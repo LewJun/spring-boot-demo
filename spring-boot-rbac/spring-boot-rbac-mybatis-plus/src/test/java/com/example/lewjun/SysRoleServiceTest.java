@@ -24,4 +24,10 @@ public class SysRoleServiceTest {
     public void testFindByUserId() {
         log.info("【findByUserId: {}】", sysRoleService.findByUserId(1L));
     }
+
+    @Test
+    public void removeById() {
+        sysRoleService.removeById(1);
+    }
+
 }
