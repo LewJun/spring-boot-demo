@@ -42,6 +42,6 @@ public class SysPermissionServiceTest {
 
     @Test
     public void removeById() {
-        sysPermissionService.removeById(5);
+        sysPermissionService.removeById(4);
     }
 }

@@ -5,6 +5,8 @@ import com.example.lewjun.domain.SysPermission;
 import com.example.lewjun.domain.SysPermissionWithSubSysPermission;
 import com.example.lewjun.mapper.SysPermissionMapper;
 import com.example.lewjun.service.SysPermissionService;
+import com.example.lewjun.service.SysRolePermissionService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.Serializable;
@@ -12,6 +14,13 @@ import java.util.List;
 
 @Service
 public class SysPermissionServiceImpl extends MyServiceImpl<SysPermissionMapper, SysPermission> implements SysPermissionService {
+    private final SysRolePermissionService sysRolePermissionService;
+
+    @Autowired
+    public SysPermissionServiceImpl(final SysRolePermissionService sysRolePermissionService) {
+        this.sysRolePermissionService = sysRolePermissionService;
+    }
+
     @Override
     public List<SysPermission> findByRoleId(final long roleId) {
         return baseMapper.findByRoleId(roleId);
@@ -40,8 +49,13 @@ public class SysPermissionServiceImpl extends MyServiceImpl<SysPermissionMapper,
     @Override
     public boolean removeById(final Serializable id) {
         if (existsSubPermissionById(id)) {
-            throw new RuntimeException("删除失败，存在下级权限。");
+            throw new RuntimeException("删除失败，权限存在子权限。");
         }
+
+        if (sysRolePermissionService.existsRolePermissionByPermissionId(id)) {
+            throw new RuntimeException("删除失败，权限正在被角色使用。");
+        }
+
         return super.removeById(id);
     }
 }
