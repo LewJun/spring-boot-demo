@@ -4,6 +4,7 @@ import com.example.lewjun.base.MyIService;
 import com.example.lewjun.domain.SysPermission;
 import com.example.lewjun.domain.SysPermissionWithSubSysPermission;
 
+import java.io.Serializable;
 import java.util.List;
 
 public interface SysPermissionService extends MyIService<SysPermission> {
@@ -14,4 +15,6 @@ public interface SysPermissionService extends MyIService<SysPermission> {
     List<SysPermissionWithSubSysPermission> findByRoleIdWithSubPermission(long roleId);
 
     List<SysPermissionWithSubSysPermission> findByIdWithSubSysPermission(long id);
+
+    boolean existsSubPermissionById(Serializable id);
 }

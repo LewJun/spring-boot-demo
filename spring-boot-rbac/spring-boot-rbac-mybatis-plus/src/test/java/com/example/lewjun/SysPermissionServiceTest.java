@@ -39,4 +39,9 @@ public class SysPermissionServiceTest {
     public void findByIdWithSubSysPermission() {
         log.info("【: {}】", sysPermissionService.findByIdWithSubSysPermission(1));
     }
+
+    @Test
+    public void removeById() {
+        sysPermissionService.removeById(5);
+    }
 }
