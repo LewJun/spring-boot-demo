@@ -122,3 +122,34 @@ CREATE TABLE IF NOT EXISTS sys_user_login (
 ALTER TABLE sys_user_login
   ADD CONSTRAINT fk_sys_user_login__user_id FOREIGN KEY (user_id) REFERENCES sys_user (id)
   ON UPDATE CASCADE ON DELETE CASCADE ;
+
+-- ------------------------
+alter table sys_user add column `nickname` VARCHAR (32) not null default '';
+alter table sys_user add column `dept_id` BIGINT;
+
+alter table sys_user add CONSTRAINT fk_sys_user__dept_id FOREIGN KEY (dept_id) REFERENCES sys_dept (id)
+on update CASCADE on DELETE set null;
+
+drop table if exists sys_dept;
+
+create table if not exists sys_dept (
+  id BIGINT not null AUTO_INCREMENT,
+  `name` VARCHAR (32) not null default '',
+  `description` VARCHAR (32) not null default '',
+  PRIMARY KEY (id)
+) ENGINE = INNODB DEFAULT CHARSET = utf8mb4;
+
+
+CREATE TABLE IF NOT EXISTS sys_dept_role (
+  dept_id BIGINT NOT NULL,
+  role_id BIGINT NOT NULL,
+  PRIMARY KEY (dept_id, role_id)
+) ENGINE = INNODB DEFAULT CHARSET = utf8mb4 ;
+
+ALTER TABLE sys_dept_role
+  ADD CONSTRAINT fk_sys_dept_role__dept_id FOREIGN KEY (dept_id) REFERENCES sys_dept (id)
+  ON UPDATE CASCADE ON DELETE CASCADE ;
+
+ALTER TABLE sys_dept_role
+  ADD CONSTRAINT fk_sys_dept_role__role_id FOREIGN KEY (role_id) REFERENCES sys_role (id)
+  ON UPDATE CASCADE ON DELETE CASCADE ;

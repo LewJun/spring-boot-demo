@@ -6,18 +6,14 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
-/**
- * 用户基本信息表
- */
 @NoArgsConstructor
 @Data
 @Accessors(chain = true)
-public class SysUser extends BaseObj {
+public class SysDept extends BaseObj {
     @TableId(type = IdType.AUTO)
     private long id;
-    private String username;
-    private String nickName;
-    private String email;
-    private String avatar;
-    private long deptId;
+
+    private String name;
+
+    private long parentId;
 }

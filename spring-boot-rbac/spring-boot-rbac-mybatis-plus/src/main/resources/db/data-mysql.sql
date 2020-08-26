@@ -8,11 +8,11 @@ TRUNCATE TABLE sys_permission;
 TRUNCATE TABLE sys_user_role;
 TRUNCATE TABLE sys_role_permission;
 
-INSERT INTO sys_user (id, username)
+INSERT INTO sys_user (id, username, nickname)
 VALUES
-  (1, 'admin')
-  ,(2, 'normal')
-  ,(3, 'user')
+  (1, 'admin', '超级管理员')
+  ,(2, 'normal', '普通人')
+  ,(3, 'user', '用户')
   ;
 
 INSERT INTO sys_user_login (id, `password`)
@@ -72,3 +72,16 @@ VALUES (7369, 'SMITH', 'CLERK', 7902, '1980-12-17', 20),
        (7900, 'JAMES', 'CLERK', 7698, '1981-12-03', 30),
        (7902, 'FORD', 'ANALYST', 7566, '1981-12-03', 20),
        (7934, 'MILLER', 'CLERK', 7782, '1982-01-23', 10);
+
+-- -----------------------------------------
+
+truncate table sys_dept;
+
+insert into sys_dept (id, `name`, `description`, parent_id)
+VALUES
+(1, '根部门', '根部门id永远是1', NULL),
+(2, '开发部门', '', 1),
+(3, '销售部门', '', 1)
+;
+
+truncate table sys_dept_role;
