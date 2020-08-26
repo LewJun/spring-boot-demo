@@ -15,4 +15,7 @@ public interface SysUserMapper extends MyBaseMapper<SysUser> {
      */
     @Select("select count(1) from sys_user t where t.username=#{username} limit 1")
     int existsByUsername(String username);
+
+    @Select("select t.password from sys_user t where t.username=#{username} limit 1")
+    String findPasswordByUsername(String username);
 }

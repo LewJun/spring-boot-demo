@@ -11,4 +11,8 @@ public interface SysUserService extends MyIService<SysUser> {
      * @return true if exists
      */
     boolean existsByUsername(String username);
+
+    boolean login(SysUser sysUser);
+
+    boolean changePassword(SysUser sysUser, String newPassword);
 }
