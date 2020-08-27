@@ -1,5 +1,6 @@
 package com.example.lewjun;
 
+import com.example.lewjun.domain.SysRolePermission;
 import com.example.lewjun.service.SysRolePermissionService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
@@ -18,6 +19,14 @@ public class SysRolePermissionServiceTest {
     @Test
     public void testList() {
         log.info("【queryAll: {}】", sysRolePermissionService.list());
+    }
+
+    @Test
+    public void testRemove() {
+        final SysRolePermission sysRolePermission = new SysRolePermission();
+        sysRolePermission.setRoleId(1);
+        sysRolePermission.setPermissionId(1);
+        sysRolePermissionService.remove(sysRolePermission);
     }
 
 }

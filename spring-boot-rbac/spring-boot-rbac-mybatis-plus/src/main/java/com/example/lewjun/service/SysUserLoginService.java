@@ -21,4 +21,6 @@ public interface SysUserLoginService extends MyIService<SysUserLogin> {
      * @return true or false
      */
     boolean changePassword(SysUserLogin sysUserLogin, String newPassword);
+
+    boolean resetPassword(SysUserLogin sysUserLogin);
 }

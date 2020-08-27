@@ -1,5 +1,6 @@
 package com.example.lewjun.service.impl;
 
+import com.baomidou.mybatisplus.extension.toolkit.SqlHelper;
 import com.example.lewjun.base.MyServiceImpl;
 import com.example.lewjun.domain.SysPermission;
 import com.example.lewjun.domain.SysPermissionWithSubSysPermission;
@@ -8,6 +9,7 @@ import com.example.lewjun.service.SysPermissionService;
 import com.example.lewjun.service.SysRolePermissionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.Serializable;
 import java.util.List;
@@ -43,10 +45,12 @@ public class SysPermissionServiceImpl extends MyServiceImpl<SysPermissionMapper,
 
     @Override
     public boolean existsSubPermissionsByPermissionId(final Serializable permissionId) {
-        return baseMapper.existsSubPermissionsByPermissionId(permissionId) != 0;
+        return SqlHelper.retBool(baseMapper.existsSubPermissionsByPermissionId(permissionId));
     }
 
-
+    @Transactional(
+            rollbackFor = {Exception.class}
+    )
     @Override
     public boolean removeById(final Serializable id) {
         if (existsSubPermissionsByPermissionId(id)) {

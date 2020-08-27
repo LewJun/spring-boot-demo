@@ -15,4 +15,6 @@ public interface SysUserRoleService extends MyIService<SysUserRole> {
      */
     @Select("SELECT COUNT(1) FROM sys_user_role t WHERE t.`role_id` = #{roleId} LIMIT 1;")
     boolean existsSysUserRolesByRoleId(Serializable roleId);
+
+    boolean remove(SysUserRole sysUserRole);
 }

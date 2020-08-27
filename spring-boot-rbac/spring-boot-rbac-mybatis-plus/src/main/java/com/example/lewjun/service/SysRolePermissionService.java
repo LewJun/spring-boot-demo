@@ -16,4 +16,6 @@ public interface SysRolePermissionService extends MyIService<SysRolePermission> 
      */
     @Select("SELECT COUNT(1) FROM sys_role_permission t WHERE t.`permission_id` = #{permissionId} LIMIT 1")
     boolean existsRolePermissionByPermissionId(Serializable permissionId);
+
+    boolean remove(SysRolePermission sysRolePermission);
 }

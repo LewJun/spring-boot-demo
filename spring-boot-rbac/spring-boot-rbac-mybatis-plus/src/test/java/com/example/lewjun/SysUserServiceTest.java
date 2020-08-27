@@ -36,7 +36,7 @@ public class SysUserServiceTest {
 
     @Test
     public void testRemoveById() {
-        final boolean isRemoved = sysUserService.removeById(4);
+        final boolean isRemoved = sysUserService.removeById(1L);
         log.info("【isRemoved: {}】", isRemoved);
     }
 }

@@ -5,6 +5,7 @@ import com.example.lewjun.domain.SysUser;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
+import java.io.Serializable;
 import java.util.Optional;
 
 @Repository
@@ -26,4 +27,7 @@ public interface SysUserMapper extends MyBaseMapper<SysUser> {
      */
     @Select("select t.id from sys_user t where t.username=#{username} limit 1")
     Optional<Long> findUserIdByUsername(String username);
+
+    @Select("select count(1) from sys_user t where t.dept_id=#{deptId} limit 1")
+    int existsByDeptId(Serializable deptId);
 }
