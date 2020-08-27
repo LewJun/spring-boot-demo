@@ -26,6 +26,8 @@ INSERT INTO sys_role (id, `name`)
 VALUES
   (1, 'ADMIN')
   ,(2, 'NORMAL')
+  ,(3 'DEV')
+  ,(4 'SALE')
   ;
 
 INSERT INTO sys_user_role (user_id, role_id)
@@ -79,9 +81,20 @@ truncate table sys_dept;
 
 insert into sys_dept (id, `name`, `description`, parent_id)
 VALUES
-(1, '根部门', '根部门id永远是1', NULL),
+(1, '根部门', '实际公司或部门名称，id永远是1', NULL),
 (2, '开发部门', '', 1),
-(3, '销售部门', '', 1)
+(3, '销售部门', '', 1),
+(4, '销售A小组', '', 3),
+(5, '销售B小组', '', 3),
+(6, '销售C小组', '', 3),
+(7, '幼儿园开发组', '', 2),
+(8, '银行开发组', '', 2),
+(9, '行政部门', '', 1)
 ;
 
 truncate table sys_dept_role;
+
+insert into sys_dept_role (dept_id, role_id)
+values
+(2,3),
+(3,4);
