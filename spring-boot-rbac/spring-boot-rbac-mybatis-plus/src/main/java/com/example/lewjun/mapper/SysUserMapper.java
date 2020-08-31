@@ -16,8 +16,8 @@ public interface SysUserMapper extends MyBaseMapper<SysUser> {
      * @param username 用户名
      * @return 1 if exists, otherwise 0
      */
-    @Select("select count(1) from sys_user t where t.username=#{username} limit 1")
-    int existsByUsername(String username);
+    @Select("select 1 from sys_user t where t.username=#{username} limit 1")
+    Optional<Integer> existsByUsername(String username);
 
     /**
      * 根据用户名查找用户id
@@ -28,6 +28,6 @@ public interface SysUserMapper extends MyBaseMapper<SysUser> {
     @Select("select t.id from sys_user t where t.username=#{username} limit 1")
     Optional<Long> findUserIdByUsername(String username);
 
-    @Select("select count(1) from sys_user t where t.dept_id=#{deptId} limit 1")
-    int existsByDeptId(Serializable deptId);
+    @Select("select 1 from sys_user t where t.dept_id=#{deptId} limit 1")
+    Optional<Integer> existsByDeptId(Serializable deptId);
 }

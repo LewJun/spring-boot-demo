@@ -23,8 +23,8 @@ public class SysDeptRoleServiceImpl extends MyServiceImpl<SysDeptRoleMapper, Sys
     }
 
     @Override
-    public boolean existsSysDeptRolesByRoleId(Serializable roleId) {
-        return SqlHelper.retBool(baseMapper.existsSysDeptRolesByRoleId(roleId));
+    public boolean existsSysDeptRolesByRoleId(final Serializable roleId) {
+        return baseMapper.existsSysDeptRolesByRoleId(roleId).isPresent();
     }
 
 }

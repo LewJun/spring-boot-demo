@@ -1,6 +1,5 @@
 package com.example.lewjun.service.impl;
 
-import com.baomidou.mybatisplus.extension.toolkit.SqlHelper;
 import com.example.lewjun.base.MyServiceImpl;
 import com.example.lewjun.domain.SysUser;
 import com.example.lewjun.mapper.SysUserMapper;
@@ -14,7 +13,7 @@ public class SysUserServiceImpl extends MyServiceImpl<SysUserMapper, SysUser> im
 
     @Override
     public boolean existsByUsername(final String username) {
-        return SqlHelper.retBool(baseMapper.existsByUsername(username));
+        return baseMapper.existsByUsername(username).isPresent();
     }
 
     @Override
@@ -27,7 +26,7 @@ public class SysUserServiceImpl extends MyServiceImpl<SysUserMapper, SysUser> im
 
     @Override
     public boolean existsByDeptId(final Serializable deptId) {
-        return SqlHelper.retBool(baseMapper.existsByDeptId(deptId));
+        return baseMapper.existsByDeptId(deptId).isPresent();
     }
 
     @Override

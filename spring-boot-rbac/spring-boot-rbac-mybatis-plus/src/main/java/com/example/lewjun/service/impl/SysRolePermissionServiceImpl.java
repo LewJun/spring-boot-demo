@@ -15,7 +15,7 @@ import java.io.Serializable;
 public class SysRolePermissionServiceImpl extends MyServiceImpl<SysRolePermissionMapper, SysRolePermission> implements SysRolePermissionService {
     @Override
     public boolean existsRolePermissionByPermissionId(final Serializable permissionId) {
-        return SqlHelper.retBool(baseMapper.existsRolePermissionByPermissionId(permissionId));
+        return baseMapper.existsRolePermissionByPermissionId(permissionId).isPresent();
     }
 
     @Transactional(

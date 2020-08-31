@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
 import java.io.Serializable;
+import java.util.Optional;
 
 @Repository
 public interface SysRolePermissionMapper extends MyBaseMapper<SysRolePermission> {
@@ -17,8 +18,8 @@ public interface SysRolePermissionMapper extends MyBaseMapper<SysRolePermission>
      * @param permissionId 权限id
      * @return 1 if exists, otherwise 0
      */
-    @Select("SELECT COUNT(1) FROM sys_role_permission t WHERE t.`permission_id` = #{permissionId} LIMIT 1")
-    int existsRolePermissionByPermissionId(Serializable permissionId);
+    @Select("SELECT 1 FROM sys_role_permission t WHERE t.`permission_id` = #{permissionId} LIMIT 1")
+    Optional<Integer> existsRolePermissionByPermissionId(Serializable permissionId);
 
     @Delete("delete from sys_role_permission where role_id=#{roleId} and permission_id=#{permissionId}")
     int remove(SysRolePermission sysRolePermission);

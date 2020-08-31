@@ -15,7 +15,7 @@ import java.io.Serializable;
 public class SysUserRoleServiceImpl extends MyServiceImpl<SysUserRoleMapper, SysUserRole> implements SysUserRoleService {
     @Override
     public boolean existsSysUserRolesByRoleId(final Serializable roleId) {
-        return SqlHelper.retBool(baseMapper.existsSysUserRolesByRoleId(roleId));
+        return baseMapper.existsSysUserRolesByRoleId(roleId).isPresent();
     }
 
     @Transactional(

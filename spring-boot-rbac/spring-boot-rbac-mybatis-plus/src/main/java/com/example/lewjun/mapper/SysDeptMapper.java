@@ -8,12 +8,13 @@ import org.springframework.stereotype.Repository;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface SysDeptMapper extends MyBaseMapper<SysDept> {
     @Select("select t.id, t.name, t.parent_id from sys_dept t where t.parent_id = #{parentId}")
     List<SysDeptNode> findByParentId(long parentId);
 
-    @Select("select count(1) from sys_dept t where t.parent_id = #{deptId} limit 1")
-    int existsChildren(Serializable deptId);
+    @Select("select 1 from sys_dept t where t.parent_id = #{deptId} limit 1")
+    Optional<Integer> existsChildren(Serializable deptId);
 }

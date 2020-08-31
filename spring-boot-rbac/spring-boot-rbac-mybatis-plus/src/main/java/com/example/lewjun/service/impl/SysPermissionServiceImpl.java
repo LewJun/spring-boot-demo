@@ -1,6 +1,5 @@
 package com.example.lewjun.service.impl;
 
-import com.baomidou.mybatisplus.extension.toolkit.SqlHelper;
 import com.example.lewjun.base.MyServiceImpl;
 import com.example.lewjun.domain.SysPermission;
 import com.example.lewjun.domain.SysPermissionWithSubSysPermission;
@@ -45,7 +44,7 @@ public class SysPermissionServiceImpl extends MyServiceImpl<SysPermissionMapper,
 
     @Override
     public boolean existsSubPermissionsByPermissionId(final Serializable permissionId) {
-        return SqlHelper.retBool(baseMapper.existsSubPermissionsByPermissionId(permissionId));
+        return baseMapper.existsSubPermissionsByPermissionId(permissionId).isPresent();
     }
 
     @Transactional(

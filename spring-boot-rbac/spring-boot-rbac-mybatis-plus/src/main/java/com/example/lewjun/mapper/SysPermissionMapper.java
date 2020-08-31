@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface SysPermissionMapper extends MyBaseMapper<SysPermission> {
@@ -49,6 +50,6 @@ public interface SysPermissionMapper extends MyBaseMapper<SysPermission> {
      * @param permissionId 权限id
      * @return 1 if exists, otherwise 0
      */
-    @Select("select count(1) from sys_permission t where t.parent_id=#{id} limit 1")
-    int existsSubPermissionsByPermissionId(Serializable permissionId);
+    @Select("select 1 from sys_permission t where t.parent_id=#{id} limit 1")
+    Optional<Integer> existsSubPermissionsByPermissionId(Serializable permissionId);
 }

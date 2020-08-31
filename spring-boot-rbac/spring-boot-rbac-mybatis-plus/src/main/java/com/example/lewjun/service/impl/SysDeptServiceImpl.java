@@ -1,6 +1,5 @@
 package com.example.lewjun.service.impl;
 
-import com.baomidou.mybatisplus.extension.toolkit.SqlHelper;
 import com.example.lewjun.base.MyServiceImpl;
 import com.example.lewjun.domain.SysDept;
 import com.example.lewjun.domain.SysDeptNode;
@@ -46,7 +45,7 @@ public class SysDeptServiceImpl extends MyServiceImpl<SysDeptMapper, SysDept> im
     }
 
     private boolean existsChildren(final Serializable deptId) {
-        return SqlHelper.retBool(baseMapper.existsChildren(deptId));
+        return baseMapper.existsChildren(deptId).isPresent();
     }
 
     @Override

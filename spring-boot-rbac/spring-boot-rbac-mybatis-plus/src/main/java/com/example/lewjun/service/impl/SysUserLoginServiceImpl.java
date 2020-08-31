@@ -1,6 +1,5 @@
 package com.example.lewjun.service.impl;
 
-import com.baomidou.mybatisplus.extension.toolkit.SqlHelper;
 import com.example.lewjun.base.MyServiceImpl;
 import com.example.lewjun.domain.SysUserLogin;
 import com.example.lewjun.mapper.SysUserLoginMapper;
@@ -50,8 +49,7 @@ public class SysUserLoginServiceImpl extends MyServiceImpl<SysUserLoginMapper, S
     @Override
     public boolean resetPassword(final SysUserLogin sysUserLogin) {
         setPassword(sysUserLogin, "123456");
-
-        if (!SqlHelper.retBool(baseMapper.existsByUserId(sysUserLogin.getUserId()))) {
+        if (!baseMapper.existsByUserId(sysUserLogin.getUserId()).isPresent()) {
             return save(sysUserLogin);
         }
         return baseMapper.resetPassword(sysUserLogin) >= 0;

@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Select;
 
 import java.io.Serializable;
+import java.util.Optional;
 
 public interface SysUserRoleMapper extends MyBaseMapper<SysUserRole> {
     /**
@@ -14,8 +15,8 @@ public interface SysUserRoleMapper extends MyBaseMapper<SysUserRole> {
      * @param roleId 角色id
      * @return 1 if exists, otherwise 0
      */
-    @Select("SELECT COUNT(1) FROM sys_user_role t WHERE t.`role_id` = #{roleId} LIMIT 1;")
-    int existsSysUserRolesByRoleId(Serializable roleId);
+    @Select("SELECT 1 FROM sys_user_role t WHERE t.`role_id` = #{roleId} LIMIT 1;")
+    Optional<Integer> existsSysUserRolesByRoleId(Serializable roleId);
 
     @Delete("delete from sys_user_role where user_id=#{userId} and role_id=#{roleId}")
     int remove(SysUserRole sysUserRole);
