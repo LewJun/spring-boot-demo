@@ -11,7 +11,7 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
     schema: classpath:db/schema-mysql.sql
     data: classpath:db/data-mysql.sql
-    url: jdbc:mysql://127.0.0.1:3306/rbac
+    url: jdbc:mysql://127.0.0.1:3306/rbac?useUnicode=true&characterEncoding=UTF-8
     username: root
     password:
 

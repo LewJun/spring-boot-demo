@@ -40,6 +40,13 @@ public class SysUserServiceTest {
     }
 
     @Test
+    public void testUpdateBySelective() {
+        final SysUser sysUser = new SysUser().setId(1L).setNickname("超级管理员");
+        final boolean isUpdate = sysUserService.updateBySelective(sysUser);
+        log.info("【isUpdate: {}】", isUpdate);
+    }
+
+    @Test
     public void testRemoveById() {
         final boolean isRemoved = sysUserService.removeById(1L);
         log.info("【isRemoved: {}】", isRemoved);

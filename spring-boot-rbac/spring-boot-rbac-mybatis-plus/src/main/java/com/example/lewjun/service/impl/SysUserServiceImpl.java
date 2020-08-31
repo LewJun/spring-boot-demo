@@ -1,5 +1,6 @@
 package com.example.lewjun.service.impl;
 
+import com.baomidou.mybatisplus.extension.toolkit.SqlHelper;
 import com.example.lewjun.base.MyServiceImpl;
 import com.example.lewjun.domain.SysUser;
 import com.example.lewjun.domain.SysUserLoginDetailsDO;
@@ -52,6 +53,11 @@ public class SysUserServiceImpl extends MyServiceImpl<SysUserMapper, SysUser> im
         }
 
         return super.removeById(id);
+    }
+
+    @Override
+    public boolean updateBySelective(final SysUser entity) {
+        return SqlHelper.retBool(baseMapper.updateBySelective(entity));
     }
 
     private boolean isRoot(final Serializable userId) {
