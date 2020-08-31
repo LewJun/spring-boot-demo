@@ -11,6 +11,6 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class SysRole extends BaseObj {
     @TableId(type = IdType.AUTO)
-    private long id;
+    private Long id;
     private String name;
 }

@@ -27,8 +27,13 @@ public class SysUserServiceTest {
     }
 
     @Test
+    public void testFindByUsername() {
+        log.info("【findByUsername: {}】", sysUserService.findByUsername("admin"));
+    }
+
+    @Test
     public void testSave() {
-        final SysUser sysUser = new SysUser().setUsername("xxx");
+        final SysUser sysUser = new SysUser().setUsername("xxz");
         final boolean isSaved = sysUserService.save(sysUser);
         log.info("【isSaved: {}】", isSaved);
         log.info("sysUser: {}】", sysUser);

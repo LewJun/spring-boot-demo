@@ -2,6 +2,7 @@ package com.example.lewjun.service.impl;
 
 import com.example.lewjun.base.MyServiceImpl;
 import com.example.lewjun.domain.SysUser;
+import com.example.lewjun.domain.SysUserLoginDetailsDO;
 import com.example.lewjun.mapper.SysUserMapper;
 import com.example.lewjun.service.SysUserService;
 import org.springframework.stereotype.Service;
@@ -20,13 +21,20 @@ public class SysUserServiceImpl extends MyServiceImpl<SysUserMapper, SysUser> im
     public Long findUserIdByUsername(final String username) {
         return baseMapper.findUserIdByUsername(username)
                 .orElseThrow(
-                        () -> new RuntimeException("用户名不存在")
+                        () -> new RuntimeException("用户名不存在。")
                 );
     }
 
     @Override
     public boolean existsByDeptId(final Serializable deptId) {
         return baseMapper.existsByDeptId(deptId).isPresent();
+    }
+
+    @Override
+    public SysUserLoginDetailsDO findByUsername(final String username) {
+        return baseMapper.findByUsername(username).orElseThrow(
+                () -> new RuntimeException("用户名或密码错误。")
+        );
     }
 
     @Override

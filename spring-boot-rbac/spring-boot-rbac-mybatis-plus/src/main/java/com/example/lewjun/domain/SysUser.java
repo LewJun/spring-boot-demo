@@ -14,10 +14,10 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class SysUser extends BaseObj {
     @TableId(type = IdType.AUTO)
-    private long id;
+    private Long id;
     private String username;
-    private String nickName;
+    private String nickname;
     private String email;
     private String avatar;
-    private long deptId;
+    private Long deptId;
 }

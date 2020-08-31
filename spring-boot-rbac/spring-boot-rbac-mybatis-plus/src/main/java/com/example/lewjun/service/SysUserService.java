@@ -2,6 +2,7 @@ package com.example.lewjun.service;
 
 import com.example.lewjun.base.MyIService;
 import com.example.lewjun.domain.SysUser;
+import com.example.lewjun.domain.SysUserLoginDetailsDO;
 
 import java.io.Serializable;
 
@@ -23,4 +24,6 @@ public interface SysUserService extends MyIService<SysUser> {
     Long findUserIdByUsername(String username);
 
     boolean existsByDeptId(Serializable deptId);
+
+    SysUserLoginDetailsDO findByUsername(String username);
 }

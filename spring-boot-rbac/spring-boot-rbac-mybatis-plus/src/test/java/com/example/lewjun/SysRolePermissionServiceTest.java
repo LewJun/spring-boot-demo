@@ -24,8 +24,8 @@ public class SysRolePermissionServiceTest {
     @Test
     public void testRemove() {
         final SysRolePermission sysRolePermission = new SysRolePermission();
-        sysRolePermission.setRoleId(1);
-        sysRolePermission.setPermissionId(1);
+        sysRolePermission.setRoleId(1L);
+        sysRolePermission.setPermissionId(1L);
         sysRolePermissionService.remove(sysRolePermission);
     }
 

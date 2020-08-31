@@ -10,6 +10,6 @@ import lombok.experimental.Accessors;
 @Data
 @Accessors(chain = true)
 public class SysUserRole extends BaseObj {
-    private long userId;
-    private long roleId;
+    private Long userId;
+    private Long roleId;
 }

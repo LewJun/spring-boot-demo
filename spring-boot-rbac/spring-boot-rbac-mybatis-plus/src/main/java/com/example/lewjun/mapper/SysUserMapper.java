@@ -2,6 +2,7 @@ package com.example.lewjun.mapper;
 
 import com.example.lewjun.base.MyBaseMapper;
 import com.example.lewjun.domain.SysUser;
+import com.example.lewjun.domain.SysUserLoginDetailsDO;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
@@ -30,4 +31,10 @@ public interface SysUserMapper extends MyBaseMapper<SysUser> {
 
     @Select("select 1 from sys_user t where t.dept_id=#{deptId} limit 1")
     Optional<Integer> existsByDeptId(Serializable deptId);
+
+    @Select("SELECT sys_user.id, sys_user.`username`, sys_user.`nickname`, sys_user.`email`, sys_user_login.`password` FROM sys_user"
+            + " JOIN sys_user_login ON sys_user_login.`user_id` = sys_user.`id`"
+            + " WHERE sys_user.`username` = #{username} LIMIT 1"
+    )
+    Optional<SysUserLoginDetailsDO> findByUsername(String username);
 }

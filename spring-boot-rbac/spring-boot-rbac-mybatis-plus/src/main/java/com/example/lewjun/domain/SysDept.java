@@ -11,9 +11,9 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class SysDept extends BaseObj {
     @TableId(type = IdType.AUTO)
-    private long id;
+    private Long id;
 
     private String name;
 
-    private long parentId;
+    private Long parentId;
 }

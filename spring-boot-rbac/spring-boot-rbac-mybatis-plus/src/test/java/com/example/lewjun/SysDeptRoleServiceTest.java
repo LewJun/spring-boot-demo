@@ -17,16 +17,16 @@ public class SysDeptRoleServiceTest {
     @Test
     public void save() {
         final SysDeptRole sysDeptRole = new SysDeptRole();
-        sysDeptRole.setDeptId(1);
-        sysDeptRole.setRoleId(2);
+        sysDeptRole.setDeptId(1L);
+        sysDeptRole.setRoleId(2L);
         sysDeptRoleService.save(sysDeptRole);
     }
 
     @Test
     public void remove() {
         final SysDeptRole sysDeptRole = new SysDeptRole();
-        sysDeptRole.setDeptId(1);
-        sysDeptRole.setRoleId(2);
+        sysDeptRole.setDeptId(1L);
+        sysDeptRole.setRoleId(2L);
         sysDeptRoleService.remove(sysDeptRole);
     }
 }
