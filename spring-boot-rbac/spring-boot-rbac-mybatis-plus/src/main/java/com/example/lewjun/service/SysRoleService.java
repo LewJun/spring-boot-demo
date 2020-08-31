@@ -13,4 +13,6 @@ public interface SysRoleService extends MyIService<SysRole> {
      * @return 角色列表
      */
     List<SysRole> findByUserId(long userId);
+
+    boolean existsByName(String name);
 }

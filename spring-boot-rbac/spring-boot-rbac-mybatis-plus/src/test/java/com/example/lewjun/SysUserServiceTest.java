@@ -33,17 +33,19 @@ public class SysUserServiceTest {
 
     @Test
     public void testSave() {
-        final SysUser sysUser = new SysUser().setUsername("xxz");
+        final SysUser sysUser = new SysUser().setUsername("xxz").setEmail("xxz@qq.com");
         final boolean isSaved = sysUserService.save(sysUser);
         log.info("【isSaved: {}】", isSaved);
         log.info("sysUser: {}】", sysUser);
     }
 
     @Test
-    public void testUpdateBySelective() {
-        final SysUser sysUser = new SysUser().setId(1L).setNickname("超级管理员");
-        final boolean isUpdate = sysUserService.updateBySelective(sysUser);
-        log.info("【isUpdate: {}】", isUpdate);
+    public void testUpdate() {
+        sysUserService.updateById(
+                new SysUser()
+                        .setId(13L)
+                        .setNickname("nickname")
+        );
     }
 
     @Test

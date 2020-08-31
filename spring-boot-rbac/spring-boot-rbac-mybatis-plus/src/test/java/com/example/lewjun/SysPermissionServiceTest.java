@@ -1,5 +1,6 @@
 package com.example.lewjun;
 
+import com.example.lewjun.domain.SysPermission;
 import com.example.lewjun.service.SysPermissionService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
@@ -43,5 +44,26 @@ public class SysPermissionServiceTest {
     @Test
     public void removeById() {
         sysPermissionService.removeById(4);
+    }
+
+    @Test
+    public void testSave() {
+        sysPermissionService.save(
+                new SysPermission()
+                        .setName("用户管理")
+                        .setUrl("/sys/user/#")
+                        .setParentId(1L)
+        );
+    }
+
+    @Test
+    public void testUpdate() {
+        sysPermissionService.updateById(
+                new SysPermission()
+                        .setId(13L)
+                        .setName("部门管理")
+                        .setUrl("/sys/user/#")
+                        .setParentId(1L)
+        );
     }
 }

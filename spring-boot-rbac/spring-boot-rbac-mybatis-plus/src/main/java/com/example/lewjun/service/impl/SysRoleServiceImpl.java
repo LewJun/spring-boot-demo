@@ -33,6 +33,31 @@ public class SysRoleServiceImpl extends MyServiceImpl<SysRoleMapper, SysRole> im
         return baseMapper.findByUserId(userId);
     }
 
+    @Override
+    public boolean existsByName(final String name) {
+        return baseMapper.existsByName(name).isPresent();
+    }
+
+    @Transactional(
+            rollbackFor = {Exception.class}
+    )
+    @Override
+    public boolean save(final SysRole entity) {
+        if (existsByName(entity.getName())) {
+            throw new RuntimeException("名称已存在");
+        }
+        return super.save(entity);
+    }
+
+    @Override
+    public boolean updateById(final SysRole entity) {
+        final Long id = baseMapper.existsByName(entity.getName()).orElse(0L);
+        if (!id.equals(entity.getId())) {
+            throw new RuntimeException("名称已存在");
+        }
+        return super.updateById(entity);
+    }
+
     @Transactional(
             rollbackFor = {Exception.class}
     )

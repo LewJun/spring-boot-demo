@@ -1,5 +1,6 @@
 package com.example.lewjun;
 
+import com.example.lewjun.domain.SysRole;
 import com.example.lewjun.service.SysRoleService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
@@ -30,4 +31,18 @@ public class SysRoleServiceTest {
         sysRoleService.removeById(1);
     }
 
+    @Test
+    public void testSave() {
+        sysRoleService.save(
+                new SysRole().setName("admin")
+        );
+    }
+
+
+    @Test
+    public void testUpdate() {
+        sysRoleService.updateById(
+                new SysRole().setId(2L).setName("admin")
+        );
+    }
 }

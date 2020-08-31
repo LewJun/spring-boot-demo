@@ -71,4 +71,25 @@ public class SysDeptServiceImpl extends MyServiceImpl<SysDeptMapper, SysDept> im
     private boolean isRoot(final Serializable id) {
         return (Long) id == 1L;
     }
+
+    @Override
+    public boolean save(final SysDept entity) {
+        if (findIdByParentIdAndName(entity.getParentId(), entity.getName())) {
+            throw new RuntimeException("同一个部门下的子部门名称不能重复。");
+        }
+        return super.save(entity);
+    }
+
+    @Override
+    public boolean updateById(final SysDept entity) {
+        final Long id = baseMapper.findIdByParentIdAndName(entity.getParentId(), entity.getName()).orElse(0L);
+        if (!id.equals(entity.getId())) {
+            throw new RuntimeException("同一个部门下的子部门名称不能重复。");
+        }
+        return super.updateById(entity);
+    }
+
+    public boolean findIdByParentIdAndName(final Long parentId, final String name) {
+        return baseMapper.findIdByParentIdAndName(parentId, name).isPresent();
+    }
 }

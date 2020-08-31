@@ -26,4 +26,16 @@ public class SysUserRoleServiceImpl extends MyServiceImpl<SysUserRoleMapper, Sys
         if (sysUserRole == null) return false;
         return SqlHelper.retBool(baseMapper.remove(sysUserRole));
     }
+
+    @Transactional(
+            rollbackFor = {Exception.class}
+    )
+    @Override
+    public boolean save(final SysUserRole entity) {
+        if (baseMapper.existsByUserIdAndRoleId(entity.getUserId(), entity.getRoleId()).isPresent()) {
+            throw new RuntimeException("用户角色已存在");
+        }
+
+        return SqlHelper.retBool(baseMapper.insert(entity));
+    }
 }

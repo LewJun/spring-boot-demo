@@ -16,8 +16,4 @@ public interface MyIService<T> extends IService<T> {
     default Optional<T> getOneOptional(final Wrapper<T> queryWrapper) {
         return Optional.ofNullable(getBaseMapper().selectOne(queryWrapper));
     }
-
-    default boolean updateBySelective(final T entity) {
-        throw new RuntimeException("未实现");
-    }
 }

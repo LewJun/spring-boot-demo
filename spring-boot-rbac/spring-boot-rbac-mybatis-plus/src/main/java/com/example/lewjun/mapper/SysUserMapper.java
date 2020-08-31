@@ -38,6 +38,4 @@ public interface SysUserMapper extends MyBaseMapper<SysUser> {
     )
     Optional<SysUserLoginDetailsDO> findByUsername(String username);
 
-    @Override
-    int updateBySelective(final SysUser entity);
 }

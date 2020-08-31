@@ -20,4 +20,7 @@ public interface SysUserRoleMapper extends MyBaseMapper<SysUserRole> {
 
     @Delete("delete from sys_user_role where user_id=#{userId} and role_id=#{roleId}")
     int remove(SysUserRole sysUserRole);
+
+    @Select("select 1 from sys_user_role t where t.user_id = #{userId} and t.role_id = #{roleId} limit 1")
+    Optional<Integer> existsByUserIdAndRoleId(Long userId, Long roleId);
 }

@@ -1,5 +1,6 @@
 package com.example.lewjun;
 
+import com.example.lewjun.domain.SysDept;
 import com.example.lewjun.domain.SysDeptNode;
 import com.example.lewjun.service.SysDeptService;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -24,5 +25,28 @@ public class SysDeptServiceTest {
         final ObjectMapper objectMapper = new ObjectMapper();
         final String json = objectMapper.writer().writeValueAsString(sysDeptTrees);
         log.info("【json: {}】", json);
+    }
+
+    @Test
+    public void testSave() {
+        final SysDept sysDept = new SysDept()
+                .setName("Office A")
+                .setParentId(1L);
+        if (sysDeptService.save(sysDept)) {
+            log.info("【sysDept: {}】", sysDept);
+        }
+    }
+
+    @Test
+    public void testUpdate() {
+        final SysDept sysDept = new SysDept().setId(5L)
+                .setName("销售B小组")
+                .setParentId(3L);
+        sysDeptService.updateById(sysDept);
+    }
+
+    @Test
+    public void testDelete() {
+        sysDeptService.removeById(1L);
     }
 }

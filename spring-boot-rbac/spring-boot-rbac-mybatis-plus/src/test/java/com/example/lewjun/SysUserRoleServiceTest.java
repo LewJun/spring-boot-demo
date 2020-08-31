@@ -1,5 +1,6 @@
 package com.example.lewjun;
 
+import com.example.lewjun.domain.SysUserRole;
 import com.example.lewjun.service.SysUserRoleService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
@@ -20,4 +21,21 @@ public class SysUserRoleServiceTest {
         log.info("【queryAll: {}】", sysUserRoleService.list());
     }
 
+    @Test
+    public void testSave() {
+        sysUserRoleService.save(
+                new SysUserRole()
+                        .setUserId(1L)
+                        .setRoleId(1L)
+        );
+    }
+
+    @Test
+    public void testDelete() {
+        sysUserRoleService.remove(
+                new SysUserRole()
+                        .setUserId(1L)
+                        .setRoleId(5L)
+        );
+    }
 }

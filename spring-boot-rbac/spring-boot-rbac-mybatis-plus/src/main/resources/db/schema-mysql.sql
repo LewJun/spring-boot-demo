@@ -48,10 +48,10 @@ CREATE TABLE IF NOT EXISTS sys_role_permission (
 ) ENGINE = INNODB DEFAULT CHARSET = utf8mb4 ;
 
 ALTER TABLE sys_permission
-  ADD CONSTRAINT uk_sys_permission__name UNIQUE (NAME) ;
+  ADD CONSTRAINT uk_sys_permission__parent_id__name UNIQUE (parent_id, `name`) ;
 
 ALTER TABLE sys_permission
-  ADD CONSTRAINT uk_sys_permission__url UNIQUE (url) ;
+  ADD CONSTRAINT uk_sys_permission__url UNIQUE (`url`) ;
 
 ALTER TABLE sys_role
   ADD CONSTRAINT uk_sys_role__name UNIQUE (NAME) ;
@@ -147,6 +147,9 @@ CREATE TABLE IF NOT EXISTS sys_dept_role (
 alter table sys_dept
   add CONSTRAINT fk_sys_dept__parent_id FOREIGN key (parent_id) REFERENCES sys_dept (id)
   on update CASCADE on delete cascade ;
+
+ALTER TABLE sys_dept
+  ADD CONSTRAINT uk_sys_dept__parent_id__name UNIQUE (parent_id, `name`) ;
 
 ALTER TABLE sys_dept_role
   ADD CONSTRAINT fk_sys_dept_role__dept_id FOREIGN KEY (dept_id) REFERENCES sys_dept (id)
