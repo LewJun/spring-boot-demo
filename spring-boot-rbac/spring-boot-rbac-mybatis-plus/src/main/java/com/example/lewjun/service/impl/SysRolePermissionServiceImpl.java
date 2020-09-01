@@ -27,4 +27,20 @@ public class SysRolePermissionServiceImpl extends MyServiceImpl<SysRolePermissio
 
         return SqlHelper.retBool(baseMapper.remove(sysRolePermission));
     }
+
+    @Transactional(
+            rollbackFor = {Exception.class}
+    )
+    @Override
+    public boolean save(final SysRolePermission entity) {
+        if (existsBySysRolePermission(entity)) {
+            throw new RuntimeException("角色权限已存在。");
+        }
+
+        return super.save(entity);
+    }
+
+    private boolean existsBySysRolePermission(final SysRolePermission entity) {
+        return baseMapper.existsBySysRolePermission(entity).isPresent();
+    }
 }

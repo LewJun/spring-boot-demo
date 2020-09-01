@@ -16,4 +16,7 @@ public interface SysDeptRoleMapper extends MyBaseMapper<SysDeptRole> {
 
     @Select("select 1 from sys_dept_role where role_id=#{roleId} limit 1")
     Optional<Integer> existsSysDeptRolesByRoleId(Serializable roleId);
+
+    @Select("select 1 from sys_dept_role where dept_id=#{deptId} and role_id=#{roleId} limit 1")
+    Optional<Integer> existsBySysDeptRole(SysDeptRole entity);
 }

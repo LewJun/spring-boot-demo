@@ -123,6 +123,9 @@ ALTER TABLE sys_user_login
   ADD CONSTRAINT fk_sys_user_login__user_id FOREIGN KEY (user_id) REFERENCES sys_user (id)
   ON UPDATE CASCADE ON DELETE CASCADE ;
 
+ALTER TABLE sys_user_login
+  ADD CONSTRAINT uk_sys_user_login__user_id UNIQUE (user_id) ;
+
 -- ------------------------
 
 drop table if exists sys_dept;

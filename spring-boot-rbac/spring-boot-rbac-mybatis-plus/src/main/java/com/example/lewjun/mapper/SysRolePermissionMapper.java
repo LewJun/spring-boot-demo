@@ -24,4 +24,6 @@ public interface SysRolePermissionMapper extends MyBaseMapper<SysRolePermission>
     @Delete("delete from sys_role_permission where role_id=#{roleId} and permission_id=#{permissionId}")
     int remove(SysRolePermission sysRolePermission);
 
+    @Select("select 1 from sys_role_permission t where t.role_id=#{roleId} and t.permission_id=#{permissionId} limit 1")
+    Optional<Integer> existsBySysRolePermission(SysRolePermission entity);
 }

@@ -29,4 +29,12 @@ public class SysRolePermissionServiceTest {
         sysRolePermissionService.remove(sysRolePermission);
     }
 
+    @Test
+    void testSave() {
+        sysRolePermissionService.save(
+                new SysRolePermission()
+                        .setRoleId(1L)
+                        .setPermissionId(1L)
+        );
+    }
 }

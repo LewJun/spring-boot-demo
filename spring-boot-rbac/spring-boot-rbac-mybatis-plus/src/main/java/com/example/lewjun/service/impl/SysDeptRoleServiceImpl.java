@@ -27,4 +27,15 @@ public class SysDeptRoleServiceImpl extends MyServiceImpl<SysDeptRoleMapper, Sys
         return baseMapper.existsSysDeptRolesByRoleId(roleId).isPresent();
     }
 
+    @Override
+    public boolean save(final SysDeptRole entity) {
+        if (existsBySysDeptRole(entity)) {
+            throw new RuntimeException("部门角色已存在。");
+        }
+        return super.save(entity);
+    }
+
+    private boolean existsBySysDeptRole(final SysDeptRole entity) {
+        return baseMapper.existsBySysDeptRole(entity).isPresent();
+    }
 }

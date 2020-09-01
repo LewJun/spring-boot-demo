@@ -24,7 +24,7 @@ public class SysUserLoginServiceTest {
 
     @Test
     public void testLogin() {
-        final String username = "xxx";
+        final String username = "admin";
         final String password = "admin";
         if (!sysUserService.existsByUsername(username)) {
             throw new RuntimeException("用户名或密码错误");

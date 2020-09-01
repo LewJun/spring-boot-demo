@@ -15,7 +15,7 @@ VALUES
   ,(3, 'user', '用户')
   ;
 
-INSERT INTO sys_user_login (id, `password`)
+INSERT INTO sys_user_login (user_id, `password`)
 VALUES
   (1, '$2a$10$WkmpZmq.pwpTwhCSzv6QXehG7UJ7vvQb/Ig7z0IKfZBxQv4hmsRGm')
   ,(2, '$2a$10$v3wVT1WTpFBOLOHCfINr9utndMlKQiMMsDxn2gv6iF/5zIPa72StG')
@@ -26,8 +26,8 @@ INSERT INTO sys_role (id, `name`)
 VALUES
   (1, 'ADMIN')
   ,(2, 'NORMAL')
-  ,(3 'DEV')
-  ,(4 'SALE')
+  ,(3, 'DEV')
+  ,(4, 'SALE')
   ;
 
 INSERT INTO sys_user_role (user_id, role_id)
