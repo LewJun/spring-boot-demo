@@ -3,6 +3,7 @@ package com.example.lewjun.mapper;
 import com.example.lewjun.base.MyBaseMapper;
 import com.example.lewjun.domain.SysUserRole;
 import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 
 import java.io.Serializable;
@@ -23,4 +24,8 @@ public interface SysUserRoleMapper extends MyBaseMapper<SysUserRole> {
 
     @Select("select 1 from sys_user_role t where t.user_id = #{userId} and t.role_id = #{roleId} limit 1")
     Optional<Integer> existsByUserIdAndRoleId(Long userId, Long roleId);
+
+    @Insert("replace into sys_user_role(user_id, role_id) select #{userId}, #{roleId}")
+    @Override
+    int insert(SysUserRole entity);
 }

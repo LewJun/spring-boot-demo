@@ -3,6 +3,7 @@ package com.example.lewjun.mapper;
 import com.example.lewjun.base.MyBaseMapper;
 import com.example.lewjun.domain.SysRolePermission;
 import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
@@ -26,4 +27,8 @@ public interface SysRolePermissionMapper extends MyBaseMapper<SysRolePermission>
 
     @Select("select 1 from sys_role_permission t where t.role_id=#{roleId} and t.permission_id=#{permissionId} limit 1")
     Optional<Integer> existsBySysRolePermission(SysRolePermission entity);
+
+    @Insert("replace into sys_role_permission(role_id, permission_id) select #{roleId}, #{permissionId}")
+    @Override
+    int insert(SysRolePermission entity);
 }

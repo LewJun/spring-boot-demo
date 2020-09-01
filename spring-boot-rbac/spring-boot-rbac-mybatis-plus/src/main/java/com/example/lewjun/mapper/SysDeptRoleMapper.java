@@ -3,6 +3,7 @@ package com.example.lewjun.mapper;
 import com.example.lewjun.base.MyBaseMapper;
 import com.example.lewjun.domain.SysDeptRole;
 import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
@@ -19,4 +20,8 @@ public interface SysDeptRoleMapper extends MyBaseMapper<SysDeptRole> {
 
     @Select("select 1 from sys_dept_role where dept_id=#{deptId} and role_id=#{roleId} limit 1")
     Optional<Integer> existsBySysDeptRole(SysDeptRole entity);
+
+    @Insert("replace into sys_dept_role(dept_id, role_id) select #{deptId}, #{roleId}")
+    @Override
+    int insert(SysDeptRole entity);
 }
