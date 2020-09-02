@@ -50,6 +50,7 @@
         <module>spring-boot-jdk8-new-features</module>
         <module>spring-boot-security</module>
         <module>spring-boot-rbac</module>
+        <module>spring-boot-bbiillii</module>
     </modules>
 
     <properties>
