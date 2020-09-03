@@ -62,3 +62,4 @@ mvn archetype:generate
 * [spring-boot-jdk8-new-features](spring-boot-jdk8-new-features) java 8 新特性
 * [spring-boot-security](spring-boot-security) spring security的使用
 * [spring-boot-bbiillii](spring-boot-bbiillii) bbiillii转换
+* [spring-boot-groovy](spring-boot-groovy) groovy入门实例
