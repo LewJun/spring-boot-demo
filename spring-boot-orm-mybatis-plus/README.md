@@ -360,7 +360,7 @@ public class Ab01Controller {
     private Ab01Service ab01Service;
 
     @GetMapping("/ab01")
-    public IPage<Ab01> selectPage(final MyPageInfo<Ab01> ab01Page) {
+    public MyPageInfo<Ab01> selectPage(final MyPageInfo<Ab01> ab01Page) {
         return ab01Service.page(ab01Page);
     }
 }
