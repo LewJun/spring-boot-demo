@@ -330,10 +330,63 @@ public class Ab01Controller {
 }
 ```
 
+### 使用@JsonIgnore去掉不必要的分页参数返回
 
+[MyPageInfo.java](/src/main/java/com/example/lewjun/base/MyPageInfo.java)
 
+```java
+public class MyPageInfo<T> extends Page<T> {
+    protected List<T> records;
+    protected long total;
+    protected long size;
+    protected long current;
+    @JsonIgnore
+    protected long pages;
+    @JsonIgnore
+    protected List<OrderItem> orders;
+    @JsonIgnore
+    protected boolean optimizeCountSql;
+    @JsonIgnore
+    protected boolean searchCount;
+    @JsonIgnore
+    protected boolean hitCount;
+}
+```
 
+```java
+@RestController
+public class Ab01Controller {
+    @Autowired
+    private Ab01Service ab01Service;
 
+    @GetMapping("/ab01")
+    public IPage<Ab01> selectPage(final MyPageInfo<Ab01> ab01Page) {
+        return ab01Service.page(ab01Page);
+    }
+}
+```
+
+再次请求，即可
+
+```json
+{
+  "records": [
+    {
+      "aab001": 30,
+      "aab002": "SALES",
+      "aab003": "CHICAGO"
+    },
+    {
+      "aab001": 40,
+      "aab002": "OPERATIONS",
+      "aab003": "BOSTON"
+    }
+  ],
+  "total": 4,
+  "size": 2,
+  "current": 2
+}
+```
 
 ## Try it
 
