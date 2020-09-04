@@ -263,6 +263,78 @@ org.springframework.dao.DataIntegrityViolationException: Error attempting to get
 * [set 条件](README-SET.md)
 * [foreach 循环](README-FOREACH.md)
 
+## mybatis plus 分页查询
+
+### 配置分页插件
+
+```java
+/**
+ * Mybatis plus 配置
+ */
+@Configuration
+@MapperScan(basePackages = {"com.example.lewjun.mapper"})
+@EnableTransactionManagement
+public class MybatisPlusConfig {
+    /**
+     * 分页插件
+     */
+    @Bean
+    public PaginationInterceptor paginationInterceptor() {
+        return new PaginationInterceptor();
+    }
+}
+```
+
+### selectPage
+
+```java
+
+@RestController
+public class Ab01Controller {
+    @Autowired
+    private Ab01Service ab01Service;
+
+    @GetMapping("/ab01")
+    public IPage<Ab01> selectPage(final Page<Ab01> ab01Page) {
+        return ab01Service.page(ab01Page);
+    }
+}
+```
+
+### 访问
+
+[http://localhost:1234/demo/ab01?current=1&size=2](http://localhost:1234/demo/ab01?current=1&size=2)
+
+```json
+{
+  "records": [
+    {
+      "aab001": 30,
+      "aab002": "SALES",
+      "aab003": "CHICAGO"
+    },
+    {
+      "aab001": 40,
+      "aab002": "OPERATIONS",
+      "aab003": "BOSTON"
+    }
+  ],
+  "total": 4,
+  "size": 2,
+  "current": 2,
+  "orders": [],
+  "optimizeCountSql": true,
+  "hitCount": false,
+  "searchCount": true,
+  "pages": 2
+}
+```
+
+
+
+
+
+
 ## Try it
 
 * MacOS/Linux
