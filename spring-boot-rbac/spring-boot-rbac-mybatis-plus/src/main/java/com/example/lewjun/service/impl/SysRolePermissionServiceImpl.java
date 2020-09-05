@@ -23,9 +23,7 @@ public class SysRolePermissionServiceImpl extends MyServiceImpl<SysRolePermissio
     )
     @Override
     public boolean remove(final SysRolePermission sysRolePermission) {
-        if (sysRolePermission == null) return false;
-
-        return SqlHelper.retBool(baseMapper.remove(sysRolePermission));
+        return sysRolePermission != null && SqlHelper.retBool(baseMapper.remove(sysRolePermission));
     }
 
     private boolean existsBySysRolePermission(final SysRolePermission entity) {

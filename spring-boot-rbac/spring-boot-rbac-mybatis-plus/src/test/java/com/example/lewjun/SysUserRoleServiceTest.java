@@ -12,17 +12,17 @@ import org.springframework.boot.test.context.SpringBootTest;
  */
 @Slf4j
 @SpringBootTest
-public class SysUserRoleServiceTest {
+class SysUserRoleServiceTest {
     @Autowired
     private SysUserRoleService sysUserRoleService;
 
     @Test
-    public void testList() {
+    void testList() {
         log.info("【queryAll: {}】", sysUserRoleService.list());
     }
 
     @Test
-    public void testSave() {
+    void testSave() {
         sysUserRoleService.save(
                 new SysUserRole()
                         .setUserId(1L)
@@ -31,7 +31,7 @@ public class SysUserRoleServiceTest {
     }
 
     @Test
-    public void testDelete() {
+    void testDelete() {
         sysUserRoleService.remove(
                 new SysUserRole()
                         .setUserId(1L)

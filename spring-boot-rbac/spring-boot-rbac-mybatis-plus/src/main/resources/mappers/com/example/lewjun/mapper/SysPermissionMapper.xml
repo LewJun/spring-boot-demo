@@ -49,7 +49,7 @@
         JOIN sys_role AS sys_role
         ON sys_role.`id` = #{roleId}
         AND sys_role.`id` = sys_role_permission.`role_id`
-        WHERE sys_permission.`id` = sys_role_permission.`permission_id`) ;
+        WHERE sys_permission.`id` = sys_role_permission.`permission_id`)
     </select>
 
     <select id="findByRoleIdWithSubPermission" resultMap="SysPermissionWithSubSysPermissionResultMap">
@@ -69,7 +69,7 @@
         JOIN sys_role AS sys_role
         ON sys_role.`id` = #{roleId}
         AND sys_role.`id` = sys_role_permission.`role_id`
-        WHERE sys_permission.`id` = sys_role_permission.`permission_id`) ;
+        WHERE sys_permission.`id` = sys_role_permission.`permission_id`)
     </select>
 
     <select id="findSubPermissionByPermissionId" resultMap="BaseResultMap">
@@ -83,7 +83,7 @@
         FROM
         sys_permission AS sys_permission
         WHERE sys_permission.`id` = sys_permission_sub.`parent_id`
-        AND sys_permission.`id` = #{id}) ;
+        AND sys_permission.`id` = #{permissionId})
     </select>
 
     <select id="findByIdWithSubSysPermission" resultMap="SysPermissionWithSubSysPermissionResultMap">
@@ -95,7 +95,7 @@
         sys_permission AS sys_permission
         LEFT JOIN sys_permission AS sys_permission_sub
         ON sys_permission_sub.`parent_id` = sys_permission.`id`
-        WHERE sys_permission.`id` = #{id} ;
+        WHERE sys_permission.`id` = #{permissionId}
     </select>
 
 </mapper>

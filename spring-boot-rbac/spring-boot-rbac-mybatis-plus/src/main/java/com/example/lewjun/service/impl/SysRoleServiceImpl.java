@@ -1,5 +1,6 @@
 package com.example.lewjun.service.impl;
 
+import com.example.lewjun.base.MyPageInfo;
 import com.example.lewjun.base.MyServiceImpl;
 import com.example.lewjun.domain.SysRole;
 import com.example.lewjun.mapper.SysRoleMapper;
@@ -11,7 +12,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.Serializable;
-import java.util.List;
 
 @Service
 public class SysRoleServiceImpl extends MyServiceImpl<SysRoleMapper, SysRole> implements SysRoleService {
@@ -29,8 +29,8 @@ public class SysRoleServiceImpl extends MyServiceImpl<SysRoleMapper, SysRole> im
     }
 
     @Override
-    public List<SysRole> findByUserId(final long userId) {
-        return baseMapper.findByUserId(userId);
+    public MyPageInfo<SysRole> findByUserId(final MyPageInfo<?> page, final long userId) {
+        return baseMapper.findByUserId(page, userId);
     }
 
     @Override

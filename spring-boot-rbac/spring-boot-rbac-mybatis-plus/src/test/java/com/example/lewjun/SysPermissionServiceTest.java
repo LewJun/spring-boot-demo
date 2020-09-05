@@ -1,7 +1,9 @@
 package com.example.lewjun;
 
+import com.example.lewjun.base.MyPageInfo;
 import com.example.lewjun.domain.SysPermission;
 import com.example.lewjun.service.SysPermissionService;
+import com.example.lewjun.utils.JsonUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,42 +14,42 @@ import org.springframework.boot.test.context.SpringBootTest;
  */
 @Slf4j
 @SpringBootTest
-public class SysPermissionServiceTest {
+class SysPermissionServiceTest {
     @Autowired
     private SysPermissionService sysPermissionService;
 
     @Test
-    public void testList() {
+    void testList() {
         log.info("【queryAll: {}】", sysPermissionService.list());
     }
 
     @Test
-    public void findByRoleId() {
-        log.info("【: {}】", sysPermissionService.findByRoleId(1));
+    void findByRoleId() {
+        log.info("【: {}】", JsonUtils.object2String(sysPermissionService.findByRoleId(new MyPageInfo<>(1, 2), 1)));
     }
 
     @Test
-    public void findSubPermissionById() {
-        log.info("【: {}】", sysPermissionService.findSubPermissionByPermissionId(1));
+    void findSubPermissionById() {
+        log.info("【: {}】", JsonUtils.object2String(sysPermissionService.findSubPermissionByPermissionId(new MyPageInfo<>(1, 2), 1)));
     }
 
     @Test
-    public void findByRoleIdWithSubPermission() {
-        log.info("【1: {}】", sysPermissionService.findByRoleIdWithSubPermission(1));
+    void findByRoleIdWithSubPermission() {
+        log.info("【: {}】", JsonUtils.object2String(sysPermissionService.findByRoleIdWithSubPermission(new MyPageInfo<>(1, 2), 1)));
     }
 
     @Test
-    public void findByIdWithSubSysPermission() {
-        log.info("【: {}】", sysPermissionService.findByIdWithSubSysPermission(1));
+    void findByIdWithSubSysPermission() {
+        log.info("【: {}】", JsonUtils.object2String(sysPermissionService.findByIdWithSubSysPermission(new MyPageInfo<>(1, 2), 1)));
     }
 
     @Test
-    public void removeById() {
+    void removeById() {
         sysPermissionService.removeById(4);
     }
 
     @Test
-    public void testSave() {
+    void testSave() {
         sysPermissionService.save(
                 new SysPermission()
                         .setName("用户管理")
@@ -57,7 +59,7 @@ public class SysPermissionServiceTest {
     }
 
     @Test
-    public void testUpdate() {
+    void testUpdate() {
         sysPermissionService.updateById(
                 new SysPermission()
                         .setId(13L)

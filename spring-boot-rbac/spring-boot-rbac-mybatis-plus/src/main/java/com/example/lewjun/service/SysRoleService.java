@@ -1,9 +1,8 @@
 package com.example.lewjun.service;
 
 import com.example.lewjun.base.MyIService;
+import com.example.lewjun.base.MyPageInfo;
 import com.example.lewjun.domain.SysRole;
-
-import java.util.List;
 
 public interface SysRoleService extends MyIService<SysRole> {
     /**
@@ -12,7 +11,7 @@ public interface SysRoleService extends MyIService<SysRole> {
      * @param userId 用户id
      * @return 角色列表
      */
-    List<SysRole> findByUserId(long userId);
+    MyPageInfo<SysRole> findByUserId(MyPageInfo<?> page, long userId);
 
     boolean existsByName(String name);
 }

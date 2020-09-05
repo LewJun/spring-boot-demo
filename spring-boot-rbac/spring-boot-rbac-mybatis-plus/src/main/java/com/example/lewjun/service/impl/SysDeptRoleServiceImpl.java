@@ -18,8 +18,7 @@ public class SysDeptRoleServiceImpl extends MyServiceImpl<SysDeptRoleMapper, Sys
     )
     @Override
     public boolean remove(final SysDeptRole sysDeptRole) {
-        if (sysDeptRole == null) return false;
-        return SqlHelper.retBool(baseMapper.remove(sysDeptRole));
+        return sysDeptRole != null && SqlHelper.retBool(baseMapper.remove(sysDeptRole));
     }
 
     @Override

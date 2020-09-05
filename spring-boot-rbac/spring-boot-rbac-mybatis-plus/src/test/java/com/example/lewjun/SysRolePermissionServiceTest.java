@@ -12,17 +12,17 @@ import org.springframework.boot.test.context.SpringBootTest;
  */
 @Slf4j
 @SpringBootTest
-public class SysRolePermissionServiceTest {
+class SysRolePermissionServiceTest {
     @Autowired
     private SysRolePermissionService sysRolePermissionService;
 
     @Test
-    public void testList() {
+    void testList() {
         log.info("【queryAll: {}】", sysRolePermissionService.list());
     }
 
     @Test
-    public void testRemove() {
+    void testRemove() {
         final SysRolePermission sysRolePermission = new SysRolePermission();
         sysRolePermission.setRoleId(1L);
         sysRolePermission.setPermissionId(1L);

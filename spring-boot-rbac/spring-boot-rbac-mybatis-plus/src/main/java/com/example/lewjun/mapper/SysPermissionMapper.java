@@ -1,13 +1,13 @@
 package com.example.lewjun.mapper;
 
 import com.example.lewjun.base.MyBaseMapper;
+import com.example.lewjun.base.MyPageInfo;
 import com.example.lewjun.domain.SysPermission;
 import com.example.lewjun.domain.SysPermissionWithSubSysPermission;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
 import java.io.Serializable;
-import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -18,7 +18,7 @@ public interface SysPermissionMapper extends MyBaseMapper<SysPermission> {
      * @param roleId 角色id
      * @return 权限列表
      */
-    List<SysPermission> findByRoleId(long roleId);
+    MyPageInfo<SysPermission> findByRoleId(MyPageInfo<?> page, long roleId);
 
     /**
      * 根据id查找对应的子权限
@@ -26,7 +26,7 @@ public interface SysPermissionMapper extends MyBaseMapper<SysPermission> {
      * @param permissionId 权限id
      * @return 权限列表
      */
-    List<SysPermission> findSubPermissionByPermissionId(long permissionId);
+    MyPageInfo<SysPermission> findSubPermissionByPermissionId(MyPageInfo<?> page, long permissionId);
 
     /**
      * 根据角色id查找权限及子权限
@@ -34,7 +34,7 @@ public interface SysPermissionMapper extends MyBaseMapper<SysPermission> {
      * @param roleId 角色id
      * @return 权限及子权限列表
      */
-    List<SysPermissionWithSubSysPermission> findByRoleIdWithSubPermission(long roleId);
+    MyPageInfo<SysPermissionWithSubSysPermission> findByRoleIdWithSubPermission(MyPageInfo<?> page, long roleId);
 
     /**
      * 根据权限id查找权限及子权限
@@ -42,7 +42,7 @@ public interface SysPermissionMapper extends MyBaseMapper<SysPermission> {
      * @param permissionId 权限id
      * @return 权限及子权限列表
      */
-    List<SysPermissionWithSubSysPermission> findByIdWithSubSysPermission(long permissionId);
+    MyPageInfo<SysPermissionWithSubSysPermission> findByIdWithSubSysPermission(MyPageInfo<?> page, long permissionId);
 
     /**
      * 根据权限Id判断是否存在子权限

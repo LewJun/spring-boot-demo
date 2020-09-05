@@ -12,27 +12,27 @@ import org.springframework.boot.test.context.SpringBootTest;
  */
 @Slf4j
 @SpringBootTest
-public class SysUserServiceTest {
+class SysUserServiceTest {
     @Autowired
     private SysUserService sysUserService;
 
     @Test
-    public void testList() {
+    void testList() {
         log.info("【queryAll: {}】", sysUserService.list());
     }
 
     @Test
-    public void testExistsByUsername() {
+    void testExistsByUsername() {
         log.info("【existsByUsername: {}】", sysUserService.existsByUsername("admin"));
     }
 
     @Test
-    public void testFindByUsername() {
+    void testFindByUsername() {
         log.info("【findByUsername: {}】", sysUserService.findByUsername("admin"));
     }
 
     @Test
-    public void testSave() {
+    void testSave() {
         final SysUser sysUser = new SysUser().setUsername("xxz").setEmail("xxz@qq.com");
         final boolean isSaved = sysUserService.save(sysUser);
         log.info("【isSaved: {}】", isSaved);
@@ -40,7 +40,7 @@ public class SysUserServiceTest {
     }
 
     @Test
-    public void testUpdate() {
+    void testUpdate() {
         sysUserService.updateById(
                 new SysUser()
                         .setId(13L)
@@ -49,7 +49,7 @@ public class SysUserServiceTest {
     }
 
     @Test
-    public void testRemoveById() {
+    void testRemoveById() {
         final boolean isRemoved = sysUserService.removeById(1L);
         log.info("【isRemoved: {}】", isRemoved);
     }

@@ -24,7 +24,7 @@
         JOIN sys_user AS sys_user
         ON sys_user.`id` = sys_user_role.`user_id`
         AND sys_user.`id` = #{userId}
-        WHERE sys_user_role.`role_id` = sys_role.`id`) ;
+        WHERE sys_user_role.`role_id` = sys_role.`id`)
     </select>
 
 </mapper>

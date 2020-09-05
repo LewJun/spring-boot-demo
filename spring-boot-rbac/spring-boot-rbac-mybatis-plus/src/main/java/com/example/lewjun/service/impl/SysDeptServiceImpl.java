@@ -1,5 +1,6 @@
 package com.example.lewjun.service.impl;
 
+import com.example.lewjun.base.MyPageInfo;
 import com.example.lewjun.base.MyServiceImpl;
 import com.example.lewjun.domain.SysDept;
 import com.example.lewjun.domain.SysDeptNode;
@@ -36,7 +37,8 @@ public class SysDeptServiceImpl extends MyServiceImpl<SysDeptMapper, SysDept> im
     }
 
     private void getSubSysDeptList(final SysDeptNode sysDeptNode) {
-        final List<SysDeptNode> subSysDeptList = baseMapper.findByParentId(sysDeptNode.getId());
+        final MyPageInfo<SysDeptNode> pageInfo = baseMapper.findByParentId(new MyPageInfo<>(1, 999), sysDeptNode.getId());
+        final List<SysDeptNode> subSysDeptList = pageInfo.getRecords();
         sysDeptNode.setChildren(subSysDeptList);
 
         for (final SysDeptNode deptNode : subSysDeptList) {

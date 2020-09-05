@@ -1,5 +1,6 @@
 package com.example.lewjun.service.impl;
 
+import com.example.lewjun.base.MyPageInfo;
 import com.example.lewjun.base.MyServiceImpl;
 import com.example.lewjun.domain.SysPermission;
 import com.example.lewjun.domain.SysPermissionWithSubSysPermission;
@@ -11,7 +12,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.Serializable;
-import java.util.List;
 
 @Service
 public class SysPermissionServiceImpl extends MyServiceImpl<SysPermissionMapper, SysPermission> implements SysPermissionService {
@@ -23,23 +23,23 @@ public class SysPermissionServiceImpl extends MyServiceImpl<SysPermissionMapper,
     }
 
     @Override
-    public List<SysPermission> findByRoleId(final long roleId) {
-        return baseMapper.findByRoleId(roleId);
+    public MyPageInfo<SysPermission> findByRoleId(final MyPageInfo<?> page, final long roleId) {
+        return baseMapper.findByRoleId(page, roleId);
     }
 
     @Override
-    public List<SysPermission> findSubPermissionByPermissionId(final long permissionId) {
-        return baseMapper.findSubPermissionByPermissionId(permissionId);
+    public MyPageInfo<SysPermission> findSubPermissionByPermissionId(final MyPageInfo<?> page, final long permissionId) {
+        return baseMapper.findSubPermissionByPermissionId(page, permissionId);
     }
 
     @Override
-    public List<SysPermissionWithSubSysPermission> findByRoleIdWithSubPermission(final long roleId) {
-        return baseMapper.findByRoleIdWithSubPermission(roleId);
+    public MyPageInfo<SysPermissionWithSubSysPermission> findByRoleIdWithSubPermission(final MyPageInfo<?> page, final long roleId) {
+        return baseMapper.findByRoleIdWithSubPermission(page, roleId);
     }
 
     @Override
-    public List<SysPermissionWithSubSysPermission> findByIdWithSubSysPermission(final long id) {
-        return baseMapper.findByIdWithSubSysPermission(id);
+    public MyPageInfo<SysPermissionWithSubSysPermission> findByIdWithSubSysPermission(final MyPageInfo<?> page, final long id) {
+        return baseMapper.findByIdWithSubSysPermission(page, id);
     }
 
     @Override

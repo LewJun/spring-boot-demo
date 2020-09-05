@@ -11,19 +11,19 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Slf4j
 @SpringBootTest
-public class SysUserLoginServiceTest {
+class SysUserLoginServiceTest {
 
     @Autowired
-    public SysUserService sysUserService;
+    private SysUserService sysUserService;
 
     @Autowired
-    public SysUserLoginService sysUserLoginService;
+    private SysUserLoginService sysUserLoginService;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
 
     @Test
-    public void testLogin() {
+    void testLogin() {
         final String username = "admin";
         final String password = "admin";
         if (!sysUserService.existsByUsername(username)) {
@@ -37,7 +37,7 @@ public class SysUserLoginServiceTest {
     }
 
     @Test
-    public void testPasswordEncode() {
+    void testPasswordEncode() {
         final String rawPassword = "normal";
         final String passwordEncode = passwordEncoder.encode(rawPassword);
         log.info("【encode: {}】", passwordEncode);

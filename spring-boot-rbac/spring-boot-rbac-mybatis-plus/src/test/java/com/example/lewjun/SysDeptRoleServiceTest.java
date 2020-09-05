@@ -9,13 +9,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 @Slf4j
 @SpringBootTest
-public class SysDeptRoleServiceTest {
+class SysDeptRoleServiceTest {
 
     @Autowired
     SysDeptRoleService sysDeptRoleService;
 
     @Test
-    public void save() {
+    void save() {
         final SysDeptRole sysDeptRole = new SysDeptRole();
         sysDeptRole.setDeptId(1L);
         sysDeptRole.setRoleId(2L);
@@ -23,7 +23,7 @@ public class SysDeptRoleServiceTest {
     }
 
     @Test
-    public void remove() {
+    void remove() {
         final SysDeptRole sysDeptRole = new SysDeptRole();
         sysDeptRole.setDeptId(1L);
         sysDeptRole.setRoleId(2L);

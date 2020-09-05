@@ -23,8 +23,7 @@ public class SysUserRoleServiceImpl extends MyServiceImpl<SysUserRoleMapper, Sys
     )
     @Override
     public boolean remove(final SysUserRole sysUserRole) {
-        if (sysUserRole == null) return false;
-        return SqlHelper.retBool(baseMapper.remove(sysUserRole));
+        return sysUserRole != null && SqlHelper.retBool(baseMapper.remove(sysUserRole));
     }
 
 }

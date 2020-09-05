@@ -1,5 +1,6 @@
 package com.example.lewjun;
 
+import com.example.lewjun.base.MyPageInfo;
 import com.example.lewjun.domain.SysRole;
 import com.example.lewjun.service.SysRoleService;
 import lombok.extern.slf4j.Slf4j;
@@ -17,22 +18,22 @@ public class SysRoleServiceTest {
     private SysRoleService sysRoleService;
 
     @Test
-    public void testList() {
+    void testList() {
         log.info("【queryAll: {}】", sysRoleService.list());
     }
 
     @Test
-    public void testFindByUserId() {
-        log.info("【findByUserId: {}】", sysRoleService.findByUserId(1L));
+    void testFindByUserId() {
+        log.info("【findByUserId: {}】", sysRoleService.findByUserId(new MyPageInfo<>(1, 2), 1L));
     }
 
     @Test
-    public void removeById() {
+    void removeById() {
         sysRoleService.removeById(1);
     }
 
     @Test
-    public void testSave() {
+    void testSave() {
         sysRoleService.save(
                 new SysRole().setName("admin")
         );
@@ -40,7 +41,7 @@ public class SysRoleServiceTest {
 
 
     @Test
-    public void testUpdate() {
+    void testUpdate() {
         sysRoleService.updateById(
                 new SysRole().setId(2L).setName("admin")
         );
