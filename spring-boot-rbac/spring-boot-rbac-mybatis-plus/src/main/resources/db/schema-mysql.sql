@@ -113,3 +113,13 @@ CREATE TABLE IF NOT EXISTS sys_dept_role (
 
 alter table sys_user add column `nickname` VARCHAR (32) not null default '';
 alter table sys_user add column `dept_id` INT;
+
+ALTER TABLE sys_dept ADD INDEX idx_parent_id (parent_id);
+
+ALTER TABLE sys_dept ADD INDEX idx_parent_id__name (parent_id, `name`);
+
+ALTER TABLE sys_role ADD INDEX idx_name (`name`);
+
+ALTER TABLE sys_user_login ADD INDEX idx_user_id (`user_id`);
+
+ALTER TABLE sys_user ADD INDEX idx_username (`username`);
