@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS sys_permission (
   id INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR (120) NOT NULL,
   url VARCHAR (120) NOT NULL,
-  parent_id INT,
+  parent_id INT not null default 0,
   description VARCHAR (120) not null default '',
   PRIMARY KEY (id)
 ) ENGINE = INNODB DEFAULT CHARSET = utf8mb4 ;
@@ -98,7 +98,7 @@ create table if not exists sys_dept (
   id INT not null AUTO_INCREMENT,
   `name` VARCHAR (32) not null default '',
   `description` VARCHAR (32) not null default '',
-  `parent_id` int,
+  `parent_id` int not null default 0,
   PRIMARY KEY (id)
 ) ENGINE = INNODB DEFAULT CHARSET = utf8mb4;
 
@@ -112,7 +112,7 @@ CREATE TABLE IF NOT EXISTS sys_dept_role (
 ) ENGINE = INNODB DEFAULT CHARSET = utf8mb4 ;
 
 alter table sys_user add column `nickname` VARCHAR (32) not null default '';
-alter table sys_user add column `dept_id` INT;
+alter table sys_user add column `dept_id` INT not null default 1;
 
 ALTER TABLE sys_dept ADD INDEX idx_parent_id (parent_id);
 
