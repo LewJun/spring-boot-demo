@@ -54,8 +54,8 @@ public interface SysPermissionMapper extends MyBaseMapper<SysPermission> {
     Optional<Integer> existsSubPermissionsByPermissionId(Serializable permissionId);
 
     @Select("select t.id from sys_permission t where t.parent_id = #{parentId} and t.name = #{name} limit 1")
-    Optional<Long> findIdByParentIdAndName(Long parentId, String name);
+    Optional<Integer> findIdByParentIdAndName(Integer parentId, String name);
 
     @Select("select t.id from sys_permission t where t.parent_id = #{parentId} and t.url = #{url} limit 1")
-    Optional<Long> findIdByParentIdAndUrl(Long parentId, String url);
+    Optional<Integer> findIdByParentIdAndUrl(Integer parentId, String url);
 }

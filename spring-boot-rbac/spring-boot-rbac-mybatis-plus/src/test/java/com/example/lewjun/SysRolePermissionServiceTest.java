@@ -24,8 +24,8 @@ class SysRolePermissionServiceTest {
     @Test
     void testRemove() {
         final SysRolePermission sysRolePermission = new SysRolePermission();
-        sysRolePermission.setRoleId(1L);
-        sysRolePermission.setPermissionId(1L);
+        sysRolePermission.setRoleId(1);
+        sysRolePermission.setPermissionId(1);
         sysRolePermissionService.remove(sysRolePermission);
     }
 
@@ -33,8 +33,8 @@ class SysRolePermissionServiceTest {
     void testSave() {
         sysRolePermissionService.save(
                 new SysRolePermission()
-                        .setRoleId(1L)
-                        .setPermissionId(1L)
+                        .setRoleId(1)
+                        .setPermissionId(1)
         );
     }
 }

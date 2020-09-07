@@ -25,8 +25,8 @@ class SysUserRoleServiceTest {
     void testSave() {
         sysUserRoleService.save(
                 new SysUserRole()
-                        .setUserId(1L)
-                        .setRoleId(1L)
+                        .setUserId(1)
+                        .setRoleId(1)
         );
     }
 
@@ -34,8 +34,8 @@ class SysUserRoleServiceTest {
     void testDelete() {
         sysUserRoleService.remove(
                 new SysUserRole()
-                        .setUserId(1L)
-                        .setRoleId(5L)
+                        .setUserId(1)
+                        .setRoleId(5)
         );
     }
 }

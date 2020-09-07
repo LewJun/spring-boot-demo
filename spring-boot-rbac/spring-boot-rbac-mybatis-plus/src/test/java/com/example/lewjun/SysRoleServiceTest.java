@@ -24,7 +24,7 @@ public class SysRoleServiceTest {
 
     @Test
     void testFindByUserId() {
-        log.info("【findByUserId: {}】", sysRoleService.findByUserId(new MyPageInfo<>(1, 2), 1L));
+        log.info("【findByUserId: {}】", sysRoleService.findByUserId(new MyPageInfo<>(1, 2), 1));
     }
 
     @Test
@@ -43,7 +43,7 @@ public class SysRoleServiceTest {
     @Test
     void testUpdate() {
         sysRoleService.updateById(
-                new SysRole().setId(2L).setName("admin")
+                new SysRole().setId(2).setName("admin")
         );
     }
 }

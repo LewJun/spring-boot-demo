@@ -16,14 +16,14 @@ public interface SysUserRoleMapper extends MyBaseMapper<SysUserRole> {
      * @param roleId 角色id
      * @return 1 if exists, otherwise 0
      */
-    @Select("SELECT 1 FROM sys_user_role t WHERE t.`role_id` = #{roleId} LIMIT 1;")
+    @Select("SELECT 1 FROM sys_user_role t WHERE t.`role_id` = #{roleId} LIMIT 1")
     Optional<Integer> existsSysUserRolesByRoleId(Serializable roleId);
 
     @Delete("delete from sys_user_role where user_id=#{userId} and role_id=#{roleId}")
     int remove(SysUserRole sysUserRole);
 
     @Select("select 1 from sys_user_role t where t.user_id = #{userId} and t.role_id = #{roleId} limit 1")
-    Optional<Integer> existsByUserIdAndRoleId(Long userId, Long roleId);
+    Optional<Integer> existsByUserIdAndRoleId(Integer userId, Integer roleId);
 
     @Insert("replace into sys_user_role(user_id, role_id) select #{userId}, #{roleId}")
     @Override

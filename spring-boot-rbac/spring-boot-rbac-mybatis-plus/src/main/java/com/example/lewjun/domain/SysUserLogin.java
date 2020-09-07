@@ -12,6 +12,6 @@ import lombok.experimental.Accessors;
 @Data
 @Accessors(chain = true)
 public class SysUserLogin extends BaseObj {
-    private Long userId;
+    private Integer userId;
     private String password;
 }

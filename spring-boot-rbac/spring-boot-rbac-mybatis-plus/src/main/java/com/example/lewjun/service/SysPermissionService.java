@@ -14,7 +14,7 @@ public interface SysPermissionService extends MyIService<SysPermission> {
      * @param roleId 角色id
      * @return 权限列表
      */
-    MyPageInfo<SysPermission> findByRoleId(MyPageInfo<?> page, long roleId);
+    MyPageInfo<SysPermission> findByRoleId(MyPageInfo<?> page, Integer roleId);
 
     /**
      * 根据id查找对应的子权限
@@ -22,7 +22,7 @@ public interface SysPermissionService extends MyIService<SysPermission> {
      * @param permissionId 权限id
      * @return 权限列表
      */
-    MyPageInfo<SysPermission> findSubPermissionByPermissionId(MyPageInfo<?> page, long permissionId);
+    MyPageInfo<SysPermission> findSubPermissionByPermissionId(MyPageInfo<?> page, Integer permissionId);
 
     /**
      * 根据角色id查找权限及子权限
@@ -30,7 +30,7 @@ public interface SysPermissionService extends MyIService<SysPermission> {
      * @param roleId 角色id
      * @return 权限及子权限列表
      */
-    MyPageInfo<SysPermissionWithSubSysPermission> findByRoleIdWithSubPermission(MyPageInfo<?> page, long roleId);
+    MyPageInfo<SysPermissionWithSubSysPermission> findByRoleIdWithSubPermission(MyPageInfo<?> page, Integer roleId);
 
     /**
      * 根据权限id查找权限及子权限
@@ -38,7 +38,7 @@ public interface SysPermissionService extends MyIService<SysPermission> {
      * @param permissionId 权限id
      * @return 权限及子权限列表
      */
-    MyPageInfo<SysPermissionWithSubSysPermission> findByIdWithSubSysPermission(MyPageInfo<?> page, long permissionId);
+    MyPageInfo<SysPermissionWithSubSysPermission> findByIdWithSubSysPermission(MyPageInfo<?> page, Integer permissionId);
 
     /**
      * 根据权限Id判断是否存在子权限

@@ -21,7 +21,7 @@ public interface SysUserService extends MyIService<SysUser> {
      * @param username 用户名
      * @return 用户id
      */
-    Long findUserIdByUsername(String username);
+    Integer findUserIdByUsername(String username);
 
     boolean existsByDeptId(Serializable deptId);
 

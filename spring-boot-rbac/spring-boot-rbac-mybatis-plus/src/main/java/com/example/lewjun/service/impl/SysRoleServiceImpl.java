@@ -29,7 +29,7 @@ public class SysRoleServiceImpl extends MyServiceImpl<SysRoleMapper, SysRole> im
     }
 
     @Override
-    public MyPageInfo<SysRole> findByUserId(final MyPageInfo<?> page, final long userId) {
+    public MyPageInfo<SysRole> findByUserId(final MyPageInfo<?> page, final Integer userId) {
         return baseMapper.findByUserId(page, userId);
     }
 
@@ -51,8 +51,7 @@ public class SysRoleServiceImpl extends MyServiceImpl<SysRoleMapper, SysRole> im
 
     @Override
     public boolean updateById(final SysRole entity) {
-        final Long id = baseMapper.existsByName(entity.getName()).orElse(0L);
-        if (!id.equals(entity.getId())) {
+        if (!baseMapper.existsByName(entity.getName()).orElse(0).equals(entity.getId())) {
             throw new RuntimeException("名称已存在");
         }
         return super.updateById(entity);

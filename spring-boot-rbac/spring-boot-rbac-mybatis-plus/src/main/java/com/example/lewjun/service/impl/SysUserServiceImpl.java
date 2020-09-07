@@ -18,7 +18,7 @@ public class SysUserServiceImpl extends MyServiceImpl<SysUserMapper, SysUser> im
     }
 
     @Override
-    public Long findUserIdByUsername(final String username) {
+    public Integer findUserIdByUsername(final String username) {
         return baseMapper.findUserIdByUsername(username)
                 .orElseThrow(
                         () -> new RuntimeException("用户名不存在。")
@@ -55,6 +55,6 @@ public class SysUserServiceImpl extends MyServiceImpl<SysUserMapper, SysUser> im
     }
 
     private boolean isRoot(final Serializable userId) {
-        return 1L == (Long) userId;
+        return 1 == (Integer) userId;
     }
 }

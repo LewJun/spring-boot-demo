@@ -8,6 +8,6 @@ import lombok.experimental.Accessors;
 @Data
 @Accessors(chain = true)
 public class SysDeptRole extends BaseObj {
-    private Long deptId;
-    private Long roleId;
+    private Integer deptId;
+    private Integer roleId;
 }

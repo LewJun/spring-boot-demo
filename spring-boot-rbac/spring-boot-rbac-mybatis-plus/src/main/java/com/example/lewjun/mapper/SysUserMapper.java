@@ -27,7 +27,7 @@ public interface SysUserMapper extends MyBaseMapper<SysUser> {
      * @return 用户id
      */
     @Select("select t.id from sys_user t where t.username=#{username} limit 1")
-    Optional<Long> findUserIdByUsername(String username);
+    Optional<Integer> findUserIdByUsername(String username);
 
     @Select("select 1 from sys_user t where t.dept_id=#{deptId} limit 1")
     Optional<Integer> existsByDeptId(Serializable deptId);

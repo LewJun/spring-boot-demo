@@ -19,5 +19,5 @@ public interface SysDeptMapper extends MyBaseMapper<SysDept> {
     Optional<Integer> existsChildren(Serializable deptId);
 
     @Select("select t.id from sys_dept t where t.parent_id = #{parentId} and t.`name` = #{name} limit 1")
-    Optional<Long> findIdByParentIdAndName(Long parentId, String name);
+    Optional<Integer> findIdByParentIdAndName(Integer parentId, String name);
 }

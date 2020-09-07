@@ -24,7 +24,7 @@ public class SysDeptServiceImpl extends MyServiceImpl<SysDeptMapper, SysDept> im
     }
 
     @Override
-    public SysDeptNode getSysDeptTrees(final Serializable deptId) {
+    public SysDeptNode getSysDeptTrees(final Integer deptId) {
         final SysDept sysDept = super.getByIdOptional(deptId).orElseThrow(() -> new RuntimeException("部门不存在"));
         final SysDeptNode sysDeptNode = new SysDeptNode();
         sysDeptNode.setId(sysDept.getId());
@@ -71,7 +71,7 @@ public class SysDeptServiceImpl extends MyServiceImpl<SysDeptMapper, SysDept> im
      * 判断是否为根部门
      */
     private boolean isRoot(final Serializable id) {
-        return (Long) id == 1L;
+        return (Integer) id == 1;
     }
 
     @Override
@@ -84,14 +84,13 @@ public class SysDeptServiceImpl extends MyServiceImpl<SysDeptMapper, SysDept> im
 
     @Override
     public boolean updateById(final SysDept entity) {
-        final Long id = baseMapper.findIdByParentIdAndName(entity.getParentId(), entity.getName()).orElse(0L);
-        if (!id.equals(entity.getId())) {
+        if (!baseMapper.findIdByParentIdAndName(entity.getParentId(), entity.getName()).orElse(0).equals(entity.getId())) {
             throw new RuntimeException("同一个部门下的子部门名称不能重复。");
         }
         return super.updateById(entity);
     }
 
-    public boolean findIdByParentIdAndName(final Long parentId, final String name) {
+    public boolean findIdByParentIdAndName(final Integer parentId, final String name) {
         return baseMapper.findIdByParentIdAndName(parentId, name).isPresent();
     }
 }

@@ -19,5 +19,5 @@ public interface SysRoleMapper extends MyBaseMapper<SysRole> {
     MyPageInfo<SysRole> findByUserId(MyPageInfo<?> page, long userId);
 
     @Select("select t.id from sys_role t where t.name = #{name} limit 1")
-    Optional<Long> existsByName(String name);
+    Optional<Integer> existsByName(String name);
 }

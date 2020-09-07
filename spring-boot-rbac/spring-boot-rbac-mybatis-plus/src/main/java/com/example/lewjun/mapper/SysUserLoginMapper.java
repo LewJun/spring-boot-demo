@@ -23,5 +23,5 @@ public interface SysUserLoginMapper extends MyBaseMapper<SysUserLogin> {
     int resetPassword(SysUserLogin sysUserLogin);
 
     @Select("select 1 from sys_user_login where user_id=#{userId} limit 1")
-    Optional<Integer> existsByUserId(long userId);
+    Optional<Integer> existsByUserId(Integer userId);
 }

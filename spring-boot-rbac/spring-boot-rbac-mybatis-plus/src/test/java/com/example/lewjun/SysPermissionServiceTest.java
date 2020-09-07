@@ -54,7 +54,7 @@ class SysPermissionServiceTest {
                 new SysPermission()
                         .setName("用户管理")
                         .setUrl("/sys/user/#")
-                        .setParentId(1L)
+                        .setParentId(1)
         );
     }
 
@@ -62,10 +62,10 @@ class SysPermissionServiceTest {
     void testUpdate() {
         sysPermissionService.updateById(
                 new SysPermission()
-                        .setId(13L)
+                        .setId(13)
                         .setName("部门管理")
                         .setUrl("/sys/user/#")
-                        .setParentId(1L)
+                        .setParentId(1)
         );
     }
 }

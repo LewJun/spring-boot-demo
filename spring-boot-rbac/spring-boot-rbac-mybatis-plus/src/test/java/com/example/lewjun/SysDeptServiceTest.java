@@ -4,7 +4,6 @@ import com.example.lewjun.domain.SysDept;
 import com.example.lewjun.domain.SysDeptNode;
 import com.example.lewjun.service.SysDeptService;
 import com.example.lewjun.utils.JsonUtils;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +17,7 @@ class SysDeptServiceTest {
     SysDeptService sysDeptService;
 
     @Test
-    void getSysDeptTrees() throws JsonProcessingException {
+    void getSysDeptTrees() {
         final SysDeptNode sysDeptTrees = sysDeptService.getSysDeptTrees(2);
         log.info("【getSysDeptTrees: {}】", sysDeptTrees);
 
@@ -29,7 +28,7 @@ class SysDeptServiceTest {
     void testSave() {
         final SysDept sysDept = new SysDept()
                 .setName("Office A")
-                .setParentId(1L);
+                .setParentId(1);
         if (sysDeptService.save(sysDept)) {
             log.info("【sysDept: {}】", sysDept);
         }
@@ -37,14 +36,14 @@ class SysDeptServiceTest {
 
     @Test
     void testUpdate() {
-        final SysDept sysDept = new SysDept().setId(5L)
+        final SysDept sysDept = new SysDept().setId(5)
                 .setName("销售B小组")
-                .setParentId(3L);
+                .setParentId(3);
         sysDeptService.updateById(sysDept);
     }
 
     @Test
     void testDelete() {
-        sysDeptService.removeById(1L);
+        sysDeptService.removeById(1);
     }
 }

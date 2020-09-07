@@ -11,7 +11,7 @@ public interface SysRoleService extends MyIService<SysRole> {
      * @param userId 用户id
      * @return 角色列表
      */
-    MyPageInfo<SysRole> findByUserId(MyPageInfo<?> page, long userId);
+    MyPageInfo<SysRole> findByUserId(MyPageInfo<?> page, Integer userId);
 
     boolean existsByName(String name);
 }

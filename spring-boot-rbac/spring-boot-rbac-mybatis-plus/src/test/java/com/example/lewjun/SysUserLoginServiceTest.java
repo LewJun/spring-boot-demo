@@ -30,7 +30,7 @@ class SysUserLoginServiceTest {
             throw new RuntimeException("用户名或密码错误");
         }
 
-        final long userId = sysUserService.findUserIdByUsername(username);
+        final Integer userId = sysUserService.findUserIdByUsername(username);
 
         final boolean isLogin = sysUserLoginService.login(new SysUserLogin().setUserId(userId).setPassword(password));
         log.info("【isLogin: {}】", isLogin);

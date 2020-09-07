@@ -23,22 +23,22 @@ public class SysPermissionServiceImpl extends MyServiceImpl<SysPermissionMapper,
     }
 
     @Override
-    public MyPageInfo<SysPermission> findByRoleId(final MyPageInfo<?> page, final long roleId) {
+    public MyPageInfo<SysPermission> findByRoleId(final MyPageInfo<?> page, final Integer roleId) {
         return baseMapper.findByRoleId(page, roleId);
     }
 
     @Override
-    public MyPageInfo<SysPermission> findSubPermissionByPermissionId(final MyPageInfo<?> page, final long permissionId) {
+    public MyPageInfo<SysPermission> findSubPermissionByPermissionId(final MyPageInfo<?> page, final Integer permissionId) {
         return baseMapper.findSubPermissionByPermissionId(page, permissionId);
     }
 
     @Override
-    public MyPageInfo<SysPermissionWithSubSysPermission> findByRoleIdWithSubPermission(final MyPageInfo<?> page, final long roleId) {
+    public MyPageInfo<SysPermissionWithSubSysPermission> findByRoleIdWithSubPermission(final MyPageInfo<?> page, final Integer roleId) {
         return baseMapper.findByRoleIdWithSubPermission(page, roleId);
     }
 
     @Override
-    public MyPageInfo<SysPermissionWithSubSysPermission> findByIdWithSubSysPermission(final MyPageInfo<?> page, final long id) {
+    public MyPageInfo<SysPermissionWithSubSysPermission> findByIdWithSubSysPermission(final MyPageInfo<?> page, final Integer id) {
         return baseMapper.findByIdWithSubSysPermission(page, id);
     }
 
@@ -79,12 +79,12 @@ public class SysPermissionServiceImpl extends MyServiceImpl<SysPermissionMapper,
     @Override
     public boolean updateById(final SysPermission entity) {
 
-        final Long id = entity.getId();
-        if (!baseMapper.findIdByParentIdAndName(entity.getParentId(), entity.getName()).orElse(0L).equals(id)) {
+        final Integer id = entity.getId();
+        if (!baseMapper.findIdByParentIdAndName(entity.getParentId(), entity.getName()).orElse(0).equals(id)) {
             throw new RuntimeException("权限名称重复");
         }
 
-        if (!baseMapper.findIdByParentIdAndUrl(entity.getParentId(), entity.getUrl()).orElse(0L).equals(id)) {
+        if (!baseMapper.findIdByParentIdAndUrl(entity.getParentId(), entity.getUrl()).orElse(0).equals(id)) {
             throw new RuntimeException("url地址重复");
         }
 

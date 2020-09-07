@@ -43,14 +43,14 @@ class SysUserServiceTest {
     void testUpdate() {
         sysUserService.updateById(
                 new SysUser()
-                        .setId(13L)
+                        .setId(13)
                         .setNickname("nickname")
         );
     }
 
     @Test
     void testRemoveById() {
-        final boolean isRemoved = sysUserService.removeById(1L);
+        final boolean isRemoved = sysUserService.removeById(1);
         log.info("【isRemoved: {}】", isRemoved);
     }
 }
