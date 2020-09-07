@@ -47,35 +47,6 @@ CREATE TABLE IF NOT EXISTS sys_role_permission (
   PRIMARY KEY (role_id, permission_id)
 ) ENGINE = INNODB DEFAULT CHARSET = utf8mb4 ;
 
-ALTER TABLE sys_permission
-  ADD CONSTRAINT uk_sys_permission__parent_id__name UNIQUE (parent_id, `name`) ;
-
-ALTER TABLE sys_permission
-  ADD CONSTRAINT uk_sys_permission__url UNIQUE (`url`) ;
-
-ALTER TABLE sys_role
-  ADD CONSTRAINT uk_sys_role__name UNIQUE (NAME) ;
-
-ALTER TABLE sys_user
-  ADD CONSTRAINT uk_sys_user__username UNIQUE (username) ;
-
--- 添加外键
-ALTER TABLE sys_user_role
-  ADD CONSTRAINT fk_sys_user_role__user_id FOREIGN KEY (user_id) REFERENCES sys_user (id)
-  ON UPDATE CASCADE ON DELETE CASCADE ;
-
-ALTER TABLE sys_user_role
-  ADD CONSTRAINT fk_sys_user_role__role_id FOREIGN KEY (role_id) REFERENCES sys_role (id) ON UPDATE CASCADE ON DELETE CASCADE ;
-
-ALTER TABLE sys_role_permission
-  ADD CONSTRAINT fk_sys_role_permission__role_id FOREIGN KEY (role_id) REFERENCES sys_role (id) ON UPDATE CASCADE ON DELETE CASCADE ;
-
-ALTER TABLE sys_role_permission
-  ADD CONSTRAINT fk_sys_role_permission__permission_id FOREIGN KEY (permission_id) REFERENCES sys_permission (id) ON UPDATE CASCADE ON DELETE CASCADE ;
-
-ALTER TABLE sys_permission
-  ADD CONSTRAINT fk_sys_permission__parent_id FOREIGN KEY (parent_id) REFERENCES sys_permission (id) ON UPDATE CASCADE ON DELETE CASCADE ;
-
 -- -------------------------------------
 
 DROP TABLE IF EXISTS AB01;
@@ -119,13 +90,6 @@ CREATE TABLE IF NOT EXISTS sys_user_login (
   PRIMARY KEY (user_id)
 ) ENGINE = INNODB DEFAULT CHARSET = utf8mb4 ;
 
-ALTER TABLE sys_user_login
-  ADD CONSTRAINT fk_sys_user_login__user_id FOREIGN KEY (user_id) REFERENCES sys_user (id)
-  ON UPDATE CASCADE ON DELETE CASCADE ;
-
-ALTER TABLE sys_user_login
-  ADD CONSTRAINT uk_sys_user_login__user_id UNIQUE (user_id) ;
-
 -- ------------------------
 
 drop table if exists sys_dept;
@@ -147,23 +111,5 @@ CREATE TABLE IF NOT EXISTS sys_dept_role (
   PRIMARY KEY (dept_id, role_id)
 ) ENGINE = INNODB DEFAULT CHARSET = utf8mb4 ;
 
-alter table sys_dept
-  add CONSTRAINT fk_sys_dept__parent_id FOREIGN key (parent_id) REFERENCES sys_dept (id)
-  on update CASCADE on delete cascade ;
-
-ALTER TABLE sys_dept
-  ADD CONSTRAINT uk_sys_dept__parent_id__name UNIQUE (parent_id, `name`) ;
-
-ALTER TABLE sys_dept_role
-  ADD CONSTRAINT fk_sys_dept_role__dept_id FOREIGN KEY (dept_id) REFERENCES sys_dept (id)
-  ON UPDATE CASCADE ON DELETE CASCADE ;
-
-ALTER TABLE sys_dept_role
-  ADD CONSTRAINT fk_sys_dept_role__role_id FOREIGN KEY (role_id) REFERENCES sys_role (id)
-  ON UPDATE CASCADE ON DELETE CASCADE ;
-
 alter table sys_user add column `nickname` VARCHAR (32) not null default '';
 alter table sys_user add column `dept_id` INT;
-
-alter table sys_user add CONSTRAINT fk_sys_user__dept_id FOREIGN KEY (dept_id) REFERENCES sys_dept (id)
-on update CASCADE on DELETE set null;
