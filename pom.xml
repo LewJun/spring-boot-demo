@@ -52,6 +52,7 @@
         <module>spring-boot-rbac</module>
         <module>spring-boot-bbiillii</module>
         <module>spring-boot-groovy</module>
+        <module>spring-boot-kotlin</module>
     </modules>
 
     <properties>
