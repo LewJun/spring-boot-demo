@@ -40,12 +40,12 @@
         SELECT
         <include refid="Base_Column_Select_List" />
         FROM
-        sys_permission AS sys_permission
-        JOIN sys_role_permission AS sys_role_permission
-        ON sys_permission.`id` = sys_role_permission.`permission_id`
-        JOIN sys_role AS sys_role
-        ON sys_role.`id` = #{roleId}
-        AND sys_role.`id` = sys_role_permission.`role_id`
+          sys_permission AS sys_permission
+          JOIN sys_role_permission AS sys_role_permission
+            ON sys_permission.`id` = sys_role_permission.`permission_id`
+          JOIN sys_role AS sys_role
+            ON sys_role.`id` = #{roleId}
+            AND sys_role.`id` = sys_role_permission.`role_id`
     </select>
 
     <select id="findByRoleIdWithSubPermission" resultMap="SysPermissionWithSubSysPermissionResultMap">
@@ -54,21 +54,14 @@
         ,
         <include refid="Sub_Permission_Column_Select_List" />
         FROM
-        sys_permission AS sys_permission
-        LEFT JOIN sys_permission AS sys_permission_sub
-        ON sys_permission_sub.`parent_id` = sys_permission.`id`
-        WHERE EXISTS
-        (SELECT
-        1
-        FROM
-        sys_permission AS sys_permission
-        LEFT JOIN sys_permission AS sys_permission_sub
-        ON sys_permission_sub.`parent_id` = sys_permission.`id`
-        JOIN sys_role_permission AS sys_role_permission
-        ON sys_permission.`id` = sys_role_permission.`permission_id`
-        JOIN sys_role AS sys_role
-        ON sys_role.`id` = #{roleId}
-        AND sys_role.`id` = sys_role_permission.`role_id`
+          sys_permission AS sys_permission
+            LEFT JOIN sys_permission AS sys_permission_sub
+              ON sys_permission_sub.`parent_id` = sys_permission.`id`
+            JOIN sys_role_permission AS sys_role_permission
+              ON sys_permission.`id` = sys_role_permission.`permission_id`
+            JOIN sys_role AS sys_role
+              ON sys_role.`id` = #{roleId}
+              AND sys_role.`id` = sys_role_permission.`role_id`
     </select>
 
     <select id="findSubPermissionByPermissionId" resultMap="BaseResultMap">
@@ -76,9 +69,9 @@
         <include refid="Sub_Permission_Column_Select_List" />
         FROM
         sys_permission AS sys_permission_sub
-        JOIN sys_permission AS sys_permission
-        ON sys_permission.`id` = sys_permission_sub.`parent_id`
-        AND sys_permission.`id` = #{permissionId})
+          JOIN sys_permission AS sys_permission
+            ON sys_permission.`id` = sys_permission_sub.`parent_id`
+            AND sys_permission.`id` = #{permissionId}
     </select>
 
     <select id="findByIdWithSubSysPermission" resultMap="SysPermissionWithSubSysPermissionResultMap">
@@ -87,9 +80,9 @@
         ,
         <include refid="Sub_Permission_Column_Select_List" />
         FROM
-        sys_permission AS sys_permission
-        LEFT JOIN sys_permission AS sys_permission_sub
-        ON sys_permission_sub.`parent_id` = sys_permission.`id`
+          sys_permission AS sys_permission
+          LEFT JOIN sys_permission AS sys_permission_sub
+            ON sys_permission_sub.`parent_id` = sys_permission.`id`
         WHERE sys_permission.`id` = #{permissionId}
     </select>
 

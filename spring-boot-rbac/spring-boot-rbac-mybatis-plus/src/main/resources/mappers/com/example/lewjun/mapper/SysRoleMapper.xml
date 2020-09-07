@@ -12,15 +12,15 @@
 
     <select id="findByUserId" resultMap="BaseResultMap">
         SELECT
-        sys_role.id,
-        sys_role.`name`
+          sys_role.id,
+          sys_role.`name`
         FROM
-        sys_role AS sys_role
-        JOIN sys_user_role AS sys_user_role
-        ON sys_user_role.`role_id` = sys_role.`id`
-        JOIN sys_user AS sys_user
-        ON sys_user.`id` = sys_user_role.`user_id`
-        AND sys_user.`id` = #{userId}
+          sys_role AS sys_role
+          JOIN sys_user_role AS sys_user_role
+            ON sys_user_role.`role_id` = sys_role.`id`
+          JOIN sys_user AS sys_user
+            ON sys_user.`id` = sys_user_role.`user_id`
+            AND sys_user.`id` = #{userId}
     </select>
 
 </mapper>
