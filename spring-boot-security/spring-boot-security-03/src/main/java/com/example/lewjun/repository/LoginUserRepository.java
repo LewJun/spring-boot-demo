@@ -2,24 +2,36 @@ package com.example.lewjun.repository;
 
 import com.example.lewjun.model.LoginUser;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 @Repository
 public class LoginUserRepository {
-    private final Map<String, LoginUser> loginUserMap = new HashMap<>(2);
+    private final List<LoginUser> loginUsers = new ArrayList<>(3);
 
     @Autowired
     public LoginUserRepository(final PasswordEncoder passwordEncoder) {
-        loginUserMap.put("admin", new LoginUser("admin", passwordEncoder.encode("admin"), Arrays.asList("ROLE_ADMIN")));
-        loginUserMap.put("normal", new LoginUser("normal", passwordEncoder.encode("normal"), Arrays.asList("ROLE_NORMAL")));
+        loginUsers.addAll(Arrays.asList(
+                new LoginUser("admin", passwordEncoder.encode("admin"),
+                        Collections.singletonList(new SimpleGrantedAuthority("ADMIN"))
+                ),
+                new LoginUser("normal", passwordEncoder.encode("normal"),
+                        Collections.singletonList(new SimpleGrantedAuthority("NORMAL"))
+                ),
+                new LoginUser("user", passwordEncoder.encode("user"),
+                        Arrays.asList(new SimpleGrantedAuthority("NORMAL"), new SimpleGrantedAuthority("USER"))
+                )
+        ));
     }
 
     public LoginUser findByUsername(final String username) {
-        return loginUserMap.get(username);
+        return loginUsers.stream()
+                .filter(loginUser -> Objects.equals(username, loginUser.getUsername()))
+                .findFirst()
+                .orElseThrow(() -> new BadCredentialsException("用户不存在"));
     }
 }
