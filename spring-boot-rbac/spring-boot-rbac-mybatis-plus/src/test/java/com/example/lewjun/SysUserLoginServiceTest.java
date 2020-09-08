@@ -26,11 +26,11 @@ class SysUserLoginServiceTest {
     void testLogin() {
         final String username = "admin";
         final String password = "admin";
-        if (!sysUserService.existsByUsername(username)) {
-            throw new RuntimeException("用户名或密码错误");
-        }
 
         final Integer userId = sysUserService.findUserIdByUsername(username);
+        if (userId == null) {
+            throw new RuntimeException("用户名或密码错误");
+        }
 
         final boolean isLogin = sysUserLoginService.login(new SysUserLogin().setUserId(userId).setPassword(password));
         log.info("【isLogin: {}】", isLogin);

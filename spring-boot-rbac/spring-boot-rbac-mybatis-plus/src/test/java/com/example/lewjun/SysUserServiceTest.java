@@ -1,7 +1,9 @@
 package com.example.lewjun;
 
+import com.example.lewjun.base.MyPageInfo;
 import com.example.lewjun.domain.SysUser;
 import com.example.lewjun.service.SysUserService;
+import com.example.lewjun.utils.JsonUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,8 +45,8 @@ class SysUserServiceTest {
     void testUpdate() {
         sysUserService.updateById(
                 new SysUser()
-                        .setId(13)
-                        .setNickname("nickname")
+                        .setId(3)
+                        .setNickname("admin")
         );
     }
 
@@ -52,5 +54,11 @@ class SysUserServiceTest {
     void testRemoveById() {
         final boolean isRemoved = sysUserService.removeById(1);
         log.info("【isRemoved: {}】", isRemoved);
+    }
+
+    @Test
+    void testPage() {
+        final MyPageInfo<SysUser> sysUserPage = sysUserService.page(new MyPageInfo<>(1, 2));
+        log.info("【sysUserPage: {}】", JsonUtils.object2String(sysUserPage));
     }
 }

@@ -54,6 +54,24 @@ public class SysUserServiceImpl extends MyServiceImpl<SysUserMapper, SysUser> im
         return super.removeById(id);
     }
 
+    @Override
+    public boolean updateById(final SysUser entity) {
+        if (entity == null) {
+            return false;
+        }
+
+        final Integer id = entity.getId();
+        if (this.getById(id) == null) {
+            throw new RuntimeException("用户不存在。");
+        }
+
+        if (!findUserIdByUsername(entity.getUsername()).equals(id)) {
+            throw new RuntimeException("用户名已存在。");
+        }
+
+        return super.updateById(entity);
+    }
+
     private boolean isRoot(final Serializable userId) {
         return 1 == (Integer) userId;
     }
