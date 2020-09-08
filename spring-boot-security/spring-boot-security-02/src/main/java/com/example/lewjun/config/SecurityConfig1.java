@@ -19,6 +19,9 @@ import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * 自定义登录成功，登录失败，无权限，登出成功的Handler。
+ */
 @Configuration
 public class SecurityConfig1 extends WebSecurityConfigurerAdapter {
     @Override

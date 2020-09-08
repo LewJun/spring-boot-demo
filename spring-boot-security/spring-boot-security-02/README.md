@@ -97,6 +97,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 当授权和资源不匹配的时候，会出现403错误。
 
+## 自定义登录成功，登录失败，无权限，登出成功的Handler。
+
+[SecurityConfig1.java](src/main/java/com/example/lewjun/config/SecurityConfig1.java)
+
 ## Try it
 
 * MacOS/Linux
