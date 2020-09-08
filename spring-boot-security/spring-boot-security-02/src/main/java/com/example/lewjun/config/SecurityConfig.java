@@ -1,10 +1,12 @@
 package com.example.lewjun.config;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
@@ -16,13 +18,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                .jdbcAuthentication()
 //                .userDetailsService(userDetailsService)
                 // 不使用PasswordEncoder密码编码器
-                .passwordEncoder(NoOpPasswordEncoder.getInstance())
+                // .passwordEncoder(NoOpPasswordEncoder.getInstance())
+                .passwordEncoder(passwordEncoder())
                 // 配置admin用户 拥有ADMIN角色
-                .withUser("admin").password("admin").roles("ADMIN")
+                .withUser("admin").password(passwordEncoder().encode("admin")).roles("ADMIN")
                 .and()
                 // 配置normal用户 拥有NORMAL角色
-                .withUser("normal").password("normal").roles("NORMAL")
+                .withUser("normal").password(passwordEncoder().encode("normal")).roles("NORMAL")
         ;
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+//        return new BCryptPasswordEncoder();
+        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
 
     @Override
