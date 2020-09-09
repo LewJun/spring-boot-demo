@@ -1,29 +1,49 @@
 package com.example.lewjun.config;
 
+import com.example.lewjun.exception.ValidateCodeException;
 import com.example.lewjun.utils.JsonUtils;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.authentication.*;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
+import org.springframework.stereotype.Component;
+import org.springframework.web.filter.OncePerRequestFilter;
 
+import javax.servlet.Filter;
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * 自定义登录成功，登录失败，无权限，登出成功的Handler。
  */
 @Configuration
+@Slf4j
 public class SecurityConfig1 extends WebSecurityConfigurerAdapter {
+    @Autowired
+    private ValidateCodeFilter validateCodeFilter;
+
     @Override
     protected void configure(final AuthenticationManagerBuilder auth) throws Exception {
         auth
@@ -91,6 +111,10 @@ public class SecurityConfig1 extends WebSecurityConfigurerAdapter {
                 // 如果用户未登录，就访问资源，则提示需要登录。
                 .and().exceptionHandling()
                 .authenticationEntryPoint(authenticationEntryPoint())
+
+                // 在【用户名密码认证过滤器】前设置一层【验证码过滤器】用于校验登录时输入验证码是否正确
+                .and().addFilterBefore(validateCodeFilter, UsernamePasswordAuthenticationFilter.class)
+
         // 配置请求地址的权限 结束
         ;
     }
@@ -147,8 +171,28 @@ public class SecurityConfig1 extends WebSecurityConfigurerAdapter {
             httpServletResponse.setContentType("application/json;charset=utf-8");
             final Map<String, Object> map = new HashMap<>();
             map.put("code", 0);
-            map.put("msg", "login fail");
-            map.put("data", ex.getMessage());
+            map.put("msg", ex.getMessage());
+
+            final String data;
+            if (ex instanceof UsernameNotFoundException) {
+                data = "用户名不存在";
+            } else if (ex instanceof LockedException) {
+                data = "账号被锁定";
+            } else if (ex instanceof DisabledException) {
+                data = "账号被禁用";
+            } else if (ex instanceof CredentialsExpiredException) {
+                data = "密码过期";
+            } else if (ex instanceof AccountExpiredException) {
+                data = "账号过期";
+            } else if (ex instanceof BadCredentialsException) {
+                data = "账号密码输入有误";
+            } else if (ex instanceof ValidateCodeException) {
+                data = "验证码输入有误";
+            } else {
+                data = ex.getMessage();
+            }
+
+            map.put("data", data);
             final PrintWriter writer = httpServletResponse.getWriter();
             writer.println(JsonUtils.object2String(map));
             writer.flush();
@@ -169,4 +213,37 @@ public class SecurityConfig1 extends WebSecurityConfigurerAdapter {
         };
     }
 
+
+    @Component
+    static class ValidateCodeFilter extends OncePerRequestFilter implements Filter {
+
+        private final AuthenticationFailureHandler authenticationFailureHandler;
+
+        @Autowired
+        public ValidateCodeFilter(final AuthenticationFailureHandler authenticationFailureHandler) {
+            this.authenticationFailureHandler = authenticationFailureHandler;
+        }
+
+        @Override
+        protected void doFilterInternal(final HttpServletRequest req, final HttpServletResponse resp, final FilterChain chain) throws ServletException, IOException {
+            log.info("【doFilterInternal】");
+            if ("/doLogin".equals(req.getRequestURI()) && "POST".equals(req.getMethod())) {
+                try {
+                    validateCode(req);
+                } catch (final AuthenticationException ex) {
+                    authenticationFailureHandler.onAuthenticationFailure(req, resp, ex);
+                }
+            }
+            chain.doFilter(req, resp);
+        }
+
+        private void validateCode(final HttpServletRequest req) {
+            final String code = req.getParameter("code");
+
+            // 如果
+            if (Objects.isNull(code)/*或其它原因*/) {
+                throw new ValidateCodeException();
+            }
+        }
+    }
 }
