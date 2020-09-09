@@ -56,6 +56,8 @@
 >  下面我们就来讨论如何动态加载权限吧
 >  在 Security中，我们可以在配置认证和授权的策略中配置 对象后处理器 ObjectPostProcessor ,通过它我们可以自定义的判断每次请求url应该如何处理。
 
+[SecurityConfig1.java](src/main/java/com/example/lewjun/config/SecurityConfig1.java)
+
 ## Try it
 
 * MacOS/Linux

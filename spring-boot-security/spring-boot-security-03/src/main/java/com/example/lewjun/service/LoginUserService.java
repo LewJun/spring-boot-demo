@@ -20,7 +20,7 @@ public class LoginUserService implements UserDetailsService {
     }
 
     @Override
-    public LoginUser loadUserByUsername(final String username) throws UsernameNotFoundException {
+    public LoginUser loadUserByUsername(final String username) {
         return Optional.ofNullable(loginUserRepository.findByUsername(username))
                 .orElseThrow(() -> new UsernameNotFoundException("username not found"));
     }
