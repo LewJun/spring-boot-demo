@@ -29,6 +29,7 @@ public class SysRoleRepository {
     };
 
     static {
+        // 存放的时候不能以/结尾
         map.put("/admin", new String[]{"ADMIN"});
         map.put("/normal", new String[]{"NORMAL", "USER"});
     }
