@@ -62,7 +62,6 @@ public class SecurityConfig1 extends WebSecurityConfigurerAdapter {
         return provider;
     }
 
-
     @Override
     protected void configure(final AuthenticationManagerBuilder auth) {
         auth.authenticationProvider(authenticationProvider());
@@ -70,7 +69,6 @@ public class SecurityConfig1 extends WebSecurityConfigurerAdapter {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-//        return new BCryptPasswordEncoder();
         return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
 
@@ -125,6 +123,8 @@ public class SecurityConfig1 extends WebSecurityConfigurerAdapter {
                 .and().addFilterBefore(validateCodeFilter(), UsernamePasswordAuthenticationFilter.class)
 
                 .addFilterBefore(new JWTAuthorizationFilter(authenticationManager()), UsernamePasswordAuthenticationFilter.class)
+
+                // 设置Session的创建策略为：Spring Security永不创建HttpSession 不使用HttpSession来获取SecurityContext
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 
         // 配置请求地址的权限 结束
@@ -134,9 +134,9 @@ public class SecurityConfig1 extends WebSecurityConfigurerAdapter {
     @Bean
     AuthenticationEntryPoint authenticationEntryPoint() {
         return (httpServletRequest, resp, e) -> {
-            final Map<String, Object> map = new HashMap<>();
+            final Map<String, Object> map = new HashMap<>(3);
             map.put("code", 0);
-            map.put("msg", "Login is required before access this resource");
+            map.put("msg", "Please login.");
             map.put("data", e.getMessage());
 
             PrintWriterUtils.printlnAndFlush(resp, map);
@@ -147,7 +147,7 @@ public class SecurityConfig1 extends WebSecurityConfigurerAdapter {
     LogoutSuccessHandler logoutSuccessHandler() {
         return (httpServletRequest, resp, authentication) -> {
 
-            final Map<String, Object> map = new HashMap<>();
+            final Map<String, Object> map = new HashMap<>(3);
             map.put("code", 1);
             map.put("msg", "logout success");
             map.put("data", authentication);
@@ -212,7 +212,6 @@ public class SecurityConfig1 extends WebSecurityConfigurerAdapter {
             final String token = JwtTokenUtils.createToken(authentication.getName(), authentication.getAuthorities().toString());
             map.put("data", token);
 
-//            httpServletResponse.setHeader("token", token);
             PrintWriterUtils.printlnAndFlush(httpServletResponse, map);
         };
     }

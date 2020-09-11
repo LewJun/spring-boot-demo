@@ -36,15 +36,21 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
 
     private UsernamePasswordAuthenticationToken getAuthentication(final String tokenHeader) {
         final String token = tokenHeader.replace(JwtTokenUtils.TOKEN_PREFIX, "");
-        final String username = JwtTokenUtils.getUsername(token);
-        final String role = JwtTokenUtils.getRoles(token);// 将[ROLE_XXX,ROLE_YYY]格式的角色字符串转换为数组
-        final String[] roles = StringUtils.strip(role, "[]").split(", ");
-        final Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
-        for (final String s : roles) {
-            authorities.add(new SimpleGrantedAuthority(s));
+        if (JwtTokenUtils.isExpiredOut(token)) {
+            return null;
         }
 
+        final String username = JwtTokenUtils.getUsername(token);
+
         if (username != null) {
+            // 将[ROLE_XXX,ROLE_YYY]格式的角色字符串转换为数组
+            final String role = JwtTokenUtils.getRoles(token);
+            final String[] roles = StringUtils.strip(role, "[]").split(", ");
+            final Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
+            for (final String s : roles) {
+                authorities.add(new SimpleGrantedAuthority(s));
+            }
+
             return new UsernamePasswordAuthenticationToken(username, null, authorities);
         }
         return null;

@@ -14,12 +14,19 @@ import java.util.Map;
 public class JwtTokenUtils {
     public static final String TOKEN_HEADER = "Authorization";
 
-    public static final String TOKEN_PREFIX = "Tiger ";
+    public static final String TOKEN_PREFIX = "Bearer ";
 
-    // 过期时间 秒
-    public static final long EXPIRITION = 5 * 60;
-    // 应用密钥
-    public static final String APPSECRET_KEY = "APPSECRET_KEY";
+    /**
+     * 过期时间 秒
+     */
+    public static final long EXPIRATION = 5 * 60;
+    /**
+     * 密钥
+     */
+    private static final String APP_SECRET_KEY = "010101";
+
+    private JwtTokenUtils() {
+    }
 
     /**
      * 校验Token
@@ -28,7 +35,7 @@ public class JwtTokenUtils {
      */
     public static Claims getClaims(final String token) {
         try {
-            final Jws<Claims> claimsJws = Jwts.parser().setSigningKey(APPSECRET_KEY).parseClaimsJws(token);
+            final Jws<Claims> claimsJws = Jwts.parser().setSigningKey(APP_SECRET_KEY).parseClaimsJws(token);
             return claimsJws.getBody();
         } catch (final ExpiredJwtException ex) {
             log.error("【出现异常：】", ex);
@@ -50,8 +57,8 @@ public class JwtTokenUtils {
                 .setClaims(claims)
                 .claim("username", username)
                 .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + EXPIRITION * 1000))
-                .signWith(SignatureAlgorithm.HS256, APPSECRET_KEY).compact();
+                .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION * 1000))
+                .signWith(SignatureAlgorithm.HS256, APP_SECRET_KEY).compact();
     }
 
     public static String getUsername(final String token) {
