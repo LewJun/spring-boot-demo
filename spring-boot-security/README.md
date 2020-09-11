@@ -10,3 +10,5 @@
 
 * [spring-boot-security-03-json](spring-boot-security-03-json) 像02那样返回json
 
+* [spring-boot-security-03-json-jwt](spring-boot-security-03-json-jwt) 在03-json的基础上实现jwt集成
+
