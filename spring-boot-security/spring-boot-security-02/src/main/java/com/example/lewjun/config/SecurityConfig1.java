@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.*;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -21,7 +22,6 @@ import org.springframework.security.web.authentication.AuthenticationFailureHand
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
-import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.Filter;
@@ -41,8 +41,6 @@ import java.util.Objects;
 @Configuration
 @Slf4j
 public class SecurityConfig1 extends WebSecurityConfigurerAdapter {
-    @Autowired
-    private ValidateCodeFilter validateCodeFilter;
 
     @Override
     protected void configure(final AuthenticationManagerBuilder auth) throws Exception {
@@ -113,7 +111,7 @@ public class SecurityConfig1 extends WebSecurityConfigurerAdapter {
                 .authenticationEntryPoint(authenticationEntryPoint())
 
                 // 在【用户名密码认证过滤器】前设置一层【验证码过滤器】用于校验登录时输入验证码是否正确
-                .and().addFilterBefore(validateCodeFilter, UsernamePasswordAuthenticationFilter.class)
+                .and().addFilterBefore(validateCodeFilter(), UsernamePasswordAuthenticationFilter.class)
 
         // 配置请求地址的权限 结束
         ;
@@ -214,20 +212,22 @@ public class SecurityConfig1 extends WebSecurityConfigurerAdapter {
     }
 
 
-    @Component
-    static class ValidateCodeFilter extends OncePerRequestFilter implements Filter {
+    @Bean
+    ValidateCodeFilter validateCodeFilter() {
+        return new ValidateCodeFilter();
+    }
 
-        private final AuthenticationFailureHandler authenticationFailureHandler;
+    private static class ValidateCodeFilter extends OncePerRequestFilter implements Filter {
 
         @Autowired
-        public ValidateCodeFilter(final AuthenticationFailureHandler authenticationFailureHandler) {
-            this.authenticationFailureHandler = authenticationFailureHandler;
-        }
+        private AuthenticationFailureHandler authenticationFailureHandler;
 
         @Override
         protected void doFilterInternal(final HttpServletRequest req, final HttpServletResponse resp, final FilterChain chain) throws ServletException, IOException {
-            log.info("【doFilterInternal】");
-            if ("/doLogin".equals(req.getRequestURI()) && "POST".equals(req.getMethod())) {
+            log.info("【ValidateCodeFilter doFilterInternal】");
+            // req.getRequestURI() -> /demo/doLogin
+            // req.getServletPath() -> /doLogin
+            if ("/doLogin".equals(req.getServletPath()) && HttpMethod.POST.matches(req.getMethod())) {
                 try {
                     validateCode(req);
                 } catch (final AuthenticationException ex) {
@@ -239,11 +239,13 @@ public class SecurityConfig1 extends WebSecurityConfigurerAdapter {
 
         private void validateCode(final HttpServletRequest req) {
             final String code = req.getParameter("code");
+            final String username = req.getParameter("username");
 
-            // 如果
-            if (Objects.isNull(code)/*或其它原因*/) {
+            // 根据username和code查询是否存在
+            if (Objects.isNull(code) || Objects.isNull(username) /*或其它原因*/) {
                 throw new ValidateCodeException();
             }
+            // queryByUsernameAndCode()
         }
     }
 }
