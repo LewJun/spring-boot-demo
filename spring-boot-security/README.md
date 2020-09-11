@@ -8,3 +8,5 @@
 
 * [spring-boot-security-03](spring-boot-security-03) 进阶使用 自定义Spring Security 的配置，使用UserDetailsService提供用户
 
+* [spring-boot-security-03-json](spring-boot-security-03-json) 像02那样返回json
+

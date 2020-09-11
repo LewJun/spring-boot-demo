@@ -17,6 +17,7 @@
         <module>spring-boot-security-01</module>
         <module>spring-boot-security-02</module>
         <module>spring-boot-security-03</module>
+        <module>spring-boot-security-03-json</module>
     </modules>
 
     <dependencies>
