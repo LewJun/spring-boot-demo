@@ -1,7 +1,6 @@
 package com.example.lewjun.config;
 
 import com.example.lewjun.repository.SysRoleRepository;
-import com.example.lewjun.util.RequestUrlUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.ConfigAttribute;
@@ -29,10 +28,12 @@ public class MyFilterInvocationSecurityMetadataSource implements FilterInvocatio
     public Collection<ConfigAttribute> getAttributes(final Object o) {
         final FilterInvocation filterInvocation = (FilterInvocation) o;
 
-        final String rawRequestUrl = filterInvocation.getRequestUrl();
-        log.info("【rawRequestUrl: {}】", rawRequestUrl);
-
-        final String requestUrl = RequestUrlUtils.getRequestUrlWithoutQueryParams(rawRequestUrl);
+        // 包含了查询参数 /admin?x=1&y=2
+//        final String rawRequestUrl = filterInvocation.getRequestUrl();
+//        log.info("【rawRequestUrl: {}】", rawRequestUrl);
+        // RequestUrlUtils.getRequestUrlWithoutQueryParams(rawRequestUrl);
+        // 无查询参数 /admin
+        final String requestUrl = filterInvocation.getRequest().getServletPath();
         log.info("【requestUrl: {}】", requestUrl);
 
         for (final String s : sysRoleRepository.getPermitAllList()) {
