@@ -2,6 +2,7 @@ package com.example.lewjun.config;
 
 import com.example.lewjun.exception.ValidateCodeException;
 import com.example.lewjun.service.LoginUserService;
+import com.example.lewjun.util.JwtTokenUtils;
 import com.example.lewjun.util.PrintWriterUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import org.springframework.security.config.annotation.ObjectPostProcessor;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
@@ -122,6 +124,9 @@ public class SecurityConfig1 extends WebSecurityConfigurerAdapter {
                 // 在【用户名密码认证过滤器】前设置一层【验证码过滤器】用于校验登录时输入验证码是否正确
                 .and().addFilterBefore(validateCodeFilter(), UsernamePasswordAuthenticationFilter.class)
 
+                .addFilterBefore(new JWTAuthorizationFilter(authenticationManager()), UsernamePasswordAuthenticationFilter.class)
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+
         // 配置请求地址的权限 结束
         ;
     }
@@ -204,8 +209,10 @@ public class SecurityConfig1 extends WebSecurityConfigurerAdapter {
             final Map<String, Object> map = new HashMap<>();
             map.put("code", 1);
             map.put("msg", "login success");
-            map.put("data", authentication);
+            final String token = JwtTokenUtils.createToken(authentication.getName(), authentication.getAuthorities().toString());
+            map.put("data", token);
 
+//            httpServletResponse.setHeader("token", token);
             PrintWriterUtils.printlnAndFlush(httpServletResponse, map);
         };
     }

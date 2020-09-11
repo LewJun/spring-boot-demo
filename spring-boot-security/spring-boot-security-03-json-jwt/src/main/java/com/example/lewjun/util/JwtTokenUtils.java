@@ -17,7 +17,7 @@ public class JwtTokenUtils {
     public static final String TOKEN_PREFIX = "Tiger ";
 
     // 过期时间 秒
-    public static final long EXPIRITION = 2 * 60;
+    public static final long EXPIRITION = 5 * 60;
     // 应用密钥
     public static final String APPSECRET_KEY = "APPSECRET_KEY";
 
@@ -40,8 +40,9 @@ public class JwtTokenUtils {
     /**
      * 生成Token
      */
-    public static String createToken(final String username) {
-        final Map<String, Object> claims = new HashMap<>();
+    public static String createToken(final String username, final String roles) {
+        final Map<String, Object> claims = new HashMap<>(1);
+        claims.put("roles", roles);
 
         return Jwts
                 .builder()
@@ -55,6 +56,10 @@ public class JwtTokenUtils {
 
     public static String getUsername(final String token) {
         return getClaims(token).get("username", String.class);
+    }
+
+    public static String getRoles(final String token) {
+        return getClaims(token).get("roles", String.class);
     }
 
     /**
