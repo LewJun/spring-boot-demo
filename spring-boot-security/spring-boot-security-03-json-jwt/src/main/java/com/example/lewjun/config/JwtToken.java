@@ -20,4 +20,15 @@ public class JwtToken {
     @Value("jwt.expiration")
     private String expiration;
 
+    @Value("${ss.loginProcessingUrl}")
+    private String loginProcessingUrl;
+
+    @Value("${ss.logoutUrl}")
+    private String logoutUrl;
+
+    @Value("${ss.usernameParameter}")
+    private String usernameParameter;
+
+    @Value("${ss.passwordParameter}")
+    private String passwordParameter;
 }

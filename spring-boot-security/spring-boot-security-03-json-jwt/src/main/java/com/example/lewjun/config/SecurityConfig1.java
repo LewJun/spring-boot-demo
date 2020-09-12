@@ -2,7 +2,6 @@ package com.example.lewjun.config;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.ObjectPostProcessor;
@@ -25,6 +24,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig1 extends WebSecurityConfigurerAdapter {
 
     @Autowired
+    private JwtToken jwtToken;
+    @Autowired
     private ValidateCodeFilter validateCodeFilter;
     @Autowired
     private MyDaoAuthenticationProvider myDaoAuthenticationProvider;
@@ -42,18 +43,6 @@ public class SecurityConfig1 extends WebSecurityConfigurerAdapter {
     private MyFilterInvocationSecurityMetadataSource myFilterInvocationSecurityMetadataSource;
     @Autowired
     private MyAccessDecisionManager myAccessDecisionManager;
-
-    @Value("${ss.loginProcessingUrl}")
-    private String loginProcessingUrl;
-
-    @Value("${ss.logoutUrl}")
-    private String logoutUrl;
-
-    @Value("${ss.usernameParameter}")
-    private String usernameParameter;
-
-    @Value("${ss.passwordParameter}")
-    private String passwordParameter;
 
     @Bean
     JWTAuthorizationFilter jwtAuthorizationFilter() throws Exception {
@@ -94,10 +83,10 @@ public class SecurityConfig1 extends WebSecurityConfigurerAdapter {
                 // 设置form表单登录 登录路径 所有用户都可以访问
                 .formLogin()
                 // 访问/doLogin接口，传入username和password参数过来即可。
-                .loginProcessingUrl(loginProcessingUrl)
+                .loginProcessingUrl(jwtToken.getLoginProcessingUrl())
                 // 登陆表单的字段名
-                .usernameParameter(usernameParameter)
-                .passwordParameter(passwordParameter)
+                .usernameParameter(jwtToken.getUsernameParameter())
+                .passwordParameter(jwtToken.getPasswordParameter())
                 // 登录成功处理器
                 .successHandler(myAuthenticationSuccessHandler)
                 // 登录失败处理器
@@ -105,7 +94,7 @@ public class SecurityConfig1 extends WebSecurityConfigurerAdapter {
 
                 // 在前后端分离的情况下，我们希望能像登录授权那样，登出成功后也能返回 JSON 字符串。
                 // 注销处理器
-                .and().logout().logoutUrl(logoutUrl).logoutSuccessHandler(myLogoutSuccessHandler)
+                .and().logout().logoutUrl(jwtToken.getLogoutUrl()).logoutSuccessHandler(myLogoutSuccessHandler)
 
                 // 设置没有权限访问的处理程序
                 .and().exceptionHandling()
