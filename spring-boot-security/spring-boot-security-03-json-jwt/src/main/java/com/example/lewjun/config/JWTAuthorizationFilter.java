@@ -16,7 +16,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 
+/**
+ * jwt 授权过滤器
+ *
+ * @author huiye
+ */
 public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
+
     public JWTAuthorizationFilter(final AuthenticationManager authenticationManager) {
         super(authenticationManager);
     }

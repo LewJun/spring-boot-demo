@@ -17,6 +17,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.BiConsumer;
 
+/**
+ * @author huiye
+ */
 //@Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 

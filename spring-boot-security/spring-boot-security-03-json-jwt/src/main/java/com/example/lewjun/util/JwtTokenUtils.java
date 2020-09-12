@@ -9,6 +9,8 @@ import java.util.Map;
 
 /**
  * 用于进行Token的加密和解密
+ *
+ * @author huiye
  */
 @Slf4j
 public class JwtTokenUtils {
@@ -16,6 +18,9 @@ public class JwtTokenUtils {
 
     public static final String TOKEN_PREFIX = "Bearer ";
 
+    public static final String USERNAME = "USERNAME";
+
+    public static final String ROLES = "ROLES";
     /**
      * 过期时间 秒
      */
@@ -49,24 +54,24 @@ public class JwtTokenUtils {
      */
     public static String createToken(final String username, final String roles) {
         final Map<String, Object> claims = new HashMap<>(1);
-        claims.put("roles", roles);
+        claims.put(ROLES, roles);
 
         return Jwts
                 .builder()
                 .setSubject(username)
                 .setClaims(claims)
-                .claim("username", username)
+                .claim(USERNAME, username)
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION * 1000))
                 .signWith(SignatureAlgorithm.HS256, APP_SECRET_KEY).compact();
     }
 
     public static String getUsername(final String token) {
-        return getClaims(token).get("username", String.class);
+        return getClaims(token).get(USERNAME, String.class);
     }
 
     public static String getRoles(final String token) {
-        return getClaims(token).get("roles", String.class);
+        return getClaims(token).get(ROLES, String.class);
     }
 
     /**

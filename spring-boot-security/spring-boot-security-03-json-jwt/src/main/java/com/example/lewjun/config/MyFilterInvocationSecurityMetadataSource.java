@@ -14,6 +14,8 @@ import java.util.Map;
 
 /**
  * FilterInvocationSecurityMetadataSource ，这个类主要是用来获取当前访问的地址需要哪些权限的，这是一个接口，我们可以实现它，动态的到数据源中获取。
+ *
+ * @author huiye
  */
 @Slf4j
 @Component

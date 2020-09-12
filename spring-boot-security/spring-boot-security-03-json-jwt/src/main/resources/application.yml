@@ -13,3 +13,15 @@ logging:
               method:
                 annotation:
                   RequestMappingHandlerMapping: trace
+
+ss:
+  loginProcessingUrl: /doLogin
+  logoutUrl: /doLogout
+  usernameParameter: username
+  passwordParameter: password
+  codeParameter: code
+
+jwt:
+  tokenHeader: Authorization
+  tokenPrefix: "Bearer "
+  expiration: 300
