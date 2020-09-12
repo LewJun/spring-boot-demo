@@ -20,6 +20,8 @@ ss:
   usernameParameter: username
   passwordParameter: password
   codeParameter: code
+  permitAllList: /permitAll, /*.html, /**/*.html, /**/*.css, /**/*.js
+  anonymousList: /login, /captchaImage, /profile/**, /webjars/**, /swagger-ui.html, /swagger-resources/**, /druid/**
 
 jwt:
   tokenHeader: Authorization

@@ -1,5 +1,7 @@
 package com.example.lewjun.repository;
 
+import com.example.lewjun.config.JwtToken;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
@@ -7,48 +9,32 @@ import java.util.Map;
 
 @Repository
 public class SysRoleRepository {
-    private
-    static final Map<String, String[]> map = new HashMap<>(2);
-
-    private static final String[] anonymousList = {
-            "/login",
-            "/captchaImage",
-            "/profile/**",
-            "/webjars/**",
-            "/swagger-ui.html",
-            "/swagger-resources/**",
-            "/druid/**"
-    };
-
-    private static final String[] permitAllList = {
-            "/permitAll",
-            "/*.html",
-            "/**/*.html",
-            "/**/*.css",
-            "/**/*.js"
-    };
+    private static final Map<String, String[]> MAP = new HashMap<>(2);
 
     static {
         // 存放的时候不能以/结尾
-        map.put("/admin", new String[]{"ADMIN"});
-        map.put("/normal", new String[]{"NORMAL", "USER"});
+        MAP.put("/admin", new String[]{"ADMIN"});
+        MAP.put("/normal", new String[]{"NORMAL", "USER"});
     }
+
+    @Autowired
+    private JwtToken jwtToken;
 
     public Map<String, String[]> findRolesByRequestUrl(final String requestUrl) {
 
-        if (map.containsKey(requestUrl)) {
-            final HashMap<String, String[]> stringHashMap = new HashMap<>();
-            stringHashMap.put(requestUrl, map.get(requestUrl));
+        if (MAP.containsKey(requestUrl)) {
+            final HashMap<String, String[]> stringHashMap = new HashMap<>(1);
+            stringHashMap.put(requestUrl, MAP.get(requestUrl));
             return stringHashMap;
         }
-        return new HashMap<>();
+        return new HashMap<>(0);
     }
 
     public String[] getAnonymousList() {
-        return anonymousList;
+        return jwtToken.getAnonymousList();
     }
 
     public String[] getPermitAllList() {
-        return permitAllList;
+        return jwtToken.getPermitAllList();
     }
 }

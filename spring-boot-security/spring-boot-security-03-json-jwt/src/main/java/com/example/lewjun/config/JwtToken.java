@@ -31,4 +31,10 @@ public class JwtToken {
 
     @Value("${ss.passwordParameter}")
     private String passwordParameter;
+
+    @Value("${ss.permitAllList}")
+    private String[] permitAllList;
+
+    @Value("${ss.anonymousList}")
+    private String[] anonymousList;
 }
