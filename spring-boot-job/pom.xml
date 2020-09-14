@@ -15,5 +15,6 @@
     <modules>
         <module>spring-boot-scheduling</module>
         <module>spring-boot-quartz</module>
+        <module>spring-boot-quartz-cluster</module>
     </modules>
 </project>
