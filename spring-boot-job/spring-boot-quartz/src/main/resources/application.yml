@@ -1,0 +1,34 @@
+server:
+  port: 1234
+  servlet:
+    context-path: /demo
+
+logging:
+  level:
+    org:
+      springframework:
+        web:
+          servlet:
+            mvc:
+              method:
+                annotation:
+                  RequestMappingHandlerMapping: trace
+
+spring:
+  # Quartz 的配置，对应 QuartzProperties 配置类。
+  quartz:
+    job-store-type: MEMORY
+    auto-startup: true
+    startup-delay: 0
+    scheduler-name: quartzScheduler
+    wait-for-jobs-to-complete-on-shutdown: true
+    overwrite-existing-jobs: false
+    properties:
+      org:
+        quartz:
+          threadPool:
+            threadCount: 25
+            threadPriority: 5 # 线程优先级
+            class: org.quartz.simpl.SimpleThreadPool # 线程池类型
+    cron:
+      sayHelloJob: 0/5 * * * * ?
