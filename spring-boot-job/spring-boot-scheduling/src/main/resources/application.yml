@@ -1,0 +1,29 @@
+server:
+  port: 1234
+  servlet:
+    context-path: /demo
+
+logging:
+  level:
+    org:
+      springframework:
+        web:
+          servlet:
+            mvc:
+              method:
+                annotation:
+                  RequestMappingHandlerMapping: trace
+
+
+spring:
+  task:
+    # Spring Task 调度任务的配置，对应 TaskSchedulingProperties 配置类
+    scheduling:
+      thread-name-prefix: spring-task-scheduling- # 线程池的线程名前缀。
+      pool:
+        size: 10 # 线程池大小
+      shutdown:
+        await-termination: true # 应用关闭时，是否等待任务完成。
+        await-termination-period: 60 # 等待任务完成的最大时长，60秒后，无论如何也要关闭应用。
+
+

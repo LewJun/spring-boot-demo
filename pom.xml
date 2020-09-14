@@ -43,7 +43,6 @@
         <module>spring-boot-template-thymeleaf</module>
         <module>spring-boot-banner</module>
         <module>spring-boot-redis-lettuce</module>
-        <module>spring-boot-scheduling</module>
         <module>spring-boot-cos-tencent</module>
         <module>spring-boot-mapstruct</module>
         <module>spring-boot-mapstruct-lombok</module>
@@ -53,6 +52,7 @@
         <module>spring-boot-bbiillii</module>
         <module>spring-boot-groovy</module>
         <module>spring-boot-kotlin</module>
+        <module>spring-boot-job</module>
     </modules>
 
     <properties>
