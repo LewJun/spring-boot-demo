@@ -7,7 +7,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.List;
 
 public class MyPageInfo<T> extends Page<T> {
-    @JsonIgnore
+    protected long current = 1;
+    protected long size = 10;
     protected long pages;
     @JsonIgnore
     protected List<OrderItem> orders;
@@ -17,6 +18,9 @@ public class MyPageInfo<T> extends Page<T> {
     protected boolean searchCount;
     @JsonIgnore
     protected boolean hitCount;
+
+    public MyPageInfo() {
+    }
 
     public MyPageInfo(final long current, final long size) {
         super(current, size);
