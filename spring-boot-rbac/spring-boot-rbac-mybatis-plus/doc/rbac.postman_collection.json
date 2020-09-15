@@ -1,0 +1,664 @@
+{
+  "info": {
+    "_postman_id": "6953c4a4-551a-4b35-beec-0ca3a971f893",
+    "name": "rbac",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "/sys/depts",
+      "item": [
+        {
+          "name": "http://localhost:1234/demo/sys/depts",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "JSESSIONID",
+                "value": "E11427F26CCB57F75982AEFCC5A8F6A5",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:1234/demo/sys/depts",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "1234",
+              "path": [
+                "demo",
+                "sys",
+                "depts"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "http://localhost:1234/demo/sys/depts/111",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "JSESSIONID",
+                "value": "E11427F26CCB57F75982AEFCC5A8F6A5",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "id",
+                  "value": "6",
+                  "type": "text",
+                  "disabled": true
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://localhost:1234/demo/sys/depts/5",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "1234",
+              "path": [
+                "demo",
+                "sys",
+                "depts",
+                "5"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "http://localhost:1234/demo/sys/depts",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "id",
+                  "value": "10",
+                  "type": "text"
+                },
+                {
+                  "key": "name",
+                  "value": "社保开发组",
+                  "type": "text"
+                },
+                {
+                  "key": "parentId",
+                  "value": "2",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://localhost:1234/demo/sys/depts",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "1234",
+              "path": [
+                "demo",
+                "sys",
+                "depts"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "http://localhost:1234/demo/sys/depts",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "name",
+                  "value": "幼儿园开发小组",
+                  "type": "text"
+                },
+                {
+                  "key": "parentId",
+                  "value": "2",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://localhost:1234/demo/sys/depts",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "1234",
+              "path": [
+                "demo",
+                "sys",
+                "depts"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "protocolProfileBehavior": {}
+    },
+    {
+      "name": "/sys/users",
+      "item": [
+        {
+          "name": "http://localhost:1234/demo/sys/users",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:1234/demo/sys/users",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "1234",
+              "path": [
+                "demo",
+                "sys",
+                "users"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "http://localhost:1234/demo/sys/users?deptId=1",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:1234/demo/sys/users?deptId=1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "1234",
+              "path": [
+                "demo",
+                "sys",
+                "users"
+              ],
+              "query": [
+                {
+                  "key": "deptId",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "http://localhost:1234/demo/sys/users",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "id",
+                  "value": "2",
+                  "type": "text"
+                },
+                {
+                  "key": "nickname",
+                  "value": "普通人",
+                  "type": "text"
+                },
+                {
+                  "key": "username",
+                  "value": "normal",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://localhost:1234/demo/sys/users",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "1234",
+              "path": [
+                "demo",
+                "sys",
+                "users"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "http://localhost:1234/demo/sys/users/4",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:1234/demo/sys/users/5",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "1234",
+              "path": [
+                "demo",
+                "sys",
+                "users",
+                "5"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "http://localhost:1234/demo/sys/users",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "username",
+                  "value": "xyz",
+                  "type": "text"
+                },
+                {
+                  "key": "nickname",
+                  "value": "XYZ",
+                  "type": "text"
+                },
+                {
+                  "key": "deptId",
+                  "value": "3",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://localhost:1234/demo/sys/users",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "1234",
+              "path": [
+                "demo",
+                "sys",
+                "users"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "protocolProfileBehavior": {}
+    },
+    {
+      "name": "/sys/roles",
+      "item": [
+        {
+          "name": "http://localhost:1234/demo/sys/roles",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:1234/demo/sys/roles",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "1234",
+              "path": [
+                "demo",
+                "sys",
+                "roles"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "http://localhost:1234/demo/sys/roles",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "name",
+                  "value": "opr",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://localhost:1234/demo/sys/roles",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "1234",
+              "path": [
+                "demo",
+                "sys",
+                "roles"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "http://localhost:1234/demo/sys/roles",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "id",
+                  "value": "5",
+                  "type": "text"
+                },
+                {
+                  "key": "name",
+                  "value": "dev2",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://localhost:1234/demo/sys/roles",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "1234",
+              "path": [
+                "demo",
+                "sys",
+                "roles"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "http://localhost:1234/demo/sys/roles/5",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:1234/demo/sys/roles/5",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "1234",
+              "path": [
+                "demo",
+                "sys",
+                "roles",
+                "5"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "protocolProfileBehavior": {}
+    },
+    {
+      "name": "/sys/permissions",
+      "item": [
+        {
+          "name": "http://localhost:1234/demo/sys/permissions",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:1234/demo/sys/permissions",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "1234",
+              "path": [
+                "demo",
+                "sys",
+                "permissions"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "http://localhost:1234/demo/sys/permissions",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "name",
+                  "value": "xxx",
+                  "type": "text"
+                },
+                {
+                  "key": "url",
+                  "value": "/xxx",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://localhost:1234/demo/sys/permissions",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "1234",
+              "path": [
+                "demo",
+                "sys",
+                "permissions"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "http://localhost:1234/demo/sys/permissions",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "name",
+                  "value": "xxx",
+                  "type": "text"
+                },
+                {
+                  "key": "url",
+                  "value": "/xxx",
+                  "type": "text"
+                },
+                {
+                  "key": "id",
+                  "value": "3",
+                  "type": "text"
+                },
+                {
+                  "key": "parentId",
+                  "value": "2",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://localhost:1234/demo/sys/permissions",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "1234",
+              "path": [
+                "demo",
+                "sys",
+                "permissions"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "http://localhost:1234/demo/sys/permissions/3",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:1234/demo/sys/permissions/3",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "1234",
+              "path": [
+                "demo",
+                "sys",
+                "permissions",
+                "3"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "protocolProfileBehavior": {}
+    },
+    {
+      "name": "/sys/userRoles",
+      "item": [
+        {
+          "name": "http://localhost:1234/demo/sys/userRoles",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:1234/demo/sys/userRoles",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "1234",
+              "path": [
+                "demo",
+                "sys",
+                "userRoles"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "http://localhost:1234/demo/sys/userRoles",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "userId",
+                  "value": "1",
+                  "type": "text"
+                },
+                {
+                  "key": "roleId",
+                  "value": "33333",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://localhost:1234/demo/sys/userRoles",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "1234",
+              "path": [
+                "demo",
+                "sys",
+                "userRoles"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "http://localhost:1234/demo/sys/userRoles/delete",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "userId",
+                  "value": "1",
+                  "type": "text"
+                },
+                {
+                  "key": "roleId",
+                  "value": "33333",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://localhost:1234/demo/sys/userRoles/delete",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "1234",
+              "path": [
+                "demo",
+                "sys",
+                "userRoles",
+                "delete"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "protocolProfileBehavior": {}
+    }
+  ],
+  "protocolProfileBehavior": {}
+}

@@ -5,8 +5,8 @@ import com.example.lewjun.base.MyServiceImpl;
 import com.example.lewjun.domain.SysDept;
 import com.example.lewjun.domain.SysDeptNode;
 import com.example.lewjun.mapper.SysDeptMapper;
+import com.example.lewjun.mapper.SysUserMapper;
 import com.example.lewjun.service.SysDeptService;
-import com.example.lewjun.service.SysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,11 +16,11 @@ import java.util.List;
 @Service
 public class SysDeptServiceImpl extends MyServiceImpl<SysDeptMapper, SysDept> implements SysDeptService {
 
-    private final SysUserService sysUserService;
+    private final SysUserMapper sysUserMapper;
 
     @Autowired
-    public SysDeptServiceImpl(final SysUserService sysUserService) {
-        this.sysUserService = sysUserService;
+    public SysDeptServiceImpl(final SysUserMapper sysUserMapper) {
+        this.sysUserMapper = sysUserMapper;
     }
 
     @Override
@@ -60,7 +60,7 @@ public class SysDeptServiceImpl extends MyServiceImpl<SysDeptMapper, SysDept> im
             throw new RuntimeException("删除失败，部门存在下级部门。");
         }
 
-        if (sysUserService.existsByDeptId(id)) {
+        if (sysUserMapper.existsByDeptId(id).isPresent()) {
             throw new RuntimeException("删除失败，部门被用户使用。");
         }
 
@@ -76,7 +76,11 @@ public class SysDeptServiceImpl extends MyServiceImpl<SysDeptMapper, SysDept> im
 
     @Override
     public boolean save(final SysDept entity) {
-        if (findIdByParentIdAndName(entity.getParentId(), entity.getName())) {
+        final Integer parentId = entity.getParentId();
+        if (baseMapper.selectById(parentId) == null) {
+            throw new RuntimeException("父级部门不存在。");
+        }
+        if (findIdByParentIdAndName(parentId, entity.getName())) {
             throw new RuntimeException("同一个部门下的子部门名称不能重复。");
         }
         return super.save(entity);
@@ -84,10 +88,15 @@ public class SysDeptServiceImpl extends MyServiceImpl<SysDeptMapper, SysDept> im
 
     @Override
     public boolean updateById(final SysDept entity) {
-        if (!baseMapper.findIdByParentIdAndName(entity.getParentId(), entity.getName()).orElse(0).equals(entity.getId())) {
-            throw new RuntimeException("同一个部门下的子部门名称不能重复。");
+        if (getById(entity.getId()) == null) {
+            throw new RuntimeException("资源不存在。");
         }
-        return super.updateById(entity);
+        final int ret = baseMapper.findIdByParentIdAndName(entity.getParentId(), entity.getName()).orElse(0);
+        if (ret == 0 || ret == entity.getId()) {
+            return super.updateById(entity);
+        }
+
+        throw new RuntimeException("同一个部门下的子部门名称不能重复。");
     }
 
     public boolean findIdByParentIdAndName(final Integer parentId, final String name) {

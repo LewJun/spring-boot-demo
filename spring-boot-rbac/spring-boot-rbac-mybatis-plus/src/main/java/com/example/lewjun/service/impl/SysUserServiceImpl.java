@@ -3,14 +3,23 @@ package com.example.lewjun.service.impl;
 import com.example.lewjun.base.MyServiceImpl;
 import com.example.lewjun.domain.SysUser;
 import com.example.lewjun.domain.SysUserLoginDetailsDO;
+import com.example.lewjun.mapper.SysDeptMapper;
 import com.example.lewjun.mapper.SysUserMapper;
 import com.example.lewjun.service.SysUserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.Serializable;
 
 @Service
 public class SysUserServiceImpl extends MyServiceImpl<SysUserMapper, SysUser> implements SysUserService {
+
+    private final SysDeptMapper sysDeptMapper;
+
+    @Autowired
+    public SysUserServiceImpl(final SysDeptMapper sysDeptMapper) {
+        this.sysDeptMapper = sysDeptMapper;
+    }
 
     @Override
     public boolean existsByUsername(final String username) {
@@ -19,10 +28,7 @@ public class SysUserServiceImpl extends MyServiceImpl<SysUserMapper, SysUser> im
 
     @Override
     public Integer findUserIdByUsername(final String username) {
-        return baseMapper.findUserIdByUsername(username)
-                .orElseThrow(
-                        () -> new RuntimeException("用户名不存在。")
-                );
+        return baseMapper.findUserIdByUsername(username).orElse(0);
     }
 
     @Override
@@ -42,6 +48,11 @@ public class SysUserServiceImpl extends MyServiceImpl<SysUserMapper, SysUser> im
         if (existsByUsername(sysUser.getUsername())) {
             throw new RuntimeException("用户名已存在。");
         }
+
+        final Integer deptId = sysUser.getDeptId();
+        if (deptId != null && sysDeptMapper.selectById(deptId) == null) {
+            throw new RuntimeException("所选部门不存在。");
+        }
         return super.save(sysUser);
     }
 
@@ -56,17 +67,22 @@ public class SysUserServiceImpl extends MyServiceImpl<SysUserMapper, SysUser> im
 
     @Override
     public boolean updateById(final SysUser entity) {
-        if (entity == null) {
-            return false;
-        }
-
         final Integer id = entity.getId();
-        if (this.getById(id) == null) {
-            throw new RuntimeException("用户不存在。");
+        if (getById(id) == null) {
+            throw new RuntimeException("资源不存在。");
         }
 
-        if (!findUserIdByUsername(entity.getUsername()).equals(id)) {
-            throw new RuntimeException("用户名已存在。");
+        final String username = entity.getUsername();
+        if (username != null) {
+            final int userId = findUserIdByUsername(username);
+            if (userId != 0 && userId != id) {
+                throw new RuntimeException("用户名已存在。");
+            }
+        }
+
+        final Integer deptId = entity.getDeptId();
+        if (deptId != null && sysDeptMapper.selectById(deptId) == null) {
+            throw new RuntimeException("所选部门不存在。");
         }
 
         return super.updateById(entity);

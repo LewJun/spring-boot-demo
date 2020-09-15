@@ -5,8 +5,8 @@ import com.example.lewjun.base.MyServiceImpl;
 import com.example.lewjun.domain.SysPermission;
 import com.example.lewjun.domain.SysPermissionWithSubSysPermission;
 import com.example.lewjun.mapper.SysPermissionMapper;
+import com.example.lewjun.mapper.SysRolePermissionMapper;
 import com.example.lewjun.service.SysPermissionService;
-import com.example.lewjun.service.SysRolePermissionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,11 +15,12 @@ import java.io.Serializable;
 
 @Service
 public class SysPermissionServiceImpl extends MyServiceImpl<SysPermissionMapper, SysPermission> implements SysPermissionService {
-    private final SysRolePermissionService sysRolePermissionService;
+
+    private final SysRolePermissionMapper sysRolePermissionMapper;
 
     @Autowired
-    public SysPermissionServiceImpl(final SysRolePermissionService sysRolePermissionService) {
-        this.sysRolePermissionService = sysRolePermissionService;
+    public SysPermissionServiceImpl(final SysRolePermissionMapper sysRolePermissionMapper) {
+        this.sysRolePermissionMapper = sysRolePermissionMapper;
     }
 
     @Override
@@ -56,7 +57,7 @@ public class SysPermissionServiceImpl extends MyServiceImpl<SysPermissionMapper,
             throw new RuntimeException("删除失败，权限存在子权限。");
         }
 
-        if (sysRolePermissionService.existsRolePermissionByPermissionId(id)) {
+        if (sysRolePermissionMapper.existsRolePermissionByPermissionId(id).isPresent()) {
             throw new RuntimeException("删除失败，权限正在被角色使用。");
         }
 
@@ -80,11 +81,17 @@ public class SysPermissionServiceImpl extends MyServiceImpl<SysPermissionMapper,
     public boolean updateById(final SysPermission entity) {
 
         final Integer id = entity.getId();
-        if (!baseMapper.findIdByParentIdAndName(entity.getParentId(), entity.getName()).orElse(0).equals(id)) {
+        if (getById(id) == null) {
+            throw new RuntimeException("资源不存在。");
+        }
+
+        int ret = baseMapper.findIdByParentIdAndName(entity.getParentId(), entity.getName()).orElse(0);
+        if (ret != 0 && ret != id) {
             throw new RuntimeException("权限名称重复");
         }
 
-        if (!baseMapper.findIdByParentIdAndUrl(entity.getParentId(), entity.getUrl()).orElse(0).equals(id)) {
+        ret = baseMapper.findIdByParentIdAndUrl(entity.getParentId(), entity.getUrl()).orElse(0);
+        if (ret != 0 && ret != id) {
             throw new RuntimeException("url地址重复");
         }
 

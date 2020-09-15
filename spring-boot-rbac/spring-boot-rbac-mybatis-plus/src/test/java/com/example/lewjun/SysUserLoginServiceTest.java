@@ -7,7 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.security.crypto.password.PasswordEncoder;
+//import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Slf4j
 @SpringBootTest
@@ -18,9 +18,9 @@ class SysUserLoginServiceTest {
 
     @Autowired
     private SysUserLoginService sysUserLoginService;
-
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+//
+//    @Autowired
+//    private PasswordEncoder passwordEncoder;
 
     @Test
     void testLogin() {
@@ -36,12 +36,12 @@ class SysUserLoginServiceTest {
         log.info("【isLogin: {}】", isLogin);
     }
 
-    @Test
-    void testPasswordEncode() {
-        final String rawPassword = "normal";
-        final String passwordEncode = passwordEncoder.encode(rawPassword);
-        log.info("【encode: {}】", passwordEncode);
-
-        log.info("【match: {}】", passwordEncoder.matches(rawPassword, passwordEncode));
-    }
+//    @Test
+//    void testPasswordEncode() {
+//        final String rawPassword = "normal";
+//        final String passwordEncode = passwordEncoder.encode(rawPassword);
+//        log.info("【encode: {}】", passwordEncode);
+//
+//        log.info("【match: {}】", passwordEncoder.matches(rawPassword, passwordEncode));
+//    }
 }
