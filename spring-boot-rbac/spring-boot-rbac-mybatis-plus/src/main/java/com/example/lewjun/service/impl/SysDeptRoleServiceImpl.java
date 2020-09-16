@@ -47,6 +47,7 @@ public class SysDeptRoleServiceImpl extends MyServiceImpl<SysDeptRoleMapper, Sys
             throw BussException.of(EnumApiResultStatus.SYS_ROLE_NOT_EXISTS);
         }
 
-        return super.save(entity);
+        return baseMapper.existsBySysDeptRole(entity).isPresent()
+                || super.save(entity);
     }
 }

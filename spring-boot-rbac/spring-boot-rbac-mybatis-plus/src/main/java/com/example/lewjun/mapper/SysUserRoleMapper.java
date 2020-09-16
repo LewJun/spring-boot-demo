@@ -25,7 +25,7 @@ public interface SysUserRoleMapper extends MyBaseMapper<SysUserRole> {
     @Select("select 1 from sys_user_role t where t.user_id = #{userId} and t.role_id = #{roleId} limit 1")
     Optional<Integer> existsByUserIdAndRoleId(Integer userId, Integer roleId);
 
-    @Insert("replace into sys_user_role(user_id, role_id) select #{userId}, #{roleId}")
+    @Insert("insert into sys_user_role(user_id, role_id) values (#{userId}, #{roleId})")
     @Override
     int insert(SysUserRole entity);
 }

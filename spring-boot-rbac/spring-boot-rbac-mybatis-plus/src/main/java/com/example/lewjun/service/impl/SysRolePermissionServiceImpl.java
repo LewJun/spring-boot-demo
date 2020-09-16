@@ -46,6 +46,7 @@ public class SysRolePermissionServiceImpl extends MyServiceImpl<SysRolePermissio
         if (sysPermissionMapper.selectById(permissionId) == null) {
             throw BussException.of(EnumApiResultStatus.SYS_PERMISSION_NOT_EXISTS);
         }
-        return super.save(entity);
+        return baseMapper.existsBySysRolePermission(entity).isPresent()
+                || super.save(entity);
     }
 }

@@ -28,7 +28,7 @@ public interface SysRolePermissionMapper extends MyBaseMapper<SysRolePermission>
     @Select("select 1 from sys_role_permission t where t.role_id=#{roleId} and t.permission_id=#{permissionId} limit 1")
     Optional<Integer> existsBySysRolePermission(SysRolePermission entity);
 
-    @Insert("replace into sys_role_permission(role_id, permission_id) select #{roleId}, #{permissionId}")
+    @Insert("insert into sys_role_permission(role_id, permission_id) values (#{roleId}, #{permissionId})")
     @Override
     int insert(SysRolePermission entity);
 }

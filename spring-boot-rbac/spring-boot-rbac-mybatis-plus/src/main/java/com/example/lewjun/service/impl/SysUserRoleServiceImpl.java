@@ -48,6 +48,7 @@ public class SysUserRoleServiceImpl extends MyServiceImpl<SysUserRoleMapper, Sys
             throw BussException.of(EnumApiResultStatus.SYS_ROLE_NOT_EXISTS);
         }
 
-        return super.save(entity);
+        return baseMapper.existsByUserIdAndRoleId(entity.getUserId(), entity.getRoleId()).isPresent()
+                || super.save(entity);
     }
 }
