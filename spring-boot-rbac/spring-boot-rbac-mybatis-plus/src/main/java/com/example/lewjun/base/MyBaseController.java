@@ -5,10 +5,10 @@ import com.example.lewjun.domain.BaseObj;
 import com.example.lewjun.utils.QueryWrapperUtils;
 import org.springframework.web.bind.annotation.*;
 
-public class MyBaseController<T extends BaseObj> {
-    protected MyIService<T> baseService;
+public abstract class MyBaseController<T extends BaseObj, S extends MyIService<T>> {
+    protected S baseService;
 
-    public MyBaseController(final MyIService<T> baseService) {
+    public MyBaseController(final S baseService) {
         this.baseService = baseService;
     }
 

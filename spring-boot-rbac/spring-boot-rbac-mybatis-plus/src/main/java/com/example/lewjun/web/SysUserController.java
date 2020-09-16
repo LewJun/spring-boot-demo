@@ -9,9 +9,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/sys/users")
-public class SysUserController extends MyBaseController<SysUser> {
+public class SysUserController extends MyBaseController<SysUser, SysUserService> {
+
     @Autowired
-    public SysUserController(final SysUserService sysUserService) {
-        super(sysUserService);
+    public SysUserController(final SysUserService baseService) {
+        super(baseService);
     }
 }

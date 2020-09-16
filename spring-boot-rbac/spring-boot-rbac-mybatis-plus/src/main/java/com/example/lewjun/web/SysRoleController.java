@@ -9,9 +9,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/sys/roles")
-public class SysRoleController extends MyBaseController<SysRole> {
+public class SysRoleController extends MyBaseController<SysRole, SysRoleService> {
+
     @Autowired
-    public SysRoleController(final SysRoleService sysRoleService) {
-        super(sysRoleService);
+    public SysRoleController(final SysRoleService baseService) {
+        super(baseService);
     }
 }

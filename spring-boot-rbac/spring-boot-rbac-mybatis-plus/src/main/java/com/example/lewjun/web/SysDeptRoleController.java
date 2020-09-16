@@ -10,18 +10,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/sys/deptRoles")
-public class SysDeptRoleController extends MyBaseController<SysDeptRole> {
-
-    private final SysDeptRoleService sysDeptRoleService;
+public class SysDeptRoleController extends MyBaseController<SysDeptRole, SysDeptRoleService> {
 
     @Autowired
-    public SysDeptRoleController(final SysDeptRoleService sysDeptRoleService) {
-        super(sysDeptRoleService);
-        this.sysDeptRoleService = sysDeptRoleService;
+    public SysDeptRoleController(final SysDeptRoleService baseService) {
+        super(baseService);
     }
 
     @DeleteMapping("/delete")
     public boolean delete(final SysDeptRole sysDeptRole) {
-        return sysDeptRoleService.remove(sysDeptRole);
+        return baseService.remove(sysDeptRole);
     }
 }

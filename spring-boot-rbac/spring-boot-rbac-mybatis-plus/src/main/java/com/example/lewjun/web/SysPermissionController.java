@@ -9,9 +9,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/sys/permissions")
-public class SysPermissionController extends MyBaseController<SysPermission> {
+public class SysPermissionController extends MyBaseController<SysPermission, SysPermissionService> {
+
     @Autowired
-    public SysPermissionController(final SysPermissionService sysPermissionService) {
-        super(sysPermissionService);
+    public SysPermissionController(final SysPermissionService baseService) {
+        super(baseService);
     }
 }

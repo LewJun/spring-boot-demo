@@ -9,9 +9,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/sys/depts")
-public class SysDeptController extends MyBaseController<SysDept> {
+public class SysDeptController extends MyBaseController<SysDept, SysDeptService> {
+
     @Autowired
-    public SysDeptController(final SysDeptService sysDeptService) {
-        super(sysDeptService);
+    public SysDeptController(final SysDeptService baseService) {
+        super(baseService);
     }
 }

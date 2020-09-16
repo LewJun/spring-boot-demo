@@ -10,17 +10,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/sys/rolePermissions")
-public class SysRolePermissionController extends MyBaseController<SysRolePermission> {
-    private final SysRolePermissionService sysRolePermissionService;
+public class SysRolePermissionController extends MyBaseController<SysRolePermission, SysRolePermissionService> {
 
     @Autowired
-    public SysRolePermissionController(final SysRolePermissionService sysRolePermissionService) {
-        super(sysRolePermissionService);
-        this.sysRolePermissionService = sysRolePermissionService;
+    public SysRolePermissionController(final SysRolePermissionService baseService) {
+        super(baseService);
     }
 
     @DeleteMapping("/delete")
     public boolean delete(final SysRolePermission sysRolePermission) {
-        return sysRolePermissionService.remove(sysRolePermission);
+        return baseService.remove(sysRolePermission);
     }
 }
