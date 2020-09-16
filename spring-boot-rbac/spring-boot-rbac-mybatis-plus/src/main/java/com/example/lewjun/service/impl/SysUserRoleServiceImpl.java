@@ -1,6 +1,8 @@
 package com.example.lewjun.service.impl;
 
 import com.example.lewjun.base.MyServiceImpl;
+import com.example.lewjun.common.BussException;
+import com.example.lewjun.common.EnumApiResultStatus;
 import com.example.lewjun.domain.SysUserRole;
 import com.example.lewjun.mapper.SysRoleMapper;
 import com.example.lewjun.mapper.SysUserMapper;
@@ -38,12 +40,12 @@ public class SysUserRoleServiceImpl extends MyServiceImpl<SysUserRoleMapper, Sys
     public boolean save(final SysUserRole entity) {
         final Integer userId = entity.getUserId();
         if (sysUserMapper.selectById(userId) == null) {
-            throw new RuntimeException("用户不存在。");
+            throw BussException.of(EnumApiResultStatus.SYS_USER_NOT_EXISTS);
         }
 
         final Integer roleId = entity.getRoleId();
         if (sysRoleMapper.selectById(roleId) == null) {
-            throw new RuntimeException("角色不存在。");
+            throw BussException.of(EnumApiResultStatus.SYS_ROLE_NOT_EXISTS);
         }
 
         return super.save(entity);

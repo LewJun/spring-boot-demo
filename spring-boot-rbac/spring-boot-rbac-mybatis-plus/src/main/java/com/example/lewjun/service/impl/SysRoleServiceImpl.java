@@ -2,6 +2,8 @@ package com.example.lewjun.service.impl;
 
 import com.example.lewjun.base.MyPageInfo;
 import com.example.lewjun.base.MyServiceImpl;
+import com.example.lewjun.common.BussException;
+import com.example.lewjun.common.EnumApiResultStatus;
 import com.example.lewjun.domain.SysRole;
 import com.example.lewjun.mapper.SysDeptRoleMapper;
 import com.example.lewjun.mapper.SysRoleMapper;
@@ -43,7 +45,7 @@ public class SysRoleServiceImpl extends MyServiceImpl<SysRoleMapper, SysRole> im
     @Override
     public boolean save(final SysRole entity) {
         if (existsByName(entity.getName())) {
-            throw new RuntimeException("名称已存在");
+            throw BussException.of(EnumApiResultStatus.SYS_ROLE_NAME_EXISTS);
         }
         return super.save(entity);
     }
@@ -51,11 +53,11 @@ public class SysRoleServiceImpl extends MyServiceImpl<SysRoleMapper, SysRole> im
     @Override
     public boolean updateById(final SysRole entity) {
         if (getById(entity.getId()) == null) {
-            throw new RuntimeException("资源不存在。");
+            throw BussException.of(EnumApiResultStatus.CONTENT_NOT_FOUND);
         }
         final int ret = baseMapper.existsByName(entity.getName()).orElse(0);
         if (ret != 0 && ret != entity.getId()) {
-            throw new RuntimeException("名称已存在。");
+            throw BussException.of(EnumApiResultStatus.SYS_ROLE_NAME_EXISTS);
         }
 
         return super.updateById(entity);
@@ -67,11 +69,11 @@ public class SysRoleServiceImpl extends MyServiceImpl<SysRoleMapper, SysRole> im
     @Override
     public boolean removeById(final Serializable id) {
         if (sysUserRoleMapper.existsSysUserRolesByRoleId(id).isPresent()) {
-            throw new RuntimeException("删除失败，角色正在被用户使用。");
+            throw BussException.of(EnumApiResultStatus.SYS_ROLE_USER_USED_ERR);
         }
 
         if (sysDeptRoleMapper.existsSysDeptRolesByRoleId(id).isPresent()) {
-            throw new RuntimeException("删除失败，角色正在被部门使用。");
+            throw BussException.of(EnumApiResultStatus.SYS_ROLE_DEPT_USED_ERR);
         }
 
         return super.removeById(id);

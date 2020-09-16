@@ -1,6 +1,8 @@
 package com.example.lewjun.service.impl;
 
 import com.example.lewjun.base.MyServiceImpl;
+import com.example.lewjun.common.BussException;
+import com.example.lewjun.common.EnumApiResultStatus;
 import com.example.lewjun.domain.SysUser;
 import com.example.lewjun.domain.SysUserLoginDetailsDO;
 import com.example.lewjun.mapper.SysDeptMapper;
@@ -39,19 +41,19 @@ public class SysUserServiceImpl extends MyServiceImpl<SysUserMapper, SysUser> im
     @Override
     public SysUserLoginDetailsDO findByUsername(final String username) {
         return baseMapper.findByUsername(username).orElseThrow(
-                () -> new RuntimeException("用户名或密码错误。")
+                () -> BussException.of(EnumApiResultStatus.SYS_USER_USERNAME_OR_PASSWORD_WRONG_ERR)
         );
     }
 
     @Override
     public boolean save(final SysUser sysUser) {
         if (existsByUsername(sysUser.getUsername())) {
-            throw new RuntimeException("用户名已存在。");
+            throw BussException.of(EnumApiResultStatus.SYS_USER_USERNAME_EXISTS);
         }
 
         final Integer deptId = sysUser.getDeptId();
         if (deptId != null && sysDeptMapper.selectById(deptId) == null) {
-            throw new RuntimeException("所选部门不存在。");
+            throw BussException.of(EnumApiResultStatus.SYS_DEPT_NOT_EXISTS);
         }
         return super.save(sysUser);
     }
@@ -59,7 +61,7 @@ public class SysUserServiceImpl extends MyServiceImpl<SysUserMapper, SysUser> im
     @Override
     public boolean removeById(final Serializable id) {
         if (isRoot(id)) {
-            throw new RuntimeException("不允许删除超级管理员。");
+            throw BussException.of(EnumApiResultStatus.SYS_USER_REMOVE_ROOT_ERR);
         }
 
         return super.removeById(id);
@@ -69,20 +71,20 @@ public class SysUserServiceImpl extends MyServiceImpl<SysUserMapper, SysUser> im
     public boolean updateById(final SysUser entity) {
         final Integer id = entity.getId();
         if (getById(id) == null) {
-            throw new RuntimeException("资源不存在。");
+            throw BussException.of(EnumApiResultStatus.CONTENT_NOT_FOUND);
         }
 
         final String username = entity.getUsername();
         if (username != null) {
             final int userId = findUserIdByUsername(username);
             if (userId != 0 && userId != id) {
-                throw new RuntimeException("用户名已存在。");
+                throw BussException.of(EnumApiResultStatus.SYS_USER_USERNAME_EXISTS);
             }
         }
 
         final Integer deptId = entity.getDeptId();
         if (deptId != null && sysDeptMapper.selectById(deptId) == null) {
-            throw new RuntimeException("所选部门不存在。");
+            throw BussException.of(EnumApiResultStatus.SYS_DEPT_NOT_EXISTS);
         }
 
         return super.updateById(entity);

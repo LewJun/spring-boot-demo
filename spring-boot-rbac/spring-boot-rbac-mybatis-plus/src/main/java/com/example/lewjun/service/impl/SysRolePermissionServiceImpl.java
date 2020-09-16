@@ -1,6 +1,8 @@
 package com.example.lewjun.service.impl;
 
 import com.example.lewjun.base.MyServiceImpl;
+import com.example.lewjun.common.BussException;
+import com.example.lewjun.common.EnumApiResultStatus;
 import com.example.lewjun.domain.SysRolePermission;
 import com.example.lewjun.mapper.SysPermissionMapper;
 import com.example.lewjun.mapper.SysRoleMapper;
@@ -30,10 +32,6 @@ public class SysRolePermissionServiceImpl extends MyServiceImpl<SysRolePermissio
         return baseMapper.existsRolePermissionByPermissionId(permissionId).isPresent();
     }
 
-    private boolean existsBySysRolePermission(final SysRolePermission entity) {
-        return baseMapper.existsBySysRolePermission(entity).isPresent();
-    }
-
     @Transactional(
             rollbackFor = {Exception.class}
     )
@@ -41,12 +39,12 @@ public class SysRolePermissionServiceImpl extends MyServiceImpl<SysRolePermissio
     public boolean save(final SysRolePermission entity) {
         final Integer roleId = entity.getRoleId();
         if (sysRoleMapper.selectById(roleId) == null) {
-            throw new RuntimeException("所选角色不存在。");
+            throw BussException.of(EnumApiResultStatus.SYS_ROLE_NOT_EXISTS);
         }
 
         final Integer permissionId = entity.getPermissionId();
         if (sysPermissionMapper.selectById(permissionId) == null) {
-            throw new RuntimeException("所选权限不存在。");
+            throw BussException.of(EnumApiResultStatus.SYS_PERMISSION_NOT_EXISTS);
         }
         return super.save(entity);
     }

@@ -2,6 +2,8 @@ package com.example.lewjun.service.impl;
 
 import com.example.lewjun.base.MyPageInfo;
 import com.example.lewjun.base.MyServiceImpl;
+import com.example.lewjun.common.BussException;
+import com.example.lewjun.common.EnumApiResultStatus;
 import com.example.lewjun.domain.SysPermission;
 import com.example.lewjun.domain.SysPermissionWithSubSysPermission;
 import com.example.lewjun.mapper.SysPermissionMapper;
@@ -54,11 +56,11 @@ public class SysPermissionServiceImpl extends MyServiceImpl<SysPermissionMapper,
     @Override
     public boolean removeById(final Serializable id) {
         if (existsSubPermissionsByPermissionId(id)) {
-            throw new RuntimeException("删除失败，权限存在子权限。");
+            throw BussException.of(EnumApiResultStatus.SYS_PERMISSION_HAS_SUB_ERR);
         }
 
         if (sysRolePermissionMapper.existsRolePermissionByPermissionId(id).isPresent()) {
-            throw new RuntimeException("删除失败，权限正在被角色使用。");
+            throw BussException.of(EnumApiResultStatus.SYS_PERMISSION_ROLE_USED_ERR);
         }
 
         return super.removeById(id);
@@ -67,11 +69,11 @@ public class SysPermissionServiceImpl extends MyServiceImpl<SysPermissionMapper,
     @Override
     public boolean save(final SysPermission entity) {
         if (baseMapper.findIdByParentIdAndName(entity.getParentId(), entity.getName()).isPresent()) {
-            throw new RuntimeException("权限名称重复");
+            throw BussException.of(EnumApiResultStatus.SYS_PERMISSION_NAME_EXISTS);
         }
 
         if (baseMapper.findIdByParentIdAndUrl(entity.getParentId(), entity.getUrl()).isPresent()) {
-            throw new RuntimeException("url地址重复");
+            throw BussException.of(EnumApiResultStatus.SYS_PERMISSION_URL_EXISTS);
         }
 
         return super.save(entity);
@@ -82,17 +84,17 @@ public class SysPermissionServiceImpl extends MyServiceImpl<SysPermissionMapper,
 
         final Integer id = entity.getId();
         if (getById(id) == null) {
-            throw new RuntimeException("资源不存在。");
+            throw BussException.of(EnumApiResultStatus.CONTENT_NOT_FOUND);
         }
 
         int ret = baseMapper.findIdByParentIdAndName(entity.getParentId(), entity.getName()).orElse(0);
         if (ret != 0 && ret != id) {
-            throw new RuntimeException("权限名称重复");
+            throw BussException.of(EnumApiResultStatus.SYS_PERMISSION_NAME_EXISTS);
         }
 
         ret = baseMapper.findIdByParentIdAndUrl(entity.getParentId(), entity.getUrl()).orElse(0);
         if (ret != 0 && ret != id) {
-            throw new RuntimeException("url地址重复");
+            throw BussException.of(EnumApiResultStatus.SYS_PERMISSION_URL_EXISTS);
         }
 
         return super.updateById(entity);

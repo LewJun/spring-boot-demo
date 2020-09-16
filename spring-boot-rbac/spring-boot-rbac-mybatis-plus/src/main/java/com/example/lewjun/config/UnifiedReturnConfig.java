@@ -50,7 +50,7 @@ public class UnifiedReturnConfig {
         @ExceptionHandler(BussException.class)
         @ResponseBody
         public ApiResult exceptionHandle(final BussException ex) {
-            log.error("【出现异常BussException】", ex);
+            log.error("【出现异常BussException {}】", ex.getStatus());
             return ApiResult.fail(ex.getStatus());
         }
 

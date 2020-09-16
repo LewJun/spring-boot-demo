@@ -1,6 +1,8 @@
 package com.example.lewjun.service.impl;
 
 import com.example.lewjun.base.MyServiceImpl;
+import com.example.lewjun.common.BussException;
+import com.example.lewjun.common.EnumApiResultStatus;
 import com.example.lewjun.domain.SysDeptRole;
 import com.example.lewjun.mapper.SysDeptMapper;
 import com.example.lewjun.mapper.SysDeptRoleMapper;
@@ -30,10 +32,6 @@ public class SysDeptRoleServiceImpl extends MyServiceImpl<SysDeptRoleMapper, Sys
         return baseMapper.existsSysDeptRolesByRoleId(roleId).isPresent();
     }
 
-    private boolean existsBySysDeptRole(final SysDeptRole entity) {
-        return baseMapper.existsBySysDeptRole(entity).isPresent();
-    }
-
     @Transactional(
             rollbackFor = {Exception.class}
     )
@@ -41,12 +39,12 @@ public class SysDeptRoleServiceImpl extends MyServiceImpl<SysDeptRoleMapper, Sys
     public boolean save(final SysDeptRole entity) {
         final Integer deptId = entity.getDeptId();
         if (sysDeptMapper.selectById(deptId) == null) {
-            throw new RuntimeException("所选部门不存在。");
+            throw BussException.of(EnumApiResultStatus.SYS_DEPT_NOT_EXISTS);
         }
 
         final Integer roleId = entity.getRoleId();
         if (sysRoleMapper.selectById(roleId) == null) {
-            throw new RuntimeException("所选角色不存在。");
+            throw BussException.of(EnumApiResultStatus.SYS_ROLE_NOT_EXISTS);
         }
 
         return super.save(entity);

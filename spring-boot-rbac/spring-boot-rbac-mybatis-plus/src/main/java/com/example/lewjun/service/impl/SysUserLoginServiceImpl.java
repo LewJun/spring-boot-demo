@@ -2,6 +2,8 @@ package com.example.lewjun.service.impl;
 
 import com.baomidou.mybatisplus.extension.toolkit.SqlHelper;
 import com.example.lewjun.base.MyServiceImpl;
+import com.example.lewjun.common.BussException;
+import com.example.lewjun.common.EnumApiResultStatus;
 import com.example.lewjun.domain.SysUserLogin;
 import com.example.lewjun.mapper.SysUserLoginMapper;
 import com.example.lewjun.service.SysUserLoginService;
@@ -60,7 +62,7 @@ public class SysUserLoginServiceImpl extends MyServiceImpl<SysUserLoginMapper, S
     }
 
     private String findPasswordByUserId(final long userId) {
-        return baseMapper.findPasswordByUserId(userId).orElseThrow(() -> new RuntimeException("用户名或密码错误。"));
+        return baseMapper.findPasswordByUserId(userId).orElseThrow(() -> BussException.of(EnumApiResultStatus.SYS_USER_USERNAME_OR_PASSWORD_WRONG_ERR));
     }
 
 //    private boolean passwordMatches(final SysUserLogin sysUserLogin) {

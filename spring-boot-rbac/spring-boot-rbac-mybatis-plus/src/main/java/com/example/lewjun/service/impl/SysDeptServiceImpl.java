@@ -2,6 +2,8 @@ package com.example.lewjun.service.impl;
 
 import com.example.lewjun.base.MyPageInfo;
 import com.example.lewjun.base.MyServiceImpl;
+import com.example.lewjun.common.BussException;
+import com.example.lewjun.common.EnumApiResultStatus;
 import com.example.lewjun.domain.SysDept;
 import com.example.lewjun.domain.SysDeptNode;
 import com.example.lewjun.mapper.SysDeptMapper;
@@ -25,7 +27,7 @@ public class SysDeptServiceImpl extends MyServiceImpl<SysDeptMapper, SysDept> im
 
     @Override
     public SysDeptNode getSysDeptTrees(final Integer deptId) {
-        final SysDept sysDept = super.getByIdOptional(deptId).orElseThrow(() -> new RuntimeException("部门不存在"));
+        final SysDept sysDept = super.getByIdOptional(deptId).orElseThrow(() -> BussException.of(EnumApiResultStatus.SYS_DEPT_NOT_EXISTS));
         final SysDeptNode sysDeptNode = new SysDeptNode();
         sysDeptNode.setId(sysDept.getId());
         sysDeptNode.setName(sysDept.getName());
@@ -53,15 +55,17 @@ public class SysDeptServiceImpl extends MyServiceImpl<SysDeptMapper, SysDept> im
     @Override
     public boolean removeById(final Serializable id) {
         if (isRoot(id)) {
-            throw new RuntimeException("不能删除根部门。");
+            throw BussException.of(EnumApiResultStatus.SYS_DEPT_REMOVE_ROOT_ERR);
         }
 
         if (existsChildren(id)) {
-            throw new RuntimeException("删除失败，部门存在下级部门。");
+            throw BussException.of(EnumApiResultStatus.SYS_DEPT_HAS_SUB_ERR);
         }
 
         if (sysUserMapper.existsByDeptId(id).isPresent()) {
-            throw new RuntimeException("删除失败，部门被用户使用。");
+
+            throw BussException.of(EnumApiResultStatus.SYS_DEPT_USER_USED_ERR);
+
         }
 
         return super.removeById(id);
@@ -78,10 +82,10 @@ public class SysDeptServiceImpl extends MyServiceImpl<SysDeptMapper, SysDept> im
     public boolean save(final SysDept entity) {
         final Integer parentId = entity.getParentId();
         if (baseMapper.selectById(parentId) == null) {
-            throw new RuntimeException("父级部门不存在。");
+            throw BussException.of(EnumApiResultStatus.SYS_DEPT_PARENT_DEPT_NOT_EXISTS);
         }
         if (findIdByParentIdAndName(parentId, entity.getName())) {
-            throw new RuntimeException("同一个部门下的子部门名称不能重复。");
+            throw BussException.of(EnumApiResultStatus.SYS_DEPT_DUPLICATE_IN_SAME_DEPT);
         }
         return super.save(entity);
     }
@@ -89,14 +93,15 @@ public class SysDeptServiceImpl extends MyServiceImpl<SysDeptMapper, SysDept> im
     @Override
     public boolean updateById(final SysDept entity) {
         if (getById(entity.getId()) == null) {
-            throw new RuntimeException("资源不存在。");
-        }
-        final int ret = baseMapper.findIdByParentIdAndName(entity.getParentId(), entity.getName()).orElse(0);
-        if (ret == 0 || ret == entity.getId()) {
-            return super.updateById(entity);
+            throw BussException.of(EnumApiResultStatus.CONTENT_NOT_FOUND);
         }
 
-        throw new RuntimeException("同一个部门下的子部门名称不能重复。");
+        final int ret = baseMapper.findIdByParentIdAndName(entity.getParentId(), entity.getName()).orElse(0);
+        if (ret != 0 && ret != entity.getId()) {
+            throw BussException.of(EnumApiResultStatus.SYS_DEPT_DUPLICATE_IN_SAME_DEPT);
+        }
+
+        return super.updateById(entity);
     }
 
     public boolean findIdByParentIdAndName(final Integer parentId, final String name) {
