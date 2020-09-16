@@ -17,6 +17,11 @@
                 "key": "JSESSIONID",
                 "value": "E11427F26CCB57F75982AEFCC5A8F6A5",
                 "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJVU0VSTkFNRSI6ImFkbWluIiwiZXhwIjoxNjAwMjUwNTUyLCJST0xFUyI6IltBRE1JTl0iLCJpYXQiOjE2MDAyNTAyNTJ9.uXU1VkxK65NlknE0EwOIS-b5nx4F5rkmDSpQp8ROVx8",
+                "type": "text"
               }
             ],
             "url": {
@@ -48,17 +53,10 @@
             ],
             "body": {
               "mode": "urlencoded",
-              "urlencoded": [
-                {
-                  "key": "id",
-                  "value": "6",
-                  "type": "text",
-                  "disabled": true
-                }
-              ]
+              "urlencoded": []
             },
             "url": {
-              "raw": "http://localhost:1234/demo/sys/depts/5",
+              "raw": "http://localhost:1234/demo/sys/depts/111",
               "protocol": "http",
               "host": [
                 "localhost"
@@ -68,7 +66,7 @@
                 "demo",
                 "sys",
                 "depts",
-                "5"
+                "111"
               ]
             }
           },
@@ -620,7 +618,7 @@
           "response": []
         },
         {
-          "name": "http://localhost:1234/demo/sys/userRoles/delete",
+          "name": "http://localhost:1234/demo/sys/userRoles",
           "request": {
             "method": "DELETE",
             "header": [],
@@ -640,7 +638,7 @@
               ]
             },
             "url": {
-              "raw": "http://localhost:1234/demo/sys/userRoles/delete",
+              "raw": "http://localhost:1234/demo/sys/userRoles/999",
               "protocol": "http",
               "host": [
                 "localhost"
@@ -650,7 +648,7 @@
                 "demo",
                 "sys",
                 "userRoles",
-                "delete"
+                "999"
               ]
             }
           },
@@ -698,7 +696,7 @@
                 },
                 {
                   "key": "roleId",
-                  "value": "3",
+                  "value": "4",
                   "type": "text"
                 }
               ]
@@ -720,27 +718,12 @@
           "response": []
         },
         {
-          "name": "http://localhost:1234/demo/sys/deptRoles/delete",
+          "name": "http://localhost:1234/demo/sys/deptRoles",
           "request": {
             "method": "DELETE",
             "header": [],
-            "body": {
-              "mode": "urlencoded",
-              "urlencoded": [
-                {
-                  "key": "deptId",
-                  "value": "22",
-                  "type": "text"
-                },
-                {
-                  "key": "roleId",
-                  "value": "4",
-                  "type": "text"
-                }
-              ]
-            },
             "url": {
-              "raw": "http://localhost:1234/demo/sys/deptRoles/delete",
+              "raw": "http://localhost:1234/demo/sys/deptRoles/3",
               "protocol": "http",
               "host": [
                 "localhost"
@@ -750,7 +733,7 @@
                 "demo",
                 "sys",
                 "deptRoles",
-                "delete"
+                "3"
               ]
             }
           },
@@ -820,7 +803,7 @@
           "response": []
         },
         {
-          "name": "http://localhost:1234/demo/sys/rolePermissions/delete",
+          "name": "http://localhost:1234/demo/sys/rolePermissions",
           "request": {
             "method": "DELETE",
             "header": [],
@@ -840,7 +823,7 @@
               ]
             },
             "url": {
-              "raw": "http://localhost:1234/demo/sys/rolePermissions/delete",
+              "raw": "http://localhost:1234/demo/sys/rolePermissions/999",
               "protocol": "http",
               "host": [
                 "localhost"
@@ -850,7 +833,7 @@
                 "demo",
                 "sys",
                 "rolePermissions",
-                "delete"
+                "999"
               ]
             }
           },
@@ -858,6 +841,48 @@
         }
       ],
       "protocolProfileBehavior": {}
+    },
+    {
+      "name": "http://localhost:1234/demo/sys/userLogin/login",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "username",
+              "value": "admin",
+              "type": "text"
+            },
+            {
+              "key": "password",
+              "value": "admin",
+              "type": "text"
+            },
+            {
+              "key": "code",
+              "value": "123",
+              "type": "text"
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://localhost:1234/demo/sys/userLogin/login",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "1234",
+          "path": [
+            "demo",
+            "sys",
+            "userLogin",
+            "login"
+          ]
+        }
+      },
+      "response": []
     }
   ],
   "protocolProfileBehavior": {}

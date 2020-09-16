@@ -4,6 +4,8 @@ import com.example.lewjun.base.MyIService;
 import com.example.lewjun.base.MyPageInfo;
 import com.example.lewjun.domain.SysRole;
 
+import java.util.List;
+
 public interface SysRoleService extends MyIService<SysRole> {
     /**
      * 根据用户id查询对应的角色
@@ -14,4 +16,6 @@ public interface SysRoleService extends MyIService<SysRole> {
     MyPageInfo<SysRole> findByUserId(MyPageInfo<?> page, Integer userId);
 
     boolean existsByName(String name);
+
+    List<String> findRolesByRequestUrl(String requestUrl);
 }

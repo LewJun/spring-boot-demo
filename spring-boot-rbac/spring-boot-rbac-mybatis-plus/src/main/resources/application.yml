@@ -14,10 +14,6 @@ spring:
     url: jdbc:mysql://127.0.0.1:3306/rbac?useUnicode=true&characterEncoding=UTF-8
     username: root
     password: Root123456
-#  security:
-#    user:
-#      username: user
-#      password: 111
 
 mybatis-plus:
   # 扫描xml的位置
@@ -38,3 +34,16 @@ logging:
           # 设置mapper包日志级别为debug
           mapper: debug
 
+
+ss:
+  loginProcessingUrl: /sys/userLogin/login
+  usernameParameter: username
+  passwordParameter: password
+  codeParameter: code
+  permitAllList: /sys/userLogin/login, /permitAll, /*.html, /**/*.html, /**/*.css, /**/*.js
+  anonymousList: /sys/userLogin/login, /login, /captchaImage, /profile/**, /webjars/**, /swagger-ui.html, /swagger-resources/**, /druid/**
+
+jwt:
+  tokenHeader: Authorization
+  tokenPrefix: "Bearer "
+  expiration: 300

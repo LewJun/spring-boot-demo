@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.Serializable;
+import java.util.List;
 
 @Service
 public class SysRoleServiceImpl extends MyServiceImpl<SysRoleMapper, SysRole> implements SysRoleService {
@@ -37,6 +38,11 @@ public class SysRoleServiceImpl extends MyServiceImpl<SysRoleMapper, SysRole> im
     @Override
     public boolean existsByName(final String name) {
         return baseMapper.existsByName(name).isPresent();
+    }
+
+    @Override
+    public List<String> findRolesByRequestUrl(final String requestUrl) {
+        return baseMapper.findRolesByUrl(requestUrl);
     }
 
     @Transactional(
