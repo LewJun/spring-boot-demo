@@ -1,10 +1,11 @@
 package com.example.lewjun.base;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.example.lewjun.domain.BaseObj;
 import com.example.lewjun.utils.QueryWrapperUtils;
 import org.springframework.web.bind.annotation.*;
 
-public class MyBaseController<T> {
+public class MyBaseController<T extends BaseObj> {
     protected MyIService<T> baseService;
 
     public MyBaseController(final MyIService<T> baseService) {

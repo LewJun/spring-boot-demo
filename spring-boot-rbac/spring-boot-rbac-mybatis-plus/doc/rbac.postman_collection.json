@@ -658,6 +658,206 @@
         }
       ],
       "protocolProfileBehavior": {}
+    },
+    {
+      "name": "/sys/deptRoles",
+      "item": [
+        {
+          "name": "http://localhost:1234/demo/sys/deptRoles",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:1234/demo/sys/deptRoles",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "1234",
+              "path": [
+                "demo",
+                "sys",
+                "deptRoles"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "http://localhost:1234/demo/sys/deptRoles",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "deptId",
+                  "value": "2",
+                  "type": "text"
+                },
+                {
+                  "key": "roleId",
+                  "value": "3",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://localhost:1234/demo/sys/deptRoles",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "1234",
+              "path": [
+                "demo",
+                "sys",
+                "deptRoles"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "http://localhost:1234/demo/sys/deptRoles/delete",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "deptId",
+                  "value": "22",
+                  "type": "text"
+                },
+                {
+                  "key": "roleId",
+                  "value": "4",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://localhost:1234/demo/sys/deptRoles/delete",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "1234",
+              "path": [
+                "demo",
+                "sys",
+                "deptRoles",
+                "delete"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "protocolProfileBehavior": {}
+    },
+    {
+      "name": "/sys/rolePermissions",
+      "item": [
+        {
+          "name": "http://localhost:1234/demo/sys/rolePermissions",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:1234/demo/sys/rolePermissions",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "1234",
+              "path": [
+                "demo",
+                "sys",
+                "rolePermissions"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "http://localhost:1234/demo/sys/rolePermissions",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "roleId",
+                  "value": "1",
+                  "type": "text"
+                },
+                {
+                  "key": "permissionId",
+                  "value": "2",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://localhost:1234/demo/sys/rolePermissions",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "1234",
+              "path": [
+                "demo",
+                "sys",
+                "rolePermissions"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "http://localhost:1234/demo/sys/rolePermissions/delete",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "roleId",
+                  "value": "1",
+                  "type": "text"
+                },
+                {
+                  "key": "permissionId",
+                  "value": "2",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://localhost:1234/demo/sys/rolePermissions/delete",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "1234",
+              "path": [
+                "demo",
+                "sys",
+                "rolePermissions",
+                "delete"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "protocolProfileBehavior": {}
     }
   ],
   "protocolProfileBehavior": {}
