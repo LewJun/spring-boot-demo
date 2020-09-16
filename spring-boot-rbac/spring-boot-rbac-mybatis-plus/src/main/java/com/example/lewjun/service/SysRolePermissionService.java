@@ -14,6 +14,4 @@ public interface SysRolePermissionService extends MyIService<SysRolePermission> 
      * @return 1 if exists, otherwise 0
      */
     boolean existsRolePermissionByPermissionId(Serializable permissionId);
-
-    boolean remove(SysRolePermission sysRolePermission);
 }

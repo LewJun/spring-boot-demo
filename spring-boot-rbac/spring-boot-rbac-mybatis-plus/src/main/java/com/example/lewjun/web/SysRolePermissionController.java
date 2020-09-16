@@ -4,7 +4,6 @@ import com.example.lewjun.base.MyBaseController;
 import com.example.lewjun.domain.SysRolePermission;
 import com.example.lewjun.service.SysRolePermissionService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,8 +16,4 @@ public class SysRolePermissionController extends MyBaseController<SysRolePermiss
         super(baseService);
     }
 
-    @DeleteMapping("/delete")
-    public boolean delete(final SysRolePermission sysRolePermission) {
-        return baseService.remove(sysRolePermission);
-    }
 }

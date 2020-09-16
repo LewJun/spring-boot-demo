@@ -6,7 +6,5 @@ import com.example.lewjun.domain.SysDeptRole;
 import java.io.Serializable;
 
 public interface SysDeptRoleService extends MyIService<SysDeptRole> {
-    boolean remove(SysDeptRole sysDeptRole);
-
     boolean existsSysDeptRolesByRoleId(Serializable roleId);
 }

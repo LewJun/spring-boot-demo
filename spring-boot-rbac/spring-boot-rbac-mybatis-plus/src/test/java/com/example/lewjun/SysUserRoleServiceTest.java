@@ -30,12 +30,4 @@ class SysUserRoleServiceTest {
         );
     }
 
-    @Test
-    void testDelete() {
-        sysUserRoleService.remove(
-                new SysUserRole()
-                        .setUserId(1)
-                        .setRoleId(5)
-        );
-    }
 }

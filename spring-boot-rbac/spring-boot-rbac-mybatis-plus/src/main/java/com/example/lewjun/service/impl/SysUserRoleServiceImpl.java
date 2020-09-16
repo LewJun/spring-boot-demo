@@ -1,6 +1,5 @@
 package com.example.lewjun.service.impl;
 
-import com.baomidou.mybatisplus.extension.toolkit.SqlHelper;
 import com.example.lewjun.base.MyServiceImpl;
 import com.example.lewjun.domain.SysUserRole;
 import com.example.lewjun.mapper.SysRoleMapper;
@@ -30,14 +29,6 @@ public class SysUserRoleServiceImpl extends MyServiceImpl<SysUserRoleMapper, Sys
     @Override
     public boolean existsSysUserRolesByRoleId(final Serializable roleId) {
         return baseMapper.existsSysUserRolesByRoleId(roleId).isPresent();
-    }
-
-    @Transactional(
-            rollbackFor = {Exception.class}
-    )
-    @Override
-    public boolean remove(final SysUserRole sysUserRole) {
-        return sysUserRole != null && SqlHelper.retBool(baseMapper.remove(sysUserRole));
     }
 
     @Transactional(

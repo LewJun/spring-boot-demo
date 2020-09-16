@@ -27,9 +27,10 @@ CREATE TABLE IF NOT EXISTS sys_role (
 ) ENGINE = INNODB DEFAULT CHARSET = utf8mb4 ;
 
 CREATE TABLE IF NOT EXISTS sys_user_role (
+  id INT NOT NULL AUTO_INCREMENT,
   user_id INT NOT NULL,
   role_id INT NOT NULL,
-  PRIMARY KEY (user_id, role_id)
+  PRIMARY KEY (id)
 ) ENGINE = INNODB DEFAULT CHARSET = utf8mb4 ;
 
 CREATE TABLE IF NOT EXISTS sys_permission (
@@ -42,9 +43,10 @@ CREATE TABLE IF NOT EXISTS sys_permission (
 ) ENGINE = INNODB DEFAULT CHARSET = utf8mb4 ;
 
 CREATE TABLE IF NOT EXISTS sys_role_permission (
+  id INT NOT NULL AUTO_INCREMENT,
   role_id INT NOT NULL,
   permission_id INT NOT NULL,
-  PRIMARY KEY (role_id, permission_id)
+  PRIMARY KEY (id)
 ) ENGINE = INNODB DEFAULT CHARSET = utf8mb4 ;
 
 -- -------------------------------------
@@ -85,9 +87,10 @@ alter table sys_user add column `avatar` VARCHAR(128) not null default '';
 DROP TABLE IF EXISTS sys_user_login ;
 
 CREATE TABLE IF NOT EXISTS sys_user_login (
+  id INT NOT NULL AUTO_INCREMENT,
   user_id INT not null,
   `password` CHAR(60) NOT NULL, -- 固定大小的字符串，用char来指定类型
-  PRIMARY KEY (user_id)
+  PRIMARY KEY (id)
 ) ENGINE = INNODB DEFAULT CHARSET = utf8mb4 ;
 
 -- ------------------------
@@ -106,9 +109,10 @@ create table if not exists sys_dept (
 drop table if exists sys_dept_role;
 
 CREATE TABLE IF NOT EXISTS sys_dept_role (
+  id INT NOT NULL AUTO_INCREMENT,
   dept_id INT NOT NULL,
   role_id INT NOT NULL,
-  PRIMARY KEY (dept_id, role_id)
+  PRIMARY KEY (id)
 ) ENGINE = INNODB DEFAULT CHARSET = utf8mb4 ;
 
 alter table sys_user add column `nickname` VARCHAR (32) not null default '';

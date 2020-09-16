@@ -4,7 +4,6 @@ import com.example.lewjun.base.MyBaseController;
 import com.example.lewjun.domain.SysDeptRole;
 import com.example.lewjun.service.SysDeptRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,10 +14,5 @@ public class SysDeptRoleController extends MyBaseController<SysDeptRole, SysDept
     @Autowired
     public SysDeptRoleController(final SysDeptRoleService baseService) {
         super(baseService);
-    }
-
-    @DeleteMapping("/delete")
-    public boolean delete(final SysDeptRole sysDeptRole) {
-        return baseService.remove(sysDeptRole);
     }
 }

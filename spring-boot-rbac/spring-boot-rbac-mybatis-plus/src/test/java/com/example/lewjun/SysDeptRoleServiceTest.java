@@ -27,6 +27,5 @@ class SysDeptRoleServiceTest {
         final SysDeptRole sysDeptRole = new SysDeptRole();
         sysDeptRole.setDeptId(1);
         sysDeptRole.setRoleId(2);
-        sysDeptRoleService.remove(sysDeptRole);
     }
 }

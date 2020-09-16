@@ -1,6 +1,5 @@
 package com.example.lewjun.service.impl;
 
-import com.baomidou.mybatisplus.extension.toolkit.SqlHelper;
 import com.example.lewjun.base.MyServiceImpl;
 import com.example.lewjun.domain.SysDeptRole;
 import com.example.lewjun.mapper.SysDeptMapper;
@@ -24,14 +23,6 @@ public class SysDeptRoleServiceImpl extends MyServiceImpl<SysDeptRoleMapper, Sys
     public SysDeptRoleServiceImpl(final SysDeptMapper sysDeptMapper, final SysRoleMapper sysRoleMapper) {
         this.sysDeptMapper = sysDeptMapper;
         this.sysRoleMapper = sysRoleMapper;
-    }
-
-    @Transactional(
-            rollbackFor = {Exception.class}
-    )
-    @Override
-    public boolean remove(final SysDeptRole sysDeptRole) {
-        return sysDeptRole != null && SqlHelper.retBool(baseMapper.remove(sysDeptRole));
     }
 
     @Override

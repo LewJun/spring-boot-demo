@@ -13,6 +13,4 @@ public interface SysUserRoleService extends MyIService<SysUserRole> {
      * @return 1 if exists, otherwise 0
      */
     boolean existsSysUserRolesByRoleId(Serializable roleId);
-
-    boolean remove(SysUserRole sysUserRole);
 }
