@@ -14,13 +14,8 @@
             "method": "GET",
             "header": [
               {
-                "key": "JSESSIONID",
-                "value": "E11427F26CCB57F75982AEFCC5A8F6A5",
-                "type": "text"
-              },
-              {
                 "key": "Authorization",
-                "value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJVU0VSTkFNRSI6ImFkbWluIiwiZXhwIjoxNjAwMjUwNTUyLCJST0xFUyI6IltBRE1JTl0iLCJpYXQiOjE2MDAyNTAyNTJ9.uXU1VkxK65NlknE0EwOIS-b5nx4F5rkmDSpQp8ROVx8",
+                "value": "{{Authorization}}",
                 "type": "text"
               }
             ],
@@ -844,6 +839,26 @@
     },
     {
       "name": "http://localhost:1234/demo/sys/userLogin/login",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "10447d10-c27a-4659-9c77-bd2c162484bb",
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "    pm.test(\"Check code is 0\", function () {\r",
+              "        var jsonData = pm.response.json();\r",
+              "        pm.expect(jsonData.code).to.eql(0);\r",
+              "        pm.environment.set(\"Authorization\", 'Bearer ' + jsonData.data);\r",
+              "    });\r",
+              "    \r",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
       "request": {
         "method": "POST",
         "header": [],

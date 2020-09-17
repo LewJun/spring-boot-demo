@@ -1,6 +1,7 @@
 package com.example.lewjun.config;
 
 import com.example.lewjun.common.ApiResult;
+import com.example.lewjun.common.EnumApiResultStatus;
 import com.example.lewjun.utils.PrintWriterUtils;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
@@ -22,6 +23,6 @@ public class MyAuthenticationEntryPoint implements AuthenticationEntryPoint {
 
     @Override
     public void commence(final HttpServletRequest httpServletRequest, final HttpServletResponse resp, final AuthenticationException e) throws IOException {
-        PrintWriterUtils.printlnAndFlush(resp, ApiResult.fail("Please login."));
+        PrintWriterUtils.printlnAndFlush(resp, ApiResult.fail(EnumApiResultStatus.AUTHENTICATION_INVALID));
     }
 }
