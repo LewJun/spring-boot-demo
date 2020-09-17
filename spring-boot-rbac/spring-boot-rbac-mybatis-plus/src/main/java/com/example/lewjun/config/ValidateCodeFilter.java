@@ -48,11 +48,13 @@ public class ValidateCodeFilter extends OncePerRequestFilter implements Filter {
         if (loginProcessingUrl.equals(req.getServletPath()) && HttpMethod.POST.matches(req.getMethod())) {
             try {
                 validateCode(req);
+                chain.doFilter(req, resp);
             } catch (final AuthenticationException ex) {
                 authenticationFailureHandler.onAuthenticationFailure(req, resp, ex);
             }
+        } else {
+            chain.doFilter(req, resp);
         }
-        chain.doFilter(req, resp);
     }
 
     private void validateCode(final HttpServletRequest req) {
