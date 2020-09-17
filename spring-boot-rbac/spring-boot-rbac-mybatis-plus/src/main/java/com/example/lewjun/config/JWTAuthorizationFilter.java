@@ -4,8 +4,10 @@ import com.example.lewjun.utils.JwtTokenUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
 import javax.servlet.FilterChain;
@@ -35,12 +37,12 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
             return;
         }
 
-        final UsernamePasswordAuthenticationToken authentication = getAuthentication(tokenHeader);
+        final Authentication authentication = getAuthentication(request, tokenHeader);
         SecurityContextHolder.getContext().setAuthentication(authentication);
         super.doFilterInternal(request, response, chain);
     }
 
-    private UsernamePasswordAuthenticationToken getAuthentication(final String tokenHeader) {
+    private Authentication getAuthentication(final HttpServletRequest request, final String tokenHeader) {
         final String token = tokenHeader.replace(JwtTokenUtils.TOKEN_PREFIX, "");
         if (JwtTokenUtils.isExpiredOut(token)) {
             return null;
@@ -57,7 +59,9 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
                 authorities.add(new SimpleGrantedAuthority(s));
             }
 
-            return new UsernamePasswordAuthenticationToken(username, null, authorities);
+            final UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(username, null, authorities);
+            usernamePasswordAuthenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+            return usernamePasswordAuthenticationToken;
         }
         return null;
     }
