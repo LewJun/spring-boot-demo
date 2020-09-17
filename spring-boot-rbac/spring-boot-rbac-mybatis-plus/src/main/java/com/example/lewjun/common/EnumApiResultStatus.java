@@ -4,6 +4,9 @@ public enum EnumApiResultStatus {
     OK(0, "请求成功"),
     FAIL(-1, "系统异常"),
     CONTENT_NOT_FOUND(0x001, "资源不存在"),
+    TOKEN_INVALID(0x002, "TOKEN无效"),
+    AUTHENTICATION_INVALID(0x003, "认证失败"),
+    ACCESS_DENIED_ERR(0x004, "授权失败"),
     // -------------------------------------------------- //
     SYS_DEPT_NOT_EXISTS(0x100, "所选部门不存在。"),
     SYS_DEPT_REMOVE_ROOT_ERR(0x101, "不能删除根部门。"),
@@ -25,7 +28,7 @@ public enum EnumApiResultStatus {
     // -------------------------------------------------- //
     SYS_PERMISSION_NOT_EXISTS(0x400, "所选权限不存在。"),
     SYS_PERMISSION_NAME_EXISTS(0x401, "权限名称重复"),
-    SYS_PERMISSION_URL_EXISTS(0x402, "url地址重复"),
+    SYS_PERMISSION_URL_EXISTS(0x402, "url地址请求方式重复"),
     SYS_PERMISSION_HAS_SUB_ERR(0x403, "所选权限存在子权限。"),
     SYS_PERMISSION_ROLE_USED_ERR(0x404, "所选权限正在被角色使用。"),
     // -------------------------------------------------- //

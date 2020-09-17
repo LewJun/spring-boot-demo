@@ -24,6 +24,6 @@ public interface SysRoleMapper extends MyBaseMapper<SysRole> {
 
     @Select("SELECT sys_role.name FROM sys_role " +
             "JOIN sys_role_permission ON sys_role_permission.`role_id` = sys_role.id " +
-            "JOIN sys_permission ON sys_permission.url=#{url} AND sys_permission.id=sys_role_permission.`permission_id`")
-    List<String> findRolesByUrl(String url);
+            "JOIN sys_permission ON sys_permission.url=#{url} and sys_permission.method=#{method} AND sys_permission.id=sys_role_permission.`permission_id`")
+    List<String> findRolesByUrlAndMethod(String url, int method);
 }

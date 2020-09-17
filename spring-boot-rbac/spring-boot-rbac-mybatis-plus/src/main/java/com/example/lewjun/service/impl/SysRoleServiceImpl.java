@@ -41,8 +41,8 @@ public class SysRoleServiceImpl extends MyServiceImpl<SysRoleMapper, SysRole> im
     }
 
     @Override
-    public List<String> findRolesByRequestUrl(final String requestUrl) {
-        return baseMapper.findRolesByUrl(requestUrl);
+    public List<String> findRolesByUrlAndMethod(final String requestUrl, final int method) {
+        return baseMapper.findRolesByUrlAndMethod(requestUrl, method);
     }
 
     @Transactional(

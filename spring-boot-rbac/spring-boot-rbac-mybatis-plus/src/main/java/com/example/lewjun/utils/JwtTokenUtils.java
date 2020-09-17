@@ -1,5 +1,7 @@
 package com.example.lewjun.utils;
 
+import com.example.lewjun.common.BussException;
+import com.example.lewjun.common.EnumApiResultStatus;
 import io.jsonwebtoken.*;
 import lombok.extern.slf4j.Slf4j;
 
@@ -46,7 +48,7 @@ public class JwtTokenUtils {
             log.error("【出现异常：】", ex);
         }
 
-        throw new RuntimeException("校验token失败。");
+        throw BussException.of(EnumApiResultStatus.TOKEN_INVALID);
     }
 
     /**

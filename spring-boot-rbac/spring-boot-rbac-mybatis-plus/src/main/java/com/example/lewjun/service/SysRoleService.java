@@ -17,5 +17,5 @@ public interface SysRoleService extends MyIService<SysRole> {
 
     boolean existsByName(String name);
 
-    List<String> findRolesByRequestUrl(String requestUrl);
+    List<String> findRolesByUrlAndMethod(String requestUrl, int code);
 }

@@ -4,6 +4,7 @@ import com.example.lewjun.base.MyBaseMapper;
 import com.example.lewjun.base.MyPageInfo;
 import com.example.lewjun.domain.SysPermission;
 import com.example.lewjun.domain.SysPermissionWithSubSysPermission;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
@@ -56,6 +57,6 @@ public interface SysPermissionMapper extends MyBaseMapper<SysPermission> {
     @Select("select t.id from sys_permission t where t.parent_id = #{parentId} and t.name = #{name} limit 1")
     Optional<Integer> findIdByParentIdAndName(Integer parentId, String name);
 
-    @Select("select t.id from sys_permission t where t.parent_id = #{parentId} and t.url = #{url} limit 1")
-    Optional<Integer> findIdByParentIdAndUrl(Integer parentId, String url);
+    @Select("select t.id from sys_permission t where t.parent_id = #{parentId} and t.url = #{url} and t.method=#{method} limit 1")
+    Optional<Integer> findIdByParentIdAndUrlAndMethod(Integer parentId, String url, @Param("method") Integer method);
 }

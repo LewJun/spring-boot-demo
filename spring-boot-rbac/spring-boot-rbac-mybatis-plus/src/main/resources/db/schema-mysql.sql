@@ -127,3 +127,5 @@ ALTER TABLE sys_role ADD INDEX idx_name (`name`);
 ALTER TABLE sys_user_login ADD INDEX idx_user_id (`user_id`);
 
 ALTER TABLE sys_user ADD INDEX idx_username (`username`);
+
+alter table sys_permission add column `method` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '0:all,1:get,2:post,3:put,4:delete';

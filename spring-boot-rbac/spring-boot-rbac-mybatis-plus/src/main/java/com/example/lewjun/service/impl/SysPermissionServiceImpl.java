@@ -72,7 +72,7 @@ public class SysPermissionServiceImpl extends MyServiceImpl<SysPermissionMapper,
             throw BussException.of(EnumApiResultStatus.SYS_PERMISSION_NAME_EXISTS);
         }
 
-        if (baseMapper.findIdByParentIdAndUrl(entity.getParentId(), entity.getUrl()).isPresent()) {
+        if (baseMapper.findIdByParentIdAndUrlAndMethod(entity.getParentId(), entity.getUrl(), entity.getMethod()).isPresent()) {
             throw BussException.of(EnumApiResultStatus.SYS_PERMISSION_URL_EXISTS);
         }
 
@@ -92,7 +92,7 @@ public class SysPermissionServiceImpl extends MyServiceImpl<SysPermissionMapper,
             throw BussException.of(EnumApiResultStatus.SYS_PERMISSION_NAME_EXISTS);
         }
 
-        ret = baseMapper.findIdByParentIdAndUrl(entity.getParentId(), entity.getUrl()).orElse(0);
+        ret = baseMapper.findIdByParentIdAndUrlAndMethod(entity.getParentId(), entity.getUrl(), entity.getMethod()).orElse(0);
         if (ret != 0 && ret != id) {
             throw BussException.of(EnumApiResultStatus.SYS_PERMISSION_URL_EXISTS);
         }

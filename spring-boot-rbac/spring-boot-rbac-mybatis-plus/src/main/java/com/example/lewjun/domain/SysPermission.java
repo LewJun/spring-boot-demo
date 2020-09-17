@@ -14,6 +14,7 @@ public class SysPermission extends BaseObj {
     private Integer id;
     private String name;
     private String url;
+    private Integer method;
     private String description;
     private Integer parentId;
 }

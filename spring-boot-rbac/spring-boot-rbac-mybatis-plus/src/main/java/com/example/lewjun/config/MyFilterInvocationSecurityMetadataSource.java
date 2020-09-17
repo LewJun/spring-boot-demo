@@ -1,5 +1,6 @@
 package com.example.lewjun.config;
 
+import com.example.lewjun.enums.EnumMethod;
 import com.example.lewjun.service.SysRoleService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.security.web.access.intercept.FilterInvocationSecurit
 import org.springframework.stereotype.Component;
 import org.springframework.util.AntPathMatcher;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Collection;
 import java.util.List;
 
@@ -46,7 +48,10 @@ public class MyFilterInvocationSecurityMetadataSource implements FilterInvocatio
 //        log.info("【rawRequestUrl: {}】", rawRequestUrl);
         // RequestUrlUtils.getRequestUrlWithoutQueryParams(rawRequestUrl);
         // 无查询参数 /admin
-        final String requestUrl = filterInvocation.getRequest().getServletPath();
+        final HttpServletRequest request = filterInvocation.getRequest();
+        final String method = request.getMethod();
+        log.info("【method: {}】", method);
+        final String requestUrl = request.getServletPath();
         log.info("【requestUrl: {}】", requestUrl);
 
         for (final String s : getPermitAllList()) {
@@ -64,7 +69,7 @@ public class MyFilterInvocationSecurityMetadataSource implements FilterInvocatio
         }
 
         // 根据路径查询，该路径需要什么权限才能访问？
-        final List<String> roles = sysRoleService.findRolesByRequestUrl(requestUrl);
+        final List<String> roles = sysRoleService.findRolesByUrlAndMethod(requestUrl, EnumMethod.getCodeByDesc(method));
         if (roles != null && !roles.isEmpty()) {
             final String[] arr = {};
             return createList(roles.toArray(arr));
