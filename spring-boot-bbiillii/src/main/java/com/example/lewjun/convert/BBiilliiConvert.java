@@ -24,7 +24,10 @@ import java.util.stream.Collectors;
 public class BBiilliiConvert {
     private static final String doubleQuota = "\"";
 
+    private File shFile;
+
     public void convert(final File bilibiliDownloadDir, final File outPutDir, final String ffmpegPath) {
+        shFile = new File(outPutDir, System.currentTimeMillis() + "bili.sh");
         if (bilibiliDownloadDir == null || bilibiliDownloadDir.isFile()) {
             throw new IllegalArgumentException("需要选择正确的下载目录");
         }
@@ -114,10 +117,15 @@ public class BBiilliiConvert {
             }
         }).collect(Collectors.toList());
 
+        // 如果文件blv.txt存在，则删除
+        final File blvTxt = new File(videoPath, "blv.txt");
+        if (blvTxt.exists()) {
+            blvTxt.delete();
+        }
+
         if (!CollectionUtils.isEmpty(blvs)) {
             log.info("【blvs: {}】", blvs);
             for (final File blv : blvs) {
-                final File blvTxt = new File(videoPath, "blv.txt");
                 FileUtils.write(blvTxt, "file " + blv.getPath() + "\n", "utf-8", true);
                 log.info("【blvTxt: {}】", blvTxt.getPath());
             }
@@ -154,10 +162,11 @@ public class BBiilliiConvert {
                     + doubleQuota;
 
             log.error("【cmd: {}】", cmd);
+            FileUtils.write(shFile, cmd + "\n", "utf-8", true);
         }
     }
 
-    private void handlerPage_data(final Entry entry, final File biliconv, final String videoPath, final String ffmpegPath, final String separator) {
+    private void handlerPage_data(final Entry entry, final File biliconv, final String videoPath, final String ffmpegPath, final String separator) throws IOException {
         final Page_data page_data = entry.getPage_data();
         if (page_data != null) {
             final String cmd = doubleQuota
@@ -184,10 +193,11 @@ public class BBiilliiConvert {
                     + doubleQuota;
 
             log.error("【page data cmd: {}】", cmd);
+            FileUtils.write(shFile, cmd + "\n", "utf-8", true);
         }
     }
 
-    private void handlerEp(final Entry entry, final File biliconv, final String videoPath, final String ffmpegPath, final String separator) {
+    private void handlerEp(final Entry entry, final File biliconv, final String videoPath, final String ffmpegPath, final String separator) throws IOException {
         final Ep ep = entry.getEp();
         if (ep != null) {
             final String cmd = doubleQuota
@@ -216,6 +226,7 @@ public class BBiilliiConvert {
                     + doubleQuota;
 
             log.error("【ep cmd: {}】", cmd);
+            FileUtils.write(shFile, cmd + "\n", "utf-8", true);
         }
     }
 }
