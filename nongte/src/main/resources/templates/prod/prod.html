@@ -10,7 +10,7 @@
     <meta content="" name="author"/>
     <link href="images/favicon.ico" rel="icon"/>
 
-    <title>农特网</title>
+    <title>${regionTitle}</title>
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet"/>
@@ -56,23 +56,23 @@
 </nav>
 
 <div class="container">
-    <h1>四川省</h1>
+    <h1 class="region-title">${regionTitle}</h1>
     <div class="mt-10 region clearfix">
         <%
         for(region in regions){
         %>
-        <a href="prod/c/${region.code}">${region.name}</a>
+        <a href="prod/${path}/${region.code}">${region.name}</a>
         <%}%>
     </div>
 
-    <h1>特产介绍</h1>
+    <h1 class="tc-intro mt-10">特产介绍</h1>
 
     <div class="prod">
         <%
         for(prod in prods) {
         %>
         <a class="img-txt" href="prod/detail/${prod.id}">
-            <img alt="" src="">
+            <img alt="" src="file/${prod.pic}">
             <div>${prod.title}</div>
         </a>
         <%}%>

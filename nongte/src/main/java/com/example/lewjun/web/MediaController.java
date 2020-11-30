@@ -16,10 +16,7 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 @Slf4j
 @RestController
@@ -34,7 +31,7 @@ public class MediaController {
     @PostMapping("/uploadFile")
     public String uploadFile(final MultipartFile file, final String type) {
         log.info("type: {}", type);
-        return transferTo(file).getName();
+        return getPathName(transferTo(file));
     }
 
     @PostMapping("/uploadFiles")
@@ -45,7 +42,7 @@ public class MediaController {
             final String originalFilename = file.getOriginalFilename();
             log.info("originalFilename: {}", originalFilename);
 
-            filenames.add(transferTo(file).getName());
+            filenames.add(getPathName(transferTo(file)));
         }
         return filenames;
     }
@@ -62,21 +59,35 @@ public class MediaController {
 
             transferTo(multipartFile);
 
-            filenames.add(transferTo(multipartFile).getName());
+            filenames.add(getPathName(transferTo(multipartFile)));
         }
         return filenames;
     }
 
+    private String getPathName(final File file) {
+        final String path = file.getPath();
+        return path.substring(uploadPath.length());
+    }
+
     private File transferTo(final MultipartFile multipartFile) {
         try {
+            final Calendar cal = Calendar.getInstance();
+            final int year = cal.get(Calendar.YEAR);
+            final int month = cal.get(Calendar.MONTH);
+
             final String originalFilename = multipartFile.getOriginalFilename();
             final String prefix = UUID.randomUUID().toString();
-            final File tempFile = File.createTempFile(prefix, String.format(".%s", originalFilename));
-            final File file = new File(uploadPath, prefix + "." + originalFilename);
-            log.info("tempFile: {}", file);
+
+            final File dir = new File(uploadPath, String.format("/%s/%s/", year, month));
+            if (!dir.exists()) {
+                dir.mkdirs();
+            }
+
+            final File file = new File(dir, prefix + "." + originalFilename);
             multipartFile.transferTo(file);
 
-            return tempFile;
+            return file;
+
         } catch (final IOException e) {
             log.error("出现异常", e);
         }
@@ -85,14 +96,14 @@ public class MediaController {
     }
 
     /**
-     * <img src="img/abc.jpg">
+     * <img src="file/abc.jpg">
      *
      * @param response
      * @param filename
      * @throws IOException
      */
-    @GetMapping("/img/{filename}")
-    public void showImg(final HttpServletResponse response, @PathVariable final String filename) throws IOException {
+    @GetMapping("/file/{filename}")
+    public void img(final HttpServletResponse response, @PathVariable final String filename) throws IOException {
         final byte[] bytes = FileUtils.readFileToByteArray(new File(uploadPath, filename));
         final ServletOutputStream out = response.getOutputStream();
         out.write(bytes);

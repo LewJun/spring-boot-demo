@@ -3,7 +3,7 @@
 }
 
 .mt-10 {
-  margin-top: 10px;
+  margin-top: 10px !important;
 }
 
 .block {
@@ -17,10 +17,11 @@
 }
 .prod {
   position: relative;
-  margin-top: 10px;
-  overflow: hidden;
+  margin: 10px auto;
+  overflow: auto;
   white-space: nowrap;
   padding: 0 10px;
+  width:98%;
 }
 .img-txt {
   float: left;
@@ -28,12 +29,19 @@
   text-align: center;
   padding: 5px;
 }
+
 .img-txt img {
   display: block;
   width: 100%;
   border: 1px solid gainsboro;
 }
-h1 {
+
+.img-txt:hover img {
+  border: 2px solid red;
+}
+
+h1.region-title,
+h1.tc-intro {
   border: 1px solid;
   border-radius: 5px;
   text-align: center;
@@ -50,4 +58,7 @@ h1 {
   border: 1px solid #cecece;
   margin-top: -1px;
   margin-left: -1px;
+  overflow:hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
