@@ -1,0 +1,53 @@
+.w-1of5 td {
+  width: 20%;
+}
+
+.mt-10 {
+  margin-top: 10px;
+}
+
+.block {
+  display: block;
+}
+
+.clearfix:after {
+  clear: both;
+  display: block;
+  content: ' ';
+}
+.prod {
+  position: relative;
+  margin-top: 10px;
+  overflow: hidden;
+  white-space: nowrap;
+  padding: 0 10px;
+}
+.img-txt {
+  float: left;
+  width: 25%;
+  text-align: center;
+  padding: 5px;
+}
+.img-txt img {
+  display: block;
+  width: 100%;
+  border: 1px solid gainsboro;
+}
+h1 {
+  border: 1px solid;
+  border-radius: 5px;
+  text-align: center;
+  margin: 0 auto;
+  padding: 5px;
+}
+
+.region a {
+  width: 20%;
+  float: left;
+  display: block;
+  padding: 10px;
+  text-align: center;
+  border: 1px solid #cecece;
+  margin-top: -1px;
+  margin-left: -1px;
+}

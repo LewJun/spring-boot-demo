@@ -1,0 +1,10 @@
+server:
+  port: 1234
+  servlet:
+    context-path: /nongte
+
+beetlsql:
+  enabled: false
+beetl:
+  suffix: html
+  templatesPath: templates

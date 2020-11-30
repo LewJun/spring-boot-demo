@@ -41,6 +41,7 @@
         <module>spring-boot-sharding-multi-datasource-mybatis</module>
         <module>spring-boot-sharding-read-write-separation-mybatis</module>
         <module>spring-boot-template-thymeleaf</module>
+        <module>nongte</module>
         <module>spring-boot-banner</module>
         <module>spring-boot-redis-lettuce</module>
         <module>spring-boot-cos-tencent</module>
