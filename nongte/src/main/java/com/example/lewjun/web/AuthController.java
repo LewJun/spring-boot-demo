@@ -2,6 +2,7 @@ package com.example.lewjun.web;
 
 import com.example.lewjun.domain.LoginForm;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -28,9 +29,16 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public String login(final HttpServletRequest request, final LoginForm loginForm) {
+    public String login(final HttpServletRequest request, final Model model, final LoginForm loginForm) {
         final HttpSession session = request.getSession();
-        session.setAttribute("loginUser", loginForm.getUsername());
-        return "redirect:prod/list";
+        final String username = loginForm.getUsername();
+        if ("admin".equals(username) && "admin123password".equals(loginForm.getPassword())) {
+            session.setAttribute("loginUser", username);
+            return "redirect:prod/list";
+        } else {
+            model.addAttribute("err", "用户名或密码错误");
+            model.addAttribute("loginForm", loginForm);
+            return "signin.html";
+        }
     }
 }

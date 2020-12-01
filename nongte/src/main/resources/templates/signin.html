@@ -60,10 +60,13 @@
 <div class="container">
     <form action="login" class="form-signin" method="post">
         <h2 class="form-signin-heading">请登录</h2>
+        <h3 style="color:red;">${err!''}</h3>
         <label class="sr-only" for="inputUsername">用户名</label>
-        <input autofocus class="form-control" id="inputUsername" name="username" placeholder="用户名" required>
+        <input autofocus class="form-control" id="inputUsername" name="username" placeholder="用户名" required
+               value="${loginForm.username!''}">
         <label class="sr-only" for="inputPassword">密码</label>
-        <input class="form-control" id="inputPassword" name="password" placeholder="密码" required type="password">
+        <input class="form-control" id="inputPassword" name="password" placeholder="密码" required type="password"
+               value="${loginForm.password!''}">
         <button class="btn btn-lg btn-primary btn-block" type="submit">登 录</button>
     </form>
 </div>
