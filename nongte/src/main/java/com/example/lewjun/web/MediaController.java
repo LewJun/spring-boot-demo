@@ -4,10 +4,11 @@ import com.example.lewjun.util.FileDownloadUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -21,7 +22,9 @@ import java.util.*;
 @Slf4j
 @RestController
 public class MediaController {
-    private final String uploadPath = "/Users/huiye/Documents/upload/";
+
+    @Value("${uploadPath}")
+    private String uploadPath;
 
     @GetMapping("/download")
     public ResponseEntity<byte[]> download(final String pathname) {
@@ -66,7 +69,7 @@ public class MediaController {
 
     private String getPathName(final File file) {
         final String path = file.getPath();
-        return path.substring(uploadPath.length());
+        return path.substring(uploadPath.length()).replaceAll("\\\\", "/");
     }
 
     private File transferTo(final MultipartFile multipartFile) {
@@ -96,14 +99,14 @@ public class MediaController {
     }
 
     /**
-     * <img src="file/abc.jpg">
+     * <img src="file?filename=xxx.jpg">
      *
      * @param response
      * @param filename
      * @throws IOException
      */
-    @GetMapping("/file/{filename}")
-    public void img(final HttpServletResponse response, @PathVariable final String filename) throws IOException {
+    @GetMapping("/file")
+    public void file(final HttpServletResponse response, @RequestParam final String filename) throws IOException {
         final byte[] bytes = FileUtils.readFileToByteArray(new File(uploadPath, filename));
         final ServletOutputStream out = response.getOutputStream();
         out.write(bytes);
