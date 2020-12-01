@@ -67,14 +67,16 @@
 
     <h1 class="tc-intro mt-10">特产介绍</h1>
 
-    <div class="prod">
+    <div class="row mt-10">
         <%
         for(prod in prods) {
         %>
-        <a class="img-txt" href="prod/detail/${prod.id}">
-            <img alt="" src="file/${prod.pic}">
-            <div>${prod.title}</div>
-        </a>
+        <div class="col-sm-6 col-md-3">
+            <a class="thumbnail" href="prod/detail/${prod.id}">
+                <img alt="" loading="lazy" src="file?filename=${prod.pic}">
+                <div class="caption text-center">${prod.title}</div>
+            </a>
+        </div>
         <%}%>
     </div>
 </div>

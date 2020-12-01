@@ -15,30 +15,6 @@
   display: block;
   content: ' ';
 }
-.prod {
-  position: relative;
-  margin: 10px auto;
-  overflow: auto;
-  white-space: nowrap;
-  padding: 0 10px;
-  width:98%;
-}
-.img-txt {
-  float: left;
-  width: 25%;
-  text-align: center;
-  padding: 5px;
-}
-
-.img-txt img {
-  display: block;
-  width: 100%;
-  border: 1px solid gainsboro;
-}
-
-.img-txt:hover img {
-  border: 2px solid red;
-}
 
 h1.region-title,
 h1.tc-intro {

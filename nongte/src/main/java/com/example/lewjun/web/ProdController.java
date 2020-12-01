@@ -50,11 +50,21 @@ public class ProdController {
         ));
 
         model.addAttribute("prods", Arrays.asList(
-                new Product(123, "金针菇", "11be62fd-a386-4e76-8a98-d90df48bb1defirst-page-bg.jpg"),
-                new Product(124, "芝麻", "11be62fd-a386-4e76-8a98-d90df48bb1defirst-page-bg.jpg"),
-                new Product(124, "芝麻2", "11be62fd-a386-4e76-8a98-d90df48bb1defirst-page-bg.jpg"),
-                new Product(124, "芝麻3", "11be62fd-a386-4e76-8a98-d90df48bb1defirst-page-bg.jpg"),
-                new Product(124, "芝麻4", "11be62fd-a386-4e76-8a98-d90df48bb1defirst-page-bg.jpg")
+                new Product(123, "金针菇", "kittens.jpg"),
+                new Product(124, "芝麻", "kittens.jpg"),
+                new Product(124, "芝麻2", "kittens.jpg"),
+                new Product(124, "芝麻3", "kittens.jpg"),
+                new Product(124, "芝麻4", "kittens.jpg"),
+                new Product(124, "芝麻4", "kittens.jpg"),
+                new Product(124, "芝麻4", "kittens.jpg"),
+                new Product(124, "芝麻4", "kittens.jpg"),
+                new Product(124, "芝麻4", "kittens.jpg"),
+                new Product(124, "芝麻4", "kittens.jpg"),
+                new Product(124, "芝麻4", "kittens.jpg"),
+                new Product(124, "芝麻4", "kittens.jpg"),
+                new Product(124, "芝麻4", "kittens.jpg"),
+                new Product(124, "芝麻4", "kittens.jpg"),
+                new Product(124, "芝麻4", "kittens.jpg")
         ));
         return "prod/prod.html";
     }
