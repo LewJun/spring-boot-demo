@@ -35,7 +35,13 @@
     <script src="respond.min.js"></script>
     <![endif]-->
     <link href="css/style.css" rel="stylesheet"/>
-    <link href="css/wang-editor.css" rel="stylesheet">
+    <!-- Latest compiled and minified CSS -->
+    <link href="https://unpkg.com/bootstrap-table@1.18.0/dist/bootstrap-table.min.css" rel="stylesheet">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://unpkg.com/bootstrap-table@1.18.0/dist/bootstrap-table.min.js"></script>
+    <!-- Latest compiled and minified Locales -->
+    <script src="https://unpkg.com/bootstrap-table@1.18.0/dist/locale/bootstrap-table-zh-CN.min.js"></script>
 </head>
 
 <body>
@@ -78,6 +84,7 @@
 
 <div class="container">
     产品列表
+    <table id="prodTable"></table>
 </div>
 <!-- /container -->
 
@@ -94,5 +101,48 @@
 <script src="js/bootstrap.min.js"></script>
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script src="js/ie10-viewport-bug-workaround.js"></script>
+<script>
+    $(function() {
+        $("#prodTable").bootstrapTable({
+            url:"prod/query",   //请求地址
+            striped : true, //是否显示行间隔色
+            pageNumber : 1, //初始化加载第一页
+            pagination : true, //是否分页
+            sidePagination : 'server',//server:服务器端分页|client：前端分页
+            pageSize : 5, //单页记录数
+            pageList : [ 5, 10, 20],//可选择单页记录数
+            showRefresh : false,//刷新按钮
+            queryParams : function(params) {//上传服务器的参数
+                var temp = {
+                    offset :params.offset + 0,// SQL语句起始索引
+                    pageNumber : params.limit  // 每页显示数量
+                };
+                return temp;
+            },
+            columns : [
+            {
+                title : 'id',
+                field : 'id',
+            },
+            {
+                title : '姓名',
+                field : 'name',
+            },
+            {
+                title : '年龄',
+                field : 'age',
+            },
+            {
+                title : '性别',
+                field : 'sex',
+            }]
+        })
+    });
+
+
+
+
+
+</script>
 </body>
 </html>

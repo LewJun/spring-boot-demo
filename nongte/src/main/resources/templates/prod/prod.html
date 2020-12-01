@@ -81,7 +81,7 @@
     <h1 class="region-title">${regionTitle}</h1>
     <div class="mt-10 region clearfix">
         <%
-        for(region in regions){
+        for(region in regions![]){
         %>
         <a href="prod/${path}/${region.code}">${region.name}</a>
         <%}%>
@@ -91,7 +91,7 @@
 
     <div class="row mt-10">
         <%
-        for(prod in prods) {
+        for(prod in prods![]) {
         %>
         <div class="col-sm-6 col-md-3">
             <a class="thumbnail" href="prod/detail/${prod.id}">
