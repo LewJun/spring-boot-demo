@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <base href="/nongte/">
     <meta charset="utf-8"/>
-    <base href="/nongte/"/>
     <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
     <meta content="width=device-width, initial-scale=1" name="viewport"/>
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
@@ -10,7 +10,7 @@
     <meta content="" name="author"/>
     <link href="images/favicon.ico" rel="icon"/>
 
-    <title>${regionTitle}</title>
+    <title>登录</title>
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet"/>
@@ -31,10 +31,11 @@
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
-    <script src="html5shiv.min.js"></script>
-    <script src="respond.min.js"></script>
+    <script src="js/html5shiv.min.js"></script>
+    <script src="js/respond.min.js"></script>
     <![endif]-->
     <link href="css/style.css" rel="stylesheet"/>
+    <link href="css/signin.css" rel="stylesheet"/>
 </head>
 
 <body>
@@ -46,31 +47,10 @@
         </div>
         <div class="navbar-collapse collapse" id="navbar">
             <ul class="nav navbar-nav navbar-right">
-                <%
-                var loginUser = session.loginUser !"";
-                %>
                 <li><a href="#">首页</a></li>
-                <%if(loginUser != "") {%>
-                <li><a href="prod/list">产品列表</a></li>
-                <%}%>
                 <li><a href="about">关于我们</a></li>
                 <li><a href="contact">联系我们</a></li>
-                <%
-                if(loginUser == "") {
-                %>
-                <li><a href="signin">登录</a></li>
-                <%} else {%>
-                <li class="dropdown">
-                    <a aria-expanded="false" aria-haspopup="true"
-                       class="dropdown-toggle"
-                       data-toggle="dropdown"
-                       href="#"
-                       role="button">${loginUser} <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="signout">退出</a></li>
-                    </ul>
-                </li>
-                <%}%>
+                <li class="active"><a href="signin">登录</a></li>
             </ul>
         </div>
         <!--/.nav-collapse -->
@@ -78,31 +58,17 @@
 </nav>
 
 <div class="container">
-    <h1 class="region-title">${regionTitle}</h1>
-    <div class="mt-10 region clearfix">
-        <%
-        for(region in regions){
-        %>
-        <a href="prod/${path}/${region.code}">${region.name}</a>
-        <%}%>
-    </div>
-
-    <h1 class="tc-intro mt-10">特产介绍</h1>
-
-    <div class="row mt-10">
-        <%
-        for(prod in prods) {
-        %>
-        <div class="col-sm-6 col-md-3">
-            <a class="thumbnail" href="prod/detail/${prod.id}">
-                <img alt="" loading="lazy" src="file?filename=${prod.pic}">
-                <div class="caption text-center">${prod.title}</div>
-            </a>
-        </div>
-        <%}%>
-    </div>
+    <form action="login" class="form-signin" method="post">
+        <h2 class="form-signin-heading">请登录</h2>
+        <label class="sr-only" for="inputUsername">用户名</label>
+        <input autofocus class="form-control" id="inputUsername" name="username" placeholder="用户名" required>
+        <label class="sr-only" for="inputPassword">密码</label>
+        <input class="form-control" id="inputPassword" name="password" placeholder="密码" required type="password">
+        <button class="btn btn-lg btn-primary btn-block" type="submit">登 录</button>
+    </form>
 </div>
 <!-- /container -->
+
 
 <div class="footer">
     <div class="container">

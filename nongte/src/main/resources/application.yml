@@ -2,6 +2,8 @@ server:
   port: 1234
   servlet:
     context-path: /nongte
+    session:
+      timeout: 3600
 
 beetlsql:
   enabled: false

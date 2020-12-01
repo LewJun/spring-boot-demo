@@ -187,4 +187,8 @@ public class ProdController {
         return "prod/detail.html";
     }
 
+    @GetMapping("/list")
+    public String list() {
+        return "prod/list.html";
+    }
 }
