@@ -5,10 +5,11 @@ import com.example.lewjun.domain.Region;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
 
 @Slf4j
@@ -190,5 +191,25 @@ public class ProdController {
     @GetMapping("/list")
     public String list() {
         return "prod/list.html";
+    }
+
+    @GetMapping("/create")
+    public String create() {
+        return "prod/create.html";
+    }
+
+    @PostMapping("/upload")
+    @ResponseBody
+    public String upload(HttpServletRequest request) {
+        MultipartHttpServletRequest mhsr = (MultipartHttpServletRequest) request;
+        MultipartFile pic = mhsr.getFile("pic");
+        String originalFilename = pic.getOriginalFilename();
+        log.info("originalFilename {}", originalFilename);
+
+        log.info("pic {}, {}", pic.getSize(), pic.getName());
+
+        request.getParameterMap().forEach((s, strings) -> log.info("{}, {}", s, strings));
+
+        return "ok";
     }
 }

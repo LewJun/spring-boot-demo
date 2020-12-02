@@ -35,13 +35,6 @@
     <script src="respond.min.js"></script>
     <![endif]-->
     <link href="css/style.css" rel="stylesheet"/>
-    <!-- Latest compiled and minified CSS -->
-    <link href="https://unpkg.com/bootstrap-table@1.18.0/dist/bootstrap-table.min.css" rel="stylesheet">
-
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://unpkg.com/bootstrap-table@1.18.0/dist/bootstrap-table.min.js"></script>
-    <!-- Latest compiled and minified Locales -->
-    <script src="https://unpkg.com/bootstrap-table@1.18.0/dist/locale/bootstrap-table-zh-CN.min.js"></script>
 </head>
 
 <body>
@@ -83,7 +76,9 @@
 </nav>
 
 <div class="container">
-    产品列表
+    <div class="btn-group">
+        <a class="btn btn-primary" href="prod/create">创建产品</a>
+    </div>
     <table id="prodTable"></table>
 </div>
 <!-- /container -->
@@ -101,6 +96,14 @@
 <script src="js/bootstrap.min.js"></script>
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script src="js/ie10-viewport-bug-workaround.js"></script>
+
+<!-- Latest compiled and minified CSS -->
+<link href="https://unpkg.com/bootstrap-table@1.18.0/dist/bootstrap-table.min.css" rel="stylesheet">
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://unpkg.com/bootstrap-table@1.18.0/dist/bootstrap-table.min.js"></script>
+<!-- Latest compiled and minified Locales -->
+<script src="https://unpkg.com/bootstrap-table@1.18.0/dist/locale/bootstrap-table-zh-CN.min.js"></script>
+
 <script>
     $(function() {
         $("#prodTable").bootstrapTable({
@@ -138,6 +141,7 @@
             }]
         })
     });
+
 
 
 

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <base href="/nongte/"/>
+    <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta content="" name="description"/>
+    <meta content="" name="author"/>
+    <link href="images/favicon.ico" rel="icon"/>
+
+    <title>创建产品</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet"/>
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="css/ie10-viewport-bug-workaround.css" rel="stylesheet"/>
+
+    <!-- Custom styles for this template -->
+    <link href="css/navbar-fixed-top.css" rel="stylesheet"/>
+    <!-- <link href="assets/css/non-responsive.css" rel="stylesheet" /> -->
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9
+      ]>
+    <script src="js/ie8-responsive-file-warning.js"></script
+    ><![endif]-->
+    <script src="js/ie-emulation-modes-warning.js"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="html5shiv.min.js"></script>
+    <script src="respond.min.js"></script>
+    <![endif]-->
+    <link href="css/style.css" rel="stylesheet"/>
+</head>
+
+<body>
+<!-- Fixed navbar -->
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">特农网</a>
+        </div>
+        <div class="navbar-collapse collapse" id="navbar">
+            <ul class="nav navbar-nav navbar-right">
+                <%
+                var loginUser = session.loginUser !"";
+                %>
+                <li><a href="#">首页</a></li>
+                <li><a href="prod/list">产品列表</a></li>
+                <li><a href="about">关于我们</a></li>
+                <li><a href="contact">联系我们</a></li>
+                <%
+                if(loginUser == "") {
+                %>
+                <li><a href="signin">登录</a></li>
+                <%} else {%>
+                <li class="dropdown">
+                    <a aria-expanded="false" aria-haspopup="true"
+                       class="dropdown-toggle"
+                       data-toggle="dropdown"
+                       href="#"
+                       role="button">${loginUser} <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="signout">退出</a></li>
+                    </ul>
+                </li>
+                <%}%>
+            </ul>
+        </div>
+        <!--/.nav-collapse -->
+    </div>
+</nav>
+
+<div class="container">
+
+    <form class="form-horizontal" role="form" id="frm">
+        <div class="form-group">
+            <label for="title" class="col-sm-2 control-label">产品名称</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="title" placeholder="请输入产品名称" maxlength="20">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="desc" class="col-sm-2 control-label">产品描述</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="desc" placeholder="请输入产品描述" maxlength="32">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="pic" class="col-sm-2 control-label">封面图片</label>
+            <div class="col-sm-10">
+                <input type="file" class="form-control" id="pic" name="pic" placeholder="请选择封面图片" accept="image/jpeg">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="region-select-box" class="col-sm-2 control-label">所属区域</label>
+            <div class="col-sm-10">
+                <div id="region-select-box" class="form-inline"></div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="product-content" class="col-sm-2 control-label">正文</label>
+            <div class="col-sm-10">
+                <div id="product-content"></div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <a class="btn btn-primary" onclick="submitForm()">提 交</a>
+            </div>
+        </div>
+    </form>
+</div>
+<!-- /container -->
+
+
+<div class="footer">
+    <div class="container">
+        <p class="text-muted">内容待完善</p>
+    </div>
+</div>
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script src="js/ie10-viewport-bug-workaround.js"></script>
+<script src="js/j-area-data.js"></script>
+<script src="js/j-area-select.js"></script>
+<script src="js/wangEditor.min.js"></script>
+<script>
+
+    function initAreaSelector() {
+        var area = $('#region-select-box').JAreaSelect({
+          prov: '',
+        });
+        return area;
+    }
+
+    function initWangEditor() {
+        var E = window.wangEditor
+        var editor = new E('#product-content')
+        // 或者 const editor = new E( document.getElementById('div1') )
+        // 设置编辑区域高度为 500px
+        // editor.config.height = 500
+        // 配置 server 接口地址
+        editor.config.uploadImgServer = 'uploadFiles'
+        // 限制图片大小
+        editor.config.uploadImgMaxSize = 2 * 1024 * 1024 // 2M
+        // 限制图片类型
+        editor.config.uploadImgAccept = ['jpg', 'jpeg', 'png', 'gif', 'bmp']
+        editor.create()
+
+        return editor;
+    }
+
+    var selector = initAreaSelector();
+    var wangEditor = initWangEditor();
+
+    function submitForm() {
+        var areaObj = selector.getAreaObj();
+        var html = wangEditor.txt.html();
+        var title = $("#title").val();
+        var desc = $("#desc").val();
+        var pic = $("#pic").val();
+
+        // TODO 数据校验
+
+
+        var frm = new FormData(document.getElementById("frm"))
+        frm.append("html", wangEditor.txt.html());
+        console.log(frm);
+        $.ajax({
+            url: "prod/upload",
+            type: "post",
+            data: frm,
+            processData: false,
+            contentType: false,
+            success: function(result) {
+                //
+                console.log(result);
+                // window.location.href="prod/list";
+                window.location.replace("prod/list");
+            },
+            error: function(err) {
+                console.log(err);
+                alert(err);
+            }
+        });
+    }
+</script>
+
+</body>
+</html>
