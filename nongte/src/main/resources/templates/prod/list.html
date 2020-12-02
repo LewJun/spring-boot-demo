@@ -76,15 +76,47 @@
 </nav>
 
 <div class="container">
-    <div class="btn-group">
+    <div class="form-inline">
+        <div class="row">
+            <div class="form-group">
+                <label for="title">产品名称</label>
+                <input type="text" class="form-control" id="title" placeholder="请输入产品名称" maxlength="20">
+            </div>
+
+            <div class="form-group">
+                <label for="desc" class="control-label">产品描述</label>
+                <input type="text" class="form-control" id="desc" placeholder="请输入产品描述" maxlength="32">
+            </div>
+
+            <div class="form-group">
+                <label for="level" class="control-label">优先级</label>
+                <input type="text" class="form-control match-rotation-input" maxlength="4"
+                       onkeyup="value=value.replace(/[^\d]/g,'')"
+                       onblur="value=value.replace(/[^\d]/g,'')" placeholder="数字越小，优先级越高。"
+                       name="level"
+                       id="level">
+            </div>
+        </div>
+
+        <div class="row mt-10">
+            <div class="form-group">
+                <label for="region-select-box">所属区域</label>
+                <div id="region-select-box" class="form-inline" style="display:inline-block"></div>
+            </div>
+
+            <button class="btn btn-default" id="queryBtn">查询</button>
+        </div>
+    </div>
+    <div class="btn-group mt-10">
         <a class="btn btn-primary" href="prod/create">创建产品</a>
     </div>
-    <table id="prodTable"></table>
+    <table id="prodTable" class="mt-10"></table>
 </div>
 <!-- /container -->
 
 
 <div class="footer">
+
     <div class="container">
         <p class="text-muted">内容待完善</p>
     </div>
@@ -104,49 +136,136 @@
 <!-- Latest compiled and minified Locales -->
 <script src="https://unpkg.com/bootstrap-table@1.18.0/dist/locale/bootstrap-table-zh-CN.min.js"></script>
 
+<script src="js/j-area-data.js"></script>
+<script src="js/j-area-select.js"></script>
 <script>
     $(function() {
+        $("#queryBtn").click(function() {
+            $("#prodTable").bootstrapTable('refresh');
+        });
+
         $("#prodTable").bootstrapTable({
-            url:"prod/query",   //请求地址
+            url:"prod/list/query",   //请求地址
             striped : true, //是否显示行间隔色
             pageNumber : 1, //初始化加载第一页
             pagination : true, //是否分页
             sidePagination : 'server',//server:服务器端分页|client：前端分页
             pageSize : 5, //单页记录数
-            pageList : [ 5, 10, 20],//可选择单页记录数
+            pageList : [5, 10, 20, 30],//可选择单页记录数
             showRefresh : false,//刷新按钮
             queryParams : function(params) {//上传服务器的参数
+                var areaObj = areaSelector.getAreaObj();
                 var temp = {
                     offset :params.offset + 0,// SQL语句起始索引
                     pageNumber : params.limit  // 每页显示数量
+                    , title: $("#title").val()
+                    , desc: $("#desc").val()
+                    , level: $("#level").val()
+                    , province: areaObj.province
+                    , city: areaObj.city
+                    , area: areaObj.area
                 };
                 return temp;
             },
             columns : [
             {
-                title : 'id',
+                title : '编号',
                 field : 'id',
+                align: 'center'
             },
             {
-                title : '姓名',
-                field : 'name',
+                title : '产品名称',
+                field : 'title',
+                align: 'center'
             },
             {
-                title : '年龄',
-                field : 'age',
+                title : '描述',
+                field : 'desc',
+                align: "center",
+                halign: "center",
+                valign: 'middle'
             },
             {
-                title : '性别',
-                field : 'sex',
-            }]
+                title : '所属区域',
+                field : 'region',
+                align: "center",
+                halign: "center",
+                valign: 'middle'
+            },
+             {
+                title : '创建时间',
+                field : 'create_time',
+                align: "center",
+                halign: "center",
+                valign: 'middle'
+            },
+            {
+                title : '状态',
+                field : 'status',
+                align: 'center',
+            },
+            {
+                title: '操作',
+                field: 'opr',
+                align: 'center',
+                events: {
+                    'click #enable': function(e, value, row, index) {
+                        changeStatus(row.id, 1);
+                    },
+                    'click #disable': function(e, value, row, index) {
+                        changeStatus(row.id, 2);
+                    }
+                },
+                formatter: function(value, row, index) {
+                    var result="";
+                    result += "<a class='btn btn-success' href='prod/detail/"+row.id+"' style='margin-right: 10px;'>详情</a>";
+                    result += "<a class='btn btn-warning' href='prod/edit/"+row.id+"' style='margin-right: 10px;'>修改</a>";
+                    if (row.status === 2) {
+                        result += "<a class='btn btn-primary' href='javascript:void(0)' id='enable'>启用</a>";
+                    } else {
+                        result += "<a class='btn btn-danger' href='javascript:void(0)' id='disable'>禁用</a>";
+                    }
+                    return result;
+                }
+            }
+            ]
         })
     });
 
+    function changeStatus(id, status) {
+        $.ajax({
+            url: 'prod/changeStatus',
+            type: 'post',
+            data: {id: id, status: status},
+            success: function(result) {
+                // 状态修改成功后刷新
+                window.location.reload();
+            },
+            error: function(err) {
+                alert(err);
+            }
+        });
+    }
+
+    function initAreaSelector() {
+        var area = $('#region-select-box').JAreaSelect({
+          prov: '',
+        });
+        return area;
+    }
+
+    var areaSelector = initAreaSelector();
 
 
 
 
 
 </script>
+<style>
+    select {
+        margin-right:2px;
+    }
+
+</style>
 </body>
 </html>

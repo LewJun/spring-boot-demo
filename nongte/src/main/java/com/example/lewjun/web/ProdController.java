@@ -193,6 +193,29 @@ public class ProdController {
         return "prod/list.html";
     }
 
+    @GetMapping("/list/query")
+    @ResponseBody
+    public String listQuery() {
+        // 需要返回total和rows
+        return "{\n" +
+                "  \"rows\": [\n" +
+                "    {\n" +
+                "      \"desc\": \"产品描述\",\n" +
+                "      \"id\": 123,\n" +
+                "      \"status\": 1,\n" +
+                "      \"title\": \"产品名称xxx\"\n" +
+                "    },\n" +
+                "    {\n" +
+                "      \"desc\": \"产品描述23\",\n" +
+                "      \"id\": 1233,\n" +
+                "      \"status\": 2,\n" +
+                "      \"title\": \"产品名称xxserewxx\"\n" +
+                "    }\n" +
+                "  ],\n" +
+                "  \"total\": 34\n" +
+                "}";
+    }
+
     @GetMapping("/create")
     public String create() {
         return "prod/create.html";
@@ -209,6 +232,15 @@ public class ProdController {
         log.info("pic {}, {}", pic.getSize(), pic.getName());
 
         request.getParameterMap().forEach((s, strings) -> log.info("{}, {}", s, strings));
+
+        return "ok";
+    }
+
+    @PostMapping("/changeStatus")
+    @ResponseBody
+    public String changeStatus(int id, int status) {
+        log.info("id {}", id);
+        log.info("status {}", status);
 
         return "ok";
     }
