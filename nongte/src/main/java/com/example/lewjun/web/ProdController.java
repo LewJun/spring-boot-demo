@@ -218,21 +218,27 @@ public class ProdController {
 
     @GetMapping("/create")
     public String create() {
-        return "prod/create.html";
+        return "prod/edit.html";
+    }
+
+    @GetMapping("/edit/{id}")
+    public String edit(@PathVariable Integer id, Model model) {
+        Product product = new Product();
+        product.setId(123);
+        product.setTitle("标题在这里");
+        product.setDesc("描述信息");
+//        product.setProvince();
+        product.setLevel(2);
+        product.setHtml("<p>abc</p>");
+        product.setPicUrl("2020/11/f1db2952-4d97-42b2-8ad7-1c0a69595e42.jpg");
+        model.addAttribute("prod", product);
+        return "prod/edit.html";
     }
 
     @PostMapping("/upload")
     @ResponseBody
-    public String upload(HttpServletRequest request) {
-        MultipartHttpServletRequest mhsr = (MultipartHttpServletRequest) request;
-        MultipartFile pic = mhsr.getFile("pic");
-        String originalFilename = pic.getOriginalFilename();
-        log.info("originalFilename {}", originalFilename);
-
-        log.info("pic {}, {}", pic.getSize(), pic.getName());
-
-        request.getParameterMap().forEach((s, strings) -> log.info("{}, {}", s, strings));
-
+    public String upload(Product product) {
+        log.info("【product {}】", product);
         return "ok";
     }
 

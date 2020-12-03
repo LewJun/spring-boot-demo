@@ -1,14 +1,16 @@
 package com.example.lewjun.domain;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor
 @Data
 public class Product {
     private Integer id;
 
     private String title;
 
-    private String pic;
+    private String picUrl;
 
     private String desc;
 
@@ -26,9 +28,10 @@ public class Product {
 
     private String update_time;
 
-    public Product(final Integer id, final String title, final String pic) {
+
+    public Product(final Integer id, final String title, final String picUrl) {
         this.id = id;
         this.title = title;
-        this.pic = pic;
+        this.picUrl = picUrl;
     }
 }
