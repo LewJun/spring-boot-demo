@@ -41,7 +41,7 @@
       $.each(areaData.prov, function (id, name) {
         if (id == options.prov) {
           obj.province.append(
-            '<option value="' + id + '">' + name + '</option>'
+            '<option value="' + id + '" selected>' + name + '</option>'
           );
         } else {
           obj.province.append(
@@ -77,7 +77,7 @@
           $.each(areaData.city[pid], function (i, item) {
             if (item.id == options.city) {
               obj.city.append(
-                '<option value="' + item.id + '" >' + item.name + '</option>'
+                '<option value="' + item.id + '" selected>' + item.name + '</option>'
               );
             } else {
               obj.city.append(
@@ -110,7 +110,7 @@
                   obj.area.append(
                     '<option value="' +
                       item.id +
-                      '" >' +
+                      '" selected>' +
                       item.name +
                       '</option>'
                   );
