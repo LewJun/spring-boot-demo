@@ -82,21 +82,39 @@
         <div class="form-group">
             <label for="title" class="col-sm-2 control-label">产品名称</label>
             <div class="col-sm-10">
-                <input value="${prod.title!''}" type="text" class="form-control" id="title" name="title" placeholder="请输入产品名称" maxlength="20">
+                <input value="${prod.title!''}" type="text" class="form-control" id="title" name="title"
+                       placeholder="请输入产品名称" maxlength="20">
             </div>
         </div>
 
         <div class="form-group">
             <label for="desc" class="col-sm-2 control-label">产品描述</label>
             <div class="col-sm-10">
-                <input value="${prod.desc!''}" type="text" class="form-control" id="desc" name="desc" placeholder="请输入产品描述" maxlength="32">
+                <input value="${prod.desc!''}" type="text" class="form-control" id="desc" name="desc"
+                       placeholder="请输入产品描述" maxlength="32">
             </div>
         </div>
 
         <div class="form-group">
             <label for="pic" class="col-sm-2 control-label">封面图片</label>
-            <div class="col-sm-10">
-                <input type="file" class="form-control" id="pic" name="pic" placeholder="请选择封面图片" accept="image/jpeg">
+            <div class="col-sm-10 pic-div">
+                <%
+                if(prod.picUrl!'' == '') {
+                %>
+                <input type="file" class="form-control" id="pic" name="pic" accept="image/jpeg">
+                <%
+                } else {
+                %>
+                <div class="pic-container" id="pic-container">
+                    <a href="file?filename=${prod.picUrl}" target="_blank" class="pic_a">
+                        <img alt="封面图片" src="file?filename=${prod.picUrl}" style="width: 80px; min-height: 100px;"
+                             id="picImg" class="img-thumbnail">
+                    </a>
+                    <div class="pic_x" id="pic_x">x</div>
+                </div>
+                <%
+                }
+                %>
             </div>
         </div>
 
@@ -129,6 +147,7 @@
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
                 <a class="btn btn-primary" onclick="submitForm()">提 交</a>
+                <a class="btn btn-default" onclick="javascript:history.go(-1)">取 消</a>
             </div>
         </div>
     </form>
@@ -154,7 +173,12 @@
 <script src="js/jquery.mloading.js"></script>
 <link rel="stylesheet" href="css/jquery.mloading.css">
 <script>
-
+$(function() {
+    $("#pic_x").click(function() {
+        $('#pic-container').remove();
+        $('<input type="file" class="form-control" id="pic" name="pic" accept="image/jpeg">').appendTo(".pic-div")
+    });
+});
     function initAreaSelector() {
         var area = $('#region-select-box').JAreaSelect({
            prov: "${prod.province!''}",
@@ -253,13 +277,14 @@
 
         var areaObj = selector.getAreaObj();
         if (!areaObj.province || !areaObj.city || !areaObj.area) {
-            alert("请完善所在区域");
+            alert("请完善所属区域");
+            $('[name="province"]').focus();
             return;
         }
 
         var html = wangEditor.txt.html();
         if (!html) {
-            alert("请输入产品正文");
+            alert("请输入正文");
             $('#product-content').focus();
             return;
         }
@@ -314,11 +339,31 @@
     }
 
 </script>
-
 <style>
-    #region-select-box select {
-        margin-right: 3px;
-    }
+.pic-container {
+display: inline-block;
+position: relative;
+}
+
+.pic_x {
+display: inline-block;
+position: absolute;
+top: 2px;
+right: 2px;
+color: #b92c28;
+background: #eeeeee;
+padding: 0 5px;
+}
+
+.pic_x:hover {
+    cursor: pointer;
+    border: 1px solid #b92c28;
+}
+
+#region-select-box select {
+margin-right: 3px;
+}
+
 </style>
 </body>
 </html>
