@@ -157,7 +157,9 @@
 
     function initAreaSelector() {
         var area = $('#region-select-box').JAreaSelect({
-          prov: '',
+           prov: "${prod.province!''}",
+           city: "${prod.city!''}",
+           area: "${prod.area!''}"
         });
         return area;
     }

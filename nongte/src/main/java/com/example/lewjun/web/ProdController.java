@@ -227,7 +227,9 @@ public class ProdController {
         product.setId(123);
         product.setTitle("标题在这里");
         product.setDesc("描述信息");
-//        product.setProvince();
+        product.setProvince("210000");
+        product.setCity("211000");
+        product.setArea("211081");
         product.setLevel(2);
         product.setHtml("<p>abc</p>");
         product.setPicUrl("2020/11/f1db2952-4d97-42b2-8ad7-1c0a69595e42.jpg");
