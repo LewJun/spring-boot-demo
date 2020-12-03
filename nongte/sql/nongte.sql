@@ -2,7 +2,8 @@
 SQLyog Ultimate v12.08 (64 bit)
 MySQL - 5.7.31-log : Database - nongte
 *********************************************************************
-*/
+*/
+
 
 /*!40101 SET NAMES utf8 */;
 
@@ -19,21 +20,27 @@ USE `nongte`;
 /*Table structure for table `product` */
 
 DROP TABLE IF EXISTS `product`;
-
 CREATE TABLE `product` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `title` varchar(20) NOT NULL DEFAULT '',
-  `description` varchar(32) NOT NULL DEFAULT '',
+  `desc` varchar(32) NOT NULL DEFAULT '',
   `html` text NOT NULL,
-  `pic` varchar(128) NOT NULL DEFAULT '',
-  `province` varchar(20) NOT NULL DEFAULT '',
-  `city` varchar(20) NOT NULL DEFAULT '',
-  `area` varchar(20) NOT NULL DEFAULT '',
+  `pic_url` varchar(128) NOT NULL DEFAULT '',
+  `province_code` mediumint(6) unsigned NOT NULL,
+  `province_name` varchar(8) NOT NULL DEFAULT '',
+  `city_code` mediumint(6) unsigned NOT NULL,
+  `city_name` varchar(12) NOT NULL DEFAULT '',
+  `area_code` mediumint(6) unsigned NOT NULL,
+  `area_name` varchar(15) NOT NULL DEFAULT '',
   `status` tinyint(1) unsigned NOT NULL DEFAULT '1',
   `create_time` datetime NOT NULL,
   `update_time` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `level` mediumint(6) unsigned DEFAULT '999',
+  PRIMARY KEY (`id`),
+  KEY `province_code` (`province_code`),
+  KEY `city_code` (`city_code`),
+  KEY `area_code` (`area_code`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `product` */
 

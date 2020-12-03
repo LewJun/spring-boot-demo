@@ -10,7 +10,7 @@
     <meta content="" name="author"/>
     <link href="images/favicon.ico" rel="icon"/>
 
-    <title>${title}</title>
+    <title>${detail.title!''}</title>
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet"/>
@@ -78,7 +78,7 @@
 </nav>
 
 <div class="container">
-    ${html}
+    ${detail.html!''}
 </div>
 <!-- /container -->
 

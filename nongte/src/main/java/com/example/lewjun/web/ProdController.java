@@ -2,6 +2,8 @@ package com.example.lewjun.web;
 
 import com.example.lewjun.domain.Product;
 import com.example.lewjun.domain.Region;
+import com.example.lewjun.domain.vo.ProductQueryParamVO;
+import com.example.lewjun.mapper.ProductMapper;
 import com.example.lewjun.mapper.RegionMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Arrays;
 import java.util.List;
 
 @Slf4j
@@ -19,6 +20,9 @@ public class ProdController {
 
     @Autowired
     private RegionMapper regionMapper;
+
+    @Autowired
+    private ProductMapper productMapper;
 
     @GetMapping("/province/{code}/{name}")
     public String province(@PathVariable final Integer code, @PathVariable final String name, final Model model) {
@@ -33,23 +37,7 @@ public class ProdController {
 
         model.addAttribute("regions", regionMapper.queryCitiesByProvinceCode(code));
 
-        model.addAttribute("prods", Arrays.asList(
-                new Product(123, "金针菇", "kittens.jpg"),
-                new Product(124, "芝麻", "kittens.jpg"),
-                new Product(124, "芝麻2", "kittens.jpg"),
-                new Product(124, "芝麻3", "kittens.jpg"),
-                new Product(124, "芝麻4", "kittens.jpg"),
-                new Product(124, "芝麻4", "kittens.jpg"),
-                new Product(124, "芝麻4", "kittens.jpg"),
-                new Product(124, "芝麻4", "kittens.jpg"),
-                new Product(124, "芝麻4", "kittens.jpg"),
-                new Product(124, "芝麻4", "kittens.jpg"),
-                new Product(124, "芝麻4", "kittens.jpg"),
-                new Product(124, "芝麻4", "kittens.jpg"),
-                new Product(124, "芝麻4", "kittens.jpg"),
-                new Product(124, "芝麻4", "kittens.jpg"),
-                new Product(124, "芝麻4", "kittens.jpg")
-        ));
+        model.addAttribute("prods", productMapper.queryByProvinceCode(code));
         return "prod/prod.html";
     }
 
@@ -62,97 +50,24 @@ public class ProdController {
         model.addAttribute("path", "area");
 
         model.addAttribute("regions", regionMapper.queryAreasByCityCode(code));
+
+        model.addAttribute("prods", productMapper.queryByCityCode(code));
         return "prod/prod.html";
     }
 
     @GetMapping("/area/{code}/{name}")
-    public String area(@PathVariable final String code, @PathVariable final String name, final Model model) {
+    public String area(@PathVariable final Integer code, @PathVariable final String name, final Model model) {
         log.info("【area code {}】", code);
 
         model.addAttribute("regionTitle", name);
 
+        model.addAttribute("prods", productMapper.queryByAreaCode(code));
         return "prod/prod.html";
     }
 
     @GetMapping("/detail/{id}")
-    public String detail(@PathVariable final String id, final Model model) {
-        model.addAttribute("title", "芝麻详情");
-
-        model.addAttribute("html", "<blockquote>Web 富文本编辑器有很多，但我们是认真的！</blockquote>\n" +
-                "    <h1 style=\"text-align: center\">为何选择 wangEditor</h1>\n" +
-                "    <ul>\n" +
-                "      <li>\n" +
-                "        万星项目<a href=\"https://github.com/wangeditor-team/wangEditor/releases\"\n" +
-                "          >Github Star 1w+</a\n" +
-                "        >\n" +
-                "      </li>\n" +
-                "      <li>\n" +
-                "        简洁、轻量级、<a href=\"http://www.wangeditor.com/doc/\">文档</a>齐全\n" +
-                "      </li>\n" +
-                "      <li>QQ 群及时答疑</li>\n" +
-                "      <li>\n" +
-                "        <a\n" +
-                "          href=\"http://www.wangeditor.com/doc/#%E5%BC%80%E5%8F%91%E4%BA%BA%E5%91%98\"\n" +
-                "          >开源团队</a\n" +
-                "        >维护，非个人单兵作战\n" +
-                "      </li>\n" +
-                "    </ul>\n" +
-                "    <h1>初见</h1>\n" +
-                "    <p>\n" +
-                "      npm 安装<code>npm i wangeditor --save</code>，几行代码即可创建一个编辑器。\n" +
-                "    </p>\n" +
-                "    <pre><code>import E from 'wangeditor'\n" +
-                "const editor = new E('#div1')\n" +
-                "editor.create()</code></pre>\n" +
-                "    <p>\n" +
-                "      更多使用配置，请阅读<a href=\"http://www.wangeditor.com/doc/\">使用文档</a\n" +
-                "      >。\n" +
-                "    </p>\n" +
-                "    <h1>浏览器兼容性</h1>\n" +
-                "    <ul>\n" +
-                "      <li>兼容主流 PC 浏览器，IE11+</li>\n" +
-                "      <li>不支持移动端和 ipad</li>\n" +
-                "    </ul>\n" +
-                "    <h1>遇到问题</h1>\n" +
-                "    <ul>\n" +
-                "      <li>\n" +
-                "        加入 QQ 群：<b>901247714</b>，164999061(人已满)，710646022(人已满)\n" +
-                "      </li>\n" +
-                "      <li>\n" +
-                "        <a\n" +
-                "          href=\"https://github.com/wangeditor-team/wangEditor/issues\"\n" +
-                "          target=\"_blank\"\n" +
-                "          >提交问题和建议</a\n" +
-                "        >\n" +
-                "      </li>\n" +
-                "    </ul>\n" +
-                "    <h1>贡献代码</h1>\n" +
-                "    <p>\n" +
-                "      欢迎非团队成员贡献代码，提交 Pull Request，请一定参考<a\n" +
-                "        href=\"https://github.com/wangeditor-team/wangEditor/blob/master/docs/contribution.md\"\n" +
-                "        target=\"_blank\"\n" +
-                "        >贡献代码流程</a\n" +
-                "      >。\n" +
-                "    </p>\n" +
-                "    <h1>谁在维护</h1>\n" +
-                "    <p>\n" +
-                "      wangEditor 现有一个开源团队在维护，团队可以保证答疑、bug 修复和迭代效率。\n" +
-                "    </p>\n" +
-                "    <p>\n" +
-                "      <a\n" +
-                "        href=\"http://www.wangeditor.com/doc/#%E5%BC%80%E5%8F%91%E4%BA%BA%E5%91%98\"\n" +
-                "        >查看开发团队，或想加入开发团队</a\n" +
-                "      >\n" +
-                "    </p>\n" +
-                "    <h1>为我们点赞</h1>\n" +
-                "    <p>如果你感觉有收获，欢迎给我打赏，以激励我们更多输出优质开源内容。</p>\n" +
-                "    <p>\n" +
-                "      <img src=\"http://www.wangeditor.com/imgs/ali-pay.jpeg\" /><img\n" +
-                "        src=\"http://www.wangeditor.com/imgs/wechat-pay.jpeg\"\n" +
-                "      />\n" +
-                "    </p>\n" +
-                "    <p><br /><br /></p>");
-
+    public String detail(@PathVariable final Integer id, final Model model) {
+        model.addAttribute("detail", productMapper.queryDetailById(id));
         return "prod/detail.html";
     }
 
@@ -163,7 +78,7 @@ public class ProdController {
 
     @GetMapping("/list/query")
     @ResponseBody
-    public String listQuery() {
+    public String listQuery(final ProductQueryParamVO param) {
         // 需要返回total和rows
         return "{\n" +
                 "  \"rows\": [\n" +
@@ -205,9 +120,9 @@ public class ProdController {
         return "prod/edit.html";
     }
 
-    @PostMapping("/upload")
+    @PostMapping("/save")
     @ResponseBody
-    public String upload(final Product product) {
+    public String save(final Product product) {
         log.info("【product {}】", product);
         return "ok";
     }
@@ -215,9 +130,7 @@ public class ProdController {
     @PostMapping("/changeStatus")
     @ResponseBody
     public String changeStatus(final int id, final int status) {
-        log.info("id {}", id);
-        log.info("status {}", status);
-
+        productMapper.updateStatus(id, status);
         return "ok";
     }
 }

@@ -3,9 +3,11 @@ package com.example.lewjun.domain;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+
 @NoArgsConstructor
 @Data
-public class Product {
+public class Product implements Serializable {
     private Integer id;
 
     private String title;
