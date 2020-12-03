@@ -165,11 +165,44 @@
         // 设置编辑区域高度为 500px
         // editor.config.height = 500
         // 配置 server 接口地址
-        editor.config.uploadImgServer = 'uploadFiles'
+        editor.config.uploadImgServer = 'wangEditor/uploadFile'
+        editor.config.uploadFileName = 'file'
+        editor.config.uploadImgTimeout = 5 * 1000
+        editor.config.uploadImgMaxLength = 1 // 一次最多上传 5 个图片
+        // 隐藏插入网络图片的功能
+        editor.config.showLinkImg = false
         // 限制图片大小
         editor.config.uploadImgMaxSize = 2 * 1024 * 1024 // 2M
         // 限制图片类型
         editor.config.uploadImgAccept = ['jpg', 'jpeg', 'png', 'gif', 'bmp']
+
+        editor.config.uploadImgHooks = {
+            // 图片上传并返回了结果，但图片插入时出错了
+            fail: function(xhr, editor, resData) {
+                // console.log('fail', resData)
+                alert(resData.msg);
+            },
+            // 上传图片出错，一般为 http 请求的错误
+            error: function(xhr, editor, resData) {
+                console.log('error', xhr, resData)
+                alert("图片上传失败");
+            },
+            // 上传图片超时
+            timeout: function(xhr) {
+                console.log('timeout')
+                alert("上传图片超时");
+            },
+            // 图片上传并返回了结果，想要自己把图片插入到编辑器中
+            // 例如服务器端返回的不是 { errno: 0, data: [...] } 这种格式，可使用 customInsert
+            customInsert: function(insertImgFn, result) {
+                // result 即服务端返回的接口
+                console.log('customInsert', result)
+
+                // insertImgFn 可把图片插入到编辑器，传入图片 src ，执行函数即可
+                // insertImgFn(result.data[0])
+            }
+        }
+
         editor.create()
 
         return editor;

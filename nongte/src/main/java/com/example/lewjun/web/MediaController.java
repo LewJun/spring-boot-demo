@@ -3,13 +3,11 @@ package com.example.lewjun.web;
 import com.example.lewjun.util.FileDownloadUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -32,25 +30,34 @@ public class MediaController {
     }
 
     @PostMapping("/uploadFile")
+    @ResponseBody
     public String uploadFile(final MultipartFile file, final String type) {
         log.info("type: {}", type);
         return getPathName(transferTo(file));
     }
 
+    @PostMapping("/wangEditor/uploadFile")
+    @ResponseBody
+    public String wangEditorUploadFile(@RequestParam("file") final MultipartFile file) {
+        if (file == null || file.isEmpty()) {
+            return "{\"errno\": -1, \"msg\": \"文件不存在\"}";
+        }
+        return "{\"errno\": 0, \"data\":[\"file?filename="+getPathName(transferTo(file))+"\"]}";
+    }
+
     @PostMapping("/uploadFiles")
+    @ResponseBody
     public List<String> uploadFiles(final MultipartFile[] files, final String type) {
         log.info("type: {}", type);
         final List<String> filenames = new ArrayList<>();
         for (final MultipartFile file : files) {
-            final String originalFilename = file.getOriginalFilename();
-            log.info("originalFilename: {}", originalFilename);
-
             filenames.add(getPathName(transferTo(file)));
         }
         return filenames;
     }
 
     @PostMapping("/upload")
+    @ResponseBody
     public List<String> uploadFiles(final MultipartHttpServletRequest multipartHttpServletRequest, final String type) {
         log.info("type: {}", type);
         final Map<String, MultipartFile> fileMap = multipartHttpServletRequest.getFileMap();
@@ -86,7 +93,8 @@ public class MediaController {
                 dir.mkdirs();
             }
 
-            final File file = new File(dir, prefix + "." + originalFilename);
+//            final File file = new File(dir, prefix + "." + originalFilename);
+            final File file = new File(dir, prefix + "." + FilenameUtils.getExtension(originalFilename));
             multipartFile.transferTo(file);
 
             return file;
