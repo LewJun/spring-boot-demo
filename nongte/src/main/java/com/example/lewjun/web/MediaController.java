@@ -1,6 +1,6 @@
 package com.example.lewjun.web;
 
-import com.example.lewjun.util.FileDownloadUtil;
+import com.example.lewjun.utils.FileDownloadUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
@@ -42,7 +42,7 @@ public class MediaController {
         if (file == null || file.isEmpty()) {
             return "{\"errno\": -1, \"msg\": \"文件不存在\"}";
         }
-        return "{\"errno\": 0, \"data\":[\"file?filename="+getPathName(transferTo(file))+"\"]}";
+        return "{\"errno\": 0, \"data\":[\"file?filename=" + getPathName(transferTo(file)) + "\"]}";
     }
 
     @PostMapping("/uploadFiles")
@@ -115,10 +115,14 @@ public class MediaController {
      */
     @GetMapping("/file")
     public void file(final HttpServletResponse response, @RequestParam final String filename) throws IOException {
-        final byte[] bytes = FileUtils.readFileToByteArray(new File(uploadPath, filename));
-        final ServletOutputStream out = response.getOutputStream();
-        out.write(bytes);
-        IOUtils.closeQuietly(out);
+        try {
+            final byte[] bytes = FileUtils.readFileToByteArray(new File(uploadPath, filename));
+            final ServletOutputStream out = response.getOutputStream();
+            out.write(bytes);
+            IOUtils.closeQuietly(out);
+        } catch (final Exception e) {
+            log.error("【出现异常】", e);
+        }
     }
 
 }

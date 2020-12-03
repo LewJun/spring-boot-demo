@@ -83,7 +83,7 @@
         <%
         for(region in regions![]){
         %>
-        <a href="prod/${path}/${region.code}">${region.name}</a>
+        <a href="prod/${path}/${region.code}/${region.name}">${region.name}</a>
         <%}%>
     </div>
 
@@ -95,7 +95,7 @@
         %>
         <div class="col-sm-6 col-md-3">
             <a class="thumbnail" href="prod/detail/${prod.id}">
-                <img alt="" loading="lazy" src="file?filename=${prod.pic}">
+                <img alt="" loading="lazy" src="file?filename=${prod.picUrl}">
                 <div class="caption text-center">${prod.title}</div>
             </a>
         </div>

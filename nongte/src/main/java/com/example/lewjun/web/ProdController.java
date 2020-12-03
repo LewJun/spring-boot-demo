@@ -2,53 +2,36 @@ package com.example.lewjun.web;
 
 import com.example.lewjun.domain.Product;
 import com.example.lewjun.domain.Region;
+import com.example.lewjun.mapper.RegionMapper;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
+import java.util.List;
 
 @Slf4j
 @Controller
 @RequestMapping("/prod")
 public class ProdController {
 
-    @GetMapping("/province/{code}")
-    public String province(@PathVariable final String code, final Model model) {
+    @Autowired
+    private RegionMapper regionMapper;
+
+    @GetMapping("/province/{code}/{name}")
+    public String province(@PathVariable final Integer code, @PathVariable final String name, final Model model) {
         log.info("【province code {}】", code);
 
-        final String regionTitle = "四川省";
-        model.addAttribute("regionTitle", regionTitle);
+        model.addAttribute("regionTitle", name);
 
         model.addAttribute("path", "city");
 
-        model.addAttribute("regions", Arrays.asList(
-                new Region(510100, "成都市"),
-                new Region(510300, "自贡市"),
-                new Region(510400, "攀枝花市"),
-                new Region(510500, "泸州市"),
-                new Region(510600, "德阳市"),
-                new Region(510700, "绵阳市"),
-                new Region(510800, "广元市"),
-                new Region(510900, "遂宁市"),
-                new Region(511000, "内江市"),
-                new Region(511100, "乐山市"),
-                new Region(511300, "南充市"),
-                new Region(511400, "眉山市"),
-                new Region(511500, "宜宾市"),
-                new Region(511600, "广安市"),
-                new Region(511700, "达州市"),
-                new Region(511800, "雅安市"),
-                new Region(511900, "巴中市"),
-                new Region(512000, "资阳市"),
-                new Region(513200, "阿坝藏族羌族自治州"),
-                new Region(513300, "甘孜藏族自治州"),
-                new Region(513400, "凉山彝族自治州")
-        ));
+        final List<Region> cityRegions = regionMapper.queryCitiesByProvinceCode(510000);
+        log.info("【cityRegions: {}】", cityRegions);
+
+        model.addAttribute("regions", regionMapper.queryCitiesByProvinceCode(code));
 
         model.addAttribute("prods", Arrays.asList(
                 new Product(123, "金针菇", "kittens.jpg"),
@@ -70,38 +53,23 @@ public class ProdController {
         return "prod/prod.html";
     }
 
-    @GetMapping("/city/{code}")
-    public String city(@PathVariable final String code, final Model model) {
+    @GetMapping("/city/{code}/{name}")
+    public String city(@PathVariable final Integer code, @PathVariable final String name, final Model model) {
         log.info("【city code {}】", code);
 
-        final String regionTitle = "成都市";
-        model.addAttribute("regionTitle", regionTitle);
+        model.addAttribute("regionTitle", name);
 
         model.addAttribute("path", "area");
 
-        model.addAttribute("regions", Arrays.asList(
-                new Region(234234, "武侯区"),
-                new Region(224234, "青羊区"),
-                new Region(23253, "郫县"),
-                new Region(235345, "双流区"),
-                new Region(255234, "金牛区")
-        ));
+        model.addAttribute("regions", regionMapper.queryAreasByCityCode(code));
         return "prod/prod.html";
     }
 
-
-    @GetMapping("/area/{code}")
-    public String area(@PathVariable final String code, final Model model) {
+    @GetMapping("/area/{code}/{name}")
+    public String area(@PathVariable final String code, @PathVariable final String name, final Model model) {
         log.info("【area code {}】", code);
 
-        final String regionTitle = "武侯区";
-        model.addAttribute("regionTitle", regionTitle);
-
-        model.addAttribute("path", "area");
-
-        model.addAttribute("regions", Arrays.asList(
-                new Region(324234, "机投镇")
-        ));
+        model.addAttribute("regionTitle", name);
 
         return "prod/prod.html";
     }
@@ -222,8 +190,8 @@ public class ProdController {
     }
 
     @GetMapping("/edit/{id}")
-    public String edit(@PathVariable Integer id, Model model) {
-        Product product = new Product();
+    public String edit(@PathVariable final Integer id, final Model model) {
+        final Product product = new Product();
         product.setId(123);
         product.setTitle("标题在这里");
         product.setDesc("描述信息");
@@ -239,14 +207,14 @@ public class ProdController {
 
     @PostMapping("/upload")
     @ResponseBody
-    public String upload(Product product) {
+    public String upload(final Product product) {
         log.info("【product {}】", product);
         return "ok";
     }
 
     @PostMapping("/changeStatus")
     @ResponseBody
-    public String changeStatus(int id, int status) {
+    public String changeStatus(final int id, final int status) {
         log.info("id {}", id);
         log.info("status {}", status);
 

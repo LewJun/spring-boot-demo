@@ -1,4 +1,4 @@
-package com.example.lewjun.util;
+package com.example.lewjun.utils;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
