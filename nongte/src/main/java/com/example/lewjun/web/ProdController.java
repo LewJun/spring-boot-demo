@@ -2,16 +2,20 @@ package com.example.lewjun.web;
 
 import com.example.lewjun.domain.Product;
 import com.example.lewjun.domain.Region;
+import com.example.lewjun.domain.result.ProductListQueryResult;
 import com.example.lewjun.domain.vo.ProductQueryParamVO;
 import com.example.lewjun.mapper.ProductMapper;
 import com.example.lewjun.mapper.RegionMapper;
+import com.example.lewjun.utils.JsonUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @Controller
@@ -78,27 +82,16 @@ public class ProdController {
 
     @GetMapping("/list/query")
     @ResponseBody
-    public String listQuery(final ProductQueryParamVO param, Integer offset, Integer pageNumber) {
+    public String listQuery(final ProductQueryParamVO param) {
         log.info("param {}", param);
-        log.info("offset {}, pageNumber {}", offset, pageNumber);
+        Map<String, Object> map = new HashMap<>(2);
+        map.put("rows", productMapper.queryByConditions(param));
+        map.put("total", productMapper.queryCountByConditions(param));
+        String json = JsonUtils.object2String(map);
+        log.info("json {}", json);
+
         // 需要返回total和rows
-        return "{\n" +
-                "  \"rows\": [\n" +
-                "    {\n" +
-                "      \"desc\": \"产品描述\",\n" +
-                "      \"id\": 1,\n" +
-                "      \"status\": 1,\n" +
-                "      \"title\": \"产品名称xxx\"\n" +
-                "    },\n" +
-                "    {\n" +
-                "      \"desc\": \"产品描述23\",\n" +
-                "      \"id\": 1,\n" +
-                "      \"status\": 2,\n" +
-                "      \"title\": \"产品名称xxserewxx\"\n" +
-                "    }\n" +
-                "  ],\n" +
-                "  \"total\": 34\n" +
-                "}";
+        return json;
     }
 
     @GetMapping("/create")

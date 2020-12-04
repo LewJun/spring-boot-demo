@@ -2,9 +2,9 @@ package com.example.lewjun.mapper;
 
 import com.example.lewjun.domain.Product;
 import com.example.lewjun.domain.result.ProductDetailResult;
-import org.apache.ibatis.annotations.CacheNamespace;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import com.example.lewjun.domain.result.ProductListQueryResult;
+import com.example.lewjun.domain.vo.ProductQueryParamVO;
+import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -28,12 +28,16 @@ public interface ProductMapper {
             "from product p where p.status=1 and p.area_code=#{areaCode}")
     List<Product> queryByAreaCode(Integer areaCode);
 
-//    List<Product> queryByConditions(ProductQueryParamVO vo);
+    @SelectProvider(type = ProductMapperProvider.class, method = "queryByConditions")
+    List<ProductListQueryResult> queryByConditions(ProductQueryParamVO vo);
+
+    @SelectProvider(type = ProductMapperProvider.class, method = "queryCountByConditions")
+    int queryCountByConditions(ProductQueryParamVO vo);
 
     @Select("select p.title, p.html from product p where p.id=#{id} limit 1")
     ProductDetailResult queryDetailById(Integer id);
 
-    @Update("update product set status=#{status} where id=#{id}")
+    @Update("update product set status=#{status}, update_time=now() where id=#{id}")
     int updateStatus(Integer id, Integer status);
 
     @Select("select p.id, p.title, p.desc, p.province_code, p.city_code, p.area_code, p.html, p.pic_url, p.level " +

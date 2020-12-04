@@ -2,8 +2,10 @@ package com.example.lewjun.domain.vo;
 
 import lombok.Data;
 
+import java.io.Serializable;
+
 @Data
-public class ProductQueryParamVO {
+public class ProductQueryParamVO extends BaseQueryParam implements Serializable {
     private String title;
 
     private String desc;

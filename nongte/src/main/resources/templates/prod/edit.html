@@ -295,13 +295,16 @@ $(function() {
     }
 
     function uploadPic(picFrm) {
-        $('body').mLoading("show");//显示loading组件
         $.ajax({
             url: "uploadFile",
             type: "post",
             data: picFrm,
             processData: false,
             contentType: false,
+            beforeSend: function() {
+                //显示loading组件
+                $('body').mLoading("show");
+            },
             success: function(result) {
                 var frm = new FormData(document.getElementById("frm"))
                 frm.append("html", wangEditor.txt.html());
@@ -310,7 +313,8 @@ $(function() {
                 uploadForm(frm);
             },
             error: function(err) {
-                $('body').mLoading("hide");//隐藏loading组件
+                //隐藏loading组件
+                $('body').mLoading("hide");
                 alert(err);
             }
         });
