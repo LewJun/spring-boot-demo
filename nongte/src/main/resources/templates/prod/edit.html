@@ -106,6 +106,8 @@
                 } else {
                 %>
                 <div class="pic-container" id="pic-container">
+                    <input type="hidden" name="pic_url" value="${prod.pic_url}">
+
                     <a href="file?filename=${prod.pic_url}" target="_blank" class="pic_a">
                         <img alt="封面图片" src="file?filename=${prod.pic_url}" style="width: 80px; min-height: 100px;"
                              id="picImg" class="img-thumbnail">
@@ -260,6 +262,7 @@ $(function() {
             return;
         }
 
+// TODO 判断pic是否为空
         var pic = $("#pic")[0].files[0];
         if (pic == null || pic.size < 5) {
             alert("请选择产品封面图片");
@@ -289,9 +292,16 @@ $(function() {
             return;
         }
 
-        var picFrm = new FormData();
-        picFrm.append('file', $("#pic")[0].files[0]);
-        uploadPic(picFrm);
+// TODO 判断pic是否为空
+        if (!$('#pic')[0]) {
+            var picFrm = new FormData();
+            picFrm.append('file', $('#pic')[0].files[0]);
+            uploadPic(picFrm);
+        } else {
+            var frm = new FormData(document.getElementById("frm"))
+            frm.append("html", wangEditor.txt.html());
+            uploadForm(frm);
+        }
     }
 
     function uploadPic(picFrm) {
@@ -302,7 +312,7 @@ $(function() {
             processData: false,
             contentType: false,
             beforeSend: function() {
-                //显示loading组件
+                // 显示loading组件
                 $('body').mLoading("show");
             },
             success: function(result) {
@@ -313,9 +323,11 @@ $(function() {
                 uploadForm(frm);
             },
             error: function(err) {
-                //隐藏loading组件
-                $('body').mLoading("hide");
                 alert(err);
+            },
+            complete: function() {
+                // 隐藏loading组件
+                $('body').mLoading("hide");
             }
         });
     }
@@ -332,20 +344,23 @@ $(function() {
             data: frm,
             processData: false,
             contentType: false,
+            beforeSend: function() {
+                // 显示loading组件
+                $('body').mLoading("show");
+            },
             success: function(result) {
                 // window.location.href="prod/list";
                 window.location.replace("prod/list");
             },
             error: function(err) {
                 alert(err);
-                // 隐藏loading组件
-                $('body').mLoading("hide");//隐藏loading组件
             },
             complete: function() {
-                // $('body').mLoading("hide");//隐藏loading组件
+                $('body').mLoading("hide");//隐藏loading组件
             }
         });
     }
+
 
 </script>
 <style>
@@ -372,6 +387,7 @@ padding: 0 5px;
 #region-select-box select {
 margin-right: 3px;
 }
+
 
 </style>
 </body>

@@ -109,6 +109,13 @@ public class ProdController {
     @ResponseBody
     public String save(final Product product) {
         log.info("【product {}】", product);
+        if (product.getId() == null) {
+            // 新增
+            productMapper.insert(product);
+        } else {
+            // 修改
+            productMapper.update(product);
+        }
         return "ok";
     }
 

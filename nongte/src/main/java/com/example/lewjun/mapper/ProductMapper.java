@@ -43,4 +43,16 @@ public interface ProductMapper {
     @Select("select p.id, p.title, p.desc, p.province_code, p.city_code, p.area_code, p.html, p.pic_url, p.level " +
             "from product p where p.id=#{id} limit 1")
     Product queryEditById(Integer id);
+
+    @Insert("insert into product(title, `desc`, html, level, pic_url, province_code, province_name, city_code, city_name, area_code, area_name, create_time) " +
+            "values(#{title}, #{desc}, #{html}, #{level}, #{pic_url}, #{province_code}, #{province_name}, #{city_code}, #{city_name}, #{area_code}, #{area_name}, now())")
+    @Options(useGeneratedKeys = true, keyColumn = "id", keyProperty = "id")
+    int insert(Product product);
+
+    @Update("update product set title=#{title}, `desc`=#{desc}, html=#{html}, level=#{level}, pic_url=#{pic_url}, " +
+            "province_code=#{province_code}, province_name=#{province_name}, " +
+            "city_code=#{city_code}, city_name=#{city_name}, area_code=#{area_code}, area_name=#{area_name}, " +
+            "update_time=now() " +
+            "where id=#{id}")
+    int update(Product product);
 }
