@@ -86,13 +86,13 @@ public class ProdController {
                 "  \"rows\": [\n" +
                 "    {\n" +
                 "      \"desc\": \"产品描述\",\n" +
-                "      \"id\": 123,\n" +
+                "      \"id\": 1,\n" +
                 "      \"status\": 1,\n" +
                 "      \"title\": \"产品名称xxx\"\n" +
                 "    },\n" +
                 "    {\n" +
                 "      \"desc\": \"产品描述23\",\n" +
-                "      \"id\": 1233,\n" +
+                "      \"id\": 1,\n" +
                 "      \"status\": 2,\n" +
                 "      \"title\": \"产品名称xxserewxx\"\n" +
                 "    }\n" +
@@ -108,17 +108,7 @@ public class ProdController {
 
     @GetMapping("/edit/{id}")
     public String edit(@PathVariable final Integer id, final Model model) {
-        final Product product = new Product();
-        product.setId(123);
-        product.setTitle("标题在这里");
-        product.setDesc("描述信息");
-        product.setProvince_code(210000);
-        product.setCity_code(211000);
-        product.setArea_code(211081);
-        product.setLevel(2);
-        product.setHtml("<p>abc</p>");
-        product.setPic_url("2020/11/f1db2952-4d97-42b2-8ad7-1c0a69595e42.jpg");
-        model.addAttribute("prod", product);
+        model.addAttribute("prod", productMapper.queryEditById(id));
         return "prod/edit.html";
     }
 
