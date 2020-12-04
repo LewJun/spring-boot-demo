@@ -101,16 +101,15 @@
                 <%
                 if(prod.pic_url!'' == '') {
                 %>
-                <input type="file" class="form-control" id="pic" name="pic" accept="image/jpeg">
+                <input type="file" class="form-control" id="pic" name="pic" accept="image/*">
                 <%
                 } else {
                 %>
                 <div class="pic-container" id="pic-container">
-                    <input type="hidden" name="pic_url" value="${prod.pic_url}">
+                    <input type="hidden" name="pic_url" id="pic_url" value="${prod.pic_url}">
 
-                    <a href="file?filename=${prod.pic_url}" target="_blank" class="pic_a">
-                        <img alt="封面图片" src="file?filename=${prod.pic_url}" style="width: 80px; min-height: 100px;"
-                             id="picImg" class="img-thumbnail">
+                    <a href="file?filename=${prod.pic_url}" target="_blank" class="pic_a thumbnail">
+                        <img alt="封面图片" src="file?filename=${prod.pic_url}" id="picImg">
                     </a>
                     <div class="pic_x" id="pic_x">x</div>
                 </div>
@@ -178,7 +177,8 @@
 $(function() {
     $("#pic_x").click(function() {
         $('#pic-container').remove();
-        $('<input type="file" class="form-control" id="pic" name="pic" accept="image/jpeg">').appendTo(".pic-div")
+        $('#pic_url').remove();
+        $('<input type="file" class="form-control" id="pic" name="pic" accept="image/*">').appendTo(".pic-div")
     });
 });
     function initAreaSelector() {
@@ -262,26 +262,38 @@ $(function() {
             return;
         }
 
-// TODO 判断pic是否为空
-        var pic = $("#pic")[0].files[0];
-        if (pic == null || pic.size < 5) {
+// 判断pic是否为空
+        if ($('#pic') && $('#pic')[0] && !$("#pic")[0].files[0]) {
             alert("请选择产品封面图片");
             $('#pic').focus();
             return;
         }
 
-        var allowExtends = ['.jpg', '.jpeg'];
-        var picVal = $('#pic').val()
-        if (allowExtends.indexOf(picVal.substring(picVal.lastIndexOf('.'))) === -1) {
-            alert("请选择image/jpeg格式的图片");
-            $('#pic').focus();
+        if ($('#pic') && $('#pic').val()) {
+            if (!$('#pic')[0].files[0].type.startsWith('image/')) {
+                alert("请选择合适的封面图片");
+                $('#pic').focus();
+                return;
+            }
+        }
+
+
+        var areaObj = selector.getAreaObj();
+        if (!areaObj.province_code) {
+            alert("请完善所属区域");
+            $('[name="province_code"]').focus();
             return;
         }
 
-        var areaObj = selector.getAreaObj();
-        if (!areaObj.province_code || !areaObj.city_code || !areaObj.area_code) {
+        if (!areaObj.city_code) {
             alert("请完善所属区域");
-            $('[name="province_code"]').focus();
+            $('[name="city_code"]').focus();
+            return;
+        }
+
+        if (!areaObj.area_code) {
+            alert("请完善所属区域");
+            $('[name="area_code"]').focus();
             return;
         }
 
@@ -292,8 +304,8 @@ $(function() {
             return;
         }
 
-// TODO 判断pic是否为空
-        if (!$('#pic')[0]) {
+// 判断pic是否为空
+        if ($('#pic') && $('#pic')[0] && $('#pic')[0].files[0]) {
             var picFrm = new FormData();
             picFrm.append('file', $('#pic')[0].files[0]);
             uploadPic(picFrm);
@@ -367,6 +379,7 @@ $(function() {
 .pic-container {
 display: inline-block;
 position: relative;
+width: 30%;
 }
 
 .pic_x {
