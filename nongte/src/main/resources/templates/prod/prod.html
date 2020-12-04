@@ -78,8 +78,10 @@
 </nav>
 
 <div class="container">
-    <h1 class="region-title">${regionTitle}</h1>
-    <div class="mt-10 region clearfix">
+    <div class="page-header">
+        <h1>${regionTitle}</h1>
+    </div>
+    <div class="region clearfix">
         <%
         for(region in regions![]){
         %>
@@ -87,15 +89,17 @@
         <%}%>
     </div>
 
-    <h1 class="tc-intro mt-10">特产介绍</h1>
+    <div class="page-header">
+        <h2>特产介绍</h2>
+    </div>
 
-    <div class="row mt-10">
+    <div class="row">
         <%
         for(prod in prods![]) {
         %>
         <div class="col-sm-6 col-md-3">
             <a class="thumbnail" href="prod/detail/${prod.id}">
-                <img alt="" loading="lazy" src="file?filename=${prod.picUrl}">
+                <img alt="" loading="lazy" src="file?filename=${prod.pic_url}">
                 <div class="caption text-center">${prod.title}</div>
             </a>
         </div>
@@ -104,11 +108,11 @@
 </div>
 <!-- /container -->
 
-<div class="footer">
-    <div class="container">
-        <p class="text-muted">内容待完善</p>
-    </div>
-</div>
+<footer>
+    <center>
+        <p>Copyright © nongte.com (2020 - present) all right reserved</p>
+    </center>
+</footer>
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->

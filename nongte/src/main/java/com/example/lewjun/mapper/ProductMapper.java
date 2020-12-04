@@ -13,17 +13,17 @@ import java.util.List;
 @Repository
 public interface ProductMapper {
 
-    @Select("select p.id, p.title, p.desc, p.pic_url as picUrl, " +
+    @Select("select p.id, p.title, p.desc, p.pic_url, " +
             "concat(p.province_name, ' ', p.city_name, ' ', p.area_name) as region " +
             "from product p where p.status=1 and p.province_code=#{provinceCode}")
     List<Product> queryByProvinceCode(Integer provinceCode);
 
-    @Select("select p.id, p.title, p.desc, p.pic_url as picUrl, " +
+    @Select("select p.id, p.title, p.desc, p.pic_url, " +
             "concat(p.province_name, ' ', p.city_name, ' ', p.area_name) as region " +
             "from product p where p.status=1 and p.city_code=#{cityCode}")
     List<Product> queryByCityCode(Integer cityCode);
 
-    @Select("select p.id, p.title, p.desc, p.pic_url as picUrl, " +
+    @Select("select p.id, p.title, p.desc, p.pic_url, " +
             "concat(p.province_name, ' ', p.city_name, ' ', p.area_name) as region " +
             "from product p where p.status=1 and p.area_code=#{areaCode}")
     List<Product> queryByAreaCode(Integer areaCode);

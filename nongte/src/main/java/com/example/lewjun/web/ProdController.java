@@ -78,7 +78,9 @@ public class ProdController {
 
     @GetMapping("/list/query")
     @ResponseBody
-    public String listQuery(final ProductQueryParamVO param) {
+    public String listQuery(final ProductQueryParamVO param, Integer offset, Integer pageNumber) {
+        log.info("param {}", param);
+        log.info("offset {}, pageNumber {}", offset, pageNumber);
         // 需要返回total和rows
         return "{\n" +
                 "  \"rows\": [\n" +
@@ -110,12 +112,12 @@ public class ProdController {
         product.setId(123);
         product.setTitle("标题在这里");
         product.setDesc("描述信息");
-        product.setProvince("210000");
-        product.setCity("211000");
-        product.setArea("211081");
+        product.setProvince_code(210000);
+        product.setCity_code(211000);
+        product.setArea_code(211081);
         product.setLevel(2);
         product.setHtml("<p>abc</p>");
-        product.setPicUrl("2020/11/f1db2952-4d97-42b2-8ad7-1c0a69595e42.jpg");
+        product.setPic_url("2020/11/f1db2952-4d97-42b2-8ad7-1c0a69595e42.jpg");
         model.addAttribute("prod", product);
         return "prod/edit.html";
     }

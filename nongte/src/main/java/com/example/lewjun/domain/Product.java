@@ -12,7 +12,7 @@ public class Product implements Serializable {
 
     private String title;
 
-    private String picUrl;
+    private String pic_url;
 
     private String desc;
 
@@ -20,20 +20,20 @@ public class Product implements Serializable {
 
     private String html;
 
-    private String province;
+    private Integer province_code;
 
-    private String city;
+    private String province_name;
 
-    private String area;
+    private Integer city_code;
+
+    private String city_name;
+
+    private Integer area_code;
+
+    private String area_name;
 
     private String create_time;
 
     private String update_time;
 
-
-    public Product(final Integer id, final String title, final String picUrl) {
-        this.id = id;
-        this.title = title;
-        this.picUrl = picUrl;
-    }
 }

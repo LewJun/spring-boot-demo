@@ -106,8 +106,8 @@
                 } else {
                 %>
                 <div class="pic-container" id="pic-container">
-                    <a href="file?filename=${prod.picUrl}" target="_blank" class="pic_a">
-                        <img alt="封面图片" src="file?filename=${prod.picUrl}" style="width: 80px; min-height: 100px;"
+                    <a href="file?filename=${prod.pic_url}" target="_blank" class="pic_a">
+                        <img alt="封面图片" src="file?filename=${prod.pic_url}" style="width: 80px; min-height: 100px;"
                              id="picImg" class="img-thumbnail">
                     </a>
                     <div class="pic_x" id="pic_x">x</div>
@@ -155,11 +155,11 @@
 <!-- /container -->
 
 
-<div class="footer">
-    <div class="container">
-        <p class="text-muted">内容待完善</p>
-    </div>
-</div>
+<footer>
+    <center>
+        <p>Copyright © nongte.com (2020 - present) all right reserved</p>
+    </center>
+</footer>
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
@@ -181,9 +181,9 @@ $(function() {
 });
     function initAreaSelector() {
         var area = $('#region-select-box').JAreaSelect({
-           prov: "${prod.province!''}",
-           city: "${prod.city!''}",
-           area: "${prod.area!''}"
+           prov: "${prod.province_code!''}",
+           city: "${prod.city_code!''}",
+           area: "${prod.area_code!''}"
         });
         return area;
     }
@@ -276,9 +276,9 @@ $(function() {
         }
 
         var areaObj = selector.getAreaObj();
-        if (!areaObj.province || !areaObj.city || !areaObj.area) {
+        if (!areaObj.province_code || !areaObj.city_code || !areaObj.area_code) {
             alert("请完善所属区域");
-            $('[name="province"]').focus();
+            $('[name="province_code"]').focus();
             return;
         }
 
@@ -306,7 +306,7 @@ $(function() {
                 var frm = new FormData(document.getElementById("frm"))
                 frm.append("html", wangEditor.txt.html());
                 frm.delete("pic");
-                frm.append("picUrl", result);
+                frm.append("pic_url", result);
                 uploadForm(frm);
             },
             error: function(err) {
@@ -317,8 +317,13 @@ $(function() {
     }
 
     function uploadForm(frm) {
+        var areaStr = selector.getAreaString();
+        frm.append('province_name', areaStr.province_name);
+        frm.append('city_name', areaStr.city_name);
+        frm.append('area_name', areaStr.area_name);
+
         $.ajax({
-            url: "prod/upload",
+            url: "prod/save",
             type: "post",
             data: frm,
             processData: false,

@@ -14,9 +14,9 @@
       city: 0, //市
       area: 0, //区
       name: {
-        prov: 'province',
-        city: 'city',
-        area: 'area',
+        prov: 'province_code',
+        city: 'city_code',
+        area: 'area_code',
       },
 
       selectClassName: 'form-control', //select class名称
@@ -134,9 +134,9 @@
     //获取区域id
     obj.getAreaObj = function () {
       return {
-        province: obj.province && obj.province.val(),
-        city: obj.city && obj.city.val(),
-        area: obj.area && obj.area.val(),
+        province_code: obj.province && obj.province.val(),
+        city_code: obj.city && obj.city.val(),
+        area_code: obj.area && obj.area.val(),
       };
     };
 
@@ -158,9 +158,9 @@
       if(areaHtml == chooseTxt) areaHtml = '';
 
       return {
-        province: provinceHtml,
-        city: cityHtml,
-        area: areaHtml,
+        province_name: provinceHtml,
+        city_name: cityHtml,
+        area_name: areaHtml,
       };
     };
 
