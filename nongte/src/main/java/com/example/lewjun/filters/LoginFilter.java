@@ -16,6 +16,7 @@ import java.io.IOException;
                 "/prod/list",
                 "/prod/query",
                 "/prod/edit/*",
+                "/prod/delete/*",
                 "/prod/save",
                 "/prod/create",
                 "/prod/changeStatus"

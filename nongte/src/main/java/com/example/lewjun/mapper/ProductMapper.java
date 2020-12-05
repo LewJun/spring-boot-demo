@@ -47,4 +47,7 @@ public interface ProductMapper {
             "update_time=now() " +
             "where id=#{id}")
     int update(Product product);
+
+    @Update("update product set status=0, update_time=now() where id=#{id}")
+    int delete(Integer id);
 }

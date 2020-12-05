@@ -119,4 +119,11 @@ public class ProdController {
         productMapper.updateStatus(id, status);
         return "ok";
     }
+
+    @PostMapping("/delete/{id}")
+    @ResponseBody
+    public String changeStatus(@PathVariable final int id) {
+        productMapper.delete(id);
+        return "ok";
+    }
 }

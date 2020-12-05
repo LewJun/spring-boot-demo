@@ -54,6 +54,7 @@ public class ProductMapperProvider {
                 if (vo.getArea_code() != null) {
                     WHERE("t.area_code=#{area_code}");
                 }
+                WHERE("status!=0");
                 ORDER_BY("level asc");
                 ORDER_BY("id desc");
                 LIMIT("#{pageNumber}");
@@ -88,6 +89,7 @@ public class ProductMapperProvider {
                 if (vo.getArea_code() != null) {
                     WHERE("t.area_code=#{area_code}");
                 }
+                WHERE("status!=0");
                 LIMIT(1);
             }
         }.toString();
