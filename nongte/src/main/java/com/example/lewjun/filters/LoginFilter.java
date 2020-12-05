@@ -10,7 +10,17 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @Slf4j
-//@WebFilter(urlPatterns = {"/prod/list"}, filterName = "loginFilter")
+@WebFilter(
+        filterName = "loginFilter",
+        urlPatterns = {
+                "/prod/list",
+                "/prod/query",
+                "/prod/edit/*",
+                "/prod/save",
+                "/prod/create",
+                "/prod/changeStatus"
+        }
+)
 public class LoginFilter implements Filter {
 
     @Override
