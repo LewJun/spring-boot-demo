@@ -60,3 +60,6 @@ body {
 margin-bottom: 60px !important;
 }
 
+.text-dec-none {
+text-decoration: none !important;
+}

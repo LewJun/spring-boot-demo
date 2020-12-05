@@ -4,7 +4,30 @@ import com.example.lewjun.domain.vo.ProductQueryParamVO;
 import org.apache.ibatis.jdbc.SQL;
 
 public class ProductMapperProvider {
-    public String queryByConditions(ProductQueryParamVO vo) {
+
+    public String queryByRegionCode(
+            final Integer province_code,
+            final Integer city_code,
+            final Integer area_code) {
+        return new SQL() {
+            {
+                SELECT("p.id, p.title, p.pic_url");
+                FROM("product p");
+                WHERE("status=1");
+                if (province_code != null) {
+                    WHERE("province_code=#{province_code}");
+                } else if (city_code != null) {
+                    WHERE("city_code=#{city_code}");
+                } else if (area_code != null) {
+                    WHERE("area_code=#{area_code}");
+                } else {
+                }
+                ORDER_BY("id desc, level asc");
+            }
+        }.toString();
+    }
+
+    public String queryByConditions(final ProductQueryParamVO vo) {
         return new SQL() {
             {
                 SELECT("t.id, t.title, t.desc, t.level, t.status, t.create_time, " +
@@ -31,13 +54,15 @@ public class ProductMapperProvider {
                 if (vo.getArea_code() != null) {
                     WHERE("t.area_code=#{area_code}");
                 }
+                ORDER_BY("level asc");
+                ORDER_BY("id desc");
                 LIMIT("#{pageNumber}");
                 OFFSET("#{offset}");
             }
         }.toString();
     }
 
-    public String queryCountByConditions(ProductQueryParamVO vo) {
+    public String queryCountByConditions(final ProductQueryParamVO vo) {
         return new SQL() {
             {
                 SELECT("count(id) as total");

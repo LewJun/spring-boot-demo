@@ -1,6 +1,7 @@
 package com.example.lewjun.mapper;
 
 import com.example.lewjun.domain.Product;
+import com.example.lewjun.domain.result.ProductByRegionCodeResult;
 import com.example.lewjun.domain.result.ProductDetailResult;
 import com.example.lewjun.domain.result.ProductListQueryResult;
 import com.example.lewjun.domain.vo.ProductQueryParamVO;
@@ -13,20 +14,11 @@ import java.util.List;
 @Repository
 public interface ProductMapper {
 
-    @Select("select p.id, p.title, p.desc, p.pic_url, " +
-            "concat(p.province_name, ' ', p.city_name, ' ', p.area_name) as region " +
-            "from product p where p.status=1 and p.province_code=#{provinceCode}")
-    List<Product> queryByProvinceCode(Integer provinceCode);
-
-    @Select("select p.id, p.title, p.desc, p.pic_url, " +
-            "concat(p.province_name, ' ', p.city_name, ' ', p.area_name) as region " +
-            "from product p where p.status=1 and p.city_code=#{cityCode}")
-    List<Product> queryByCityCode(Integer cityCode);
-
-    @Select("select p.id, p.title, p.desc, p.pic_url, " +
-            "concat(p.province_name, ' ', p.city_name, ' ', p.area_name) as region " +
-            "from product p where p.status=1 and p.area_code=#{areaCode}")
-    List<Product> queryByAreaCode(Integer areaCode);
+    @SelectProvider(type = ProductMapperProvider.class, method = "queryByRegionCode")
+    List<ProductByRegionCodeResult> queryByRegionCode(
+            @Param("province_code") Integer province_code,
+            @Param("city_code") Integer city_code,
+            @Param("area_code") Integer area_code);
 
     @SelectProvider(type = ProductMapperProvider.class, method = "queryByConditions")
     List<ProductListQueryResult> queryByConditions(ProductQueryParamVO vo);

@@ -1,8 +1,6 @@
 package com.example.lewjun.web;
 
 import com.example.lewjun.domain.Product;
-import com.example.lewjun.domain.Region;
-import com.example.lewjun.domain.result.ProductListQueryResult;
 import com.example.lewjun.domain.vo.ProductQueryParamVO;
 import com.example.lewjun.mapper.ProductMapper;
 import com.example.lewjun.mapper.RegionMapper;
@@ -14,7 +12,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @Slf4j
@@ -36,12 +33,9 @@ public class ProdController {
 
         model.addAttribute("path", "city");
 
-        final List<Region> cityRegions = regionMapper.queryCitiesByProvinceCode(510000);
-        log.info("【cityRegions: {}】", cityRegions);
-
         model.addAttribute("regions", regionMapper.queryCitiesByProvinceCode(code));
 
-        model.addAttribute("prods", productMapper.queryByProvinceCode(code));
+        model.addAttribute("prods", productMapper.queryByRegionCode(code, null, null));
         return "prod/prod.html";
     }
 
@@ -55,7 +49,7 @@ public class ProdController {
 
         model.addAttribute("regions", regionMapper.queryAreasByCityCode(code));
 
-        model.addAttribute("prods", productMapper.queryByCityCode(code));
+        model.addAttribute("prods", productMapper.queryByRegionCode(null, code, null));
         return "prod/prod.html";
     }
 
@@ -65,7 +59,7 @@ public class ProdController {
 
         model.addAttribute("regionTitle", name);
 
-        model.addAttribute("prods", productMapper.queryByAreaCode(code));
+        model.addAttribute("prods", productMapper.queryByRegionCode(null, null, code));
         return "prod/prod.html";
     }
 
@@ -84,10 +78,10 @@ public class ProdController {
     @ResponseBody
     public String listQuery(final ProductQueryParamVO param) {
         log.info("param {}", param);
-        Map<String, Object> map = new HashMap<>(2);
+        final Map<String, Object> map = new HashMap<>(2);
         map.put("rows", productMapper.queryByConditions(param));
         map.put("total", productMapper.queryCountByConditions(param));
-        String json = JsonUtils.object2String(map);
+        final String json = JsonUtils.object2String(map);
         log.info("json {}", json);
 
         // 需要返回total和rows

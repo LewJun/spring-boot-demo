@@ -85,7 +85,7 @@
         <%
         for(region in regions![]){
         %>
-        <a href="prod/${path}/${region.code}/${region.name}">${region.name}</a>
+        <a class="text-dec-none" href="prod/${path}/${region.code}/${region.name}">${region.name}</a>
         <%}%>
     </div>
 
@@ -98,8 +98,8 @@
         for(prod in prods![]) {
         %>
         <div class="col-sm-6 col-md-3">
-            <a class="thumbnail" href="prod/detail/${prod.id}">
-                <img alt="" loading="lazy" src="file?filename=${prod.pic_url}">
+            <a class="thumbnail text-dec-none" href="prod/detail/${prod.id}">
+                <img alt="${prod.title}" loading="lazy" src="file?filename=${prod.pic_url}">
                 <div class="caption text-center">${prod.title}</div>
             </a>
         </div>
@@ -120,5 +120,21 @@
 <script src="js/bootstrap.min.js"></script>
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script src="js/ie10-viewport-bug-workaround.js"></script>
+
+<style>
+.page-header {
+margin-top: 20px;
+}
+
+.thumbnail {
+    height: 200px!important;
+}
+
+.thumbnail img {
+    width: 100%;
+    height: 85%;
+    object-fit: cover;
+}
+</style>
 </body>
 </html>
