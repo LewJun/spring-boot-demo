@@ -1,9 +1,9 @@
 package com.example.lewjun.mapper;
 
 import com.example.lewjun.domain.Product;
-import com.example.lewjun.domain.result.ProductByRegionCodeResult;
 import com.example.lewjun.domain.result.ProductDetailResult;
 import com.example.lewjun.domain.result.ProductListQueryResult;
+import com.example.lewjun.domain.result.ProductSearchResult;
 import com.example.lewjun.domain.vo.ProductQueryParamVO;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
@@ -15,7 +15,7 @@ import java.util.List;
 public interface ProductMapper {
 
     @SelectProvider(type = ProductMapperProvider.class, method = "queryByRegionCode")
-    List<ProductByRegionCodeResult> queryByRegionCode(
+    List<ProductSearchResult> queryByRegionCode(
             @Param("province_code") Integer province_code,
             @Param("city_code") Integer city_code,
             @Param("area_code") Integer area_code);
@@ -50,4 +50,9 @@ public interface ProductMapper {
 
     @Update("update product set status=0, update_time=now() where id=#{id}")
     int delete(Integer id);
+
+    @SelectProvider(type = ProductMapperProvider.class, method = "queryByKeywords")
+    List<ProductSearchResult> queryByKeywords(@Param("keywords") String keywords,
+                                              @Param("pageNumber") Integer pageNumber,
+                                              @Param("offset") Integer offset);
 }

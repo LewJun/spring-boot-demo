@@ -5,7 +5,7 @@ import lombok.Data;
 import java.io.Serializable;
 
 @Data
-public class ProductByRegionCodeResult implements Serializable {
+public class ProductSearchResult implements Serializable {
     private Integer id;
 
     private String title;

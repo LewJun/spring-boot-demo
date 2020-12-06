@@ -34,3 +34,5 @@ build/
 
 .mvn
 *.log
+
+.DS_Store

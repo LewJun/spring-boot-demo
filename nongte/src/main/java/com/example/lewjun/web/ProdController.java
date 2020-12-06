@@ -88,6 +88,16 @@ public class ProdController {
         return json;
     }
 
+    @PostMapping("/queryByKeywords")
+    public String queryByKeywords(final Model model, @RequestParam("keywords") final String keywords,
+                                  @RequestParam(name = "pageNumber", required = false, defaultValue = "100") final Integer pageNumber,
+                                  @RequestParam(name = "offset", required = false, defaultValue = "0") final Integer offset) {
+        log.info("queryByKeywords {} {} {}", keywords, pageNumber, offset);
+        model.addAttribute("prods", productMapper.queryByKeywords(keywords, pageNumber, offset));
+        model.addAttribute("keywords", keywords);
+        return "prod/query.html";
+    }
+
     @GetMapping("/create")
     public String create() {
         return "prod/edit.html";

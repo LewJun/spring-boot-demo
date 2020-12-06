@@ -94,4 +94,30 @@ public class ProductMapperProvider {
             }
         }.toString();
     }
+
+    public String queryByKeywords(final String keywords, final Integer pageNumber, final Integer offset) {
+        String likeSql = "";
+        if (keywords != null && keywords.trim().length() > 0) {
+            likeSql = "like concat('%', '" + keywords + "','%')";
+        }
+        final String finalLikeSql = likeSql;
+        return new SQL() {
+            {
+                SELECT("t.id, t.title, t.pic_url");
+                FROM("product t");
+                if (finalLikeSql.length() > 0) {
+                    OR().WHERE("t.title " + finalLikeSql);
+                    OR().WHERE("t.`desc` " + finalLikeSql);
+                    OR().WHERE("t.province_name " + finalLikeSql);
+                    OR().WHERE("t.city_name " + finalLikeSql);
+                    OR().WHERE("t.area_name " + finalLikeSql);
+                }
+                AND().WHERE("t.status=1");
+                ORDER_BY("level asc");
+                ORDER_BY("id desc");
+                LIMIT(pageNumber);
+                OFFSET(offset);
+            }
+        }.toString();
+    }
 }
