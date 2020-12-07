@@ -1,6 +1,7 @@
 package com.example.lewjun.web;
 
 import com.example.lewjun.domain.Product;
+import com.example.lewjun.domain.Region;
 import com.example.lewjun.domain.vo.ProductQueryParamVO;
 import com.example.lewjun.mapper.ProductMapper;
 import com.example.lewjun.mapper.RegionMapper;
@@ -11,7 +12,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Slf4j
@@ -31,12 +34,29 @@ public class ProdController {
 
         model.addAttribute("regionTitle", name);
 
-        model.addAttribute("path", "city");
-
-        model.addAttribute("regions", regionMapper.queryCitiesByProvinceCode(code));
-
+        if (code == 110000 // 北京市
+                || code == 120000 // 天津市
+                || code == 500000 // 重庆市
+                || code == 310000 // 上海市
+        ) {
+            // 对直辖市特殊处理
+            handleMunicipality(code, model);
+        } else {
+            model.addAttribute("path", "city");
+            model.addAttribute("regions", regionMapper.queryCitiesByProvinceCode(code));
+        }
         model.addAttribute("prods", productMapper.queryByRegionCode(code, null, null));
         return "prod/prod.html";
+    }
+
+    private void handleMunicipality(Integer code, Model model) {
+        model.addAttribute("path", "area");
+
+        List<Region> regions = new ArrayList<>(10);
+        for (Region region : regionMapper.queryCitiesByProvinceCode(code)) {
+            regions.addAll(regionMapper.queryAreasByCityCode(region.getCode()));
+        }
+        model.addAttribute("regions", regions);
     }
 
     @GetMapping("/city/{code}/{name}")
