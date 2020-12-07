@@ -47,7 +47,10 @@ public class IndexController {
                 new Region(620000, "甘肃省"),
                 new Region(630000, "青海省"),
                 new Region(640000, "宁夏回族自治区"),
-                new Region(650000, "新疆维吾尔自治区")
+                new Region(650000, "新疆维吾尔自治区"),
+                new Region(710000, "香港"),
+                new Region(720000, "澳门"),
+                new Region(730000, "中国台湾")
         ));
         return "index.html";
     }

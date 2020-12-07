@@ -1,3 +1,18 @@
+.navbar,
+.navbar-brand {
+min-height: 60px;
+}
+
+.navbar-brand {
+height: 60px;
+padding: 20px 20px;
+}
+
+.navbar-nav > li > a {
+padding-top: 20px;
+padding-bottom: 20px
+}
+
 .w-1of5 td {
   width: 20%;
 }

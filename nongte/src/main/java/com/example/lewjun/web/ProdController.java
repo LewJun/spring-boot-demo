@@ -41,19 +41,22 @@ public class ProdController {
         ) {
             // 对直辖市特殊处理
             handleMunicipality(code, model);
+            model.addAttribute("prods", productMapper.queryByRegionCode(code, null, null));
+        } else if (code == 710000 || code == 720000 || code == 730000) {
+            model.addAttribute("path", "area");
         } else {
             model.addAttribute("path", "city");
             model.addAttribute("regions", regionMapper.queryCitiesByProvinceCode(code));
+            model.addAttribute("prods", productMapper.queryByRegionCode(code, null, null));
         }
-        model.addAttribute("prods", productMapper.queryByRegionCode(code, null, null));
         return "prod/prod.html";
     }
 
-    private void handleMunicipality(Integer code, Model model) {
+    private void handleMunicipality(final Integer code, final Model model) {
         model.addAttribute("path", "area");
 
-        List<Region> regions = new ArrayList<>(10);
-        for (Region region : regionMapper.queryCitiesByProvinceCode(code)) {
+        final List<Region> regions = new ArrayList<>(10);
+        for (final Region region : regionMapper.queryCitiesByProvinceCode(code)) {
             regions.addAll(regionMapper.queryAreasByCityCode(region.getCode()));
         }
         model.addAttribute("regions", regions);

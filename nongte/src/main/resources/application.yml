@@ -37,5 +37,5 @@ logging:
       example:
         lewjun:
           # 设置mapper包日志级别为debug
-          mapper: debug
+          mapper: error
 
