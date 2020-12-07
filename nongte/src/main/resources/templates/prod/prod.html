@@ -53,8 +53,8 @@
                 <%if(loginUser != "") {%>
                 <li><a href="prod/list">产品列表</a></li>
                 <%}%>
+                <li><a href="contact">新闻动态</a></li>
                 <li><a href="about">关于我们</a></li>
-                <li><a href="contact">联系我们</a></li>
                 <%
                 if(loginUser == "") {
                 %>
@@ -79,7 +79,7 @@
 
 <div class="container">
     <div class="page-header">
-        <h1>${regionTitle}</h1>
+        <h2>${regionTitle}</h2>
     </div>
     <div class="region clearfix">
         <%
@@ -90,7 +90,7 @@
     </div>
 
     <div class="page-header">
-        <h2>特产介绍</h2>
+        <h3>特产介绍</h3>
     </div>
 
     <div class="row">
@@ -124,6 +124,7 @@
 <style>
 .page-header {
 margin-top: 20px;
+text-align:center;
 }
 
 .thumbnail {
