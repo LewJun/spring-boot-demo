@@ -35,6 +35,7 @@
     <script src="js/respond.min.js"></script>
     <![endif]-->
     <link href="css/style.css" rel="stylesheet"/>
+    <link href="css/icon-search.css" rel="stylesheet"/>
 </head>
 
 <body>
@@ -80,9 +81,10 @@
 <div class="container">
     <form action="prod/queryByKeywords" method="post" style="width: 40%; margin: 30px auto 30px;">
         <div class="input-group">
-            <input class="form-control" name="keywords" placeholder="搜索..." type="text"/>
+            <i class="icon-search i-search"></i>
+            <input class="form-control keywords" name="keywords">
             <span class="input-group-btn">
-                <button class="btn btn-primary" type="submit">Go!</button>
+                <button class="btn btn-warning" type="submit">搜索</button>
             </span>
         </div>
         <!-- /input-group -->
