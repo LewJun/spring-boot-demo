@@ -261,7 +261,7 @@
             },
             success: function(result) {
                 // 状态修改成功后刷新
-                window.location.reload();
+                $("#prodTable").bootstrapTable('refresh');
             },
             error: function(err) {
                 alert(err);
@@ -283,7 +283,8 @@
             },
             success: function(result) {
                 // 状态修改成功后刷新
-                window.location.reload();
+                // window.location.reload();
+                $("#prodTable").bootstrapTable('refresh');
             },
             error: function(err) {
                 alert(err);
@@ -311,6 +312,8 @@
 
 
 
+
+
 </script>
 <script src="js/jquery.mloading.js"></script>
 <link href="css/jquery.mloading.css" rel="stylesheet">
@@ -318,6 +321,8 @@
     select {
         margin-right:3px;
     }
+
+
 
 
 

@@ -1,21 +1,16 @@
 package com.example.lewjun.web;
 
 import com.example.lewjun.domain.Region;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.Arrays;
 
-@Slf4j
 @Controller
 public class IndexController {
     @GetMapping("/")
     public String index(final Model model) {
-        log.info("【index】");
-        model.addAttribute("msg", "hello world");
-
         model.addAttribute("regions", Arrays.asList(
                 new Region(110000, "北京"),
                 new Region(120000, "天津"),
@@ -50,7 +45,7 @@ public class IndexController {
                 new Region(650000, "新疆"),
                 new Region(710000, "香港"),
                 new Region(720000, "澳门"),
-                new Region(730000, "中国台湾")
+                new Region(730000, "台湾")
         ));
         return "index.html";
     }

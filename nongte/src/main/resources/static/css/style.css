@@ -1,17 +1,22 @@
 .navbar,
 .navbar-brand {
-min-height: 60px;
-background: rgb(146,209,79);
+min-height: 80px;
+background: rgb(146,208,80);
 }
 
 .navbar-brand {
-height: 60px;
 padding: 20px 20px;
+line-height: 40px;
 }
 
 .navbar-nav > li > a {
 padding-top: 20px;
-padding-bottom: 20px
+padding-bottom: 20px;
+line-height: 40px;
+}
+
+.nav > .active > a {
+background: #FFC900 !important;
 }
 
 .w-1of5 td {
@@ -41,7 +46,8 @@ h1.tc-intro {
   padding: 5px;
 }
 
-.region a {
+.region > span,
+.region > a {
   width: 20%;
   float: left;
   display: block;
@@ -55,13 +61,29 @@ h1.tc-intro {
   white-space: nowrap;
 }
 
+.region > span {
+border: none !important;
+}
+
+.region > span > a {
+display: inline-block;
+width: 80px;
+border: 2px solid #FEBF00;
+border-radius: 4px;
+color: #00B050;
+padding: 5px;
+overflow:hidden;
+text-overflow: ellipsis;
+white-space: nowrap;
+}
+
 footer {
   position: absolute;
   bottom: 0;
   width: 100%;
   padding: 10px 0;
   border-top: 1px solid #f1f1f1;
-  background: rgb(0,175,81);
+  background: rgb(0,176,80);
   color: #eee;
 }
 
@@ -74,9 +96,26 @@ html {
 
 body {
 margin-bottom: 60px !important;
-background: linear-gradient(to bottom, #FBE199, #FFF1D3)
+/* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#fbe397+0,fbe397+14,fdf2d0+29,fffcf3+100 */
+background: #fbe397; /* Old browsers */
+background: -moz-linear-gradient(top,  #fbe397 0%, #fbe397 14%, #fdf2d0 29%, #fffcf3 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top,  #fbe397 0%,#fbe397 14%,#fdf2d0 29%,#fffcf3 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom,  #fbe397 0%,#fbe397 14%,#fdf2d0 29%,#fffcf3 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fbe397', endColorstr='#fffcf3',GradientType=0 ); /* IE6-9 */
 }
 
+body > .container {
+margin-top: 60px;
+}
 .text-dec-none {
 text-decoration: none !important;
+}
+
+input.keywords {
+border-top-left-radius: 6px !important;
+border-bottom-left-radius: 6px !important;
+}
+
+.btn-search {
+background:#FFC900;color:white;
 }

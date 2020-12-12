@@ -76,22 +76,37 @@
         <!--/.nav-collapse -->
     </div>
 </nav>
+<style>
+h2, h3 {
+border-bottom: 5px solid #BEBABA;
+text-align:center;
+padding-bottom: 10px;
+}
+
+h2 {
+color:#8548B0;
+}
+h3 {
+border-bottom-width: 1px;
+}
+
+
+
+</style>
 
 <div class="container">
-    <div class="page-header">
-        <h2>${regionTitle}</h2>
-    </div>
+    <h2>${regionTitle}</h2>
     <div class="region clearfix">
         <%
         for(region in regions![]){
         %>
-        <a class="text-dec-none" href="prod/${path}/${region.code}/${region.name}">${region.name}</a>
+        <span>
+            <a class="text-dec-none" href="prod/${path}/${region.code}/${region.name}">${region.name}</a>
+        </span>
         <%}%>
     </div>
 
-    <div class="page-header">
-        <h3>特产介绍</h3>
-    </div>
+    <h3>特产介绍</h3>
 
     <div class="row">
         <%
@@ -136,6 +151,19 @@ text-align:center;
     height: 85%;
     object-fit: cover;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
 </style>
 </body>
 </html>
