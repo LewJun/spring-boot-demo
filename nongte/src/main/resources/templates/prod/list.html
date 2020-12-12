@@ -80,21 +80,21 @@
         <div class="row">
             <div class="form-group">
                 <label for="title">产品名称</label>
-                <input class="form-control" id="title" maxlength="20" placeholder="请输入产品名称" type="text">
+                <input autocomplete="off" class="form-control" id="title" maxlength="20" placeholder="请输入产品名称">
             </div>
 
             <div class="form-group">
                 <label class="control-label" for="desc">产品描述</label>
-                <input class="form-control" id="desc" maxlength="32" placeholder="请输入产品描述" type="text">
+                <input autocomplete="off" class="form-control" id="desc" maxlength="32" placeholder="请输入产品描述">
             </div>
 
             <div class="form-group">
                 <label class="control-label" for="level">优先级</label>
-                <input class="form-control match-rotation-input" id="level" maxlength="4"
-                       name="level"
-                       onblur="value=value.replace(/[^\d]/g,'')" onkeyup="value=value.replace(/[^\d]/g,'')"
-                       placeholder="数字越小，优先级越高。"
-                       type="text">
+                <input autocomplete="off" class="form-control match-rotation-input" id="level"
+                       maxlength="4"
+                       name="level" onblur="value=value.replace(/[^\d]/g,'')"
+                       onkeyup="value=value.replace(/[^\d]/g,'')"
+                       placeholder="数字越小，优先级越高。">
             </div>
         </div>
 
@@ -314,6 +314,9 @@
 
 
 
+
+
+
 </script>
 <script src="js/jquery.mloading.js"></script>
 <link href="css/jquery.mloading.css" rel="stylesheet">
@@ -321,6 +324,9 @@
     select {
         margin-right:3px;
     }
+
+
+
 
 
 
