@@ -12,7 +12,18 @@ public class ProductListQueryResult implements Serializable {
 
     private String desc;
 
-    private Integer level;
+    private String keywords;
+
+    private Integer db;
+
+    private Integer level_prov;
+    private Integer level_city;
+    private Integer level_area;
+
+
+    private Integer show_prov;
+    private Integer show_city;
+    private Integer show_area;
 
     private Integer status;
 

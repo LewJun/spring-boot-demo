@@ -122,7 +122,8 @@ public class ProdController {
     }
 
     @GetMapping("/create")
-    public String create() {
+    public String create(final Model model) {
+        model.addAttribute("prod", new Product());
         return "prod/edit.html";
     }
 

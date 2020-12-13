@@ -16,7 +16,19 @@ public class Product implements Serializable {
 
     private String desc;
 
-    private Integer level;
+    private Integer level_prov = 999;
+
+    private Integer level_city = 999;
+
+    private Integer level_area = 999;
+
+    private Integer show_prov = 0;
+
+    private Integer show_city = 0;
+
+    private Integer show_area = 0;
+
+    private String keywords;
 
     private String html;
 
@@ -36,4 +48,5 @@ public class Product implements Serializable {
 
     private String update_time;
 
+    private Integer db;
 }

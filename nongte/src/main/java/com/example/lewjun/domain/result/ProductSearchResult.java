@@ -10,5 +10,9 @@ public class ProductSearchResult implements Serializable {
 
     private String title;
 
+    private String desc;
+
     private String pic_url;
+
+    private Integer db;
 }
