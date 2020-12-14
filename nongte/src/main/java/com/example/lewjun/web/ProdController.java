@@ -76,14 +76,10 @@ public class ProdController {
         return "prod/prod.html";
     }
 
-    @GetMapping("/area/{code}/{name}")
-    public String area(@PathVariable final Integer code, @PathVariable final String name, final Model model) {
-        log.info("【area code {}】", code);
-
-        model.addAttribute("regionTitle", name);
-
-        model.addAttribute("prods", productMapper.queryByRegionCode(null, null, code));
-        return "prod/prod.html";
+    @GetMapping("/area/{code}")
+    @ResponseBody
+    public String queryProdByAreaCode(@PathVariable final Integer code) {
+        return JsonUtils.object2String(productMapper.queryByRegionCode(null, null, code));
     }
 
     @GetMapping("/detail/{id}")

@@ -175,7 +175,7 @@ public class ProductMapperProvider {
                     OR().WHERE("t.province_name " + finalLikeSql);
                     OR().WHERE("t.city_name " + finalLikeSql);
                     OR().WHERE("t.area_name " + finalLikeSql);
-                    OR().WHERE("t.keywords" + finalLikeSql);
+                    OR().WHERE("t.keywords " + finalLikeSql);
                 }
                 AND().WHERE("t.status=1");
                 ORDER_BY("level_prov asc");

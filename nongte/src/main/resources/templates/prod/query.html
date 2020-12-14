@@ -36,6 +36,7 @@
     <![endif]-->
     <link href="css/style.css" rel="stylesheet"/>
     <link href="css/icon-search.css" rel="stylesheet"/>
+    <link href="css/prod.css" rel="stylesheet"/>
 </head>
 
 <body>
@@ -95,10 +96,20 @@
         for(prod in prods![]) {
         %>
         <div class="col-sm-6 col-md-3">
-            <a class="thumbnail text-dec-none" href="prod/detail/${prod.id}">
-                <img alt="${prod.title}" loading="lazy" src="file?filename=${prod.pic_url}">
-                <div class="caption text-center">${prod.title}</div>
-            </a>
+            <div class="thumbnail">
+                <a class="clearfix text-dec-none" href="prod/detail/${prod.id}">
+                    <div class="box">
+                        <img alt="${prod.title}" src="file?filename=${prod.pic_url}"/>
+                    </div>
+                    <div class="caption">
+                        <div class="top clearfix">
+                            <span>${prod.title}</span>
+                            <img src="images/db00${prod.db}.jpg">
+                        </div>
+                        <p class="desc">${prod.desc}</p>
+                    </div>
+                </a>
+            </div>
         </div>
         <%} elsefor {%>
         <center>没有符合条件的查询结果</center>
@@ -119,23 +130,5 @@
 <script src="js/bootstrap.min.js"></script>
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script src="js/ie10-viewport-bug-workaround.js"></script>
-
-<style>
-.page-header {
-margin-top: 20px;
-}
-
-.thumbnail {
-    height: 200px!important;
-}
-
-.thumbnail img {
-    width: 100%;
-    height: 85%;
-    object-fit: cover;
-}
-
-
-</style>
 </body>
 </html>

@@ -82,36 +82,47 @@
     <h2>${regionTitle}</h2>
     <div class="region clearfix">
         <%
+        if (path == "area") {
+        %>
+        <%
         for(region in regions![]){
         %>
         <span>
-            <a class="text-dec-none" href="prod/${path}/${region.code}/${region.name}">${region.name}</a>
+            <a class="area text-dec-none" data-code="${region.code}"
+               href="javascript:void(0)">${region.name}</a>
         </span>
+        <%}%>
+        <%} else {%>
+        <%
+        for(region in regions![]){
+        %>
+        <span><a class="text-dec-none" href="prod/${path}/${region.code}/${region.name}">${region.name}</a></span>
+        <%}%>
         <%}%>
     </div>
 
     <h3>特产介绍</h3>
 
-    <div class="row">
+    <div class="row prod">
         <%
         for(prod in prods![]) {
         %>
-           <div class="col-sm-6 col-md-3">
-               <div class="thumbnail">
-                   <a href="prod/detail/${prod.id}" class="prod-a clearfix text-dec-none">
-                        <div class="box">
-                            <img src="file?filename=${prod.pic_url}" alt="${prod.title}" />
+        <div class="col-sm-6 col-md-3">
+            <div class="thumbnail">
+                <a class="clearfix text-dec-none" href="prod/detail/${prod.id}">
+                    <div class="box">
+                        <img alt="${prod.title}" src="file?filename=${prod.pic_url}"/>
+                    </div>
+                    <div class="caption">
+                        <div class="top clearfix">
+                            <span>${prod.title}</span>
+                            <img src="images/db00${prod.db}.jpg">
                         </div>
-                        <div class="caption">
-                            <div class="top clearfix">
-                                <span>${prod.title}</span>
-                                <img src="images/db00${prod.db}.jpg">
-                            </div>
-                            <p class="desc">${prod.desc}</p>
-                        </div>
-                   </a>
-               </div>
-           </div>
+                        <p class="desc">${prod.desc}</p>
+                    </div>
+                </a>
+            </div>
+        </div>
         <%}%>
     </div>
 </div>
@@ -128,5 +139,82 @@
 <script src="js/bootstrap.min.js"></script>
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script src="js/ie10-viewport-bug-workaround.js"></script>
+
+<script src="js/jquery.mloading.js"></script>
+<link href="css/jquery.mloading.css" rel="stylesheet">
+
+<script>
+    $(function() {
+        $(".area").click(function() {
+            var that = $(this);
+            $(".area.areaClicked").removeClass("areaClicked");
+            that.addClass("areaClicked");
+
+            var areaCode = that.attr('data-code');
+            $.ajax({
+                url: "prod/area/" + areaCode,
+                type: "get",
+                dataType: "json",
+                beforeSend: function() {
+                     //显示loading组件
+                    $('body').mLoading("show");
+                },
+                success: function(rets) {
+                    var html='';
+                    for (data of rets) {
+                        html += '<div class="col-sm-6 col-md-3"><div class="thumbnail"><a class="prod-a clearfix text-dec-none" href="prod/detail/' + data.id + '"><div class="box"> <img alt="' + data.title + '" src="file?filename=' + data.pic_url + '"> </div> <div class="caption"> <div class="top clearfix"> <span>' + data.title + '</span> <img src="images/db00' + data.db + '.jpg"> </div> <p class="desc">' + data.desc + '</p> </div> </a> </div> </div> ';
+                    }
+                    $('.prod').html(html);
+                },
+                error: function(err) {
+                    console.log(err);
+                },
+                complete: function() {
+                    // 隐藏loading组件
+                    $('body').mLoading("hide");
+                }
+            });
+        });
+    });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+<style>
+    .areaClicked {
+      color: #8548b0 !important;
+      border-color: #8548b0 !important;
+    }
+
+
+
+
+
+
+</style>
 </body>
 </html>
