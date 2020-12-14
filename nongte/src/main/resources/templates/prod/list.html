@@ -242,7 +242,7 @@
             {
                 title: '优先级',
                 align: "center",
-                width: 100,
+                width: 105,
                 formatter: function(value, row, index) {
                     var result = '';
                     result += row['level_prov'];
@@ -288,6 +288,7 @@
                 title: '操作',
                 field: 'opr',
                 align: 'center',
+                width: 216,
                 events: {
                     'click #enable': function(e, value, row, index) {
                         changeStatus(row.id, 1);
