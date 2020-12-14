@@ -29,7 +29,6 @@ public class ProductMapperProvider {
                     orderSql = "level_area asc";
                 } else {
                 }
-                ORDER_BY("id desc");
                 if (orderSql != null && orderSql.length() > 0) {
                     ORDER_BY(orderSql);
                 }
@@ -96,7 +95,6 @@ public class ProductMapperProvider {
                 ORDER_BY("level_prov asc");
                 ORDER_BY("level_city asc");
                 ORDER_BY("level_area asc");
-                ORDER_BY("id desc");
                 LIMIT("#{pageNumber}");
                 OFFSET("#{offset}");
             }
@@ -183,7 +181,6 @@ public class ProductMapperProvider {
                 ORDER_BY("level_prov asc");
                 ORDER_BY("level_city asc");
                 ORDER_BY("level_area asc");
-                ORDER_BY("id desc");
                 LIMIT(pageNumber);
                 OFFSET(offset);
             }
