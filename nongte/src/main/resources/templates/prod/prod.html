@@ -35,6 +35,7 @@
     <script src="respond.min.js"></script>
     <![endif]-->
     <link href="css/style.css" rel="stylesheet"/>
+    <link href="css/prod.css" rel="stylesheet"/>
 </head>
 
 <body>
@@ -76,23 +77,6 @@
         <!--/.nav-collapse -->
     </div>
 </nav>
-<style>
-h2, h3 {
-border-bottom: 5px solid #BEBABA;
-text-align:center;
-padding-bottom: 10px;
-}
-
-h2 {
-color:#8548B0;
-}
-h3 {
-border-bottom-width: 1px;
-}
-
-
-
-</style>
 
 <div class="container">
     <h2>${regionTitle}</h2>
@@ -112,17 +96,26 @@ border-bottom-width: 1px;
         <%
         for(prod in prods![]) {
         %>
-        <div class="col-sm-6 col-md-3">
-            <a class="thumbnail text-dec-none" href="prod/detail/${prod.id}">
-                <img alt="${prod.title}" loading="lazy" src="file?filename=${prod.pic_url}">
-                <div class="caption text-center">${prod.title}</div>
-            </a>
-        </div>
+           <div class="col-sm-6 col-md-3">
+               <div class="thumbnail">
+                   <a href="prod/detail/${prod.id}" class="prod-a clearfix text-dec-none">
+                        <div class="box">
+                            <img src="file?filename=${prod.pic_url}" alt="${prod.title}" />
+                        </div>
+                        <div class="caption">
+                            <div class="top clearfix">
+                                <span>${prod.title}</span>
+                                <img src="images/db00${prod.db}.jpg">
+                            </div>
+                            <p class="desc">${prod.desc}</p>
+                        </div>
+                   </a>
+               </div>
+           </div>
         <%}%>
     </div>
 </div>
 <!-- /container -->
-
 <footer>
     <center>
         <p>Copyright © nongte.com (2020 - present) all right reserved</p>
@@ -135,35 +128,5 @@ border-bottom-width: 1px;
 <script src="js/bootstrap.min.js"></script>
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script src="js/ie10-viewport-bug-workaround.js"></script>
-
-<style>
-.page-header {
-margin-top: 20px;
-text-align:center;
-}
-
-.thumbnail {
-    height: 200px!important;
-}
-
-.thumbnail img {
-    width: 100%;
-    height: 85%;
-    object-fit: cover;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-</style>
 </body>
 </html>
