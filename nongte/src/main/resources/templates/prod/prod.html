@@ -111,12 +111,12 @@
             <div class="thumbnail">
                 <a class="clearfix text-dec-none" href="prod/detail/${prod.id}">
                     <div class="box">
-                        <img alt="${prod.title}" src="file?filename=${prod.pic_url}"/>
+                        <img src="file?filename=${prod.pic_url}">
                     </div>
                     <div class="caption">
-                        <div class="top clearfix">
+                        <div class="top"
+                             style="background:url('images/db00${prod.db}.jpg') no-repeat right center; background-size:contain;">
                             <span>${prod.title}</span>
-                            <img src="images/db00${prod.db}.jpg">
                         </div>
                         <p class="desc">${prod.desc}</p>
                     </div>
@@ -177,43 +177,12 @@
         });
     });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </script>
 <style>
     .areaClicked {
       color: #8548b0 !important;
       border-color: #8548b0 !important;
     }
-
-
-
-
-
 
 </style>
 </body>
