@@ -5,7 +5,6 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -23,15 +22,9 @@ public class MediaController {
     @Value("${uploadPath}")
     private String uploadPath;
 
-    @GetMapping("/download")
-    public ResponseEntity<byte[]> download(final String pathname) {
-        return FileDownloadUtil.getResponseEntity(new File(pathname), false);
-    }
-
     @PostMapping("/uploadFile")
     @ResponseBody
     public String uploadFile(final MultipartFile file, final String type) {
-        log.info("type: {}", type);
         return getPathName(transferTo(file));
     }
 
