@@ -104,7 +104,9 @@
                     <div class="caption">
                         <div class="top clearfix">
                             <span>${prod.title}</span>
+                            <%if(prod.db != null && prod.db > 0) {%>
                             <img src="images/db00${prod.db}.jpg">
+                            <%}%>
                         </div>
                         <p class="desc">${prod.desc}</p>
                     </div>
