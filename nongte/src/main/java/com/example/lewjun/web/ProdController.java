@@ -9,17 +9,22 @@ import com.example.lewjun.utils.JsonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/prod")
 public class ProdController {
 
+    private final String OK = "ok";
+    private final String ERR = "err";
     @Autowired
     private RegionMapper regionMapper;
-
     @Autowired
     private ProductMapper productMapper;
 
@@ -117,6 +122,26 @@ public class ProdController {
     @PostMapping("/save")
     @ResponseBody
     public String save(final Product product) {
+        if (product.getCity_code() == null) {
+            product.setCity_code(0);
+        }
+
+        if (StringUtils.isEmpty(product.getCity_name())) {
+            product.setCity_name("");
+        }
+
+        if (product.getArea_code() == null) {
+            product.setArea_code(0);
+        }
+
+        if (StringUtils.isEmpty(product.getArea_code())) {
+            product.setArea_name("");
+        }
+
+        if (product.getDb() == null) {
+            product.setDb(0);
+        }
+
         if (product.getId() == null) {
             productMapper.insert(product);
         } else {
@@ -138,6 +163,4 @@ public class ProdController {
         productMapper.delete(id);
         return OK;
     }
-    private String OK = "ok";
-    private String ERR = "err";
 }
