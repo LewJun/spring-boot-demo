@@ -204,7 +204,7 @@
                     <%if (prod.db == 1) {%>
                     <input checked name="db" type="radio" value="1">
                     <%} else {%>
-                    <input checked name="db" type="radio" value="1">
+                    <input name="db" type="radio" value="1">
                     <%}%>
                     <img src="images/db001.jpg" width="150px">
                 </label>
@@ -386,18 +386,6 @@ $(function() {
             return;
         }
 
-        if (!areaObj.city_code) {
-            alert("请完善所属区域");
-            $('[name="city_code"]').focus();
-            return;
-        }
-
-        if (!areaObj.area_code) {
-            alert("请完善所属区域");
-            $('[name="area_code"]').focus();
-            return;
-        }
-
         var html = wangEditor.txt.html();
         if (!html) {
             alert("请输入正文");
@@ -447,9 +435,9 @@ $(function() {
 
     function uploadForm(frm) {
         var areaStr = selector.getAreaString();
-        frm.append('province_name', areaStr.province_name);
-        frm.append('city_name', areaStr.city_name);
-        frm.append('area_name', areaStr.area_name);
+        frm.append('province_name', areaStr.province_name||'');
+        frm.append('city_name', areaStr.city_name||'');
+        frm.append('area_name', areaStr.area_name||'');
 
         $.ajax({
             url: "prod/save",
@@ -473,51 +461,6 @@ $(function() {
             }
         });
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -549,51 +492,6 @@ padding: 0 5px;
 #region-select-box select {
 margin-right: 3px;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
