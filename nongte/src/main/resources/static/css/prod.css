@@ -13,6 +13,7 @@ h3 {
 }
 .caption .top {
   position: relative;
+  height: 24px;
 }
 .top > span {
   display: inline !important;
@@ -31,7 +32,10 @@ h3 {
 .caption > .desc {
   padding: 0;
   margin: 0;
-  white-space: nowrap;
+  //white-space: nowrap;
+  display:-webkit-box;
+  -webkit-box-orient:vertical;
+  -webkit-line-clamp: 2;
   text-overflow: ellipsis;
   overflow: hidden;
   margin-top: 5px;
