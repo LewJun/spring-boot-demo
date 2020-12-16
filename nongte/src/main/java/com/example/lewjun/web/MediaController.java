@@ -1,6 +1,5 @@
 package com.example.lewjun.web;
 
-import com.example.lewjun.utils.FileDownloadUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
@@ -93,7 +92,6 @@ public class MediaController {
                 dir.mkdirs();
             }
 
-//            final File file = new File(dir, prefix + "." + originalFilename);
             final File file = new File(dir, prefix + "." + FilenameUtils.getExtension(originalFilename));
             multipartFile.transferTo(file);
 

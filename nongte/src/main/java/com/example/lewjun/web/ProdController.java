@@ -6,18 +6,13 @@ import com.example.lewjun.domain.vo.ProductQueryParamVO;
 import com.example.lewjun.mapper.ProductMapper;
 import com.example.lewjun.mapper.RegionMapper;
 import com.example.lewjun.utils.JsonUtils;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
-@Slf4j
 @Controller
 @RequestMapping("/prod")
 public class ProdController {
@@ -30,8 +25,6 @@ public class ProdController {
 
     @GetMapping("/province/{code}/{name}")
     public String province(@PathVariable final Integer code, @PathVariable final String name, final Model model) {
-        log.info("【province code {}】", code);
-
         model.addAttribute("regionTitle", name);
 
         if (code == 110000 // 北京市
@@ -39,7 +32,7 @@ public class ProdController {
                 || code == 500000 // 重庆市
                 || code == 310000 // 上海市
         ) {
-            // 对直辖市特殊处理
+            // 按照需求方要求，对直辖市特殊处理
             handleMunicipality(code, model);
             model.addAttribute("prods", productMapper.queryByRegionCode(code, null, null));
         } else if (code == 710000 || code == 720000 || code == 730000) {
@@ -64,8 +57,6 @@ public class ProdController {
 
     @GetMapping("/city/{code}/{name}")
     public String city(@PathVariable final Integer code, @PathVariable final String name, final Model model) {
-        log.info("【city code {}】", code);
-
         model.addAttribute("regionTitle", name);
 
         model.addAttribute("path", "area");
@@ -96,22 +87,16 @@ public class ProdController {
     @GetMapping("/list/query")
     @ResponseBody
     public String listQuery(final ProductQueryParamVO param) {
-        log.info("param {}", param);
         final Map<String, Object> map = new HashMap<>(2);
         map.put("rows", productMapper.queryByConditions(param));
         map.put("total", productMapper.queryCountByConditions(param));
-        final String json = JsonUtils.object2String(map);
-        log.info("json {}", json);
-
-        // 需要返回total和rows
-        return json;
+        return JsonUtils.object2String(map);
     }
 
     @PostMapping("/queryByKeywords")
     public String queryByKeywords(final Model model, @RequestParam("keywords") final String keywords,
                                   @RequestParam(name = "pageNumber", required = false, defaultValue = "100") final Integer pageNumber,
                                   @RequestParam(name = "offset", required = false, defaultValue = "0") final Integer offset) {
-        log.info("queryByKeywords {} {} {}", keywords, pageNumber, offset);
         model.addAttribute("prods", productMapper.queryByKeywords(keywords, pageNumber, offset));
         model.addAttribute("keywords", keywords);
         return "prod/query.html";
@@ -132,28 +117,27 @@ public class ProdController {
     @PostMapping("/save")
     @ResponseBody
     public String save(final Product product) {
-        log.info("【product {}】", product);
         if (product.getId() == null) {
-            // 新增
             productMapper.insert(product);
         } else {
-            // 修改
             productMapper.update(product);
         }
-        return "ok";
+        return OK;
     }
 
     @PostMapping("/changeStatus")
     @ResponseBody
     public String changeStatus(final int id, final int status) {
         productMapper.updateStatus(id, status);
-        return "ok";
+        return OK;
     }
 
     @PostMapping("/delete/{id}")
     @ResponseBody
     public String changeStatus(@PathVariable final int id) {
         productMapper.delete(id);
-        return "ok";
+        return OK;
     }
+    private String OK = "ok";
+    private String ERR = "err";
 }
