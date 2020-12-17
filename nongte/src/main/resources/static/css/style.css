@@ -67,11 +67,11 @@ border: none !important;
 
 .region > span > a {
 display: inline-block;
-width: 80px;
+width: 100px;
 border: 2px solid #FEBF00;
 border-radius: 4px;
 color: #00B050;
-padding: 5px;
+padding: 8px 5px;
 overflow:hidden;
 text-overflow: ellipsis;
 white-space: nowrap;

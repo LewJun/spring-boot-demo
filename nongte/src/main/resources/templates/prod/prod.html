@@ -88,7 +88,7 @@
         for(region in regions![]){
         %>
         <span>
-            <a class="area text-dec-none" data-code="${region.code}"
+            <a class="area text-dec-none" data-code="${region.code}" title="${region.name}"
                href="javascript:void(0)">${region.name}</a>
         </span>
         <%}%>
@@ -96,7 +96,7 @@
         <%
         for(region in regions![]){
         %>
-        <span><a class="text-dec-none" href="prod/${path}/${region.code}/${region.name}">${region.name}</a></span>
+        <span><a class="text-dec-none" href="prod/${path}/${region.code}/${region.name}" title="${region.name}">${region.name}</a></span>
         <%}%>
         <%}%>
     </div>
@@ -111,11 +111,11 @@
             <div class="thumbnail">
                 <a class="clearfix text-dec-none" href="prod/detail/${prod.id}">
                     <div class="box">
-                        <img src="file?filename=${prod.pic_url}">
+                        <img alt="${prod.title}" src="file?filename=${prod.pic_url}"/>
                     </div>
                     <div class="caption">
                         <div class="top"
-                             style="background:url('images/db00${prod.db}.jpg') no-repeat right center; background-size:contain;">
+                            style="background:url('images/db00${prod.db}.jpg') no-repeat right center; background-size:contain;">
                             <span class="prod-title">${prod.title}</span>
                         </div>
                         <p class="prod-desc">${prod.desc}</p>
@@ -143,47 +143,6 @@
 <script src="js/jquery.mloading.js"></script>
 <link href="css/jquery.mloading.css" rel="stylesheet">
 
-<script>
-    $(function() {
-        $(".area").click(function() {
-            var that = $(this);
-            $(".area.areaClicked").removeClass("areaClicked");
-            that.addClass("areaClicked");
-
-            var areaCode = that.attr('data-code');
-            $.ajax({
-                url: "prod/area/" + areaCode,
-                type: "get",
-                dataType: "json",
-                beforeSend: function() {
-                     //显示loading组件
-                    $('body').mLoading("show");
-                },
-                success: function(rets) {
-                    var html='';
-                    for (data of rets) {
-                        html += '<div class="col-sm-6 col-md-3"><div class="thumbnail"><a class="prod-a clearfix text-dec-none" href="prod/detail/' + data.id + '"><div class="box"> <img alt="' + data.title + '" src="file?filename=' + data.pic_url + '"> </div> <div class="caption"> <div class="top clearfix"> <span>' + data.title + '</span> <img src="images/db00' + data.db + '.jpg"> </div> <p class="desc">' + data.desc + '</p> </div> </a> </div> </div> ';
-                    }
-                    $('.prod').html(html);
-                },
-                error: function(err) {
-                    console.log(err);
-                },
-                complete: function() {
-                    // 隐藏loading组件
-                    $('body').mLoading("hide");
-                }
-            });
-        });
-    });
-
-</script>
-<style>
-    .areaClicked {
-      color: #8548b0 !important;
-      border-color: #8548b0 !important;
-    }
-
-</style>
+<script src="js/prod/prod.js"></script>
 </body>
 </html>
