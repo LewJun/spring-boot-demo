@@ -38,7 +38,7 @@
     <link href="css/list.css" rel="stylesheet"/>
 </head>
 
-<body>
+<body onload="onload()">
 <!-- Fixed navbar -->
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">
@@ -209,6 +209,7 @@
                     , show_city: $("[name=show_city]:checked").val()
                     , show_area: $("[name=show_area]:checked").val()
                 };
+                console.log('temp=', temp);
                 return temp;
             },
             columns: [
@@ -380,7 +381,20 @@
 
     var areaSelector = initAreaSelector();
 
+/**
+ * 页面加载完成后，执行
+ */
+function onload() {
+    if (!localStorage) {
+        alert('浏览器版本太低了。不能刷新表格数据。');
+        return;
+    }
 
+    if (localStorage && localStorage.getItem('prod-edit')) {
+        $("#prodTable").bootstrapTable('refresh');
+        localStorage.removeItem('prod-edit');
+    }
+}
 </script>
 <script src="js/jquery.mloading.js"></script>
 <link href="css/jquery.mloading.css" rel="stylesheet">

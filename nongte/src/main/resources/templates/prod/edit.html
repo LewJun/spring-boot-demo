@@ -450,8 +450,8 @@ $(function() {
                 $('body').mLoading("show");
             },
             success: function(result) {
-                // window.location.href="prod/list";
-                window.location.replace("prod/list");
+                localStorage && localStorage.setItem('prod-edit', Date.now());
+                history.go(-1);
             },
             error: function(err) {
                 alert(err);
