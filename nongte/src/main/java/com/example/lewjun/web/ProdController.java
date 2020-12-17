@@ -98,12 +98,12 @@ public class ProdController {
         return JsonUtils.object2String(map);
     }
 
-    @PostMapping("/queryByKeywords")
-    public String queryByKeywords(final Model model, @RequestParam("keywords") final String keywords,
-                                  @RequestParam(name = "pageNumber", required = false, defaultValue = "100") final Integer pageNumber,
-                                  @RequestParam(name = "offset", required = false, defaultValue = "0") final Integer offset) {
-        model.addAttribute("prods", productMapper.queryByKeywords(keywords, pageNumber, offset));
-        model.addAttribute("keywords", keywords);
+    @GetMapping("/search")
+    public String search(final Model model, @RequestParam("s") final String s,
+                         @RequestParam(name = "pageNumber", required = false, defaultValue = "20") final Integer pageNumber,
+                         @RequestParam(name = "offset", required = false, defaultValue = "0") final Integer offset) {
+        model.addAttribute("prods", productMapper.queryByKeywords(s, pageNumber, offset));
+        model.addAttribute("s", s);
         return "prod/query.html";
     }
 

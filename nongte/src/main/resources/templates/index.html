@@ -36,6 +36,7 @@
     <![endif]-->
     <link href="css/style.css" rel="stylesheet"/>
     <link href="css/icon-search.css" rel="stylesheet"/>
+    <link href="css/index/index.css" rel="stylesheet"/>
 </head>
 
 <body>
@@ -79,29 +80,18 @@
 </nav>
 
 <div class="container">
-    <form action="prod/queryByKeywords" method="post" style="width: 40%; margin: 30px auto 30px;">
+    <form action="prod/search" method="get"
+          onsubmit="return submitForm()"
+          style="width: 40%; margin: 30px auto 30px;">
         <div class="input-group input-group-lg">
             <i class="icon-search i-search"></i>
-            <input autocomplete="off" class="form-control keywords" name="keywords">
+            <input autocomplete="off" class="form-control keywords" id="s" name="s">
             <span class="input-group-btn">
                 <button class="btn btn-search" type="submit">搜索</button>
             </span>
         </div>
         <!-- /input-group -->
     </form>
-    <style>
-        .region > a > span {
-        border-radius: 5px;
-        background: #FFAE4E;
-        padding: 5px 10px;
-        display: inline-block;
-        color: white;
-        width: 80px;
-        font-weight: 500;
-        }
-
-    </style>
-
     <div class="mt-10 region">
         <a href="prod/province/110000/北京">
             <span class="prov">北京</span>
@@ -221,5 +211,6 @@
 <script src="js/bootstrap.min.js"></script>
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script src="js/ie10-viewport-bug-workaround.js"></script>
+<script src="js/prod-query.js"></script>
 </body>
 </html>
