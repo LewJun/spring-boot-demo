@@ -1,3 +1,4 @@
+if(totalPages > 1) {
 var options = {
 //根据后台返回的分页相关信息，设置插件参数
 bootstrapMajorVersion: 3, //如果是bootstrap3版本需要加此标识，并且设置包含分页内容的DOM元素为UL,如果是bootstrap2版本，则DOM包含元素是DIV
@@ -41,6 +42,5 @@ return '››';
 }
 }
 };
-if(totalPages > 1) {
 $('#paginator').bootstrapPaginator(options); //设置分页
 }
