@@ -100,9 +100,17 @@ public class ProdController {
 
     @GetMapping("/search")
     public String search(final Model model, @RequestParam("s") final String s,
-                         @RequestParam(name = "offset", required = false, defaultValue = "0") final Integer offset) {
-        model.addAttribute("prods", productMapper.queryByKeywords(s, 20, offset));
+                         @RequestParam(name = "page", required = false, defaultValue = "1") final Integer page) {
+        final int limit = 20;
+        final int offset = (page - 1) * limit;
+        model.addAttribute("prods", productMapper.queryByKeywords(s, limit, offset));
         model.addAttribute("s", s);
+        model.addAttribute("currentPage", page);
+        model.addAttribute("limit", limit);
+        int total = productMapper.queryCountByKeywords(s);
+        int totalPages = total > limit ? (total % limit == 0 ? total / limit : (total / limit) + 1) : 1;
+
+        model.addAttribute("totalPages", totalPages);
         return "prod/query.html";
     }
 

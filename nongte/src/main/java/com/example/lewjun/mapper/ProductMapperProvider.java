@@ -159,6 +159,30 @@ public class ProductMapperProvider {
         }.toString();
     }
 
+     public String queryCountByKeywords(final String keywords) {
+        String likeSql = "";
+        if (keywords != null && keywords.trim().length() > 0) {
+            likeSql = "like concat('%', '" + keywords + "','%')";
+        }
+        final String finalLikeSql = likeSql;
+        return new SQL() {
+            {
+                SELECT("count(t.id) total");
+                FROM("product t");
+                if (finalLikeSql.length() > 0) {
+                    OR().WHERE("t.title " + finalLikeSql);
+                    OR().WHERE("t.`desc` " + finalLikeSql);
+                    OR().WHERE("t.province_name " + finalLikeSql);
+                    OR().WHERE("t.city_name " + finalLikeSql);
+                    OR().WHERE("t.area_name " + finalLikeSql);
+                    OR().WHERE("t.keywords " + finalLikeSql);
+                }
+                AND().WHERE("t.status=1");
+                LIMIT(1);
+            }
+        }.toString();
+    }
+
     public String queryByKeywords(final String keywords, final Integer pageNumber, final Integer offset) {
         String likeSql = "";
         if (keywords != null && keywords.trim().length() > 0) {

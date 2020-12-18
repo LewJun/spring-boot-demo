@@ -74,4 +74,7 @@ public interface ProductMapper {
     List<ProductSearchResult> queryByKeywords(@Param("keywords") String keywords,
                                               @Param("pageNumber") Integer pageNumber,
                                               @Param("offset") Integer offset);
+
+    @SelectProvider(type = ProductMapperProvider.class, method = "queryCountByKeywords")
+    int queryCountByKeywords(@Param("keywords") String keywords);
 }
