@@ -82,14 +82,22 @@
     <h2>${regionTitle}</h2>
     <div class="region clearfix">
         <%
-        if (path == "area") {
+        if (regionType == "city") {
         %>
         <%
-        for(region in regions![]){
+        for(region in regions![]) {
         %>
         <span>
-            <a class="text-dec-none" href="prod/${path}/${region.code}?cityCode=${code}&cityName=${regionTitle}"
-                 title="${region.name}">${region.name}</a></span>
+            <%
+            if(region.code == areaCode!'') {
+            %>
+            <a class="text-dec-none areaClicked"
+               title="${region.name}">${region.name}</a>
+            <%} else {%>
+            <a class="text-dec-none"
+               href="prod/${path}/${region.code}?cityCode=${code}&cityName=${regionTitle}"
+               title="${region.name}">${region.name}</a>
+            <%}%>
         </span>
         <%}%>
         <%} else {%>
@@ -118,7 +126,7 @@
                     </div>
                     <div class="caption">
                         <div class="top"
-                            style="background:url('images/db00${prod.db}.jpg') no-repeat right center; background-size:contain;">
+                             style="background:url('images/db00${prod.db}.jpg') no-repeat right center; background-size:contain;">
                             <span class="prod-title">${prod.title}</span>
                         </div>
                         <p class="prod-desc">${prod.desc}</p>
@@ -157,9 +165,11 @@ var currentPage = ${currentPage}
 var totalPages = ${totalPages}
 var limit = ${limit}
 var url = "prod/${regionType}/${code}/${regionTitle}?page=";
-if('${path}' == 'area') {
-    url = "prod/area/${areaCode}?cityCode=${code}&cityName=${regionTitle}&page=";
+var areaCode = "${areaCode!''}"
+if('${path}' == 'area' && areaCode != '') {
+    url = "prod/area/"+areaCode+"?cityCode=${code}&cityName=${regionTitle}&page=";
 }
+
 </script>
 <script src="js/paginatorUtil.js"></script>
 </body>

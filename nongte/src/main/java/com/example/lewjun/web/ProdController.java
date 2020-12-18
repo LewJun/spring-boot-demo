@@ -2,7 +2,6 @@ package com.example.lewjun.web;
 
 import com.example.lewjun.domain.Product;
 import com.example.lewjun.domain.Region;
-import com.example.lewjun.domain.result.ProductSearchResult;
 import com.example.lewjun.domain.vo.ProductQueryParamVO;
 import com.example.lewjun.enums.EnumRegionType;
 import com.example.lewjun.mapper.ProductMapper;
@@ -31,7 +30,7 @@ public class ProdController {
     private final ProductMapper productMapper;
 
     @Autowired
-    public ProdController(RegionMapper regionMapper, ProductMapper productMapper) {
+    public ProdController(final RegionMapper regionMapper, final ProductMapper productMapper) {
         this.regionMapper = regionMapper;
         this.productMapper = productMapper;
     }
@@ -65,7 +64,7 @@ public class ProdController {
                 limit, getOffset(page))
         );
 
-        int total = productMapper.queryCountByRegionCode(code, null, null);
+        final int total = productMapper.queryCountByRegionCode(code, null, null);
         handleTotalPages(model, total);
 
         model.addAttribute("regionType", regionType);
@@ -73,13 +72,13 @@ public class ProdController {
         return "prod/prod.html";
     }
 
-    private void handleCurrentPageAndLimit(Model model, @RequestParam(name = "page", required = false, defaultValue = "1") Integer page) {
+    private void handleCurrentPageAndLimit(final Model model, @RequestParam(name = "page", required = false, defaultValue = "1") final Integer page) {
         model.addAttribute("currentPage", page);
         model.addAttribute("limit", limit);
     }
 
-    private void handleTotalPages(Model model, int total) {
-        int totalPages = total > limit ? (total % limit == 0 ? total / limit : (total / limit) + 1) : 1;
+    private void handleTotalPages(final Model model, final int total) {
+        final int totalPages = total > limit ? (total % limit == 0 ? total / limit : (total / limit) + 1) : 1;
         model.addAttribute("totalPages", totalPages);
     }
 
@@ -107,7 +106,7 @@ public class ProdController {
 
         model.addAttribute("prods", productMapper.queryByRegionCode(null, code,
                 null, limit, getOffset(page)));
-        int total = productMapper.queryCountByRegionCode(null, code, null);
+        final int total = productMapper.queryCountByRegionCode(null, code, null);
         handleTotalPages(model, total);
 
         model.addAttribute("regionType", EnumRegionType.city.name());
@@ -115,16 +114,16 @@ public class ProdController {
         return "prod/prod.html";
     }
 
-    private int getOffset(Integer page) {
+    private int getOffset(final Integer page) {
         return (page - 1) * limit;
     }
 
     @GetMapping("/area/{code}")
     public String area(@PathVariable final Integer code,
-                       @RequestParam("cityCode") Integer cityCode,
-                       @RequestParam("cityName") String cityName,
+                       @RequestParam("cityCode") final Integer cityCode,
+                       @RequestParam("cityName") final String cityName,
                        @RequestParam(name = "page", required = false, defaultValue = "1") final Integer page,
-                       Model model) {
+                       final Model model) {
         model.addAttribute("regionTitle", cityName);
         model.addAttribute("code", cityCode);
         model.addAttribute("areaCode", code);
@@ -133,11 +132,26 @@ public class ProdController {
 
         model.addAttribute("path", EnumRegionType.area.name());
 
-        model.addAttribute("regions", regionMapper.queryAreasByCityCode(cityCode));
+
+        if (cityCode == 110000 // 北京市
+                || cityCode == 120000 // 天津市
+                || cityCode == 500000 // 重庆市
+                || cityCode == 310000 // 上海市
+        ) {
+            final List<Region> regions = new ArrayList<>();
+            for (final Region city : regionMapper.queryCitiesByProvinceCode(cityCode)) {
+                regions.addAll(regionMapper.queryAreasByCityCode(city.getCode()));
+            }
+            model.addAttribute("regions", regions);
+        } else if (cityCode == 710000 || cityCode == 720000 || code == 730000) {
+
+        } else {
+            model.addAttribute("regions", regionMapper.queryAreasByCityCode(cityCode));
+        }
 
         model.addAttribute("prods", productMapper.queryByRegionCode(null, null,
                 code, limit, getOffset(page)));
-        int total = productMapper.queryCountByRegionCode(null, null, code);
+        final int total = productMapper.queryCountByRegionCode(null, null, code);
         handleTotalPages(model, total);
 
         model.addAttribute("regionType", EnumRegionType.city.name());
@@ -169,7 +183,7 @@ public class ProdController {
                          @RequestParam(name = "page", required = false, defaultValue = "1") final Integer page) {
         model.addAttribute("prods", productMapper.queryByKeywords(s, limit, getOffset(page)));
         model.addAttribute("s", s);
-        int total = productMapper.queryCountByKeywords(s);
+        final int total = productMapper.queryCountByKeywords(s);
         handleCurrentPageAndLimit(model, page);
         handleTotalPages(model, total);
         return "prod/query.html";
