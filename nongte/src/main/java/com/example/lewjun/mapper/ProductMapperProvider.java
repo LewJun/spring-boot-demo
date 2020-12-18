@@ -4,6 +4,30 @@ import com.example.lewjun.domain.vo.ProductQueryParamVO;
 import org.apache.ibatis.jdbc.SQL;
 
 public class ProductMapperProvider {
+    public String queryCountByRegionCode(
+            final Integer province_code,
+            final Integer city_code,
+            final Integer area_code) {
+        return new SQL() {
+            {
+                SELECT("count(p.id) r");
+                FROM("product p");
+                WHERE("status=1");
+                if (province_code != null) {
+                    WHERE("province_code=#{province_code}");
+                    WHERE("show_prov=1");
+                } else if (city_code != null) {
+                    WHERE("city_code=#{city_code}");
+                    WHERE("show_city=1");
+                } else if (area_code != null) {
+                    WHERE("area_code=#{area_code}");
+                    WHERE("show_area=1");
+                } else {
+                }
+                LIMIT(1);
+            }
+        }.toString();
+    }
 
     public String queryByRegionCode(
             final Integer province_code,
@@ -29,9 +53,13 @@ public class ProductMapperProvider {
                     orderSql = "level_area asc";
                 } else {
                 }
+
                 if (orderSql != null && orderSql.length() > 0) {
                     ORDER_BY(orderSql);
                 }
+
+                LIMIT("#{limit}");
+                OFFSET("#{offset}");
             }
         }.toString();
     }
@@ -159,7 +187,7 @@ public class ProductMapperProvider {
         }.toString();
     }
 
-     public String queryCountByKeywords(final String keywords) {
+    public String queryCountByKeywords(final String keywords) {
         String likeSql = "";
         if (keywords != null && keywords.trim().length() > 0) {
             likeSql = "like concat('%', '" + keywords + "','%')";

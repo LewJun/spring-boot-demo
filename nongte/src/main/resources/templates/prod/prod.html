@@ -88,15 +88,18 @@
         for(region in regions![]){
         %>
         <span>
-            <a class="area text-dec-none" data-code="${region.code}" title="${region.name}"
-               href="javascript:void(0)">${region.name}</a>
+            <a class="text-dec-none" href="prod/${path}/${region.code}?cityCode=${code}&cityName=${regionTitle}"
+                 title="${region.name}">${region.name}</a></span>
         </span>
         <%}%>
         <%} else {%>
         <%
         for(region in regions![]){
         %>
-        <span><a class="text-dec-none" href="prod/${path}/${region.code}/${region.name}" title="${region.name}">${region.name}</a></span>
+        <span>
+            <a class="text-dec-none" href="prod/${path}/${region.code}/${region.name}"
+               title="${region.name}">${region.name}</a>
+        </span>
         <%}%>
         <%}%>
     </div>
@@ -125,6 +128,11 @@
         </div>
         <%}%>
     </div>
+    <!-- 分页容器： 显示分页按钮-->
+    <div class="col-lg-12">
+        <!-- 注意:3版本的分页容器标签是<ul>，2版本的容器标签是<div> -->
+        <ul id="paginator"></ul>
+    </div>
 </div>
 <!-- /container -->
 <footer>
@@ -143,6 +151,16 @@
 <script src="js/jquery.mloading.js"></script>
 <link href="css/jquery.mloading.css" rel="stylesheet">
 
-<script src="js/prod/prod.js"></script>
+<script src="js/bootstrap-paginator.min.js"></script>
+<script>
+var currentPage = ${currentPage}
+var totalPages = ${totalPages}
+var limit = ${limit}
+var url = "prod/${regionType}/${code}/${regionTitle}?page=";
+if('${path}' == 'area') {
+    url = "prod/area/${areaCode}?cityCode=${code}&cityName=${regionTitle}&page=";
+}
+</script>
+<script src="js/paginatorUtil.js"></script>
 </body>
 </html>

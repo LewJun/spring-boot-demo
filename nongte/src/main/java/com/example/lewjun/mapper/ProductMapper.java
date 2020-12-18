@@ -18,7 +18,16 @@ public interface ProductMapper {
     List<ProductSearchResult> queryByRegionCode(
             @Param("province_code") Integer province_code,
             @Param("city_code") Integer city_code,
-            @Param("area_code") Integer area_code);
+            @Param("area_code") Integer area_code,
+            @Param("limit") Integer limit,
+            @Param("offset") Integer offset
+            );
+
+
+    @SelectProvider(type = ProductMapperProvider.class, method = "queryCountByRegionCode")
+    int queryCountByRegionCode(@Param("province_code") Integer province_code,
+                               @Param("city_code") Integer city_code,
+                               @Param("area_code") Integer area_code);
 
     @SelectProvider(type = ProductMapperProvider.class, method = "queryByConditions")
     List<ProductListQueryResult> queryByConditions(ProductQueryParamVO vo);
