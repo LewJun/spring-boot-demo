@@ -5,10 +5,9 @@ bootstrapMajorVersion: 3, //如果是bootstrap3版本需要加此标识，并且
 currentPage: currentPage, //当前页数
 totalPages: totalPages, //总页数
 numberOfPages: limit, //每页记录数
-alignment: 'center',
 pageUrl: function(type, page, current) {
 if (page != currentPage) {
-return "prod/search?s="+s+"&page="+page;
+return url + page;
 }
 },
 shouldShowPage: function (type, page, current) {
