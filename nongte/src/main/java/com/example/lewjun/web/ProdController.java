@@ -181,11 +181,13 @@ public class ProdController {
     @GetMapping("/search")
     public String search(final Model model, @RequestParam("s") final String s,
                          @RequestParam(name = "page", required = false, defaultValue = "1") final Integer page) {
-        model.addAttribute("prods", productMapper.queryByKeywords(s, limit, getOffset(page)));
-        model.addAttribute("s", s);
-        final int total = productMapper.queryCountByKeywords(s);
-        handleCurrentPageAndLimit(model, page);
-        handleTotalPages(model, total);
+        if (s != null && s.trim().length() > 0) {
+            model.addAttribute("prods", productMapper.queryByKeywords(s, limit, getOffset(page)));
+            model.addAttribute("s", s);
+            final int total = productMapper.queryCountByKeywords(s);
+            handleCurrentPageAndLimit(model, page);
+            handleTotalPages(model, total);
+        }
         return "prod/query.html";
     }
 
