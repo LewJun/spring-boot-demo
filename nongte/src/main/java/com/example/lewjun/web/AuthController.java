@@ -1,6 +1,9 @@
 package com.example.lewjun.web;
 
 import com.example.lewjun.domain.LoginForm;
+import com.example.lewjun.mapper.SysUserMapper;
+import org.mindrot.jbcrypt.BCrypt;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +14,14 @@ import javax.servlet.http.HttpSession;
 
 @Controller
 public class AuthController {
+
+    private final SysUserMapper sysUserMapper;
+
+    @Autowired
+    public AuthController(final SysUserMapper sysUserMapper) {
+        this.sysUserMapper = sysUserMapper;
+    }
+
     @GetMapping("/signin")
     public String signin(final HttpServletRequest request) {
         final HttpSession session = request.getSession(false);
@@ -30,15 +41,16 @@ public class AuthController {
 
     @PostMapping("/login")
     public String login(final HttpServletRequest request, final Model model, final LoginForm loginForm) {
-        final HttpSession session = request.getSession();
         final String username = loginForm.getUsername();
-        if ("admin".equals(username) && "admin123password".equals(loginForm.getPassword())) {
-            session.setAttribute("loginUser", username);
+
+        final String pwd = sysUserMapper.findByUsername(username);
+        if (BCrypt.checkpw(loginForm.getPassword() + loginForm.getUsername(), pwd)) {
+            request.getSession().setAttribute("loginUser", username);
             return "redirect:prod/list";
-        } else {
-            model.addAttribute("err", "用户名或密码错误");
-            model.addAttribute("loginForm", loginForm);
-            return "signin.html";
         }
+
+        model.addAttribute("err", "用户名或密码错误");
+        model.addAttribute("loginForm", loginForm);
+        return "signin.html";
     }
 }
