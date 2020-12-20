@@ -78,7 +78,11 @@ public class ProdController {
     }
 
     private void handleTotalPages(final Model model, final int total) {
-        final int totalPages = total > limit ? (total % limit == 0 ? total / limit : (total / limit) + 1) : 1;
+        int totalPages = 0;
+        if (total > 0) {
+            totalPages = total > limit ? (total % limit == 0 ? total / limit : (total / limit) + 1) : 1;
+        }
+
         model.addAttribute("totalPages", totalPages);
     }
 
