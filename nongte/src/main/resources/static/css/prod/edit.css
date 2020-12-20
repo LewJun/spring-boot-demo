@@ -1,0 +1,27 @@
+body {
+background: none !important;
+}
+.pic-container {
+display: inline-block;
+position: relative;
+width: 30%;
+}
+
+.pic_x {
+display: inline-block;
+position: absolute;
+top: 2px;
+right: 2px;
+color: #b92c28;
+background: #eeeeee;
+padding: 0 5px;
+}
+
+.pic_x:hover {
+    cursor: pointer;
+    border: 1px solid #b92c28;
+}
+
+#region-select-box select {
+margin-right: 3px;
+}

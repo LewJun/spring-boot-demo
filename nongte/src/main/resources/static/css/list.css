@@ -1,3 +1,6 @@
+body {
+background: none !important;
+}
 select {
 margin-right:3px;
 }
