@@ -10,3 +10,8 @@ document.body.appendChild(a);
 a.click();
 }
 });
+
+function submitForm() {
+if(document.getElementById("s").value) return true;
+return false;
+}
