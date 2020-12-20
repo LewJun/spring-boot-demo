@@ -137,7 +137,7 @@
         <%}%>
     </div>
     <!-- 分页容器： 显示分页按钮-->
-    <div class="col-lg-12">
+    <div align="center" class="col-lg-12">
         <!-- 注意:3版本的分页容器标签是<ul>，2版本的容器标签是<div> -->
         <ul id="paginator"></ul>
     </div>
@@ -169,6 +169,7 @@ var areaCode = "${areaCode!''}"
 if('${path}' == 'area' && areaCode != '') {
     url = "prod/area/"+areaCode+"?cityCode=${code}&cityName=${regionTitle}&page=";
 }
+
 
 </script>
 <script src="js/paginatorUtil.js"></script>
