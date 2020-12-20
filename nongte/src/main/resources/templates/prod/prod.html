@@ -120,7 +120,7 @@
         %>
         <div class="col-sm-6 col-md-3">
             <div class="thumbnail">
-                <a class="clearfix text-dec-none" href="prod/detail/${prod.id}">
+                <a class="clearfix text-dec-none" href="prod/detail/${prod.id}" target="prod_detail_${prod.id}">
                     <div class="box">
                         <img alt="${prod.title}" src="file?filename=${prod.pic_url}"/>
                     </div>
@@ -169,6 +169,7 @@ var areaCode = "${areaCode!''}"
 if('${path}' == 'area' && areaCode != '') {
     url = "prod/area/"+areaCode+"?cityCode=${code}&cityName=${regionTitle}&page=";
 }
+
 
 
 
