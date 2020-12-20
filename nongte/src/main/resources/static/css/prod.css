@@ -13,7 +13,7 @@ h3 {
 }
 
 .prod-title {
-  color: #536A8F;
+  color: #1373e2;
   font-weight: 600;
 }
 
@@ -53,7 +53,7 @@ h3 {
   height: 100%;
 }
 .thumbnail:hover {
-box-shadow: 0 0 0 2px #FFC900;
+box-shadow: 0 0 0 2px #ff6330;
 }
 
 .thumbnail .caption {
