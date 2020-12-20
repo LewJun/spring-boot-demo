@@ -12,3 +12,7 @@ CREATE or replace TABLE `sys_user` (
 INSERT INTO `sys_user` (`id`, `username`, `password`, `status`)
 VALUES
 	(1, 'admin', '$2a$10$0HYHyrtZV86J4orePe6x0u8qL95WVWZe4pk5sxeZPM3RiZUXGuisi', 1);
+
+alter table product
+modify column `desc` VARCHAR(48) not null default '';
+
