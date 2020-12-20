@@ -203,7 +203,7 @@
             <div class="col-sm-10">
                 <label class="radio-inline">
                     <%if (prod.db == 1) {%>
-                    <input checked name="db" type="radio" value="1">
+                    <input checked="checked" name="db" type="radio" value="1">
                     <%} else {%>
                     <input name="db" type="radio" value="1">
                     <%}%>
@@ -212,7 +212,7 @@
 
                 <label class="radio-inline">
                     <%if (prod.db == 2) {%>
-                    <input checked name="db" type="radio" value="2">
+                    <input checked="checked" name="db" type="radio" value="2">
                     <%} else {%>
                     <input name="db" type="radio" value="2">
                     <%}%>
@@ -221,7 +221,7 @@
 
                 <label class="radio-inline">
                     <%if (prod.db == 3) {%>
-                    <input checked name="db" type="radio" value="3">
+                    <input checked="checked" name="db" type="radio" value="3">
                     <%} else {%>
                     <input name="db" type="radio" value="3">
                     <%}%>
@@ -230,7 +230,7 @@
 
                 <label class="radio-inline">
                     <%if (prod.db == 5) {%>
-                    <input checked name="db" type="radio" value="5">
+                    <input checked="checked" name="db" type="radio" value="5">
                     <%} else {%>
                     <input name="db" type="radio" value="5">
                     <%}%>
@@ -273,14 +273,11 @@
 <script src="js/wangEditor.min.js"></script>
 <script src="js/jquery.mloading.js"></script>
 <link href="css/jquery.mloading.css" rel="stylesheet">
-<script>
-var jAreaObj = {
+<script>var jAreaObj = {
 prov: "${prod.province_code!''}",
 city: "${prod.city_code!''}",
 area: "${prod.area_code!''}"
 }
-
-
 </script>
 <script src="js/prod/edit.js">
 </script>
