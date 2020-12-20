@@ -80,18 +80,16 @@
 </nav>
 
 <div class="container">
-    <form action="prod/search" method="get"
-          onsubmit="return submitForm()"
-          style="width: 40%; margin: 30px auto 30px;">
+    <div style="width: 40%; margin: 30px auto 30px;">
         <div class="input-group input-group-lg">
             <i class="icon-search i-search"></i>
             <input autocomplete="off" class="form-control keywords" id="s" name="s">
             <span class="input-group-btn">
-                <button class="btn btn-search" type="submit">搜索</button>
+                <a class="btn btn-search" href="javascript:;" id="search">搜索</a>
             </span>
         </div>
         <!-- /input-group -->
-    </form>
+    </div>
     <div class="mt-10 region">
         <a href="prod/province/110000/北京">
             <span class="prov">北京</span>

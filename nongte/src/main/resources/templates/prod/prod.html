@@ -101,6 +101,17 @@
         </span>
         <%}%>
         <%} else {%>
+        <%if(regionType=="province") {%>
+        <%
+        for(region in regions![]){
+        %>
+        <span>
+            <a class="text-dec-none" href="prod/${path}/${region.code}/${region.name}"
+               target="region_city${region.code}"
+               title="${region.name}">${region.name}</a>
+        </span>
+        <%}%>
+        <%} else {%>
         <%
         for(region in regions![]){
         %>
@@ -108,6 +119,7 @@
             <a class="text-dec-none" href="prod/${path}/${region.code}/${region.name}"
                title="${region.name}">${region.name}</a>
         </span>
+        <%}%>
         <%}%>
         <%}%>
     </div>
@@ -169,10 +181,6 @@ var areaCode = "${areaCode!''}"
 if('${path}' == 'area' && areaCode != '') {
     url = "prod/area/"+areaCode+"?cityCode=${code}&cityName=${regionTitle}&page=";
 }
-
-
-
-
 </script>
 <script src="js/paginatorUtil.js"></script>
 </body>

@@ -180,7 +180,8 @@ function uploadForm(frm) {
         },
         success: function(result) {
             localStorage && localStorage.setItem('prod-edit', Date.now());
-            history.go(-1);
+            // history.go(-1);
+            window.close();
         },
         error: function(err) {
             alert(err);
