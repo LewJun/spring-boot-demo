@@ -35,7 +35,7 @@ public interface ProductMapper {
     @SelectProvider(type = ProductMapperProvider.class, method = "queryCountByConditions")
     int queryCountByConditions(ProductQueryParamVO vo);
 
-    @Select("select p.title, p.html, p.html2 from product p where p.id=#{id} limit 1")
+    @Select("select p.title, p.html, p.html2, p.province_name, p.city_name, p.area_name from product p where p.id=#{id} limit 1")
     ProductDetailResult queryDetailById(Integer id);
 
     @Update("update product set status=#{status}, update_time=now() where id=#{id}")

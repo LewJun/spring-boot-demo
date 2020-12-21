@@ -12,4 +12,10 @@ public class ProductDetailResult implements Serializable {
     private String html;
 
     private String html2;
+
+    private String province_name;
+
+    private String city_name;
+
+    private String area_name;
 }

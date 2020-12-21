@@ -10,7 +10,7 @@
     <meta content="" name="author"/>
     <link href="images/favicon.ico" rel="icon"/>
 
-    <title>${detail.title!'标题不存在'}</title>
+    <title>${detail.title!'-'}</title>
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet"/>
@@ -35,16 +35,8 @@
     <script src="respond.min.js"></script>
     <![endif]-->
     <link href="css/style.css" rel="stylesheet"/>
+    <link href="css/prod/detail.css" rel="stylesheet"/>
     <link href="css/wang-editor.css" rel="stylesheet">
-<style>
-.thumbnail {
-min-height: 400px;
-}
-.col-md-3 {
-width: 24.5%;
-margin-left: 0.5%;
-}
-</style>
 </head>
 
 <body>
@@ -87,6 +79,23 @@ margin-left: 0.5%;
 </nav>
 
 <div class="container">
+    <p class="pos">
+        <%
+        var province_name = detail.province_name !'';
+        var city_name = detail.city_name !'';
+        var area_name = detail.area_name !'';
+        %>
+        当前位置：
+        <%if(province_name != '') {%>
+            <span>${province_name}</span>
+        <%}%>
+        <%if(city_name != '') {%>
+        <span> > ${city_name}</span>
+        <%}%>
+        <%if(area_name != '') {%>
+        <span> > ${area_name}</span>
+        <%}%>
+    </p>
     <div class="row">
         <div class="thumbnail col-md-9 col-xs-12">
             ${detail.html!''}

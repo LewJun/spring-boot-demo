@@ -1,0 +1,13 @@
+.thumbnail {
+min-height: 400px;
+}
+.col-md-9 {
+width: 70%;
+}
+.col-md-3 {
+width: 29.5%;
+margin-left: 0.5%;
+}
+.pos {
+margin-left: -15px;
+}
