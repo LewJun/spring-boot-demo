@@ -106,6 +106,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fbe397', end
 
 body > .container {
 margin-top: 60px;
+margin-bottom: 120px;
 }
 .text-dec-none {
 text-decoration: none !important;
@@ -118,4 +119,14 @@ border-bottom-left-radius: 6px !important;
 
 .btn-search {
 background:#FFC900;color:white;
+}
+
+footer ul, footer li {
+display: inline-block;
+padding: 0;
+list-style: none
+}
+
+footer a {
+color:white;
 }

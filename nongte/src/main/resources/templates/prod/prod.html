@@ -35,7 +35,7 @@
     <script src="respond.min.js"></script>
     <![endif]-->
     <link href="css/style.css" rel="stylesheet"/>
-    <link href="css/prod.css" rel="stylesheet"/>
+    <link href="css/prod/prod.css" rel="stylesheet"/>
 </head>
 
 <body>
@@ -155,11 +155,20 @@
     </div>
 </div>
 <!-- /container -->
+
 <footer>
     <center>
+        <ul>
+            <li><a href="about">关于我们</a></li>
+            <li><a href="declare" target="declare">网站申明</a></li>
+            <li><a href="about">建议</a></li>
+            <li><a href="about">找错</a></li>
+        </ul>
         <p>Copyright © nongte.wang (2020 - present) all right reserved</p>
+        <p>备案信息</p>
     </center>
 </footer>
+
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
@@ -181,6 +190,8 @@ var areaCode = "${areaCode!''}"
 if('${path}' == 'area' && areaCode != '') {
     url = "prod/area/"+areaCode+"?cityCode=${code}&cityName=${regionTitle}&page=";
 }
+
+
 </script>
 <script src="js/paginatorUtil.js"></script>
 </body>

@@ -11,8 +11,8 @@ beetl:
   suffix: html
   templatesPath: templates
 
-#uploadPath: /Users/huiye/Documents/upload/
-uploadPath: d:/upload/
+uploadPath: /Users/huiye/Documents/upload/
+#uploadPath: d:/upload/
 
 # 设置文件上传大小
 spring:
@@ -25,7 +25,7 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://127.0.0.1:3306/nongte?useUnicode=true&characterEncoding=UTF-8
     username: root
-    password: root
+    password: Root123456
 
 mybatis:
   # 扫描xml的位置
