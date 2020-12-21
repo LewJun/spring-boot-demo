@@ -20,9 +20,9 @@ function initAreaSelector() {
     return area;
 }
 
-function initWangEditor() {
+function initWangEditor(ele, placeholder) {
     var E = window.wangEditor
-    var editor = new E('#product-content')
+    var editor = new E(ele)
     // 或者 const editor = new E( document.getElementById('div1') )
     // 设置编辑区域高度为 500px
     // editor.config.height = 500
@@ -39,6 +39,11 @@ function initWangEditor() {
     editor.config.uploadImgMaxSize = 2 * 1024 * 1024 // 2M
     // 限制图片类型
     editor.config.uploadImgAccept = ['jpg', 'jpeg', 'png', 'gif', 'bmp']
+
+    editor.config.placeholder = placeholder
+
+    editor.config.focus = false
+
 
     editor.config.uploadImgHooks = {
         // 图片上传并返回了结果，但图片插入时出错了
@@ -73,7 +78,8 @@ function initWangEditor() {
 }
 
 var selector = initAreaSelector();
-var wangEditor = initWangEditor();
+var prodHtmlWangEditor = initWangEditor('#prod-html', '请输入正文');
+var prodHtml2WangEditor = initWangEditor('#prod-html2', '请输入额外信息');
 
 function submitForm() {
 
@@ -115,7 +121,7 @@ function submitForm() {
         return;
     }
 
-    var html = wangEditor.txt.html();
+    var html = prodHtmlWangEditor.txt.html();
     if (!html) {
         alert("请输入正文");
         $('#product-content').focus();
@@ -129,7 +135,8 @@ function submitForm() {
         uploadPic(picFrm);
     } else {
         var frm = new FormData(document.getElementById("frm"))
-        frm.append("html", wangEditor.txt.html());
+        frm.append("html", prodHtmlWangEditor.txt.html());
+        frm.append("html2", prodHtml2WangEditor.txt.html());
         uploadForm(frm);
     }
 }
@@ -147,7 +154,8 @@ function uploadPic(picFrm) {
         },
         success: function(result) {
             var frm = new FormData(document.getElementById("frm"))
-            frm.append("html", wangEditor.txt.html());
+            frm.append("html", prodHtmlWangEditor.txt.html());
+            frm.append("html2", prodHtml2WangEditor.txt.html());
             frm.delete("pic");
             frm.append("pic_url", result);
             uploadForm(frm);
@@ -178,10 +186,10 @@ function uploadForm(frm) {
             // 显示loading组件
             $('body').mLoading("show");
         },
-        success: function(result) {
+        success: function(id) {
             localStorage && localStorage.setItem('prod-edit', Date.now());
             // history.go(-1);
-            window.close();
+            location.replace('prod/detail/' + id);
         },
         error: function(err) {
             alert(err);

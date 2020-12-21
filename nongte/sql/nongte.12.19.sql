@@ -1,6 +1,6 @@
 use nongte;
 
-CREATE or replace TABLE `sys_user` (
+CREATE TABLE `sys_user` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `username` varchar(32) NOT NULL DEFAULT '',
   `password` char(60) NOT NULL DEFAULT '',
@@ -16,3 +16,5 @@ VALUES
 alter table product
 modify column `desc` VARCHAR(48) not null default '';
 
+
+ALTER TABLE product ADD COLUMN html2 TEXT;

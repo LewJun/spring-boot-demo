@@ -31,6 +31,7 @@ public class Product implements Serializable {
     private String keywords;
 
     private String html;
+    private String html2;
 
     private Integer province_code;
 

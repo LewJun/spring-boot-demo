@@ -209,7 +209,7 @@ public class ProdController {
 
     @PostMapping("/save")
     @ResponseBody
-    public String save(final Product product) {
+    public Integer save(final Product product) {
         if (product.getCity_code() == null) {
             product.setCity_code(0);
         }
@@ -235,7 +235,7 @@ public class ProdController {
         } else {
             productMapper.update(product);
         }
-        return OK;
+        return product.getId();
     }
 
     @PostMapping("/changeStatus")

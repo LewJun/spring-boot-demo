@@ -10,4 +10,6 @@ public class ProductDetailResult implements Serializable {
     private String title;
 
     private String html;
+
+    private String html2;
 }

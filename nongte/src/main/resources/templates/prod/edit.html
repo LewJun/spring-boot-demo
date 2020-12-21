@@ -241,12 +241,18 @@
         </div>
 
         <div class="form-group">
-            <label class="col-sm-2 control-label" for="product-content">正文</label>
+            <label class="col-sm-2 control-label" for="prod-html">正文</label>
             <div class="col-sm-10">
-                <div id="product-content">${prod.html!''}</div>
+                <div id="prod-html">${prod.html!''}</div>
             </div>
         </div>
 
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="prod-html2">额外信息</label>
+            <div class="col-sm-10">
+                <div id="prod-html2">${prod.html2!''}</div>
+            </div>
+        </div>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
                 <a class="btn btn-primary" onclick="submitForm()">提 交</a>
