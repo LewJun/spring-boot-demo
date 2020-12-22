@@ -45,7 +45,8 @@ public interface ProductMapper {
     @Update("update product set status=#{status}, update_time=now() where id=#{id}")
     int updateStatus(Integer id, Integer status);
 
-    @Select("select p.id, p.title, p.desc, p.province_code, p.city_code, p.area_code, p.html, p.pic_url, p.db, p.keywords, " +
+    @Select("select p.id, p.title, p.desc, p.province_code, p.city_code, p.area_code, p.html, p.html2, " +
+            "p.pic_url, p.db, p.keywords, " +
             "p.show_prov, p.show_city, p.show_area, " +
             "p.level_prov, p.level_city, p.level_area " +
             "from product p where p.id=#{id} limit 1")
