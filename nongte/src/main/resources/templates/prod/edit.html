@@ -10,7 +10,10 @@
     <meta content="" name="author"/>
     <link href="images/favicon.ico" rel="icon"/>
 
-    <title>创建产品</title>
+    <%
+    var title = prod.title!'';
+    %>
+    <title>${title == '' ? '创建产品' : '修改产品'}</title>
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet"/>
@@ -293,7 +296,6 @@ prov: "${prod.province_code!''}",
 city: "${prod.city_code!''}",
 area: "${prod.area_code!''}"
 }
-
 
 </script>
 <script src="js/prod/edit.js">
