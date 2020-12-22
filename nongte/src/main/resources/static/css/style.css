@@ -31,12 +31,6 @@ background: #FFC900 !important;
   display: block;
 }
 
-.clearfix:after {
-  clear: both;
-  display: block;
-  content: ' ';
-}
-
 h1.region-title,
 h1.tc-intro {
   border: 1px solid;
