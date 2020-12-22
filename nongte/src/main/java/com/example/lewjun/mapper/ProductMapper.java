@@ -21,7 +21,7 @@ public interface ProductMapper {
             @Param("area_code") Integer area_code,
             @Param("limit") Integer limit,
             @Param("offset") Integer offset
-            );
+    );
 
 
     @SelectProvider(type = ProductMapperProvider.class, method = "queryCountByRegionCode")
@@ -35,7 +35,11 @@ public interface ProductMapper {
     @SelectProvider(type = ProductMapperProvider.class, method = "queryCountByConditions")
     int queryCountByConditions(ProductQueryParamVO vo);
 
-    @Select("select p.title, p.html, p.html2, p.province_name, p.city_name, p.area_name from product p where p.id=#{id} limit 1")
+    @Select("select p.title, p.html, p.html2, " +
+            "p.province_code, p.province_name, " +
+            "p.city_code, p.city_name, " +
+            "p.area_code, p.area_name " +
+            "from product p where p.id=#{id} limit 1")
     ProductDetailResult queryDetailById(Integer id);
 
     @Update("update product set status=#{status}, update_time=now() where id=#{id}")

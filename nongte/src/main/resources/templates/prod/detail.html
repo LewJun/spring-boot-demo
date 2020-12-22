@@ -39,7 +39,7 @@
     <link href="css/wang-editor.css" rel="stylesheet">
 </head>
 
-<body>
+<body onload="onload()">
 <!-- Fixed navbar -->
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">
@@ -81,19 +81,24 @@
 <div class="container">
     <p class="pos">
         <%
+        var province_code = detail.province_code !'';
         var province_name = detail.province_name !'';
+
+        var city_code = detail.city_code !'';
         var city_name = detail.city_name !'';
+
+        var area_code = detail.area_code !'';
         var area_name = detail.area_name !'';
         %>
         当前位置：
         <%if(province_name != '') {%>
-        <span>${province_name}</span>
+        <a href="prod/province/${province_code}/${province_name}">${province_name}</a>
         <%}%>
         <%if(city_name != '') {%>
-        <span> > ${city_name}</span>
+        > <a href="prod/city/${city_code}/${city_name}"> ${city_name}</a>
         <%}%>
         <%if(area_name != '') {%>
-        <span> > ${area_name}</span>
+        > <a href="prod/area/${area_code}?cityCode=${city_code}&cityName=${city_name}"> ${area_name}</a>
         <%}%>
     </p>
     <div class="row">
@@ -128,6 +133,27 @@
 <script src="js/bootstrap.min.js"></script>
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script src="js/ie10-viewport-bug-workaround.js"></script>
+<script>
+    function onload() {
+    console.log(111)
+        var thumbnailMinHeight = 600;
+        var thumbnail0 = $($(".thumbnail").get(0));
+        var thumbnail1 = $($(".thumbnail").get(1));
+        if (thumbnail0.height() > thumbnailMinHeight) {
+            thumbnailMinHeight = thumbnail0.height()
+        }
 
+        if (thumbnail1.height() > thumbnailMinHeight) {
+            thumbnailMinHeight = thumbnail1.height()
+        }
+
+        thumbnail0.height(thumbnailMinHeight)
+        thumbnail1.height(thumbnailMinHeight)
+
+    }
+
+
+
+</script>
 </body>
 </html>
