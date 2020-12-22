@@ -94,7 +94,9 @@
         <%if(province_name != '') {%>
         <a href="prod/province/${province_code}/${province_name}">${province_name}</a>
         <%}%>
-        <%if(city_name != '') {%>
+        <%if(city_name != '' && (province_code != 110000
+        && province_code != 120000
+        && province_code != 500000 && province_code != 310000)) {%>
         > <a href="prod/city/${city_code}/${city_name}"> ${city_name}</a>
         <%}%>
         <%if(area_name != '') {%>
@@ -136,7 +138,7 @@
 <script>
     function onload() {
     console.log(111)
-        var thumbnailMinHeight = 600;
+        var thumbnailMinHeight = 400;
         var thumbnail0 = $($(".thumbnail").get(0));
         var thumbnail1 = $($(".thumbnail").get(1));
         if (thumbnail0.height() > thumbnailMinHeight) {
@@ -149,10 +151,7 @@
 
         thumbnail0.height(thumbnailMinHeight)
         thumbnail1.height(thumbnailMinHeight)
-
     }
-
-
 
 </script>
 </body>
