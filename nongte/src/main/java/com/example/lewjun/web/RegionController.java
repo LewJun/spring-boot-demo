@@ -25,7 +25,7 @@ public class RegionController {
 
     @GetMapping("/select")
     public String getSelect() {
-        Map<String, Object> map = new HashMap(3);
+        Map<String, Object> map = new HashMap<>(3);
         List<Region> provs = regionMapper.queryAllProvs();
 
         map.put("prov", provs);

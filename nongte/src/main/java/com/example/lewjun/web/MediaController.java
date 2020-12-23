@@ -17,6 +17,7 @@ import java.util.*;
 
 @Slf4j
 @RestController
+@RequestMapping("/medias")
 public class MediaController {
 
     @Value("${uploadPath}")
@@ -34,7 +35,7 @@ public class MediaController {
         if (file == null || file.isEmpty()) {
             return "{\"errno\": -1, \"msg\": \"文件不存在\"}";
         }
-        return "{\"errno\": 0, \"data\":[\"file?filename=" + getPathName(transferTo(file)) + "\"]}";
+        return "{\"errno\": 0, \"data\":[\"medias/file?filename=" + getPathName(transferTo(file)) + "\"]}";
     }
 
     @PostMapping("/uploadFiles")
@@ -98,7 +99,7 @@ public class MediaController {
     }
 
     /**
-     * <img src="file?filename=xxx.jpg">
+     * <img src="medias/file?filename=xxx.jpg">
      *
      * @param response
      * @param filename

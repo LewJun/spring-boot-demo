@@ -18,6 +18,10 @@ import java.io.IOException;
                 "/prod/create",
                 "/prod/changeStatus",
                 "/regions/select",
+                "/medias/uploadFile",
+                "/medias/uploadFiles",
+                "/medias/upload",
+                "/medias/wangEditor/uploadFile",
         }
 )
 public class LoginFilter implements Filter {

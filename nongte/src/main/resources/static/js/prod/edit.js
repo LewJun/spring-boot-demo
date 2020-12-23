@@ -29,7 +29,7 @@ function initWangEditor(ele, placeholder) {
     // 编辑器 z-index 默认为 10000，可以自行调整
     editor.config.zIndex = 1;
     // 配置 server 接口地址
-    editor.config.uploadImgServer = 'wangEditor/uploadFile'
+    editor.config.uploadImgServer = 'medias/wangEditor/uploadFile'
     editor.config.uploadFileName = 'file'
     editor.config.uploadImgTimeout = 5 * 1000
     editor.config.uploadImgMaxLength = 1 // 一次最多上传 5 个图片
@@ -143,7 +143,7 @@ function submitForm() {
 
 function uploadPic(picFrm) {
     $.ajax({
-        url: "uploadFile",
+        url: "medias/uploadFile",
         type: "post",
         data: picFrm,
         processData: false,
