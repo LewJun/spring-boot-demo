@@ -12,7 +12,7 @@ $(function() {
         pageSize: 5, //单页记录数
         pageList: [5, 10, 20, 30],//可选择单页记数
         queryParams: function(params) {//上传服务器的参数
-            var areaObj = areaSelector.getAreaObj();
+            var areaObj = (areaSelector && areaSelector.getAreaObj()) || {};
             var temp = {
                 offset :params.offset + 0,// SQL语句起始索引
                 pageNumber : params.limit  // 每页显示数量
@@ -192,15 +192,6 @@ function changeStatus(id, status) {
         }
     });
 }
-
-function initAreaSelector() {
-    var area = $('#region-select-box').JAreaSelect({
-      prov: '',
-    });
-    return area;
-}
-
-var areaSelector = initAreaSelector();
 
 /**
 * 页面加载完成后，执行

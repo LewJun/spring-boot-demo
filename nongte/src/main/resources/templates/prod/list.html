@@ -180,10 +180,22 @@
 <!-- Latest compiled and minified Locales -->
 <script src="js/bootstrap-table-zh-CN.min.js"></script>
 
-<script src="js/j-area-data.js"></script>
-<script src="js/j-area-select.js"></script>
-<script src="js/prod/list.js"></script>
 <script src="js/jquery.mloading.js"></script>
 <link href="css/jquery.mloading.css" rel="stylesheet">
+
+<script src="js/prod/list.js"></script>
+
+<script src="js/j-area-data.js"></script>
+<script src="js/j-area-select.js"></script>
+<script>
+function initAreaSelector() {
+    var area = $('#region-select-box').JAreaSelect({
+      prov: '',
+    });
+    return area;
+}
+var areaSelector = initAreaSelector();
+</script>
+
 </body>
 </html>

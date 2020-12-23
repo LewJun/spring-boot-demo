@@ -16,7 +16,8 @@ import java.io.IOException;
                 "/prod/delete/*",
                 "/prod/save",
                 "/prod/create",
-                "/prod/changeStatus"
+                "/prod/changeStatus",
+                "/regions/select",
         }
 )
 public class LoginFilter implements Filter {

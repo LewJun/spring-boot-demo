@@ -38,14 +38,14 @@
       );
       obj.province.append('<option value="">'+chooseTxt+'</option>');
       //加载所有省级
-      $.each(areaData.prov, function (id, name) {
-        if (id == options.prov) {
+      $.each(areaData.prov, function (i, item) {
+        if (item.code == options.prov) {
           obj.province.append(
-            '<option value="' + id + '" selected>' + name + '</option>'
+            '<option value="' + item.code + '" selected>' + item.name + '</option>'
           );
         } else {
           obj.province.append(
-            '<option value="' + id + '">' + name + '</option>'
+            '<option value="' + item.code + '">' + item.name + '</option>'
           );
         }
       });
@@ -75,13 +75,13 @@
           );
           obj.city.append('<option value="">'+chooseTxt+'</option>');
           $.each(areaData.city[pid], function (i, item) {
-            if (item.id == options.city) {
+            if (item.code == options.city) {
               obj.city.append(
-                '<option value="' + item.id + '" selected>' + item.name + '</option>'
+                '<option value="' + item.code + '" selected>' + item.name + '</option>'
               );
             } else {
               obj.city.append(
-                '<option value="' + item.id + '">' + item.name + '</option>'
+                '<option value="' + item.code + '">' + item.name + '</option>'
               );
             }
           });
@@ -106,17 +106,17 @@
               );
               obj.area.append('<option value="">'+chooseTxt+'</option>');
               $.each(areaData.area[cid], function (i, item) {
-                if (item.id == options.area) {
+                if (item.code == options.area) {
                   obj.area.append(
                     '<option value="' +
-                      item.id +
+                      item.code +
                       '" selected>' +
                       item.name +
                       '</option>'
                   );
                 } else {
                   obj.area.append(
-                    '<option value="' + item.id + '">' + item.name + '</option>'
+                    '<option value="' + item.code + '">' + item.name + '</option>'
                   );
                 }
               });
