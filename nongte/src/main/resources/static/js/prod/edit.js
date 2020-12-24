@@ -199,3 +199,13 @@ function uploadForm(frm) {
         }
     });
 }
+
+$("#title").on('input propertychange', function() {
+    $('#prod-html-title').html($(this).val());
+});
+$("#prod-edit-next-title").on('input propertychange', function() {
+    $('#prod-next-title').html($(this).val());
+});
+$("#prod-edit-next-href").on('input propertychange', function() {
+    $('#prod-next').attr('href', $(this).val());
+});

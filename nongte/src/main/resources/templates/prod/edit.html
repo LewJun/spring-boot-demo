@@ -244,9 +244,45 @@
         </div>
 
         <div class="form-group">
+            <label class="col-sm-2 control-label">下一篇信息</label>
+            <div class="col-sm-10">
+                <div class="row">
+                    <div class="col-sm-4 col-md-4">
+                        <input type="text" id="prod-edit-next-title" placeholder="下一篇标题" autocomplete="off" class="form-control match-rotation-input">
+                    </div>
+                    <div class="col-sm-8 col-md-8">
+                        <input type="text" id="prod-edit-next-href" placeholder="下一篇链接" autocomplete="off" class="form-control match-rotation-input">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
             <label class="col-sm-2 control-label" for="prod-html">正文</label>
             <div class="col-sm-10">
-                <div id="prod-html">${prod.html!''}</div>
+                <div id="prod-html">
+                    <%if(prod.id!=null && prod.id > 0) {%>
+                    ${prod.html!''}
+                    <%} else {%>
+                    <h2 id="prod-html-title" style="text-align: center; color: #f9963b">产品名称</h2>
+                    <hr />
+                    <p style="text-align: center">
+                        <img src="images/favicon.ico" style="max-width: 100%" alt="图片"/>
+                    </p>
+                    <p style="text-align: center"></p>
+                    <p style="text-indent: 2em; font-size: 16px">
+                        铺盖面叠合传统秘方，结合现代科学技术，在面条本身上做了彻底改变，因其加工方式独特，面片韧性十足，口感极佳，而面绍一样特色鲜明，或麻辣，或清淡，川味十足。并且营养丰富，百食不厌，除富含丰富的碳水化合物外，还含有无机盐和多种矿物质、氨基酸、葡萄糖、维生素与植物性蛋白质以及磷、铁、钙、锌等大量的微量元素，拒竞争对手的模仿于千里之外，确保投资者独享一方市场。
+                    </p>
+                    <p style="text-indent: 2em; font-size: 16px">
+                        所以在市场上铺盖面的经营始终火爆异常，顾客持续不断。甫一亮相，就在市场上掀起一波罕遇的热浪。以小额投资开店，轻松获得极高利润回报，缔造餐饮业内一大神话。终其原因还在于，同样的美味和同样的价格之上，铺盖面却有了不同的特点，新意盎然，感觉新颖，并且食用时口感味道皆佳，并不哗取宠，一样实实在在。
+                    </p>
+                    <br />
+                    <br />
+                    <br />
+                    <a id="prod-next" target="_blank"
+                       style="display: inline-block; width: 100%; font-size: 18px; font-weight:600; text-align:center;padding:10px;border:1px solid #cccccc;">下一篇：<span id="prod-next-title">下一篇标题和链接不要手动编辑</span></a>
+                    <%}%>
+                </div>
             </div>
         </div>
 
