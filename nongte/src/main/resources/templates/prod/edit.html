@@ -58,10 +58,8 @@
                 <li><a href="contact">新闻动态</a></li>
                 <li><a href="about">关于我们</a></li>
                 <%
-                if(loginUser == "") {
+                if(loginUser != "") {
                 %>
-                <li><a href="signin">登录</a></li>
-                <%} else {%>
                 <li class="dropdown">
                     <a aria-expanded="false" aria-haspopup="true"
                        class="dropdown-toggle"
@@ -248,10 +246,12 @@
             <div class="col-sm-10">
                 <div class="row">
                     <div class="col-sm-4 col-md-4">
-                        <input type="text" id="prod-edit-next-title" placeholder="下一篇标题" autocomplete="off" class="form-control match-rotation-input">
+                        <input autocomplete="off" class="form-control match-rotation-input" id="prod-edit-next-title" placeholder="下一篇标题"
+                               type="text">
                     </div>
                     <div class="col-sm-8 col-md-8">
-                        <input type="text" id="prod-edit-next-href" placeholder="下一篇链接" autocomplete="off" class="form-control match-rotation-input">
+                        <input autocomplete="off" class="form-control match-rotation-input" id="prod-edit-next-href" placeholder="下一篇链接"
+                               type="text">
                     </div>
                 </div>
             </div>
@@ -265,9 +265,9 @@
                     ${prod.html!''}
                     <%} else {%>
                     <h2 id="prod-html-title" style="text-align: center; color: #f9963b">产品名称</h2>
-                    <hr />
+                    <hr/>
                     <p style="text-align: center">
-                        <img src="images/favicon.ico" style="max-width: 100%" alt="图片"/>
+                        <img alt="图片" src="images/favicon.ico" style="max-width: 100%"/>
                     </p>
                     <p style="text-align: center"></p>
                     <p style="text-indent: 2em; font-size: 16px">
@@ -276,11 +276,12 @@
                     <p style="text-indent: 2em; font-size: 16px">
                         所以在市场上铺盖面的经营始终火爆异常，顾客持续不断。甫一亮相，就在市场上掀起一波罕遇的热浪。以小额投资开店，轻松获得极高利润回报，缔造餐饮业内一大神话。终其原因还在于，同样的美味和同样的价格之上，铺盖面却有了不同的特点，新意盎然，感觉新颖，并且食用时口感味道皆佳，并不哗取宠，一样实实在在。
                     </p>
-                    <br />
-                    <br />
-                    <br />
-                    <a id="prod-next" target="_blank"
-                       style="display: inline-block; width: 100%; font-size: 18px; font-weight:600; text-align:center;padding:10px;border:1px solid #cccccc;">下一篇：<span id="prod-next-title">下一篇标题和链接不要手动编辑</span></a>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <a id="prod-next" style="display: inline-block; width: 100%; font-size: 18px; font-weight:600; text-align:center;padding:10px;border:1px solid #cccccc;"
+                       target="_blank">下一篇：<span
+                            id="prod-next-title">下一篇标题和链接不要手动编辑</span></a>
                     <%}%>
                 </div>
             </div>
@@ -332,6 +333,7 @@ prov: "${prod.province_code!''}",
 city: "${prod.city_code!''}",
 area: "${prod.area_code!''}"
 }
+
 
 </script>
 <script src="js/prod/edit.js">
