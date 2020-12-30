@@ -56,6 +56,7 @@
                 <li><a href="#">首页</a></li>
                 <li><a href="prod/list">产品列表</a></li>
                 <li><a href="contact">新闻动态</a></li>
+                <li><a href="tougao">联系投稿</a></li>
                 <li><a href="about">关于我们</a></li>
                 <%
                 if(loginUser != "") {
@@ -246,11 +247,13 @@
             <div class="col-sm-10">
                 <div class="row">
                     <div class="col-sm-4 col-md-4">
-                        <input autocomplete="off" class="form-control match-rotation-input" id="prod-edit-next-title" placeholder="下一篇标题"
+                        <input autocomplete="off" class="form-control match-rotation-input" id="prod-edit-next-title"
+                               placeholder="下一篇标题"
                                type="text">
                     </div>
                     <div class="col-sm-8 col-md-8">
-                        <input autocomplete="off" class="form-control match-rotation-input" id="prod-edit-next-href" placeholder="下一篇链接"
+                        <input autocomplete="off" class="form-control match-rotation-input" id="prod-edit-next-href"
+                               placeholder="下一篇链接"
                                type="text">
                     </div>
                 </div>
@@ -279,7 +282,8 @@
                     <br/>
                     <br/>
                     <br/>
-                    <a id="prod-next" style="display: inline-block; width: 100%; font-size: 18px; font-weight:600; text-align:center;padding:10px;border:1px solid #cccccc;"
+                    <a id="prod-next"
+                       style="display: inline-block; width: 100%; font-size: 18px; font-weight:600; text-align:center;padding:10px;border:1px solid #cccccc;"
                        target="_blank">下一篇：<span
                             id="prod-next-title">下一篇标题和链接不要手动编辑</span></a>
                     <%}%>
@@ -333,7 +337,6 @@ prov: "${prod.province_code!''}",
 city: "${prod.city_code!''}",
 area: "${prod.area_code!''}"
 }
-
 
 </script>
 <script src="js/prod/edit.js">

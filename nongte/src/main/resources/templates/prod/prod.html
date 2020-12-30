@@ -55,6 +55,7 @@
                 <li><a href="prod/list">产品列表</a></li>
                 <%}%>
                 <li><a href="contact">新闻动态</a></li>
+                <li><a href="tougao">联系投稿</a></li>
                 <li><a href="about">关于我们</a></li>
                 <%
                 if(loginUser != "") {
@@ -188,8 +189,6 @@ var areaCode = "${areaCode!''}"
 if('${path}' == 'area' && areaCode != '') {
     url = "prod/area/"+areaCode+"?cityCode=${code}&cityName=${regionTitle}&page=";
 }
-
-
 
 </script>
 <script src="js/paginatorUtil.js"></script>
