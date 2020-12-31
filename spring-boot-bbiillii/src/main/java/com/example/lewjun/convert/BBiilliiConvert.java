@@ -126,7 +126,7 @@ public class BBiilliiConvert {
         if (!CollectionUtils.isEmpty(blvs)) {
             log.info("【blvs: {}】", blvs);
             for (final File blv : blvs) {
-                FileUtils.write(blvTxt, "file " + blv.getPath() + "\n", "utf-8", true);
+                FileUtils.write(blvTxt, "file '" + blv.getPath() + "'\n", "utf-8", true);
                 log.info("【blvTxt: {}】", blvTxt.getPath());
             }
 
@@ -151,9 +151,9 @@ public class BBiilliiConvert {
                     + doubleQuota
                     + videoPath
                     + separator
-                    + "blv.txt "
+                    + "blv.txt"
                     + doubleQuota
-                    + "-c copy "
+                    + " -c copy "
                     + doubleQuota
                     + biliconv.getPath()
                     + separator
