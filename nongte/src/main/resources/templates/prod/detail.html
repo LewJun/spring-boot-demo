@@ -6,8 +6,9 @@
     <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
     <meta content="width=device-width, initial-scale=1" name="viewport"/>
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
-    <meta content="" name="description"/>
-    <meta content="" name="author"/>
+    <meta content="本网站帮你快速了解全国各地农产品土特产及地域文化产物（小吃、美食等），提供全国各地农产品信息资讯。" name="description"/>
+    <meta content="本网站提供各地农产品、土特产信息。" name="keywords">
+
     <link href="images/favicon.ico" rel="icon"/>
 
     <title>${detail.title!'-'}</title>
@@ -55,12 +56,11 @@
                 <li><a href="prod/list">产品列表</a></li>
                 <%}%>
                 <li><a href="contact">新闻动态</a></li>
+                <li><a href="tougao">联系投稿</a></li>
                 <li><a href="about">关于我们</a></li>
                 <%
-                if(loginUser == "") {
+                if(loginUser != "") {
                 %>
-                <li><a href="signin">登录</a></li>
-                <%} else {%>
                 <li class="dropdown">
                     <a aria-expanded="false" aria-haspopup="true"
                        class="dropdown-toggle"
@@ -120,11 +120,10 @@
         <ul>
             <li><a href="about">关于我们</a></li>
             <li><a href="declare" target="declare">网站申明</a></li>
-            <li><a href="about">建议</a></li>
-            <li><a href="about">找错</a></li>
+            <li><a href="tougao">建议提交</a></li>
         </ul>
-        <p>Copyright © nongte.wang (2020 - present) all right reserved</p>
-        <p>备案信息</p>
+        <p>Copyright © 2020-2021 nongte.wang All Rights Reserved</p>
+        <p>本站部分信息来源于网络，如有侵权请联系我们进行删除 蜀ICP备xxxx号</p>
     </center>
 </footer>
 
@@ -152,6 +151,8 @@
         thumbnail0.height(thumbnailMinHeight)
         thumbnail1.height(thumbnailMinHeight)
     }
+
+
 
 </script>
 </body>

@@ -1,17 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <base href="/nongte/">
     <meta charset="utf-8"/>
-    <base href="/nongte/"/>
     <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
     <meta content="width=device-width, initial-scale=1" name="viewport"/>
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
     <meta content="本网站帮你快速了解全国各地农产品土特产及地域文化产物（小吃、美食等），提供全国各地农产品信息资讯。" name="description"/>
     <meta content="本网站提供各地农产品、土特产信息。" name="keywords">
-
     <link href="images/favicon.ico" rel="icon"/>
 
-    <title>${regionTitle}</title>
+    <title>联系投稿</title>
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet"/>
@@ -32,11 +31,10 @@
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
-    <script src="html5shiv.min.js"></script>
-    <script src="respond.min.js"></script>
+    <script src="js/html5shiv.min.js"></script>
+    <script src="js/respond.min.js"></script>
     <![endif]-->
     <link href="css/style.css" rel="stylesheet"/>
-    <link href="css/prod/prod.css" rel="stylesheet"/>
 </head>
 
 <body>
@@ -47,8 +45,7 @@
             <a class="navbar-brand" href="#">特农网</a>
         </div>
         <div class="navbar-collapse collapse" id="navbar">
-            <ul class="nav navbar-nav navbar-right">
-                <%
+            <ul class="nav navbar-nav navbar-right"> <%
                 var loginUser = session.loginUser !"";
                 %>
                 <li><a href="#">首页</a></li>
@@ -56,7 +53,7 @@
                 <li><a href="prod/list">产品列表</a></li>
                 <%}%>
                 <li><a href="contact">新闻动态</a></li>
-                <li><a href="tougao">联系投稿</a></li>
+                <li class="active"><a href="tougao">联系投稿</a></li>
                 <li><a href="about">关于我们</a></li>
                 <%
                 if(loginUser != "") {
@@ -79,82 +76,22 @@
 </nav>
 
 <div class="container">
-    <h2>${regionTitle}</h2>
-    <div class="region clearfix">
-        <%
-        if (regionType == "city") {
-        %>
-        <%
-        for(region in regions![]) {
-        %>
-        <span>
-            <%
-            if(region.code == areaCode!'') {
-            %>
-            <a class="text-dec-none areaClicked"
-               title="${region.name}">${region.name}</a>
-            <%} else {%>
-            <a class="text-dec-none"
-               href="prod/${path}/${region.code}?cityCode=${code}&cityName=${regionTitle}"
-               title="${region.name}">${region.name}</a>
-            <%}%>
-        </span>
-        <%}%>
-        <%} else {%>
-        <%if(regionType=="province") {%>
-        <%
-        for(region in regions![]){
-        %>
-        <span>
-            <a class="text-dec-none" href="prod/${path}/${region.code}/${region.name}"
-               target="region_city${region.code}"
-               title="${region.name}">${region.name}</a>
-        </span>
-        <%}%>
-        <%} else {%>
-        <%
-        for(region in regions![]){
-        %>
-        <span>
-            <a class="text-dec-none" href="prod/${path}/${region.code}/${region.name}"
-               title="${region.name}">${region.name}</a>
-        </span>
-        <%}%>
-        <%}%>
-        <%}%>
-    </div>
+    <div class="jumbotron">
+        <h2>联系投稿</h2>
+        <p>如果你对本站有什么好的建议，欢迎联系我们。</p>
+        <p>同时，也欢迎大家对本站进行投稿，帮助本站完善更多地方的农产品信息，让更多的人了解你的家乡特产。</p>
 
-    <h3>特产介绍</h3>
+        <p>联系方式 <br/>
+            QQ: <a href="http://wpa.qq.com/msgrd?v=3&uin=550037346&site=qq&menu=yes" target="_blank">550037346</a>
+            <br/>
+            Email: <a href="mailto:550037346@qq.com">550037346@qq.com</a>
+        </p>
 
-    <div class="row prod">
-        <%
-        for(prod in prods![]) {
-        %>
-        <div class="col-sm-6 col-md-3">
-            <div class="thumbnail">
-                <a class="clearfix text-dec-none" href="prod/detail/${prod.id}" target="prod_detail_${prod.id}">
-                    <div class="box">
-                        <img alt="${prod.title}" src="medias/file?filename=${prod.pic_url}"/>
-                    </div>
-                    <div class="caption">
-                        <div class="top"
-                             style="background:url('images/db00${prod.db}.jpg') no-repeat right center; background-size:contain;">
-                            <span class="prod-title">${prod.title}</span>
-                        </div>
-                        <p class="prod-desc">${prod.desc}</p>
-                    </div>
-                </a>
-            </div>
-        </div>
-        <%}%>
-    </div>
-    <!-- 分页容器： 显示分页按钮-->
-    <div align="center" class="col-lg-12">
-        <!-- 注意:3版本的分页容器标签是<ul>，2版本的容器标签是<div> -->
-        <ul id="paginator"></ul>
     </div>
 </div>
+
 <!-- /container -->
+
 
 <footer>
     <center>
@@ -175,24 +112,5 @@
 <script src="js/bootstrap.min.js"></script>
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script src="js/ie10-viewport-bug-workaround.js"></script>
-
-<script src="js/jquery.mloading.js"></script>
-<link href="css/jquery.mloading.css" rel="stylesheet">
-
-<script src="js/bootstrap-paginator.min.js"></script>
-<script>
-var currentPage = ${currentPage}
-var totalPages = ${totalPages}
-var limit = ${limit}
-var url = "prod/${regionType}/${code}/${regionTitle}?page=";
-var areaCode = "${areaCode!''}"
-if('${path}' == 'area' && areaCode != '') {
-    url = "prod/area/"+areaCode+"?cityCode=${code}&cityName=${regionTitle}&page=";
-}
-
-
-
-</script>
-<script src="js/paginatorUtil.js"></script>
 </body>
 </html>

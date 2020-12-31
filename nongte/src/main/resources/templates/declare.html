@@ -6,8 +6,9 @@
     <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
     <meta content="width=device-width, initial-scale=1" name="viewport"/>
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
-    <meta content="" name="description"/>
-    <meta content="" name="author"/>
+    <meta content="本网站帮你快速了解全国各地农产品土特产及地域文化产物（小吃、美食等），提供全国各地农产品信息资讯。" name="description"/>
+    <meta content="本网站提供各地农产品、土特产信息。" name="keywords">
+
     <link href="images/favicon.ico" rel="icon"/>
 
     <title>网站申明</title>
@@ -53,12 +54,11 @@
                 <li><a href="prod/list">产品列表</a></li>
                 <%}%>
                 <li><a href="contact">新闻动态</a></li>
-                <li class="active"><a href="about">关于我们</a></li>
+                <li><a href="tougao">联系投稿</a></li>
+                <li><a href="about">关于我们</a></li>
                 <%
-                if(loginUser == "") {
+                if(loginUser != "") {
                 %>
-                <li><a href="signin">登录</a></li>
-                <%} else {%>
                 <li class="dropdown">
                     <a aria-expanded="false" aria-haspopup="true"
                        class="dropdown-toggle"
@@ -78,25 +78,35 @@
 
 <div class="container">
     <div class="jumbotron">
-        <h2>网站申明</h2>
-        <p>网站申明的内容</p>
+        <h2>版权申明</h2>
+        <p style="text-indent: 2em;">
+            本站网页所涉及的任何资料(包括但不限于文字内容、图片、音影像、图表、广告、软件、程序、版面设计、目录与名称、内容分类等)的版权均属本站和资料提供者所有。未经本站书面许可，任何人不得复制、转载或以其他任何方式非法使用本站的内容。对于有上述行为者，本站将保留追究其法律责任的权利。
+        </p>
+
+        <h2>免责申明</h2>
+        <p>1、访问者在浏览本站享受服务之前，务必先仔细阅读本网站申明内容。接受本网站申明内容的则可以继续，如有异议请停止浏览，或联系本站进行协商处理。</p>
+        <p>2、访问者不得通过本站或利用本站提供的合法信息违反或者触犯中华人民共和国法律，否则一切不良后果自负，本站不承担任何责任。</p>
+        <p>3、擅自使用本站名义转载不规范来源的信息、版权不明的资讯，或盗用本站名义发布信息，本站将依法追究其法律责任。</p>
+        <p>4、本站链接的其它网站所造成之个人资料泄露及由此而导致的任何法律争议和后果，本网站不承担任何责任。</p>
+        <p>5、鉴于本站发布稿件来源广泛、数量较多，如因作者联系方式不详或其它原因未能与著作权拥有者取得联系，著作权人发现本站转载了其拥有著作权的作品时，请主动与本站联系，提供证明材料，我们将进行处理。</p>
+        <p>6、本站如因线路及非本网站控制范围外的硬件故障或其它不可抗力而导致暂停服务，对于暂停服务期间造成的一切不便与损失，本站不负任何责任。</p>
+        <p>7、本网站声明以及其修改权、更新权及最终解释权均属本站所有。</p>
     </div>
 </div>
 <!-- /container -->
-
 
 <footer>
     <center>
         <ul>
             <li><a href="about">关于我们</a></li>
             <li><a href="declare" target="declare">网站申明</a></li>
-            <li><a href="about">建议</a></li>
-            <li><a href="about">找错</a></li>
+            <li><a href="tougao">建议提交</a></li>
         </ul>
-        <p>Copyright © nongte.wang (2020 - present) all right reserved</p>
-        <p>备案信息</p>
+        <p>Copyright © 2020-2021 nongte.wang All Rights Reserved</p>
+        <p>本站部分信息来源于网络，如有侵权请联系我们进行删除 蜀ICP备xxxx号</p>
     </center>
 </footer>
+
 
 <!-- Bootstrap core JavaScript
 ================================================== -->
