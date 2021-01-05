@@ -21,6 +21,21 @@ public class AppTest {
     private ICosService cosService;
 
     @Test
+    public void testUploadFile() {
+        final String filePath = "/lzyjweb/prod/apk/21/01";
+        final boolean flag = cosService.uploadFile(filePath, new File("D:\\svn-repo\\child\\04_Code\\lzcjapp\\trunk\\app\\release\\7.1.3-lz-yjy-rel.apk"));
+        System.out.println(flag);
+
+        System.out.println(cosService.getFilePath(filePath, "7.1.3-lz-yjy-rel.apk"));
+    }
+
+    @Test
+    public void testDeleteFile() {
+        final String filePath = "/test/lzyjweb/prod/apk/21/01/7.1.3-lz-yjy-rel.apk";
+        cosService.deleteFile(filePath);
+    }
+
+    @Test
     public void testLoadContext() throws FileNotFoundException {
 // 指定目录
         final String directory = "dir/";
