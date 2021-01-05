@@ -18,13 +18,18 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 import java.util.function.Consumer;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 @Slf4j
 public class BBiilliiConvert {
     private static final String doubleQuota = "\"";
-
+    private static final Pattern FILEPATTERN = Pattern.compile("[\\\\/:*?\"<>|]");
     private File shFile;
+
+    public static String filenameFilter(final String str) {
+        return str == null ? null : FILEPATTERN.matcher(str).replaceAll("-");
+    }
 
     public void convert(final File bilibiliDownloadDir, final File outPutDir, final String ffmpegPath) {
         shFile = new File(outPutDir, System.currentTimeMillis() + "bili.sh");
@@ -157,7 +162,7 @@ public class BBiilliiConvert {
                     + doubleQuota
                     + biliconv.getPath()
                     + separator
-                    + fileName
+                    + filenameFilter(fileName)
                     + ".mp4"
                     + doubleQuota;
 
@@ -188,7 +193,7 @@ public class BBiilliiConvert {
                     + doubleQuota
                     + biliconv.getPath()
                     + separator
-                    + page_data.getPart()
+                    + filenameFilter(page_data.getPart())
                     + ".mp4"
                     + doubleQuota;
 
@@ -221,7 +226,7 @@ public class BBiilliiConvert {
                     + separator
                     + ep.getIndex()
                     + " "
-                    + ep.getIndex_title()
+                    + filenameFilter(ep.getIndex_title())
                     + ".mp4"
                     + doubleQuota;
 
