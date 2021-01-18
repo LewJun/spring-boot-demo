@@ -10,8 +10,12 @@ spring:
     static-locations: classpath:/static/,classpath:/views/
   datasource:
     driver-class-name: org.sqlite.JDBC
-#    url: jdbc:sqlite::resource:static/sqlite/scott.db3
-    url: jdbc:sqlite:E:/scott.db3
+    # resource:static方式，必须配置spring.resources.static-locations
+    url: jdbc:sqlite::resource:static/sqlite/scott.db3
+    # absolute path win
+    #    url: jdbc:sqlite:E:/scott.db3
+    # absolute Like Unix
+    #    url: jdbc:sqlite:/Users/huiye/Documents/scott.db3
     username:
     password:
   jpa:
@@ -21,9 +25,9 @@ spring:
     properties:
       hibernate:
         # 格式化输出sql
-        #        format_sql: true
+        format_sql: true
         hbm2ddl:
-          auto: update # update, none, create
+          auto: none # update, none, create，TODO 如果创建好后，就用none。
 
 # 显示jpa的入参
 logging:

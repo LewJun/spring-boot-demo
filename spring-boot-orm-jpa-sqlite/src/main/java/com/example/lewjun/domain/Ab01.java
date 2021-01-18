@@ -17,7 +17,7 @@ import javax.persistence.Id;
 @Entity
 public class Ab01 extends BaseObj {
     /**
-     * 部门编号 如果不是id字段，那么需要使用@TableId注释这就是id
+     * 部门编号 如果不是id字段，那么需要使用@Id注释这就是id
      */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
