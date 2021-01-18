@@ -6,9 +6,12 @@ server:
 
 # DataSource Config
 spring:
+  resources:
+    static-locations: classpath:/static/,classpath:/views/
   datasource:
     driver-class-name: org.sqlite.JDBC
-    url: jdbc:sqlite:/Users/huiye/Documents/scott.db3
+#    url: jdbc:sqlite::resource:static/sqlite/scott.db3
+    url: jdbc:sqlite:E:/scott.db3
     username:
     password:
   jpa:
@@ -20,7 +23,7 @@ spring:
         # 格式化输出sql
         #        format_sql: true
         hbm2ddl:
-          auto: none # update
+          auto: update # update, none, create
 
 # 显示jpa的入参
 logging:
