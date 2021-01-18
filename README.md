@@ -64,3 +64,4 @@ mvn archetype:generate
 * [spring-boot-bbiillii](spring-boot-bbiillii) bbiillii转换
 * [spring-boot-groovy](spring-boot-groovy) groovy入门实例
 * [spring-boot-kotlin](spring-boot-kotlin) kotlin的使用
+* [spring-boot-easyexcel](spring-boot-easyexcel) easyexcel的使用

@@ -54,6 +54,7 @@
         <module>spring-boot-kotlin</module>
         <module>spring-boot-job</module>
         <module>nongte</module>
+        <module>spring-boot-easyexcel</module>
     </modules>
 
     <properties>
@@ -162,6 +163,13 @@
                 <artifactId>sqlite-dialect</artifactId>
                 <version>1.0</version>
             </dependency>
+
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>easyexcel</artifactId>
+                <version>2.2.7</version>
+            </dependency>
+
         </dependencies>
 
     </dependencyManagement>
