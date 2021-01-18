@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.3.1.RELEASE</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <relativePath /> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.example.lewjun</groupId>
     <artifactId>spring-boot-demo</artifactId>
@@ -41,7 +41,6 @@
         <module>spring-boot-sharding-multi-datasource-mybatis</module>
         <module>spring-boot-sharding-read-write-separation-mybatis</module>
         <module>spring-boot-template-thymeleaf</module>
-        <module>nongte</module>
         <module>spring-boot-banner</module>
         <module>spring-boot-redis-lettuce</module>
         <module>spring-boot-cos-tencent</module>
@@ -54,6 +53,7 @@
         <module>spring-boot-groovy</module>
         <module>spring-boot-kotlin</module>
         <module>spring-boot-job</module>
+        <module>nongte</module>
     </modules>
 
     <properties>
@@ -66,6 +66,17 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-tomcat</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-undertow</artifactId>
         </dependency>
 
         <!--        OPTIONAL START -->
