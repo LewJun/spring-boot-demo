@@ -8,11 +8,28 @@ server:
 spring:
   datasource:
     driver-class-name: org.h2.Driver
-    #    schema: classpath:db/schema-h2.sql
-    #    data: classpath:db/data-h2.sql
-    url: jdbc:h2:mem:test
+    schema: classpath:db/schema-h2.sql
+    data: classpath:db/data-h2.sql
+    # mem 内存模式 # 通过mode设置数据库兼容模式
+    # url: jdbc:h2:mem:test;MODE=Mysql
+    # 硬盘模式 会自动创建test.mv.db
+    url: jdbc:h2:/Users/huiye/test;MODE=Mysql
     username: root
     password: test
+  h2:
+    # 开启console 访问 默认false
+    console:
+      enabled: true
+      settings:
+        # 开启h2 console 跟踪 方便调试  默认 false
+        trace: true
+        # 允许console 远程访问 默认false
+        web-allow-others: true
+      #  h2 访问路径上下文
+      path: /h2-console
+      # TODO ⚠️ ⚠️ ⚠️️
+      # 如上h2配置后，浏览器输入localhost:1234/demo/h2-console
+      # 浏览器界面的url username password等按照当前配置文件填写
   jpa:
     # 显示sql
     show-sql: true

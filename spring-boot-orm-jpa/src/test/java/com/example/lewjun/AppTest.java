@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 
 import java.util.Arrays;
@@ -15,12 +16,12 @@ import java.util.Arrays;
  */
 @Slf4j
 @SpringBootTest
-public class AppTest {
+class AppTest {
     @Autowired
     private Ab01Repository ab01Repository;
 
     @Test
-    public void testLoadContext() {
+    void testLoadContext() {
         ab01Repository.saveAll(
                 Arrays.asList(
                         new Ab01().setAab002("aab002").setAab003("aab003"),
@@ -32,11 +33,16 @@ public class AppTest {
         log.info("【findAll: {}】", ab01Repository.findAll());
         log.info("【findAb01: {}】", ab01Repository.findAb01("aab002"));
 
-        log.info("【findByAab002: {}】", ab01Repository.findByAab002("aab002"));
+        log.info("【findByAab002: {}】", ab01Repository.findByAab002("aab002", PageRequest.of(0, 10)));
 
         log.info("【findByAab002AndAab003: {}】", ab01Repository.findByAab002AndAab003("aab0021", "aab0031"));
 
-        ab01Repository.deleteById(2);
+        try {
+            ab01Repository.deleteById(2);
+            log.info("删除成功。");
+        } catch (final Exception e) {
+            log.error("删除失败，数据不存在。");
+        }
 
         log.info("【findAll: {}】", ab01Repository.findAll(Sort.by(Sort.Order.desc("aab001"))));
     }
