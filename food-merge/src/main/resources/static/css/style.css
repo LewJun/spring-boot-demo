@@ -1,0 +1,48 @@
+.navbar,
+.navbar-brand {
+background: rgb(146,208,80);
+}
+
+.nav > .active > a {
+background: #FFC900 !important;
+}
+
+.mt-10 {
+  margin-top: 10px !important;
+}
+
+.block {
+  display: block;
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 10px 0;
+  background: rgb(0,176,80);
+  color: #eee;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body > .container {
+margin-top: 60px;
+margin-bottom: 120px;
+}
+.text-dec-none {
+text-decoration: none !important;
+}
+
+footer ul, footer li {
+display: inline-block;
+padding: 0;
+list-style: none
+}
+
+footer a {
+color:white;
+}

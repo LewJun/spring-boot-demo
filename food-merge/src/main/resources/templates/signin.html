@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <base href="/food-merge/">
+    <meta charset="utf-8"/>
+    <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+
+    <link href="images/favicon.ico" rel="icon"/>
+
+    <title>登录</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet"/>
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="css/ie10-viewport-bug-workaround.css" rel="stylesheet"/>
+
+    <!-- Custom styles for this template -->
+    <link href="css/navbar-fixed-top.css" rel="stylesheet"/>
+    <!-- <link href="assets/css/non-responsive.css" rel="stylesheet" /> -->
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9
+      ]>
+    <script src="js/ie8-responsive-file-warning.js"></script
+    ><![endif]-->
+    <script src="js/ie-emulation-modes-warning.js"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.min.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+    <link href="css/style.css" rel="stylesheet"/>
+    <link href="css/signin.css" rel="stylesheet"/>
+</head>
+
+<body>
+<!-- Fixed navbar -->
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">食物合并</a>
+        </div>
+        <div class="navbar-collapse collapse" id="navbar">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#">首页</a></li>
+            </ul>
+        </div>
+        <!--/.nav-collapse -->
+    </div>
+</nav>
+
+<div class="container">
+    <form action="login" class="form-signin" method="post">
+        <h2 class="form-signin-heading">请登录</h2>
+        <h3 style="color:red;">${err!''}</h3>
+        <label class="sr-only" for="inputUsername">用户名</label>
+        <input autocomplete="off" autofocus class="form-control" id="inputUsername" name="username" placeholder="用户名"
+               required value="${loginForm.username!''}">
+        <label class="sr-only" for="inputPassword">密码</label>
+        <input autocomplete="off" class="form-control" id="inputPassword" name="password" placeholder="密码" required
+               type="password" value="${loginForm.password!''}">
+        <button class="btn btn-lg btn-primary btn-block" type="submit">登 录</button>
+    </form>
+</div>
+<!-- /container -->
+
+<footer>
+    <center>
+        <ul>
+            <li><a href="#">关于我们</a></li>
+            <li><a href="#" target="declare">网站申明</a></li>
+            <li><a href="#">建议提交</a></li>
+        </ul>
+        <p>Copyright © 2020-2021 liujun All Rights Reserved</p>
+    </center>
+</footer>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script src="js/ie10-viewport-bug-workaround.js"></script>
+</body>
+</html>
