@@ -8,4 +8,5 @@ import java.io.Serializable;
 public class BaseQueryParam implements Serializable {
      private Integer pageNumber;
      private Integer offset;
+     private Integer limit = 20;
 }
