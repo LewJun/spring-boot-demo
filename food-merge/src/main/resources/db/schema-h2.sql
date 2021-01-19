@@ -30,7 +30,7 @@ fd015 varchar(128)	comment '铁',
 fd016 varchar(128)	comment '锌',
 fd017 varchar(128)	comment '用量',
 yyss001 varchar(128) null comment 'yyss 主键',
-fd018 date null comment '对照时间',
+fd018 datetime null comment '对照时间',
 primary key (fd001)
 );
 
