@@ -73,6 +73,32 @@
 </nav>
 
 <div class="container-fluid">
+    <!-- 模态框（Modal） -->
+    <div aria-hidden="true" aria-labelledby="fdDetailModalLabel" class="modal fade" id="fdDetailModal" role="dialog"
+         tabindex="-1">
+        <div class="modal-dialog" style="width:95% !important;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button aria-hidden="true" class="close" data-dismiss="modal" type="button">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="fdDetailModalLabel">
+                        详情
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    在这里添加一些文本
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-default" data-dismiss="modal" type="button">关闭
+                    </button>
+                    <button class="btn btn-primary" type="button">
+                        提交更改
+                    </button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
     <div class="form-inline">
         <div>
             <div class="form-group">
@@ -156,8 +182,39 @@ $(function() {
             {field: 'fd015', title: '铁', align: 'center'},
             {field: 'fd016', title: '锌', align: 'center'},
             {field: 'fd017', title: '用量', align: 'center'},
-            {field: 'yyss001', title: 'yyss 主键', align: 'center'},
-            {field: 'fd018', title: '对照时间', align: 'center'},
+            {field: 'yyss001', title: '是否对照', align: 'center',
+                formatter: function(value, row, index) {
+                    var result = '';
+                    if (row.yyss001) {
+                        result += '<a title="点击查看" target="_blank" href="yyss/view/'+row.yyss001+'" class="label label-success">row.fd018</a>'
+                    } else {
+                        result += '<span class="label label-default">未对照</span>'
+                    }
+                    return result;
+                }
+            },
+            {title: '操作', align: 'center',
+                events: {
+                    'click #fd-detail': function(e, value, row, index) {
+                        // alert(1)
+                        // TODO 根据fd001查询基础数据，和合并后的数据
+                        // TODO 显示到fdDetailModal中的相应位置
+                        // TODO 显示模态框
+                        // fd/detail/"+row.fd001
+$('#fdDetailModal').modal('show');
+                    },
+                    'click #fd-merge': function(e, value, row, index) {
+                        alert(2)
+                        // yyss/query?yyss007="+row.fd002+"
+                    },
+                },
+                formatter: function(value, row, index) {
+                    var result = ''
+                    result += "<a class='btn btn-sm btn-info' id='fd-detail' href='javascript:void(0)' style='margin-right: 5px;'>详情</a>";
+                    result += "<a class='btn btn-sm btn-success' id='fd-merge' href='javascript:void(0)'>查询对照</a>";
+                    return result;
+                }
+            }
         ]
     });
 });
