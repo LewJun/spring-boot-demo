@@ -72,8 +72,17 @@
     </div>
 </nav>
 
-<div class="container">
-
+<div class="container-fluid">
+    <div class="form-inline">
+        <div>
+            <div class="form-group">
+                <label for="fd002">名称</label>
+                <input autocomplete="off" class="form-control" id="fd002" maxlength="20" placeholder="请输入名称">
+                <button class="btn btn-success" id="queryBtn">查询</button>
+            </div>
+        </div>
+    </div>
+    <table class="mt-10" id="prodTable"></table>
 </div>
 <!-- /container -->
 
@@ -96,5 +105,63 @@
 <script src="js/bootstrap.min.js"></script>
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script src="js/ie10-viewport-bug-workaround.js"></script>
+
+<!-- Latest compiled and minified CSS -->
+<link href="css/bootstrap-table.min.css" rel="stylesheet">
+<!-- Latest compiled and minified JavaScript -->
+<script src="js/bootstrap-table.min.js"></script>
+<!-- Latest compiled and minified Locales -->
+<script src="js/bootstrap-table-zh-CN.min.js"></script>
+
+<script src="js/jquery.mloading.js"></script>
+<link href="css/jquery.mloading.css" rel="stylesheet">
+
+<script>
+$(function() {
+    $("#queryBtn").click(function() {
+        $("#prodTable").bootstrapTable('refresh');
+    });
+
+    $("#prodTable").bootstrapTable({
+        url:"fd/list/query",   //请求地址
+        striped: true, //是否显示行间隔色
+        pageNumber: 1, //初始化加载第一页
+        pagination: true, //是否分页
+        sidePagination: 'server',//server:服务器端分页|client：前端分页
+        pageSize: 5, //单页记录数
+        pageList: [5, 10, 20, 30],//可选择单页记数
+        queryParams: function(params) {//上传服务器的参数
+            var temp = {
+                offset :params.offset + 0// SQL语句起始索引
+                , pageNumber : params.limit  // 每页显示数量
+                , fd002: $("#fd002").val()
+            };
+            return temp;
+        },
+        columns: [
+            {field: 'fd001', title: '编码', align: 'center'},
+            {field: 'fd002', title: '名称', align: 'center'},
+            {field: 'fd003', title: '可食部', align: 'center'},
+            {field: 'fd004', title: '一类名称', align: 'center'},
+            {field: 'fd005', title: '二类名称', align: 'center'},
+            {field: 'fd006', title: '能量', align: 'center'},
+            {field: 'fd007', title: '蛋白质', align: 'center'},
+            {field: 'fd008', title: '脂肪', align: 'center'},
+            {field: 'fd009', title: '维生素A', align: 'center'},
+            {field: 'fd010', title: '维生素B1', align: 'center'},
+            {field: 'fd011', title: '维生素B2', align: 'center'},
+            {field: 'fd012', title: '维生素C', align: 'center'},
+            {field: 'fd013', title: '钙', align: 'center'},
+            {field: 'fd014', title: '钠', align: 'center'},
+            {field: 'fd015', title: '铁', align: 'center'},
+            {field: 'fd016', title: '锌', align: 'center'},
+            {field: 'fd017', title: '用量', align: 'center'},
+            {field: 'yyss001', title: 'yyss 主键', align: 'center'},
+            {field: 'fd018', title: '对照时间', align: 'center'},
+        ]
+    });
+});
+
+</script>
 </body>
 </html>

@@ -15,7 +15,7 @@ public class FdMapperProvider {
                     WHERE("fd002 like concat('%',#{fd002},'%')");
                 }
 
-                LIMIT("#{limit}");
+                LIMIT("#{pageNumber}");
                 OFFSET("#{offset}");
             }
         }.toString();
