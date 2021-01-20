@@ -68,7 +68,10 @@ $("#fdTable").bootstrapTable({
                 'click #fd-merge': function(e, value, row, index) {
                     $('#yyss007').val(row.fd002);
                     $('#yyss007').attr('data-fd001', row.fd001);
-                    $("#yyssTable").bootstrapTable('refresh');
+                    {
+                        initYyssTable();
+                        $("#yyssTable").bootstrapTable('refresh');
+                    }
                     $('#fdMergeModal').modal('show');
                 },
             },
@@ -86,6 +89,7 @@ $("#queryYyssBtn").click(function() {
     $("#yyssTable").bootstrapTable('refresh');
 });
 
+function initYyssTable() {
 $("#yyssTable").bootstrapTable({
     url:"yyss/list/query",   //请求地址
     striped: true, //是否显示行间隔色
@@ -230,5 +234,5 @@ $("#yyssTable").bootstrapTable({
         {field:'yyss087', title:'铜-毫克',align:'center',},
     ]
 });
-
+}
 });
