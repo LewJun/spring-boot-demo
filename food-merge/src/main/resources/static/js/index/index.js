@@ -74,8 +74,8 @@ $("#fdTable").bootstrapTable({
             },
             formatter: function(value, row, index) {
                 var result = ''
-                result += "<a class='btn btn-sm btn-info' id='fd-detail' href='javascript:void(0)' style='margin-right: 5px;'>详情</a>";
-                result += "<a class='btn btn-sm btn-success' id='fd-merge' href='javascript:void(0)'>查询对照</a>";
+                result += "<a class='btn btn-xs btn-info glyphicon glyphicon-eye-open' id='fd-detail' href='javascript:void(0)' style='margin-right: 5px;'></a>";
+                result += "<a class='btn btn-xs btn-success glyphicon glyphicon-edit' id='fd-merge' href='javascript:void(0)'></a>";
                 return result;
             }
         }
@@ -138,7 +138,7 @@ $("#yyssTable").bootstrapTable({
                 },
             },
             formatter: function(value, row, index) {
-                return "<a class='btn btn-xs btn-primary' id='yyss-merge' href='javascript:void(0)'>对照</a>";
+                return "<a class='btn btn-xs btn-primary glyphicon glyphicon-transfer' id='yyss-merge' href='javascript:void(0)'></a>";
             }
         },
         {field:'yyss001', title:'ID',align:'center',},
