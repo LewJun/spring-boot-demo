@@ -29,8 +29,8 @@ html {
   min-height: 100%;
 }
 
-body > .container {
-margin-bottom: 120px;
+body > .container, body > .container-fluid {
+margin-bottom: 60px;
 }
 .text-dec-none {
 text-decoration: none !important;

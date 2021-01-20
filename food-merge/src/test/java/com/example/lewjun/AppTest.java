@@ -49,8 +49,4 @@ public class AppTest {
         log.info("findByYys001 {}", yyssMapper.findByYyss001("10010"));
     }
 
-    @Test
-    public void testFindByYyss007() {
-        log.info("findByYyss007{}", yyssMapper.findByYyss007("鸡蛋"));
-    }
 }
