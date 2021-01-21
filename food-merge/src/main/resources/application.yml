@@ -25,7 +25,7 @@ spring:
     # mem 内存模式 # 通过mode设置数据库兼容模式
     # url: jdbc:h2:mem:test;MODE=Mysql
     # 硬盘模式 会自动创建xxx.mv.db
-    url: jdbc:h2:E:/food-merge;MODE=Mysql
+    url: jdbc:h2:E:/food-merge/food-merge;MODE=Mysql
     username: root
     password: test
   h2:
