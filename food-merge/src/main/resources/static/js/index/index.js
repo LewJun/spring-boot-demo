@@ -4,11 +4,10 @@ $("#queryFdBtn").click(function() {
 });
 
 $("#downloadFdBtn").click(function() {
-    var a = document.createElement("a");
-    a.href = "fd/download?fd002="+$("#fd002").val() + "&duizhao=" + $("#duizhao").find('option:selected').val()
-    $("body").append(a); // 修复firefox中无法触发click
-    a.click();
-    $(a).remove();
+    downloadFile("fd/download"
+    + "?fd002="+$("#fd002").val()
+    + "&duizhao=" + $("#duizhao").find('option:selected').val()
+    )
 });
 
 $("#fdTable").bootstrapTable({
