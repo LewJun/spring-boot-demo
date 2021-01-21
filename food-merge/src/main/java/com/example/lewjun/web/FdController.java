@@ -1,17 +1,21 @@
 package com.example.lewjun.web;
 
+import com.alibaba.excel.EasyExcel;
+import com.example.lewjun.domain.result.FdDownloadResult;
 import com.example.lewjun.domain.vo.FdQueryParam;
 import com.example.lewjun.domain.vo.FdUpdateParam;
 import com.example.lewjun.mapper.FdMapper;
 import com.example.lewjun.utils.JsonUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.*;
 
+@Slf4j
 @Controller
 @RequestMapping("/fd")
 public class FdController {
@@ -44,5 +48,16 @@ public class FdController {
     @ResponseBody
     public String merge(final FdUpdateParam fdUpdateParam) {
         return JsonUtils.object2String(fdMapper.updateYyss001(fdUpdateParam));
+    }
+
+    @GetMapping("/download")
+    public void download(final FdQueryParam param, final HttpServletResponse resp) throws IOException {
+        final List<FdDownloadResult> fdDownloadResults = fdMapper.findDownloadByParam(param);
+        log.info("results: {}", fdDownloadResults);
+
+        resp.setContentType("application/vnd.ms-excel");
+        resp.setCharacterEncoding("utf-8");
+        resp.setHeader("Content-disposition", "attachment;filename=" + UUID.randomUUID() + ".xlsx");
+        EasyExcel.write(resp.getOutputStream(), FdDownloadResult.class).sheet("Sheet 0").doWrite(fdDownloadResults);
     }
 }

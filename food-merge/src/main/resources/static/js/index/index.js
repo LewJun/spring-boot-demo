@@ -3,6 +3,14 @@ $("#queryFdBtn").click(function() {
     $("#fdTable").bootstrapTable('refresh');
 });
 
+$("#downloadFdBtn").click(function() {
+    var a = document.createElement("a");
+    a.href = "fd/download?fd002="+$("#fd002").val() + "&duizhao=" + $("#duizhao").find('option:selected').val()
+    $("body").append(a); // 修复firefox中无法触发click
+    a.click();
+    $(a).remove();
+});
+
 $("#fdTable").bootstrapTable({
     url:"fd/list/query",   //请求地址
     striped: true, //是否显示行间隔色
@@ -22,6 +30,7 @@ $("#fdTable").bootstrapTable({
             offset :params.offset + 0// SQL语句起始索引
             , pageNumber : params.limit  // 每页显示数量
             , fd002: $("#fd002").val()
+            , duizhao: $("#duizhao").find('option:selected').val()
         };
         return temp;
     },
@@ -75,8 +84,8 @@ $("#fdTable").bootstrapTable({
             },
             formatter: function(value, row, index) {
                 var result = ''
-                result += "<a class='btn btn-xs btn-info glyphicon glyphicon-eye-open' id='fd-detail' href='javascript:void(0)' style='margin-right: 5px;'></a>";
-                result += "<a class='btn btn-xs btn-success glyphicon glyphicon-edit' id='fd-merge' href='javascript:void(0)'></a>";
+                result += "<a title='查看' class='btn btn-xs btn-info glyphicon glyphicon-eye-open' id='fd-detail' href='javascript:void(0)' style='margin-right: 5px;'></a>";
+                result += "<a title='查询对照' class='btn btn-xs btn-success glyphicon glyphicon-edit' id='fd-merge' href='javascript:void(0)'></a>";
                 return result;
             }
         }
@@ -141,7 +150,7 @@ $("#yyssTable").bootstrapTable({
                 },
             },
             formatter: function(value, row, index) {
-                return "<a class='btn btn-xs btn-primary glyphicon glyphicon-transfer' id='yyss-merge' href='javascript:void(0)'></a>";
+                return "<a title='对照' class='btn btn-xs btn-primary glyphicon glyphicon-transfer' id='yyss-merge' href='javascript:void(0)'></a>";
             }
         },
         {field:'yyss001', title:'ID',align:'center',},

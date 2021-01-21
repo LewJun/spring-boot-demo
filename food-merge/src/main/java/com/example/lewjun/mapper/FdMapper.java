@@ -1,6 +1,7 @@
 package com.example.lewjun.mapper;
 
 import com.example.lewjun.domain.Fd;
+import com.example.lewjun.domain.result.FdDownloadResult;
 import com.example.lewjun.domain.vo.FdQueryParam;
 import com.example.lewjun.domain.vo.FdUpdateParam;
 import org.apache.ibatis.annotations.CacheNamespace;
@@ -16,6 +17,9 @@ import java.util.List;
 public interface FdMapper {
     @SelectProvider(type = FdMapperProvider.class, method = "findByParam")
     List<Fd> findByParam(FdQueryParam param);
+
+    @SelectProvider(type = FdMapperProvider.class, method = "findDownloadByParam")
+    List<FdDownloadResult> findDownloadByParam(FdQueryParam param);
 
     @SelectProvider(type = FdMapperProvider.class, method = "countByParam")
     int countByParam(FdQueryParam param);
