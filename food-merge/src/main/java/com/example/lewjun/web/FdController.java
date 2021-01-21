@@ -53,7 +53,6 @@ public class FdController {
     @GetMapping("/download")
     public void download(final FdQueryParam param, final HttpServletResponse resp) throws IOException {
         final List<FdDownloadResult> fdDownloadResults = fdMapper.findDownloadByParam(param);
-        log.info("results: {}", fdDownloadResults);
 
         resp.setContentType("application/vnd.ms-excel");
         resp.setCharacterEncoding("utf-8");
