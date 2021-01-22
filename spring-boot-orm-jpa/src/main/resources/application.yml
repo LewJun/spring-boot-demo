@@ -8,12 +8,12 @@ server:
 spring:
   datasource:
     driver-class-name: org.h2.Driver
-    schema: classpath:db/schema-h2.sql
-    data: classpath:db/data-h2.sql
+    # schema: classpath:db/schema-h2.sql
+    # data: classpath:db/data-h2.sql
     # mem 内存模式 # 通过mode设置数据库兼容模式
-    # url: jdbc:h2:mem:test;MODE=Mysql
+    url: jdbc:h2:mem:test;MODE=Mysql
     # 硬盘模式 会自动创建test.mv.db
-    url: jdbc:h2:/Users/huiye/test;MODE=Mysql
+    # url: jdbc:h2:/Users/huiye/test;MODE=Mysql
     username: root
     password: test
   h2:
