@@ -1,5 +1,6 @@
-package com.example.lewjun.domain;
+package com.example.lewjun.domain.one2one;
 
+import com.example.lewjun.domain.BaseObj;
 import lombok.Data;
 import lombok.experimental.Accessors;
 

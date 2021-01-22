@@ -1,7 +1,7 @@
 package com.example.lewjun;
 
-import com.example.lewjun.domain.Address;
-import com.example.lewjun.domain.People;
+import com.example.lewjun.domain.one2one.Address;
+import com.example.lewjun.domain.one2one.People;
 import com.example.lewjun.repositories.PeopleRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
@@ -12,7 +12,7 @@ import java.time.LocalDate;
 
 @Slf4j
 @SpringBootTest
-class PeopleRepositoryTest {
+class One2OneTest {
 
     @Autowired
     PeopleRepository peopleRepository;
