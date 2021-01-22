@@ -36,9 +36,11 @@ spring:
     properties:
       hibernate:
         # 格式化输出sql
-        #        format_sql: true
+        # format_sql: true
         hbm2ddl:
           auto: update
+        # 解决spring boot hibernate 懒加载的问题
+        enable_lazy_load_no_trans: true
 
 # 显示jpa的入参
 logging:
