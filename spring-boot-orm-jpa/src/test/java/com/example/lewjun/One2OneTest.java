@@ -24,17 +24,17 @@ class One2OneTest {
 
     @Test
     public void testOneToOne() {
-        final Address address = new Address();
-        address.setPhone("028-88888888");
-        address.setStreet("street NO.1");
-        address.setZipcode("610000");
+        final Address address = new Address()
+                .setPhone("028-88888888")
+                .setStreet("street NO.1")
+                .setZipcode("610000");
 
-        final People people = new People();
-        people.setUsername("LewJun");
-        people.setAge(32);
-        people.setWeight(65.3f);
-        people.setBirthday(LocalDate.now());
-        people.setAddress(address);
+        final People people = new People()
+                .setUsername("LewJun")
+                .setAge(32)
+                .setWeight(65.3f)
+                .setBirthday(LocalDate.now())
+                .setAddress(address);
 
         final People savedPeople = peopleRepository.save(people);
 

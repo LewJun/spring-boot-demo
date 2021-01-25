@@ -3,9 +3,11 @@ package com.example.lewjun.domain.one2one;
 import com.example.lewjun.domain.BaseObj;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.experimental.Accessors;
 
 import javax.persistence.*;
 
+@Accessors(chain = true)
 @Getter
 @Setter
 @Entity
