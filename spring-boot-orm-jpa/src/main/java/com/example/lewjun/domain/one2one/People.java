@@ -1,14 +1,14 @@
 package com.example.lewjun.domain.one2one;
 
 import com.example.lewjun.domain.BaseObj;
-import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 
-@Accessors(chain = true)
-@Data
+@Getter
+@Setter
 @Entity
 public class People extends BaseObj {
     @Id

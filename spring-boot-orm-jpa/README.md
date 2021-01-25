@@ -5,19 +5,21 @@
 [TOC]
 
 ## 添加依赖
-```xml
-    <dependencies>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-jpa</artifactId>
-        </dependency>
 
-        <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <scope>runtime</scope>
-        </dependency>
-    </dependencies>
+```xml
+
+<dependencies>
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-data-jpa</artifactId>
+    </dependency>
+
+    <dependency>
+        <groupId>com.h2database</groupId>
+        <artifactId>h2</artifactId>
+        <scope>runtime</scope>
+    </dependency>
+</dependencies>
 ```
 
 ## 数据源配置
@@ -57,6 +59,7 @@ logging:
 ## Ab01
 
 ```java
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
@@ -87,6 +90,7 @@ public class Ab01 extends BaseObj {
 ## 单元测试
 
 ```java
+
 @Slf4j
 @SpringBootTest
 public class AppTest {
@@ -116,6 +120,15 @@ public class AppTest {
     }
 }
 ```
+
+## 注意
+
+* @Data Spring Boot Data JPA中，如果要在实体上使用@Data，那么可能会出现toString错误。 解决方案：
+    * 必须重写toString方法。
+    * 不用@Data，使用@Getter+@Setter
+
+* mappedBy 在关系**被**维护端，获取关系维护端（即主表）的信息为null，可能的原因是没有在关系被维护端设置mappedBy。 解决方案：
+    * 在关系被维护端的主表上添加@OneToOne(mappedBy = "address", fetch = FetchType.LAZY)
 
 ## Try it
 

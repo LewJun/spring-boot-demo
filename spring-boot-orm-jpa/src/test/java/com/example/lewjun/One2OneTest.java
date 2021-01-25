@@ -2,6 +2,7 @@ package com.example.lewjun;
 
 import com.example.lewjun.domain.one2one.Address;
 import com.example.lewjun.domain.one2one.People;
+import com.example.lewjun.repositories.AddressRepository;
 import com.example.lewjun.repositories.PeopleRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Slf4j
 @SpringBootTest
@@ -17,26 +19,39 @@ class One2OneTest {
     @Autowired
     PeopleRepository peopleRepository;
 
+    @Autowired
+    AddressRepository addressRepository;
+
     @Test
     public void testOneToOne() {
-        final Address address = new Address()
-                .setPhone("028-88888888")
-                .setStreet("street NO.1")
-                .setZipcode("610000");
+        final Address address = new Address();
+        address.setPhone("028-88888888");
+        address.setStreet("street NO.1");
+        address.setZipcode("610000");
 
-        final People people = new People()
-                .setUsername("LewJun")
-                .setAge(32)
-                .setWeight(65.3f)
-                .setBirthday(LocalDate.now())
-                .setAddress(address);
+        final People people = new People();
+        people.setUsername("LewJun");
+        people.setAge(32);
+        people.setWeight(65.3f);
+        people.setBirthday(LocalDate.now());
+        people.setAddress(address);
 
         final People savedPeople = peopleRepository.save(people);
 
         log.info("【address: {}】", address);
         log.info("【savedPeople: {}】", savedPeople);
 
-        log.info("【findAll:{}】", peopleRepository.findAll());
+        final List<People> peopleList = peopleRepository.findAll();
+        for (final People p : peopleList) {
+            log.info("【p:{}】", p.getUsername());
+            log.info("【p add:{}】", p.getAddress().getStreet());
+        }
+
+        final List<Address> addressList = addressRepository.findAll();
+        for (final Address a : addressList) {
+            log.info("【a:{}】", a.getZipcode());
+            log.info("【a.people:{}】", a.getPeople().getUsername());
+        }
 /*
 执行如上测试，打印日志如下所示：
 Hibernate: call next value for hibernate_sequence
