@@ -1,16 +1,15 @@
 package com.example.lewjun.domain.many2many;
 
 import com.example.lewjun.domain.BaseObj;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.experimental.Accessors;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 import java.util.List;
 
-@Data
+@Getter
+@Setter
 @Accessors(chain = true)
 @Entity
 public class SysUser extends BaseObj {
@@ -20,6 +19,7 @@ public class SysUser extends BaseObj {
 
     private String uname;
 
-    @ManyToMany
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
+    @JoinTable(name = "sys_user_sys_role", joinColumns = @JoinColumn(name = "sys_user_id"), inverseJoinColumns = @JoinColumn(name = "sys_role_id"))
     private List<SysRole> sysRoles;
 }
