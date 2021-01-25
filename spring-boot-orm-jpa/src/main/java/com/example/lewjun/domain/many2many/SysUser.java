@@ -20,6 +20,12 @@ public class SysUser extends BaseObj {
     private String uname;
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
-    @JoinTable(name = "sys_user_sys_role", joinColumns = @JoinColumn(name = "sys_user_id"), inverseJoinColumns = @JoinColumn(name = "sys_role_id"))
+    // 配置中间表的信息
+    @JoinTable(name = "sys_user_sys_role"
+            //
+//            , joinColumns = @JoinColumn(name = "sys_user_id")
+            //
+//            , inverseJoinColumns = @JoinColumn(name = "sys_role_id")
+    )
     private List<SysRole> sysRoles;
 }
