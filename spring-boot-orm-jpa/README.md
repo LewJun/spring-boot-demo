@@ -60,9 +60,8 @@ logging:
 
 ```java
 
-@NoArgsConstructor
-@AllArgsConstructor
-@Data
+@Setter
+@Getter
 @Accessors(chain = true)
 @Entity
 public class Ab01 extends BaseObj {
@@ -120,6 +119,12 @@ public class AppTest {
     }
 }
 ```
+
+## mappedBy位置
+
+* one to one 在关系被维护端 People + Address(mappedBy="address")
+* one to many 在关系维护端 Mather(mappedBy="mather") + Son
+* many to many 在关系被维护端 SysUser + SysRole(mappedBy="sysRoles")
 
 ## 注意
 
