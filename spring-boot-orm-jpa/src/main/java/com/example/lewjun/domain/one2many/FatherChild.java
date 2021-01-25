@@ -7,16 +7,19 @@ import lombok.experimental.Accessors;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.io.Serializable;
+
 
 @Accessors(chain = true)
 @Getter
 @Setter
 @Entity
-public class Child {
-
+public class FatherChild implements Serializable {
     @Id
     @GeneratedValue
     private Integer id;
 
-    private String uname;
+    private Integer father;
+
+    private Integer child;
 }
