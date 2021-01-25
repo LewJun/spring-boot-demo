@@ -1,5 +1,6 @@
 package com.example.lewjun.domain.one2many2;
 
+import com.example.lewjun.domain.BaseObj;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
@@ -10,7 +11,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Entity
-public class Son {
+public class Son extends BaseObj {
 
     @Id
     @GeneratedValue
