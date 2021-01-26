@@ -54,6 +54,7 @@
         <module>spring-boot-kotlin</module>
         <module>spring-boot-job</module>
         <module>spring-boot-ws-original</module>
+        <module>spring-boot-ws-spring</module>
         <module>nongte</module>
         <module>food-merge</module>
         <module>spring-boot-easyexcel</module>
