@@ -69,9 +69,7 @@ public class Ab01Controller {
      * @return 成功返回success
      */
     @DeleteMapping("/{aab001}")
-    public String deleteAb01(@PathVariable final int aab001) {
+    public void deleteAb01(@PathVariable final int aab001) {
         ab01Service.delete(aab001);
-        return "success";
     }
-
 }
