@@ -8,6 +8,7 @@ import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.stream.Collectors;
 
 // ws://127.0.0.1:1234/demo/ws/test
 @Slf4j
@@ -39,13 +40,15 @@ public class WsServerEndpoint {
         // 发消息给自己
         session.getAsyncRemote().sendText("回声: " + session.getId() + " :: " + msg);
 
-        // 群发
-        for (final Map.Entry<String, Session> me : SESSIONMAP.entrySet()) {
-            final String sessionId = me.getKey();
-            if (sessionId.equals(session.getId())) {
-                continue;
-            }
-            me.getValue().getAsyncRemote().sendText(session.getId() + "发来消息：" + msg);
-        }
+        sendGroupMsg(msg, session, true);
+    }
+
+    private void sendGroupMsg(final String msg, final Session s, final boolean includeMySelf) {
+        SESSIONMAP.entrySet()
+                .stream()
+                .filter(entry -> includeMySelf || (!s.getId().equals(entry.getKey())))
+                .map(Map.Entry::getValue)
+                .collect(Collectors.toList())
+                .forEach(session -> session.getAsyncRemote().sendText(msg));
     }
 }
