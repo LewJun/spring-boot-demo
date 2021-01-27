@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ws</title>
+</head>
+<body>
+<textarea id="txt"></textarea>
+<br/>
+<button onclick="send()">send</button>
+<button onclick="exit()">close</button>
+<div id="msg"></div>
+<script>
+    var ws = null
+    if ('WebSocket' in window) {
+        ws = new WebSocket('ws://127.0.0.1:1234/demo/ws/test')
+    } else {
+        alert('WebSocket not support.')
+    }
+
+    // 连接成功建立的回调方法
+    ws.onopen = function(e) {
+        setMessageInnerHTML('成功建立连接，发个消息吧。')
+    }
+
+    // 关闭成功建立的回调方法
+    ws.onclose = function(e) {
+        setMessageInnerHTML('连接已关闭')
+    }
+
+    //接收到消息的回调方法
+    ws.onmessage = function(e) {
+        setMessageInnerHTML(e.data);
+    }
+
+    //连接发生错误的回调方法
+    ws.onerror = function() {
+        setMessageInnerHTML("error");
+    };
+
+    //将消息显示在网页上
+    function setMessageInnerHTML(innerHTML) {
+        document.getElementById('msg').innerHTML += innerHTML + '<br/>';
+    }
+
+    function send() {
+        var txt = document.getElementById('txt').value
+        ws.send(txt)
+        document.getElementById('txt').value = ''
+    }
+
+    function exit() {
+        ws.close()
+    }
+
+</script>
+</body>
+</html>

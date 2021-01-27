@@ -8,6 +8,6 @@ import java.io.File;
 public class JunitTest {
     @Test
     public void testConvert() {
-        new BBiilliiConvert().convert(new File("F:\\BILI\\tv.danmaku.bili\\download"), new File("f:\\biliconv"), "D:/Program Files/ffmpeg/ffmpeg.exe");
+        new BBiilliiConvert().convert(new File("/Users/huiye/Desktop/"), new File("/Users/huiye/Desktop/biliconv/"), "ffmpeg");
     }
 }
