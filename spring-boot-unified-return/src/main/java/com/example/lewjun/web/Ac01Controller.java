@@ -1,7 +1,6 @@
 package com.example.lewjun.web;
 
 import com.example.lewjun.common.BussException;
-import com.example.lewjun.common.EnumApiResultStatus;
 import com.example.lewjun.domain.Ac01;
 import com.example.lewjun.service.Ac01Service;
 import org.springframework.beans.BeanUtils;
@@ -28,12 +27,22 @@ public class Ac01Controller {
      */
     @GetMapping
     public List<Ac01> getList() {
-        try {
-            final int i = 1 / 0;
-        } catch (final Exception ex) {
-            throw BussException.of(EnumApiResultStatus.FAIL, ex);
-        }
         return ac01Service.getList();
+    }
+
+    @RequestMapping("/exception")
+    public void exception() {
+        try {
+            final int ret = 1 / 0;
+        } catch (final Exception ex) {
+            throw BussException.of(ex);
+        }
+    }
+
+    @GetMapping("/delay")
+    public String delay(final long seconds) throws InterruptedException {
+        Thread.sleep(seconds * 1000);
+        return String.format("delay %d secs.", seconds);
     }
 
     /**
@@ -55,7 +64,7 @@ public class Ac01Controller {
      * @return Ac01
      */
     @GetMapping("/{aac001}")
-    public Ac01 getAc01(@PathVariable @Min(value = 1, message = "aac001不能小于1")  final int aac001) {
+    public Ac01 getAc01(@PathVariable @Min(value = 1, message = "aac001不能小于1") final int aac001) {
         return ac01Service.get(aac001);
     }
 
