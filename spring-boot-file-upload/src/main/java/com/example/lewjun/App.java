@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -50,14 +51,14 @@ public class App {
     }
 
     @PostMapping("/upload")
-    public List<String> uploadFiles(final MultipartHttpServletRequest multipartHttpServletRequest, String type) {
+    public List<String> uploadFiles(final MultipartHttpServletRequest multipartHttpServletRequest, final String type) {
         log.info("type: {}", type);
-        Map<String, MultipartFile> fileMap = multipartHttpServletRequest.getFileMap();
-        List<String> filenames = new ArrayList<>();
-        for (Map.Entry<String, MultipartFile> me : fileMap.entrySet()) {
-            String key = me.getKey();
+        final Map<String, MultipartFile> fileMap = multipartHttpServletRequest.getFileMap();
+        final List<String> filenames = new ArrayList<>();
+        for (final Map.Entry<String, MultipartFile> me : fileMap.entrySet()) {
+            final String key = me.getKey();
             log.info("key: {}", key);
-            MultipartFile multipartFile = me.getValue();
+            final MultipartFile multipartFile = me.getValue();
 
             transferTo(multipartFile);
 
@@ -72,8 +73,12 @@ public class App {
             final String prefix = UUID.randomUUID().toString();
             final File tempFile = File.createTempFile(prefix, String.format(".%s", originalFilename));
             log.info("tempFile: {}", tempFile);
-            multipartFile.transferTo(tempFile);
+            // 会出现FileExistException
+//            multipartFile.transferTo(tempFile);
 
+            final FileOutputStream fos = new FileOutputStream(tempFile);
+            fos.write(multipartFile.getBytes());
+            fos.close();
             return tempFile;
         } catch (final IOException e) {
             log.error("出现异常", e);

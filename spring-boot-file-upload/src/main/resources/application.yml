@@ -2,3 +2,11 @@ server:
   port: 1234
   servlet:
     context-path: /demo
+
+# 设置每个文件和请求中总大小
+spring:
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 100MB
+
