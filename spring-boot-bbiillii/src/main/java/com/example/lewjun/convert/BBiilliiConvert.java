@@ -13,10 +13,7 @@ import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.function.Consumer;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -130,10 +127,12 @@ public class BBiilliiConvert {
 
         if (!CollectionUtils.isEmpty(blvs)) {
             log.info("【blvs: {}】", blvs);
+            List<String> lines = new ArrayList<>();
             for (final File blv : blvs) {
-                FileUtils.write(blvTxt, "file '" + blv.getPath() + "'\n", "utf-8", true);
+                lines.add(blv.getPath());
                 log.info("【blvTxt: {}】", blvTxt.getPath());
             }
+            FileUtils.writeLines(blvTxt, "utf-8", lines);
 
             String fileName = "";
             final Page_data page_data = entry.getPage_data();
@@ -167,7 +166,7 @@ public class BBiilliiConvert {
                     + doubleQuota;
 
             log.error("【cmd: {}】", cmd);
-            FileUtils.write(shFile, cmd + "\n", "utf-8", true);
+            FileUtils.writeByteArrayToFile(shFile, cmd.getBytes(StandardCharsets.UTF_8));
         }
     }
 
@@ -198,7 +197,7 @@ public class BBiilliiConvert {
                     + doubleQuota;
 
             log.error("【page data cmd: {}】", cmd);
-            FileUtils.write(shFile, cmd + "\n", "utf-8", true);
+            FileUtils.writeByteArrayToFile(shFile, cmd.getBytes(StandardCharsets.UTF_8));
         }
     }
 
@@ -231,7 +230,7 @@ public class BBiilliiConvert {
                     + doubleQuota;
 
             log.error("【ep cmd: {}】", cmd);
-            FileUtils.write(shFile, cmd + "\n", "utf-8", true);
+            FileUtils.writeByteArrayToFile(shFile, cmd.getBytes(StandardCharsets.UTF_8));
         }
     }
 }

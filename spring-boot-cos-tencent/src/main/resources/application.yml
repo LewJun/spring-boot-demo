@@ -15,10 +15,10 @@ logging:
                   RequestMappingHandlerMapping: trace
 
 cos:
-  accessKey: xxx
-  secretKey: yyy
+  accessKey: AKIDuftsa1j6mBOM4XreJkupVv4RXMvDbyR8
+  secretKey: aidIhofGemfJgogIdokSwA7nDML3XlkT
   bucketName: qcjl2019-1300597172
   regionName: ap-chengdu
-  baseDir: test/
+  baseDir:
   timeout: 5000
   domain: https://${cos.bucketName}.cos.${cos.regionName}.myqcloud.com/

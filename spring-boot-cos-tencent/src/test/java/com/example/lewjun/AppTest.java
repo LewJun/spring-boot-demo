@@ -22,11 +22,11 @@ public class AppTest {
 
     @Test
     public void testUploadFile() {
-        final String filePath = "/lzyjweb/prod/apk/21/01";
-        final boolean flag = cosService.uploadFile(filePath, new File("D:\\svn-repo\\child\\04_Code\\lzcjapp\\trunk\\app\\release\\7.1.3-lz-yjy-rel.apk"));
+        final String filePath = "/lzycw/prod/apk/21/01";
+        final boolean flag = cosService.uploadFile(filePath, new File("D:\\Codes\\as\\lzycwapp\\trunk\\app\\release\\ycw_7.1.4(64)-lz-ycw-rel.apk"));
         System.out.println(flag);
 
-        System.out.println(cosService.getFilePath(filePath, "7.1.3-lz-yjy-rel.apk"));
+        System.out.println(cosService.getFilePath(filePath, "ycw_7.1.4(64)-lz-ycw-rel.apk"));
     }
 
     @Test

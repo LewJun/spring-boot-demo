@@ -1,6 +1,7 @@
 package com.example.lewjun;
 
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.io.FileUtils;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,7 +11,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -74,11 +74,9 @@ public class App {
             final File tempFile = File.createTempFile(prefix, String.format(".%s", originalFilename));
             log.info("tempFile: {}", tempFile);
             // 会出现FileExistException
-//            multipartFile.transferTo(tempFile);
+            // multipartFile.transferTo(tempFile);
 
-            final FileOutputStream fos = new FileOutputStream(tempFile);
-            fos.write(multipartFile.getBytes());
-            fos.close();
+            FileUtils.writeByteArrayToFile(tempFile, multipartFile.getBytes());
             return tempFile;
         } catch (final IOException e) {
             log.error("出现异常", e);
