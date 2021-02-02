@@ -23,12 +23,13 @@ public class BBiilliiConvert {
     private static final String doubleQuota = "\"";
     private static final Pattern FILEPATTERN = Pattern.compile("[\\\\/:*?\"<>|]");
     private File shFile;
+    private final List<String> cmds = new ArrayList<>();
 
     public static String filenameFilter(final String str) {
         return str == null ? null : FILEPATTERN.matcher(str).replaceAll("-");
     }
 
-    public void convert(final File bilibiliDownloadDir, final File outPutDir, final String ffmpegPath) {
+    public void convert(final File bilibiliDownloadDir, final File outPutDir, final String ffmpegPath) throws IOException {
         shFile = new File(outPutDir, System.currentTimeMillis() + "bili.sh");
         if (bilibiliDownloadDir == null || bilibiliDownloadDir.isFile()) {
             throw new IllegalArgumentException("需要选择正确的下载目录");
@@ -100,6 +101,7 @@ public class BBiilliiConvert {
 
             }
         });
+        FileUtils.writeLines(shFile, "utf-8", cmds);
     }
 
     private void handlerBlv(final Entry entry, final File biliconv, final String videoPath, final File videoDir, final String ffmpegPath, final String separator) throws IOException {
@@ -127,7 +129,7 @@ public class BBiilliiConvert {
 
         if (!CollectionUtils.isEmpty(blvs)) {
             log.info("【blvs: {}】", blvs);
-            List<String> lines = new ArrayList<>();
+            final List<String> lines = new ArrayList<>();
             for (final File blv : blvs) {
                 lines.add(blv.getPath());
                 log.info("【blvTxt: {}】", blvTxt.getPath());
@@ -166,7 +168,7 @@ public class BBiilliiConvert {
                     + doubleQuota;
 
             log.error("【cmd: {}】", cmd);
-            FileUtils.writeByteArrayToFile(shFile, cmd.getBytes(StandardCharsets.UTF_8));
+            cmds.add(cmd);
         }
     }
 
@@ -197,7 +199,7 @@ public class BBiilliiConvert {
                     + doubleQuota;
 
             log.error("【page data cmd: {}】", cmd);
-            FileUtils.writeByteArrayToFile(shFile, cmd.getBytes(StandardCharsets.UTF_8));
+            cmds.add(cmd);
         }
     }
 
@@ -230,7 +232,7 @@ public class BBiilliiConvert {
                     + doubleQuota;
 
             log.error("【ep cmd: {}】", cmd);
-            FileUtils.writeByteArrayToFile(shFile, cmd.getBytes(StandardCharsets.UTF_8));
+            cmds.add(cmd);
         }
     }
 }
