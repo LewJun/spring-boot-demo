@@ -15,19 +15,18 @@ public abstract class BaseDaoImpl<T extends BaseObj> implements BaseDao<T> {
 
     @Override
     public int save(final String sql, final Object... args) {
-        return jdbcTemplate.update(sql, args);
+        return update(sql, args);
     }
 
     @Override
     public int delete(final String sql, final Object... args) {
-        return jdbcTemplate.update(sql, args);
+        return update(sql, args);
     }
 
     @Override
     public int update(final String sql, final Object... args) {
         return jdbcTemplate.update(sql, args);
     }
-
 
     @Override
     public <R> R queryForObject(final String sql, final Class<R> clazz, final Object... args) {
