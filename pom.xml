@@ -58,6 +58,7 @@
         <module>nongte</module>
         <module>food-merge</module>
         <module>spring-boot-easyexcel</module>
+        <module>spring-boot-vuetest</module>
     </modules>
 
     <properties>
