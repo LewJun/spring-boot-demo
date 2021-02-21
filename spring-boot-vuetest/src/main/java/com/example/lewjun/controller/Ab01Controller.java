@@ -25,7 +25,8 @@ public class Ab01Controller {
 
     @GetMapping
     public Page<Ab01> search(final Ab01SearchInfo searchInfo, final Pageable pageable) {
-        // 如果查询条件为空
+        // 这里的pageable其实是PageRequest
+        // 如果查询条件为空，需要传入page和size参数，如果是其它方式传入，可以 PageRequest.of(page, size)
         if (searchInfo == null || StringUtils.isEmpty(searchInfo.getAab002())) {
             final Page<Ab01> ab01Page = ab01Repository.findAll(pageable);
             return ab01Page;

@@ -112,7 +112,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:1234/demo/ab01s",
+					"raw": "http://localhost:1234/demo/ab01s?page=2&size=10",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -121,6 +121,16 @@
 					"path": [
 						"demo",
 						"ab01s"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "2"
+						},
+						{
+							"key": "size",
+							"value": "10"
+						}
 					]
 				}
 			},
@@ -132,7 +142,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:1234/demo/ab01s?aab002=ACCOUNTING 2",
+					"raw": "http://localhost:1234/demo/ab01s?page=2&size=10&aab002=ACCOUNTING 2",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -143,6 +153,14 @@
 						"ab01s"
 					],
 					"query": [
+						{
+							"key": "page",
+							"value": "2"
+						},
+						{
+							"key": "size",
+							"value": "10"
+						},
 						{
 							"key": "aab002",
 							"value": "ACCOUNTING 2"
